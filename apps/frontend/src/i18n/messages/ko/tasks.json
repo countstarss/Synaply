@@ -1,0 +1,137 @@
+{
+  "tabs": {
+    "today": "오늘",
+    "waiting": "대기 중",
+    "inProgress": "진행 중",
+    "blocked": "차단됨",
+    "completed": "완료됨"
+  },
+  "summary": {
+    "todayFocus": "오늘 집중",
+    "waiting": "대기 중",
+    "inProgress": "진행 중",
+    "blocked": "차단됨",
+    "completedToday": "오늘 완료"
+  },
+  "header": {
+    "title": "내 작업 개요",
+    "activeCount": "활성 항목 {count}개",
+    "syncing": "동기화 중",
+    "updatedAt": "{value} 기준 업데이트",
+    "waitingFirstSync": "첫 동기화를 기다리는 중"
+  },
+  "pulse": {
+    "title": {
+      "team": "팀 협업 펄스",
+      "personal": "협업 펄스"
+    },
+    "description": {
+      "team": "집계된 문서 다이제스트를 홈에 바로 전달해 팀에서 무엇이 바뀌었는지 알기 위해 Inbox를 계속 열지 않아도 되게 합니다.",
+      "personal": "집계된 문서 다이제스트를 홈에 바로 전달해 작업 개요에서 최신 협업 맥락으로 바로 들어갈 수 있게 합니다."
+    },
+    "openDigest": "다이제스트 열기",
+    "emptyTitle": "홈에 전달할 다이제스트가 아직 없습니다",
+    "emptyDescription": "같은 프로젝트, 이슈 또는 워크플로에 구조화된 문서 변화가 충분히 쌓이면 먼저 여기에 다이제스트가 나타납니다."
+  },
+  "sections": {
+    "today": {
+      "title": "오늘의 집중 항목",
+      "description": "먼저 여기부터 시작하세요. 긴급도, 막힘, 리뷰 요청, 현재 실행 상태를 함께 보여줍니다.",
+      "emptyTitle": "지금은 집중할 항목이 없습니다",
+      "emptyDescription": "작업이 대기 중이거나 진행 중이거나 막히면 여기 상단으로 올라옵니다."
+    },
+    "waiting": {
+      "title": "내 응답 대기",
+      "description": "시작, 검토, 또는 인계 수락이 필요한 작업입니다.",
+      "emptyTitle": "지금 당신을 기다리는 작업은 없습니다",
+      "emptyDescription": "새 인계, 리뷰 요청, 바로 시작할 수 있는 작업은 먼저 여기에 들어옵니다."
+    },
+    "inProgress": {
+      "title": "진행 중",
+      "description": "이미 맡아서 적극적으로 앞으로 밀고 있는 작업입니다.",
+      "emptyTitle": "현재 진행 중인 작업이 없습니다",
+      "emptyDescription": "이슈나 워크플로 실행을 시작하면 여기에 표시됩니다."
+    },
+    "blocked": {
+      "title": "차단됨",
+      "description": "현재 당신과 관련되어 있으면서 진행이 막힌 작업입니다.",
+      "emptyTitle": "현재 당신에게 연결된 차단 항목이 없습니다",
+      "emptyDescription": "차단된 작업은 여기에 모여 다른 보기에서 리스크가 사라지지 않게 합니다."
+    },
+    "completed": {
+      "title": "오늘 완료",
+      "description": "오늘 완료했거나 마무리한 작업입니다.",
+      "emptyTitle": "오늘은 아직 완료된 작업이 없습니다",
+      "emptyDescription": "이슈나 워크플로 단계를 끝내면 오늘의 전달 진척이 여기에 표시됩니다."
+    }
+  },
+  "table": {
+    "work": "작업",
+    "context": "맥락",
+    "signal": "신호",
+    "action": "액션"
+  },
+  "row": {
+    "source": {
+      "workflow": "워크플로",
+      "issue": "이슈"
+    },
+    "quickAction": {
+      "accept": "수락",
+      "start": "시작",
+      "review": "검토",
+      "open": "열기"
+    },
+    "queue": {
+      "review": "검토 · {name}",
+      "handoff": "인계 · {name}",
+      "assignee": "담당자 · {name}",
+      "workflow": "워크플로 실행",
+      "issue": "이슈"
+    },
+    "openIssueAria": "{title} 열기",
+    "unassignedProject": "프로젝트 없음",
+    "workspaceQueue": "워크스페이스 큐",
+    "due": "마감 {value}"
+  },
+  "actions": {
+    "retry": "다시 시도"
+  },
+  "addModal": {
+    "title": "작업 만들기",
+    "fields": {
+      "titlePlaceholder": "제목",
+      "descriptionPlaceholder": "설명(선택)",
+      "dueDatePlaceholder": "마감일(선택)"
+    },
+    "actions": {
+      "submit": "만들기"
+    }
+  },
+  "calendar": {
+    "newTask": "작업 만들기",
+    "noTasks": "아직 작업이 없습니다",
+    "close": "닫기",
+    "more": "+{count}개 더",
+    "weekdays": {
+      "sun": "일",
+      "mon": "월",
+      "tue": "화",
+      "wed": "수",
+      "thu": "목",
+      "fri": "금",
+      "sat": "토"
+    }
+  },
+  "states": {
+    "loading": "작업 큐를 정리하는 중...",
+    "errorTitle": "작업 개요를 불러오지 못했습니다",
+    "errorDescription": "잠시 후 다시 시도해 주세요."
+  },
+  "toasts": {
+    "markedStarted": "시작됨으로 표시했습니다.",
+    "markStartedFailed": "실행 상태를 업데이트하지 못했습니다. 다시 시도해 주세요.",
+    "handoffAccepted": "인계를 수락했습니다.",
+    "acceptHandoffFailed": "인계를 수락하지 못했습니다. 다시 시도해 주세요."
+  }
+}

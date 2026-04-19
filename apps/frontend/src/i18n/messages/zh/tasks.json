@@ -1,0 +1,137 @@
+{
+  "tabs": {
+    "today": "今天",
+    "waiting": "等待中",
+    "inProgress": "进行中",
+    "blocked": "已阻塞",
+    "completed": "已完成"
+  },
+  "summary": {
+    "todayFocus": "今日重点",
+    "waiting": "等待中",
+    "inProgress": "进行中",
+    "blocked": "已阻塞",
+    "completedToday": "今日完成"
+  },
+  "header": {
+    "title": "我的工作总览",
+    "activeCount": "{count} 个活跃项",
+    "syncing": "同步中",
+    "updatedAt": "更新于 {value}",
+    "waitingFirstSync": "等待首次同步"
+  },
+  "pulse": {
+    "title": {
+      "team": "团队协作脉冲",
+      "personal": "协作脉冲"
+    },
+    "description": {
+      "team": "把最近被聚合出来的文档摘要直接投递到首页，这样你不用反复进 Inbox 才能知道团队协作上下文发生了什么。",
+      "personal": "把最近被聚合出来的文档摘要直接投递到首页，方便你从工作总览进入最新的协作上下文。"
+    },
+    "openDigest": "打开摘要队列",
+    "emptyTitle": "还没有可投递到首页的摘要",
+    "emptyDescription": "当同一项目、事项或工作流积累了足够多的结构化文档变化，这里会先出现一条可直接打开的摘要。"
+  },
+  "sections": {
+    "today": {
+      "title": "今日重点",
+      "description": "先从这些开始。这里会综合紧急程度、阻塞情况、评审请求和你当前的执行状态。",
+      "emptyTitle": "当前没有重点事项",
+      "emptyDescription": "当工作进入等待、进行中或阻塞状态时，它会优先出现在这里。"
+    },
+    "waiting": {
+      "title": "等待我处理",
+      "description": "需要你开始、评审或接受交接的工作。",
+      "emptyTitle": "当前没有在等你处理的工作",
+      "emptyDescription": "新的交接、评审请求和可以立刻开始的工作会先进入这里。"
+    },
+    "inProgress": {
+      "title": "进行中",
+      "description": "你已经接手并正在积极推进的工作。",
+      "emptyTitle": "当前没有进行中的工作",
+      "emptyDescription": "一旦你开始某个事项或工作流运行，它就会出现在这里。"
+    },
+    "blocked": {
+      "title": "已阻塞",
+      "description": "当前与你相关且处于阻塞状态的工作。",
+      "emptyTitle": "当前没有与你相关的阻塞项",
+      "emptyDescription": "阻塞中的工作会统一收集在这里，避免风险散落在其他视图中。"
+    },
+    "completed": {
+      "title": "今日完成",
+      "description": "你今天已经完成或收尾的工作。",
+      "emptyTitle": "今天还没有完成任何工作",
+      "emptyDescription": "当你完成某个事项或工作流步骤时，今天的交付进展会显示在这里。"
+    }
+  },
+  "table": {
+    "work": "工作项",
+    "context": "上下文",
+    "signal": "信号",
+    "action": "动作"
+  },
+  "row": {
+    "source": {
+      "workflow": "工作流",
+      "issue": "事项"
+    },
+    "quickAction": {
+      "accept": "接受",
+      "start": "开始",
+      "review": "评审",
+      "open": "打开"
+    },
+    "queue": {
+      "review": "评审 · {name}",
+      "handoff": "交接 · {name}",
+      "assignee": "负责人 · {name}",
+      "workflow": "工作流运行",
+      "issue": "事项"
+    },
+    "openIssueAria": "打开 {title}",
+    "unassignedProject": "无项目",
+    "workspaceQueue": "工作空间队列",
+    "due": "截止于 {value}"
+  },
+  "actions": {
+    "retry": "重试"
+  },
+  "addModal": {
+    "title": "创建任务",
+    "fields": {
+      "titlePlaceholder": "标题",
+      "descriptionPlaceholder": "描述（可选）",
+      "dueDatePlaceholder": "截止日期（可选）"
+    },
+    "actions": {
+      "submit": "创建"
+    }
+  },
+  "calendar": {
+    "newTask": "创建任务",
+    "noTasks": "还没有任务",
+    "close": "关闭",
+    "more": "+{count} 项",
+    "weekdays": {
+      "sun": "周日",
+      "mon": "周一",
+      "tue": "周二",
+      "wed": "周三",
+      "thu": "周四",
+      "fri": "周五",
+      "sat": "周六"
+    }
+  },
+  "states": {
+    "loading": "正在整理你的工作队列...",
+    "errorTitle": "无法加载你的工作总览",
+    "errorDescription": "请稍后再试。"
+  },
+  "toasts": {
+    "markedStarted": "已标记为开始。",
+    "markStartedFailed": "无法更新执行状态，请重试。",
+    "handoffAccepted": "已接受交接。",
+    "acceptHandoffFailed": "接受交接失败，请重试。"
+  }
+}

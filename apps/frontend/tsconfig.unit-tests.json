@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/assets/*": ["./src/assets/*"]
+    },
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "declaration": false,
+    "noEmit": false,
+    "outDir": "./node_modules/.cache/unit-tests",
+    "rootDir": "./src",
+    "types": ["node"]
+  },
+  "include": [
+    "src/components/shared/docs/doc-navigation-utils.ts",
+    "src/components/shared/docs/doc-navigation-utils.test.ts",
+    "src/components/workflow/workflow-doc-utils.ts",
+    "src/components/workflow/workflow-doc-utils.test.ts",
+    "src/lib/ai/agent.ts",
+    "src/lib/ai/agent.test.ts"
+  ]
+}

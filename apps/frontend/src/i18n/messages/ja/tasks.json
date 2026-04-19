@@ -1,0 +1,137 @@
+{
+  "tabs": {
+    "today": "今日",
+    "waiting": "待機中",
+    "inProgress": "進行中",
+    "blocked": "ブロック中",
+    "completed": "完了"
+  },
+  "summary": {
+    "todayFocus": "今日のフォーカス",
+    "waiting": "待機中",
+    "inProgress": "進行中",
+    "blocked": "ブロック中",
+    "completedToday": "本日完了"
+  },
+  "header": {
+    "title": "マイワーク概要",
+    "activeCount": "アクティブ項目 {count} 件",
+    "syncing": "同期中",
+    "updatedAt": "{value} に更新",
+    "waitingFirstSync": "初回同期を待っています"
+  },
+  "pulse": {
+    "title": {
+      "team": "チームコラボレーションパルス",
+      "personal": "コラボレーションパルス"
+    },
+    "description": {
+      "team": "集約されたドキュメントダイジェストをホームに直接届け、チームで何が変わったかを把握するために Inbox を何度も開かなくて済むようにします。",
+      "personal": "集約されたドキュメントダイジェストをホームに直接届け、作業概要から最新のコラボレーション文脈へ入れるようにします。"
+    },
+    "openDigest": "ダイジェストを開く",
+    "emptyTitle": "ホームに届けるダイジェストはまだありません",
+    "emptyDescription": "同じプロジェクト、課題、またはワークフローに十分な構造化ドキュメントの変化が溜まると、まずここにダイジェストが現れます。"
+  },
+  "sections": {
+    "today": {
+      "title": "今日のフォーカス",
+      "description": "まずはここから。緊急度、ブロッカー、レビュー依頼、現在の実行状態をまとめて見られます。",
+      "emptyTitle": "今のところ重点項目はありません",
+      "emptyDescription": "待機中、進行中、ブロック中の作業があると、ここに優先して表示されます。"
+    },
+    "waiting": {
+      "title": "自分待ち",
+      "description": "開始、レビュー、または引き継ぎの受け入れが必要な作業です。",
+      "emptyTitle": "現在あなた待ちの作業はありません",
+      "emptyDescription": "新しい引き継ぎ、レビュー依頼、着手可能な作業はまずここに入ります。"
+    },
+    "inProgress": {
+      "title": "進行中",
+      "description": "すでに引き取り、現在進めている作業です。",
+      "emptyTitle": "現在進行中の作業はありません",
+      "emptyDescription": "課題やワークフロー実行を開始すると、ここに表示されます。"
+    },
+    "blocked": {
+      "title": "ブロック中",
+      "description": "現在あなたに関係していて、進行が止まっている作業です。",
+      "emptyTitle": "現在あなたに紐づくブロック中の項目はありません",
+      "emptyDescription": "ブロック中の作業はここに集約されるため、他のビューに埋もれません。"
+    },
+    "completed": {
+      "title": "本日完了",
+      "description": "今日完了、または区切りを付けた作業です。",
+      "emptyTitle": "今日はまだ完了した作業がありません",
+      "emptyDescription": "課題やワークフローのステップを完了すると、今日の進捗がここに現れます。"
+    }
+  },
+  "table": {
+    "work": "作業",
+    "context": "文脈",
+    "signal": "シグナル",
+    "action": "アクション"
+  },
+  "row": {
+    "source": {
+      "workflow": "ワークフロー",
+      "issue": "課題"
+    },
+    "quickAction": {
+      "accept": "受け入れる",
+      "start": "開始",
+      "review": "レビュー",
+      "open": "開く"
+    },
+    "queue": {
+      "review": "レビュー · {name}",
+      "handoff": "引き継ぎ · {name}",
+      "assignee": "担当者 · {name}",
+      "workflow": "ワークフロー実行",
+      "issue": "課題"
+    },
+    "openIssueAria": "{title} を開く",
+    "unassignedProject": "プロジェクトなし",
+    "workspaceQueue": "ワークスペースキュー",
+    "due": "期限 {value}"
+  },
+  "actions": {
+    "retry": "再試行"
+  },
+  "addModal": {
+    "title": "タスクを作成",
+    "fields": {
+      "titlePlaceholder": "タイトル",
+      "descriptionPlaceholder": "説明（任意）",
+      "dueDatePlaceholder": "期限（任意）"
+    },
+    "actions": {
+      "submit": "作成"
+    }
+  },
+  "calendar": {
+    "newTask": "タスクを作成",
+    "noTasks": "まだタスクはありません",
+    "close": "閉じる",
+    "more": "+{count} 件",
+    "weekdays": {
+      "sun": "日",
+      "mon": "月",
+      "tue": "火",
+      "wed": "水",
+      "thu": "木",
+      "fri": "金",
+      "sat": "土"
+    }
+  },
+  "states": {
+    "loading": "作業キューを整理しています...",
+    "errorTitle": "作業概要の読み込みに失敗しました",
+    "errorDescription": "しばらくしてからもう一度お試しください。"
+  },
+  "toasts": {
+    "markedStarted": "開始済みとして記録しました。",
+    "markStartedFailed": "実行状態の更新に失敗しました。もう一度お試しください。",
+    "handoffAccepted": "引き継ぎを受け入れました。",
+    "acceptHandoffFailed": "引き継ぎの受け入れに失敗しました。もう一度お試しください。"
+  }
+}

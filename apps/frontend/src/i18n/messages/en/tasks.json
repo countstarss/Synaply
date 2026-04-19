@@ -1,0 +1,137 @@
+{
+  "tabs": {
+    "today": "Today",
+    "waiting": "Waiting",
+    "inProgress": "In progress",
+    "blocked": "Blocked",
+    "completed": "Completed"
+  },
+  "summary": {
+    "todayFocus": "Today focus",
+    "waiting": "Waiting",
+    "inProgress": "In progress",
+    "blocked": "Blocked",
+    "completedToday": "Completed today"
+  },
+  "header": {
+    "title": "My work overview",
+    "activeCount": "{count} active items",
+    "syncing": "Syncing",
+    "updatedAt": "Updated at {value}",
+    "waitingFirstSync": "Waiting for the first sync"
+  },
+  "pulse": {
+    "title": {
+      "team": "Team collaboration pulse",
+      "personal": "Collaboration pulse"
+    },
+    "description": {
+      "team": "Deliver the latest aggregated doc digests straight to the homepage so you do not need to keep checking Inbox just to understand what changed across the team.",
+      "personal": "Deliver the latest aggregated doc digests straight to the homepage so your work overview can lead you into the newest collaboration context."
+    },
+    "openDigest": "Open digest queue",
+    "emptyTitle": "No digest is ready for the homepage yet",
+    "emptyDescription": "Once the same project, issue, or workflow accumulates enough structured doc changes, a digest will appear here first."
+  },
+  "sections": {
+    "today": {
+      "title": "Today focus",
+      "description": "Start with these first. They combine urgency, blockers, review requests, and your current execution state.",
+      "emptyTitle": "Your focus queue is empty for now",
+      "emptyDescription": "When work is waiting, in progress, or blocked, it will rise to the top here."
+    },
+    "waiting": {
+      "title": "Waiting for me",
+      "description": "Work that needs you to start, review, or accept a handoff.",
+      "emptyTitle": "Nothing is waiting for you right now",
+      "emptyDescription": "New handoffs, review requests, and ready-to-start work will land here first."
+    },
+    "inProgress": {
+      "title": "In progress",
+      "description": "Work you have already picked up and are actively moving forward.",
+      "emptyTitle": "No work is currently in progress",
+      "emptyDescription": "Once you start an issue or workflow run, it will show up here."
+    },
+    "blocked": {
+      "title": "Blocked",
+      "description": "Work related to you that is currently blocked.",
+      "emptyTitle": "No blocked items are tied to you right now",
+      "emptyDescription": "Blocked work is collected here so risk does not get lost in other views."
+    },
+    "completed": {
+      "title": "Completed today",
+      "description": "Work you finished or wrapped up today.",
+      "emptyTitle": "Nothing has been completed today yet",
+      "emptyDescription": "When you finish an issue or workflow step, today's delivery progress will show up here."
+    }
+  },
+  "table": {
+    "work": "Work",
+    "context": "Context",
+    "signal": "Signal",
+    "action": "Action"
+  },
+  "row": {
+    "source": {
+      "workflow": "Workflow",
+      "issue": "Issue"
+    },
+    "quickAction": {
+      "accept": "Accept",
+      "start": "Start",
+      "review": "Review",
+      "open": "Open"
+    },
+    "queue": {
+      "review": "Review · {name}",
+      "handoff": "Handoff · {name}",
+      "assignee": "Owner · {name}",
+      "workflow": "Workflow run",
+      "issue": "Issue"
+    },
+    "openIssueAria": "Open {title}",
+    "unassignedProject": "No project",
+    "workspaceQueue": "Workspace queue",
+    "due": "Due {value}"
+  },
+  "actions": {
+    "retry": "Retry"
+  },
+  "addModal": {
+    "title": "Create task",
+    "fields": {
+      "titlePlaceholder": "Title",
+      "descriptionPlaceholder": "Description (optional)",
+      "dueDatePlaceholder": "Due date (optional)"
+    },
+    "actions": {
+      "submit": "Create"
+    }
+  },
+  "calendar": {
+    "newTask": "Create task",
+    "noTasks": "No tasks yet",
+    "close": "Close",
+    "more": "+{count} more",
+    "weekdays": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat"
+    }
+  },
+  "states": {
+    "loading": "Organizing your work queue...",
+    "errorTitle": "Failed to load your work overview",
+    "errorDescription": "Please try again in a moment."
+  },
+  "toasts": {
+    "markedStarted": "Marked as started.",
+    "markStartedFailed": "Failed to update the execution state. Please try again.",
+    "handoffAccepted": "Handoff accepted.",
+    "acceptHandoffFailed": "Failed to accept the handoff. Please try again."
+  }
+}

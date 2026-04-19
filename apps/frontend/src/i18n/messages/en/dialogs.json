@@ -1,0 +1,47 @@
+{
+  "createTeam": {
+    "title": "Create team",
+    "description": "Create a new team to collaborate with your teammates. A dedicated workspace will be created automatically.",
+    "nameLabel": "Team name",
+    "namePlaceholder": "Enter a team name",
+    "validation": {
+      "nameRequired": "Please enter a team name."
+    },
+    "toasts": {
+      "created": "Team created.",
+      "createFailed": "Failed to create the team. Please try again."
+    },
+    "actions": {
+      "creating": "Creating...",
+      "submit": "Create team"
+    }
+  },
+  "inviteMember": {
+    "title": "Invite a new member",
+    "description": "Invite a new member to “{teamName}”.",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "Enter the email to invite",
+    "emailHint": "We will send an invitation link to this address.",
+    "validation": {
+      "emailRequired": "Please enter an email address.",
+      "emailInvalid": "Please enter a valid email address."
+    },
+    "toasts": {
+      "sent": "Invited {email} to {teamName}.",
+      "sendFailed": "Something went wrong while inviting the member. Please try again."
+    },
+    "actions": {
+      "sending": "Sending invitation...",
+      "submit": "Send invitation"
+    }
+  },
+  "workspace": {
+    "errors": {
+      "createAuthRequired": "Please sign in before creating a workspace.",
+      "personalUnsupported": "This version only supports creating team workspaces.",
+      "inviteAuthRequired": "Please sign in before inviting members.",
+      "teamInviteOnly": "The current workspace does not support member invitations.",
+      "invitePermissionDenied": "You do not have permission to invite members."
+    }
+  }
+}

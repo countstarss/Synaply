@@ -1,0 +1,443 @@
+{
+  "site": {
+    "tagline": "Remote collaboration software for small startup teams.",
+    "hero": {
+      "eyebrow": "Remote collaboration software for small startup teams",
+      "title": "Bring projects, workflows, issues, and docs into one deliberate rhythm.",
+      "subtitle": "Synaply gives small startup teams a shared context for planning, execution, handoff, and documentation so remote work keeps moving quickly without constant follow-up.",
+      "primaryCta": "Start with clarity",
+      "secondaryCta": "See the workflow in motion",
+      "returningCta": "Enter your workspace"
+    },
+    "metrics": [
+      {
+        "value": "3-15",
+        "label": "people per remote team"
+      },
+      {
+        "value": "4",
+        "label": "core collaboration surfaces"
+      },
+      {
+        "value": "Live",
+        "label": "sync across roles and updates"
+      }
+    ],
+    "capabilities": {
+      "eyebrow": "One workspace, fewer seams",
+      "title": "Structure the work so the team can focus on delivery.",
+      "description": "Each module exists to reduce back-and-forth. Product, design, engineering, and operations stay aligned because the workflow itself carries the context forward.",
+      "items": [
+        {
+          "name": "Projects",
+          "title": "Set project boundaries before the work fragments.",
+          "description": "Capture goals, priorities, and delivery context so the team understands what matters now and what comes next."
+        },
+        {
+          "name": "Issues",
+          "title": "Turn every task into a clear unit of progress.",
+          "description": "Track actions, blockers, and follow-through with enough rigor to stay reliable without turning work into ceremony."
+        },
+        {
+          "name": "Workflows",
+          "title": "Make every handoff legible.",
+          "description": "Define stages, owners, and transitions so work keeps moving even when multiple roles are involved."
+        },
+        {
+          "name": "Docs",
+          "title": "Keep the why next to the work itself.",
+          "description": "Store requirements, decisions, and operational notes in the same space as execution, not in a separate archive."
+        }
+      ]
+    },
+    "workflow": {
+      "eyebrow": "Workflow over chasing",
+      "title": "Collaboration should run on clarity, not reminders.",
+      "description": "When process is visible, progress stops depending on memory. The team spends less time asking where things stand and more time moving work forward.",
+      "steps": [
+        {
+          "step": "01",
+          "title": "Define the outcome",
+          "description": "Projects establish the goal, scope, and sequencing so everyone starts from the same brief."
+        },
+        {
+          "step": "02",
+          "title": "Route work through issues",
+          "description": "Issues hold the current state, owners, notes, and next actions in a format that is easy to advance."
+        },
+        {
+          "step": "03",
+          "title": "Move through the workflow",
+          "description": "Transitions are explicit, handoffs are visible, and multi-role work stops disappearing between tools."
+        },
+        {
+          "step": "04",
+          "title": "Document as part of delivery",
+          "description": "Docs absorb context continuously, so the team can revisit decisions without reopening old threads."
+        }
+      ]
+    },
+    "finalCta": {
+      "eyebrow": "Start with clarity. Move with momentum.",
+      "description": "Build a shared workspace where planning, execution, and alignment stay connected.",
+      "primary": "Build your collaboration hub"
+    },
+    "auth": {
+      "eyebrow": "Structured access",
+      "title": "Enter the workspace where remote execution stays aligned.",
+      "description": "Projects, issues, workflows, and docs stay in one shared context so every role can move in the same direction.",
+      "highlights": [
+        "Multi-role collaboration without tool switching",
+        "Workflow visibility across every handoff",
+        "Live sync that reduces repeat check-ins"
+      ],
+      "modes": {
+        "login": {
+          "title": "Welcome back",
+          "description": "Return to the same workspace where priorities, states, and documentation already line up."
+        },
+        "register": {
+          "title": "Create your team workspace",
+          "description": "Start with a calmer remote collaboration tool for product, design, engineering, and operations."
+        },
+        "reset": {
+          "title": "Recover access without losing context",
+          "description": "We will send a secure link so you can return to the same structured flow."
+        }
+      }
+    }
+  },
+  "landing": {
+    "proofSignals": [
+      "Remote-first structure",
+      "Visible handoffs",
+      "Docs inside execution",
+      "One operating rhythm"
+    ],
+    "canvasWord": "clarity in motion",
+    "coverPrefix": "Start with",
+    "coverWord": "clarity",
+    "coverSuffix": "and let the workflow carry the rest.",
+    "preview": {
+      "moduleStrip": "Projects / Issues / Workflows / Docs",
+      "status": "Remote execution stays aligned"
+    },
+    "productPreview": {
+      "workspaceTitle": "Synaply Workspace",
+      "workspaceSubtitle": "Projects, issues, workflows, and docs in one shared context",
+      "syncStatus": "remote execution synced",
+      "execution": {
+        "eyebrow": "Current execution",
+        "title": "Cross-role release coordination",
+        "status": "Synced now",
+        "columns": {
+          "issue": "Issue",
+          "owner": "Owner",
+          "state": "State",
+          "doc": "Linked doc"
+        },
+        "rowHint": "Context stays attached as work moves.",
+        "rows": [
+          {
+            "name": "Remote onboarding release",
+            "owner": "ENG",
+            "state": "In review",
+            "doc": "Launch checklist"
+          },
+          {
+            "name": "Workflow handoff update",
+            "owner": "PM",
+            "state": "Spec aligned",
+            "doc": "Decision notes"
+          },
+          {
+            "name": "Docs linked to execution",
+            "owner": "OPS",
+            "state": "Ready",
+            "doc": "Operating guide"
+          }
+        ]
+      },
+      "workflow": {
+        "eyebrow": "Workflow",
+        "title": "Clear handoff path",
+        "steps": [
+          "Product defines milestone and sequence",
+          "Design delivers reviewed handoff packet",
+          "Engineering ships with linked docs"
+        ]
+      },
+      "context": {
+        "eyebrow": "Context",
+        "title": "Docs and updates stay attached",
+        "snippetEyebrow": "Doc snippet",
+        "snippetBody": "Launch checklist, reviewer notes, and release decisions stay visible beside the work instead of falling into chat history.",
+        "sharedBy": "Shared by every role"
+      }
+    },
+    "workflowPrinciple": {
+      "label": "Operating principle",
+      "text": "When the team shares one context, progress stops depending on reminders and starts depending on system design."
+    },
+    "structuredFlowLabel": "Structured flow",
+    "final": {
+      "titlePrefix": "Build each project with",
+      "titleFocus": "order",
+      "secondaryCta": "Explore pricing"
+    },
+    "footer": {
+      "copyrightSuffix": "All rights reserved.",
+      "sections": [
+        {
+          "title": "Pages",
+          "items": [
+            {
+              "label": "Home",
+              "href": "/landing"
+            },
+            {
+              "label": "Capabilities",
+              "href": "#capabilities"
+            },
+            {
+              "label": "Workflow",
+              "href": "#workflow"
+            },
+            {
+              "label": "Pricing",
+              "href": "/pricing"
+            }
+          ]
+        },
+        {
+          "title": "Product",
+          "items": [
+            {
+              "label": "Projects",
+              "href": "/auth"
+            },
+            {
+              "label": "Issues",
+              "href": "/auth"
+            },
+            {
+              "label": "Workflows",
+              "href": "/auth"
+            },
+            {
+              "label": "Docs",
+              "href": "/auth"
+            }
+          ]
+        },
+        {
+          "title": "Company",
+          "items": [
+            {
+              "label": "About Synaply",
+              "href": "/about"
+            },
+            {
+              "label": "Remote-first"
+            },
+            {
+              "label": "Structured execution"
+            },
+            {
+              "label": "Clarity over noise"
+            }
+          ]
+        },
+        {
+          "title": "Access",
+          "items": [
+            {
+              "label": "Start with clarity",
+              "href": "/auth"
+            },
+            {
+              "label": "Login",
+              "href": "/auth"
+            },
+            {
+              "label": "Explore pricing",
+              "href": "/pricing"
+            },
+            {
+              "label": "About",
+              "href": "/about"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "about": {
+    "badge": "About Synaply",
+    "hero": {
+      "eyebrow": "Why it exists",
+      "titlePrefix": "We want remote teams to work with more",
+      "titleFocus": "clarity",
+      "titleSuffix": ".",
+      "description": "Synaply is built on a simple belief: the best collaboration software is not a faster inbox. It is a clearer environment where goals, process, work, and documentation belong to one logic.",
+      "canvasWord": "order with momentum"
+    },
+    "story": [
+      "Synaply was not designed to help teams manage more tasks.",
+      "It is focused remote collaboration software for small startup teams, where different roles can move through the same project context naturally.",
+      "When workflow is legible, context is intact, and docs stay attached to execution, teams can focus on delivery again."
+    ],
+    "principlesSection": {
+      "eyebrow": "Principles",
+      "title": "How we think about collaboration software",
+      "description": "This is not another place to stack tasks. It is a structure that helps teams stay in the same rhythm."
+    },
+    "principles": [
+      {
+        "title": "One shared context",
+        "description": "Projects, issues, workflows, and docs should not live in disconnected tools. They should belong to the same operating surface."
+      },
+      {
+        "title": "Workflow over chasing",
+        "description": "Better collaboration comes from clearer stages, ownership, and paths forward, not from more reminders and follow-up messages."
+      },
+      {
+        "title": "Docs inside execution",
+        "description": "Requirements, rationale, and operational notes should stay attached to the work itself rather than fading into archive space."
+      }
+    ],
+    "preview": {
+      "label": "Product surface",
+      "description": "A live product surface instead of an abstract collaboration mock.",
+      "surfaceTag": "Synaply app",
+      "imageAlt": "Synaply remote collaboration workspace for projects, issues, workflows, and docs",
+      "badge": "Remote-first workspace",
+      "status": "Live product view"
+    },
+    "symbol": {
+      "label": "Operating symbol",
+      "description": "For us, collaboration software is valuable only if it can keep holding context as work moves."
+    },
+    "closing": "Less checking in. More work arriving where it needs to be."
+  },
+  "pricing": {
+    "hero": {
+      "eyebrow": "Pricing",
+      "titlePrefix": "Pricing should feel as",
+      "titleFocus": "clear",
+      "titleSuffix": ".",
+      "description": "Synaply pricing is meant to preserve clarity. Teams at different stages should be able to start with a focused remote collaboration tool without unnecessary complexity.",
+      "cta": "Start with Synaply"
+    },
+    "included": [
+      "No fragmented module sprawl, just one operating context",
+      "The goal is less coordination drag, not more feature volume",
+      "Packaging maps to team maturity, not arbitrary feature locks"
+    ],
+    "planSignal": {
+      "label": "Plan signal",
+      "description": "The aim is not more surface area. It is a steadier way into the same operating rhythm."
+    },
+    "summaryCards": [
+      {
+        "kind": "workspace",
+        "text": "Unified workspace"
+      },
+      {
+        "kind": "followUp",
+        "text": "Less follow-up noise"
+      },
+      {
+        "kind": "coordination",
+        "text": "More reliable coordination"
+      }
+    ],
+    "plans": [
+      {
+        "name": "Launch",
+        "featured": false,
+        "price": "$9",
+        "priceHint": "per member / mo",
+        "summary": "For teams setting up a calmer operating rhythm",
+        "badge": "Private beta",
+        "fitLabel": "Best for 3-8 seats"
+      },
+      {
+        "name": "Team",
+        "featured": true,
+        "price": "$19",
+        "priceHint": "per member / mo",
+        "summary": "For multi-role teams running steady execution",
+        "badge": "Most aligned",
+        "fitLabel": "Best for 5-15 seats"
+      },
+      {
+        "name": "Custom",
+        "featured": false,
+        "price": "Custom",
+        "priceHint": "tailored quote",
+        "summary": "For longer-term workflow design and rollout",
+        "badge": "Contact",
+        "fitLabel": "Tailored to team size"
+      }
+    ],
+    "planCta": "Request access",
+    "offers": [
+      {
+        "name": "Launch",
+        "description": "For 3-8 person teams establishing a calmer remote collaboration rhythm.",
+        "price": "9",
+        "priceCurrency": "USD"
+      },
+      {
+        "name": "Team",
+        "description": "For 5-15 person cross-functional teams that need steadier handoffs and execution.",
+        "price": "19",
+        "priceCurrency": "USD"
+      }
+    ]
+  },
+  "seo": {
+    "shared": {
+      "homeLabel": "Home"
+    },
+    "pages": {
+      "landing": {
+        "title": "Remote Collaboration Software for Small Startup Teams",
+        "description": "Synaply helps small startup teams stay aligned with clear execution, visible handoffs, and shared context across projects, issues, workflows, docs, and updates.",
+        "keywords": [
+          "remote collaboration software",
+          "remote team collaboration tool",
+          "workflow handoff software",
+          "async team coordination",
+          "projects issues docs workflows"
+        ],
+        "breadcrumbLabel": "Home"
+      },
+      "pricing": {
+        "title": "Pricing for Remote Team Collaboration Software",
+        "description": "Explore Synaply pricing for remote product, design, engineering, and operations teams that need a calmer workflow, visible handoffs, and one shared execution context.",
+        "keywords": [
+          "collaboration software pricing",
+          "remote team software pricing",
+          "workflow software pricing",
+          "small team collaboration tool",
+          "async collaboration platform pricing"
+        ],
+        "breadcrumbLabel": "Pricing"
+      },
+      "about": {
+        "title": "About Synaply and Our Remote Collaboration Philosophy",
+        "description": "Learn why Synaply focuses on remote team clarity, structured execution, visible handoffs, and documentation that stays attached to projects, issues, and workflows.",
+        "keywords": [
+          "about synaply",
+          "remote collaboration philosophy",
+          "workflow visibility",
+          "structured execution software",
+          "team handoff platform"
+        ],
+        "breadcrumbLabel": "About"
+      }
+    }
+  }
+}

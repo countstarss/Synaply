@@ -1,0 +1,59 @@
+/* BlockNote custom styles for dark mode compatibility */
+.bn-container {
+  height: 100%;
+  overflow-y: auto;
+  background-color: var(--app-editor-bg);
+  color: var(--app-text-primary);
+}
+
+.bn-editor {
+  min-height: 100%;
+  padding: clamp(1.5rem, 2vw, 2.25rem);
+  max-width: 62rem;
+  margin: 0 auto;
+}
+
+.bn-editor .bn-block-group,
+.bn-editor .bn-inline-content {
+  letter-spacing: -0.01em;
+}
+
+/* Dark mode adjustments */
+.dark .bn-container {
+  background-color: var(--app-editor-bg);
+}
+
+.dark .bn-editor {
+  color: var(--app-text-primary);
+}
+
+/* Override BlockNote's default styles for better dark mode support */
+.dark .bn-block-content {
+  color: var(--app-text-primary);
+}
+
+.dark .bn-inline-content {
+  color: var(--app-text-primary);
+}
+
+/* Selection and cursor colors */
+.dark .ProseMirror-selectednode {
+  background-color: rgba(59, 130, 246, 0.2);
+}
+
+/* Collaboration cursor colors */
+.bn-collab-cursor {
+  border-radius: 2px;
+  padding: 0 2px;
+}
+
+/* Placeholder text */
+.dark .bn-is-empty:before {
+  color: var(--app-text-muted);
+}
+
+@media (max-width: 768px) {
+  .bn-editor {
+    padding: 1rem;
+  }
+}

@@ -1,0 +1,293 @@
+{
+  "sourceSwitcher": {
+    "label": "문서 출처",
+    "description": "팀 공유 문서와 나만의 개인 문서 사이를 전환합니다.",
+    "placeholder": "문서 출처 선택"
+  },
+  "source": {
+    "personal": "내 문서",
+    "team": "팀 문서",
+    "teamPersonal": "내 개인 문서"
+  },
+  "creation": {
+    "newDoc": "새 문서",
+    "newFolder": "새 폴더",
+    "newTeamDoc": "새 팀 문서",
+    "newPersonalDoc": "새 개인 문서",
+    "dialog": {
+      "title": "구조화된 문서 만들기",
+      "description": "이 문서가 담을 협업 형식을 선택하세요. Synaply가 팀을 위한 시작 구조를 넣어 줍니다.",
+      "templateLabel": "템플릿",
+      "templatePlaceholder": "템플릿 선택",
+      "titleLabel": "문서 제목",
+      "titlePlaceholder": "문서 제목 입력",
+      "projectHint": "이 문서는 현재 프로젝트에 자동으로 연결됩니다.",
+      "parentHint": "이 문서는 현재 폴더 안에 생성됩니다.",
+      "cancel": "취소",
+      "create": "문서 만들기",
+      "creating": "만드는 중...",
+      "createFailed": "문서를 만들지 못했습니다."
+    },
+    "template": {
+      "blank": {
+        "label": "빈 문서",
+        "description": "자유 형식의 메모만 필요할 때는 빈 페이지에서 시작합니다.",
+        "title": "새 문서"
+      },
+      "projectBrief": {
+        "label": "프로젝트 개요",
+        "description": "이 프로젝트가 왜 필요한지, 범위에 무엇이 포함되는지, 성공은 무엇인지 정리합니다.",
+        "title": "프로젝트 개요"
+      },
+      "decisionLog": {
+        "label": "결정 기록",
+        "description": "결정, 근거, 영향을 받는 작업, 후속 조치를 남겨 인계의 맥락을 지탱합니다.",
+        "title": "결정 기록"
+      },
+      "reviewPacket": {
+        "label": "검토 패킷",
+        "description": "검토자가 답변하기 전에 알아야 할 맥락, 변경 사항, 질문을 한데 묶습니다.",
+        "title": "검토 패킷"
+      },
+      "handoffPacket": {
+        "label": "인계 패킷",
+        "description": "다음 담당자를 위해 준비 상태, 의존성, 링크, 기대치를 정리합니다.",
+        "title": "인계 패킷"
+      },
+      "releaseChecklist": {
+        "label": "릴리스 체크리스트",
+        "description": "출시 준비, 리스크 점검, 담당자, 출시 후 관찰 포인트를 한곳에 모읍니다.",
+        "title": "릴리스 체크리스트"
+      }
+    },
+    "templateContent": {
+      "projectBrief": {
+        "intro": "이 프로젝트가 무엇을 앞으로 밀고자 하는지, 그리고 왜 지금 팀이 여기에 정렬되어야 하는지 요약합니다.",
+        "goal": "[목표와 범위] 전달 목표, 범위의 경계, 그리고 이 프로젝트가 의도적으로 다루지 않을 내용을 설명합니다.",
+        "scope": "[핵심 맥락] 현재 맥락, 제약, 의존성, 팀이 함께 유지해야 할 가정을 기록합니다.",
+        "success": "[성공 신호] 이 프로젝트가 준비 완료, 성공, 혹은 안전하게 출시 가능한 상태임을 어떻게 판단할지 설명합니다.",
+        "openQuestions": "[열린 질문] 아직 후속 조치가 필요한 미해결 질문, 결정, 리스크를 적습니다."
+      },
+      "decisionLog": {
+        "intro": "이 노트에는 하나의 구체적인 결정을 남겨 다음 담당자가 전체 논의를 다시 보지 않아도 이유를 이해할 수 있게 합니다.",
+        "decision": "[결정] 한 문장으로 결론을 적습니다.",
+        "context": "[맥락] 무엇이 바뀌었는지, 어떤 압박이 결정을 촉발했는지, 어떤 트레이드오프를 풀어야 했는지 설명합니다.",
+        "rationale": "[근거] 왜 이 선택지가 다른 대안보다 우선되었는지 씁니다.",
+        "impact": "[영향받는 작업] 영향을 받는 프로젝트, 이슈, 워크플로, 릴리스 면을 연결하고 다음에 무엇이 달라지는지 남깁니다.",
+        "followUp": "[후속 조치] 다음 액션, 담당자, 이 결정을 다시 검토해야 할 시점을 기록합니다."
+      },
+      "reviewPacket": {
+        "intro": "검토자가 최소한으로 알아야 할 맥락을 묶어, 추가 추적 없이 비동기 검토를 진행할 수 있게 합니다.",
+        "goal": "[검토 목표] 어떤 종류의 검토가 필요한지, 그리고 그 결과 어떤 판단이 나와야 하는지 분명히 합니다.",
+        "changeSummary": "[무엇이 바뀌는가] 검토 대상인 제안, 구현, 산출물을 요약합니다.",
+        "focusQuestions": "[검토 포인트] 검토자가 특히 봐 주었으면 하는 질문, 리스크, 엣지 케이스를 적습니다.",
+        "decision": "[결론 / 수정 요청] 결과, 수정 요청, 승인 메모를 남길 공간입니다.",
+        "nextStep": "[다음 인계] 검토 후 무엇이 일어나야 하는지, 누가 이어받는지 설명합니다."
+      },
+      "handoffPacket": {
+        "intro": "이 패킷을 사용해 추가 동기 설명 없이도 다음 담당자가 바로 생산적으로 움직일 수 있게 만듭니다.",
+        "target": "[인계 대상] 누구를 위한 인계인지, 그리고 그 사람이 무엇을 이어받는지 적습니다.",
+        "readyNow": "[지금 바로 신뢰할 수 있는 것] 이미 완료되고 검증되어 다음 담당자가 안심하고 이어받을 수 있는 내용을 요약합니다.",
+        "dependencies": "[의존성과 막힘] 아직 필요한 입력, 결정, 리스크, 막힘을 적습니다.",
+        "links": "[링크와 근거] 받는 사람이 먼저 읽어야 할 이슈, 문서, 디자인, PR, 릴리스 맥락을 첨부합니다.",
+        "receiverChecklist": "[수신자 체크리스트] 인계를 수락한 뒤 가장 먼저 해야 할 점검이나 액션을 분명히 적습니다."
+      },
+      "releaseChecklist": {
+        "intro": "출시 준비 상태를 계속 보이게 만들어 제품, 디자인, 엔지니어링, 운영, 지원이 현재 상태를 스스로 확인할 수 있게 합니다.",
+        "scope": "[릴리스 범위] 무엇을 배포하는지, 의도적으로 제외한 것은 무엇인지, 어떤 환경에 영향을 주는지 설명합니다.",
+        "risk": "[리스크와 안전장치] 보이는 리스크, 롤백 경로, 모니터링, 조율이 필요한 의존성을 기록합니다.",
+        "goNoGo": "[출시 가능 여부 점검] 릴리스 준비 완료로 보기 전에 반드시 통과해야 할 점검 항목을 적습니다.",
+        "ownerMap": "[담당 맵] 승인, 실행, 커뮤니케이션, 출시 후 후속 조치를 누가 맡는지 분명히 합니다.",
+        "postRelease": "[출시 후 관찰] 출시 직후 팀이 봐야 할 항목과, 어떤 임계값에서 조치가 필요한지 남깁니다."
+      }
+    }
+  },
+  "docKind": {
+    "general": "일반 문서",
+    "projectBrief": "프로젝트 개요",
+    "decisionLog": "결정 기록",
+    "reviewPacket": "검토 패킷",
+    "handoffPacket": "인계 패킷",
+    "releaseChecklist": "릴리스 체크리스트"
+  },
+  "consumption": {
+    "summaryPrefix": "다이제스트용 문서 변경: {items}",
+    "summaryEmpty": "아직 연결된 구조화 문서가 없습니다. 다음 담당자에게 가장 필요한 패킷부터 시작하세요.",
+    "summaryCount": "{count}개의 {label}",
+    "emptyTitle": "아직 문서가 없습니다",
+    "emptyDescription": "이 협업 패킷은 아직 기록되지 않았습니다.",
+    "updatedAt": "{value}에 업데이트",
+    "openDoc": "문서 열기",
+    "createDoc": "문서 만들기"
+  },
+  "overview": {
+    "shared": {
+      "documentMetric": "문서",
+      "folderMetric": "폴더",
+      "structuredMetric": "구조화 문서",
+      "recentMetric": "이번 주 업데이트",
+      "newDocTitle": "새 문서",
+      "categoryTitle": "카테고리",
+      "recentTitle": "최근 업데이트",
+      "recentDescription": "활성 문서를 앞으로 끌어와 맥락을 다시 찾지 않고 그대로 이어서 작업할 수 있게 합니다.",
+      "structuredTitle": "협업 패킷",
+      "structuredDescription": "브리프, 결정 기록, 검토 패킷, 인계 패킷을 한 작업면에 두어 불필요한 추적을 줄입니다.",
+      "workspaceTitle": "최상위 공간",
+      "workspaceDescription": "현재 문서 작업면의 주요 주제로 빠르게 다시 들어갈 수 있게 해 주는 진입점입니다.",
+      "projectSpacesTitle": "프로젝트 공간",
+      "projectSpacesDescription": "팀 문서는 프로젝트를 주축으로 정리합니다. 각 프로젝트는 브리프, 결정, 인계를 위한 안정적인 공간을 갖습니다.",
+      "otherSpacesTitle": "기타 최상위 공간",
+      "otherSpacesDescription": "특정 프로젝트에 직접 속하지 않는 팀 문서 공간은 여기에 둡니다.",
+      "openAction": "열기",
+      "enterSpace": "공간으로 이동",
+      "totalCount": "문서 {count}개",
+      "folderContains": "{count}개 항목",
+      "emptyFolder": "빈 폴더",
+      "updatedAt": "{value}에 업데이트",
+      "projectSpaceMeta": "문서 {docs}개 · 하위 폴더 {folders}개"
+    },
+    "personal": {
+      "eyebrow": "개인 작업 공간",
+      "title": "내 문서",
+      "subtitle": "개인 문서 {count}개",
+      "heroDescription": "메모, 초안, 실행 맥락을 어수선한 임시 보관함이 아니라 차분하고 효율적인 작업면에 남깁니다.",
+      "newDocDescription": "새 개인 문서 만들기",
+      "emptyTitle": "아직 문서가 없습니다",
+      "emptyDescription": "첫 문서를 만들어 아이디어를 기록하기 시작해 보세요.",
+      "emptyAction": "문서 만들기"
+    },
+    "team": {
+      "eyebrow": "팀 지식 작업면",
+      "title": "팀 문서",
+      "subtitle": "팀 문서 {count}개",
+      "heroDescription": "프로젝트 맥락, 결정, 검토, 인계를 하나의 의도된 작업면에 모읍니다. 맥락을 되찾기 위해 채팅 기록을 다시 훑을 필요가 없습니다.",
+      "documentMetric": "팀 문서",
+      "newDocDescription": "새 팀 문서 만들기",
+      "emptyTitle": "아직 팀 문서가 없습니다",
+      "emptyDescription": "첫 팀 문서를 만들고 팀 협업을 시작해 보세요.",
+      "emptyAction": "팀 문서 만들기"
+    },
+    "teamPersonal": {
+      "eyebrow": "개인 작업 레이어",
+      "title": "내 작업 문서",
+      "subtitle": "개인 작업 문서 {count}개",
+      "heroDescription": "팀 맥락에 연결된 개인 메모, 분해, 준비 작업을 공유 면을 어지럽히지 않고 유지합니다.",
+      "documentMetric": "작업 문서",
+      "newDocDescription": "새 개인 작업 문서 만들기",
+      "emptyTitle": "아직 개인 작업 문서가 없습니다",
+      "emptyDescription": "팀 워크스페이스 안에 나만 볼 수 있는 개인 문서를 만들어 보세요.",
+      "emptyAction": "개인 문서 만들기"
+    }
+  },
+  "states": {
+    "loadingPage": "문서를 불러오는 중...",
+    "loadingSidebar": "불러오는 중...",
+    "loadingEditor": "에디터를 불러오는 중..."
+  },
+  "welcome": {
+    "title": "문서에 오신 것을 환영합니다",
+    "emptyDescription": "아직 문서가 없습니다. 사이드바의 + 버튼을 눌러 만들어 보세요.",
+    "selectDescription": "왼쪽에서 문서를 선택하면 편집을 시작할 수 있습니다."
+  },
+  "emptyState": {
+    "eyebrow": "문서 작업 공간",
+    "emptyDescription": "아직 열려 있는 문서가 없습니다. 왼쪽 트리에서 찾아보거나 단축키로 바로 기록을 시작할 수 있습니다.",
+    "selectDescription": "왼쪽에서 기존 문서를 열거나 단축키로 바로 빈 문서를 새로 만들 수 있습니다.",
+    "shortcutsTitle": "사용 가능한 단축키",
+    "createHint": "아직 문서가 없다면 Cmd + N 으로 빈 문서를 바로 만들 수 있습니다.",
+    "selectHint": "더 넓게 편집하고 싶다면 Cmd + B 로 왼쪽 문서 사이드바를 숨기거나 다시 표시할 수 있습니다.",
+    "shortcuts": {
+      "newDoc": "빠른 새 문서",
+      "toggleSidebar": "문서 사이드바 전환",
+      "saveDoc": "현재 문서 저장"
+    }
+  },
+  "sidebar": {
+    "title": "문서",
+    "searchPlaceholder": "문서 검색...",
+    "newChildDoc": "하위 문서 만들기",
+    "newDoc": "새 문서",
+    "newFolder": "새 폴더",
+    "duplicate": "복제",
+    "duplicateSuffix": "복사본",
+    "rename": "이름 바꾸기",
+    "delete": "삭제",
+    "projectSpaces": "프로젝트 공간",
+    "otherSpaces": "기타 공간",
+    "projectSpaceBadge": "프로젝트",
+    "emptySearch": "일치하는 문서를 찾지 못했습니다",
+    "emptyTitle": "아직 문서가 없습니다",
+    "emptyDescription": "위의 + 버튼을 눌러 만들어 보세요",
+    "deleteDialog": {
+      "title": "문서를 삭제할까요?",
+      "description": "“{title}” 문서를 삭제합니다. {children} 이 작업은 되돌릴 수 없습니다.",
+      "children": "하위 문서도 함께 삭제됩니다.",
+      "cancel": "취소",
+      "confirm": "삭제 확인"
+    }
+  },
+  "toolbar": {
+    "collapseTitle": "에디터 접기",
+    "expandTitle": "에디터 펼치기",
+    "collapse": "접기",
+    "expand": "펼치기"
+  },
+  "tabs": {
+    "close": "닫기",
+    "closeOthers": "다른 탭 닫기",
+    "closeAll": "모두 닫기"
+  },
+  "editor": {
+    "save": "저장",
+    "saving": "저장 중...",
+    "cancel": "취소",
+    "untitled": "이름 없는 문서",
+    "editable": "편집 가능",
+    "readonly": "읽기 전용",
+    "clickToEdit": "제목을 클릭해 편집",
+    "updatedAt": "{value}에 업데이트",
+    "meta": {
+      "folder": "폴더",
+      "document": "문서",
+      "private": "비공개",
+      "teamReadonly": "팀 읽기 전용",
+      "teamEditable": "팀 편집 가능",
+      "public": "공개"
+    }
+  },
+  "blocknote": {
+    "conflict": "원격 변경이 감지되었습니다. 로컬 초안은 보존되었습니다.",
+    "saveFailed": "저장에 실패했습니다",
+    "saving": "저장 중...",
+    "conflictStatus": "충돌이 감지되었습니다. 로컬 초안은 보존되었습니다.",
+    "errorStatus": "저장에 실패했습니다. 로컬 초안은 기기에 보존되었습니다.",
+    "recoveredDraft": "로컬 초안을 복구했습니다",
+    "draftPending": "로컬 초안이 동기화를 기다리는 중입니다",
+    "updatedAt": "{value}에 업데이트",
+    "ready": "준비 완료",
+    "shortcut": "{key} + S로 저장 • 30초마다 자동 저장"
+  },
+  "folderIntro": {
+    "saveFailed": "폴더 설명을 저장하지 못했습니다.",
+    "folderMeta": "폴더 • {value}에 생성",
+    "editDescription": "설명 편집",
+    "title": "폴더 설명",
+    "projectRootBadge": "프로젝트 공간",
+    "projectRootDescription": "이 폴더는 프로젝트가 자동으로 관리합니다. 안쪽 내용은 계속 편집할 수 있지만 폴더 자체는 프로젝트 이름과 생명주기에 맞춰 유지됩니다.",
+    "placeholder": "폴더 설명 입력...",
+    "saving": "저장 중...",
+    "save": "저장",
+    "cancel": "취소",
+    "emptyEditable": "클릭해 폴더 설명 추가...",
+    "emptyReadonly": "아직 폴더 설명이 없습니다",
+    "tipsTitle": "팁",
+    "tip1": "이 폴더는 문서를 정리하고 분류하는 데 사용합니다.",
+    "tip2": "폴더를 오른쪽 클릭하면 하위 문서를 만들 수 있습니다.",
+    "tip3": "여기에 자세한 안내나 사용 메모를 남길 수 있습니다.",
+    "projectRootTip": "프로젝트가 존재하는 동안 이 루트 폴더는 삭제할 수 없습니다.",
+    "visibility": "폴더 공개 범위: {value}"
+  },
+  "context": {
+    "docNotReady": "문서가 없거나 아직 로딩이 완료되지 않았습니다."
+  }
+}

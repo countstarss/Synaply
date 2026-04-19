@@ -1,0 +1,148 @@
+{
+  "shared": {
+    "copyFailed": "Copy failed.",
+    "assistant": "AI assistant",
+    "surfaceLabel": "Intelligence",
+    "newConversation": "New conversation",
+    "conversation": "Intelligence conversation",
+    "conversationLegacy": "AI collaboration thread"
+  },
+  "thread": {
+    "shell": {
+      "title": "AI assistant",
+      "description": "Work from the current task context first, then help clarify, advance, and shape the next step."
+    },
+    "list": {
+      "fallbackTitle": "AI collaboration thread",
+      "description": "This thread remembers the current task context and your collaboration history.",
+      "noPins": "No context pins yet"
+    },
+    "messages": {
+      "loading": "Syncing thread and message history...",
+      "empty": "Tell AI what you want to move forward, and it will respond from the current task context.",
+      "streaming": "Generating a reply..."
+    },
+    "composer": {
+      "placeholder": "For example: help me map the next step for this issue and point out the missing context.",
+      "send": "Send"
+    },
+    "approval": {
+      "readStatusFailed": "We could not read the approval status right now.",
+      "confirmUnavailable": "This action cannot be confirmed right now.",
+      "actionIncomplete": "The action did not finish successfully.",
+      "confirmSuccess": "Confirmed. AI is continuing the run.",
+      "confirmFailed": "Confirmation failed.",
+      "rejectUnavailable": "This action cannot be rejected right now.",
+      "rejectSuccess": "The action was rejected.",
+      "rejectFailed": "Rejection failed.",
+      "statuses": {
+        "confirmed": "Confirmed",
+        "rejected": "Rejected",
+        "expired": "Expired",
+        "pending": "Waiting for confirmation"
+      },
+      "action": "Action: {value}",
+      "batchSummary": "This approval will execute {count} actions together.",
+      "previewStatus": "Preview status: {value}",
+      "confirm": "Confirm and run",
+      "reject": "Reject"
+    },
+    "codingPrompt": {
+      "copied": "The coding handoff prompt was copied.",
+      "title": "Coding handoff prompt",
+      "issueLabel": "Issue {id}",
+      "unbound": "Not linked to a specific issue",
+      "copy": "Copy for Claude Code / Codex"
+    },
+    "clarification": {
+      "fallbackTitle": "Options"
+    },
+    "toolResult": {
+      "toolFailed": "The tool execution failed.",
+      "toolCompleted": "The tool execution completed.",
+      "details": "View structured output",
+      "status": "Status: {value}",
+      "summary": "Summary: {value}",
+      "message": "Message: {value}"
+    },
+    "messageBubble": {
+      "empty": "No visible message content."
+    }
+  },
+  "workbench": {
+    "page": {
+      "fallbackWorkspace": "Untitled workspace",
+      "defaultOriginTitle": "{name} · Intelligence workspace",
+      "unauthorized": "Unauthorized.",
+      "sendFailed": "Failed to send the AI message.",
+      "loading": "Preparing the Intelligence workspace...",
+      "emptyWorkspace": "No workspace is available yet, so Intelligence cannot start."
+    },
+    "sidebar": {
+      "new": "New",
+      "workspaceSection": "Workspace",
+      "projectsSection": "Projects",
+      "sectionTitle": "Intelligence",
+      "freeEmpty": "There is no free-form conversation history yet. You can start directly from the current context.",
+      "projectEmpty": "There are no issue chat records for this project yet. Click the project itself to enter the project conversation.",
+      "projectStart": "Start the main conversation for this project",
+      "projectConversation": "Project conversation",
+      "freeConversation": "Free conversation",
+      "collapseProject": "Collapse {name}",
+      "expandProject": "Expand {name}",
+      "syncing": "Syncing conversations...",
+      "empty": "There is no conversation history yet. Send the first message and the composer will move down into the workspace.",
+      "justNow": "Just now",
+      "minutesAgo": "{count} min ago",
+      "hoursAgo": "{count} hr ago",
+      "daysAgo": "{count} d ago"
+    },
+    "chat": {
+      "loading": "Syncing thread and message history...",
+      "heroTitle": "Start by saying what you want to move forward.",
+      "streaming": "AI is shaping the reply",
+      "copySuccess": "Message copied.",
+      "copy": "Copy",
+      "deselect": "Unselect",
+      "select": "Select",
+      "exitMultiSelect": "Exit multi-select",
+      "multiSelect": "Multi-select",
+      "noContent": "No visible message content.",
+      "selected": "Selected {count} message(s)",
+      "autoSelect": "Auto select",
+      "mergeCopy": "Merge and copy",
+      "copying": "Copying...",
+      "clearSelection": "Clear selection",
+      "exit": "Exit",
+      "selectionHint": "Right-click messages to keep multi-select going. Later this can naturally grow into clipping, summarizing, or saving."
+    },
+    "composer": {
+      "placeholder": "Keep typing your idea, blocker, or next action...",
+      "sending": "Sending...",
+      "send": "Send"
+    },
+    "roles": {
+      "user": "User",
+      "assistant": "AI assistant",
+      "system": "System",
+      "tool": "Tool",
+      "message": "Message"
+    },
+    "plainText": {
+      "status": "Status: {value}",
+      "summary": "Summary: {value}",
+      "message": "Message: {value}",
+      "toolFailed": "The tool execution failed.",
+      "toolCompleted": "The tool execution completed.",
+      "approval": "Approval request",
+      "action": "Action: {value}",
+      "batchActions": "Batch actions: {count} item(s)",
+      "error": "Error: {value}",
+      "context": "Context: {value}",
+      "tool": "Tool {name}",
+      "codingPrompt": "Coding prompt",
+      "options": "Options",
+      "noContent": "No content"
+    }
+  }
+}

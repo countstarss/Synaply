@@ -1,0 +1,47 @@
+{
+  "createTeam": {
+    "title": "팀 만들기",
+    "description": "팀원과 협업할 새 팀을 만드세요. 연결된 전용 워크스페이스도 자동으로 생성됩니다.",
+    "nameLabel": "팀 이름",
+    "namePlaceholder": "팀 이름을 입력하세요",
+    "validation": {
+      "nameRequired": "팀 이름을 입력하세요."
+    },
+    "toasts": {
+      "created": "팀을 만들었습니다.",
+      "createFailed": "팀을 만들지 못했습니다. 다시 시도해 주세요."
+    },
+    "actions": {
+      "creating": "만드는 중...",
+      "submit": "팀 만들기"
+    }
+  },
+  "inviteMember": {
+    "title": "새 구성원 초대",
+    "description": "“{teamName}”에 새 구성원을 초대합니다.",
+    "emailLabel": "이메일 주소",
+    "emailPlaceholder": "초대할 이메일 주소를 입력하세요",
+    "emailHint": "이 주소로 초대 링크를 보냅니다.",
+    "validation": {
+      "emailRequired": "이메일 주소를 입력하세요.",
+      "emailInvalid": "유효한 이메일 주소를 입력하세요."
+    },
+    "toasts": {
+      "sent": "{email}을(를) {teamName}에 초대했습니다.",
+      "sendFailed": "구성원을 초대하는 중 문제가 발생했습니다. 다시 시도해 주세요."
+    },
+    "actions": {
+      "sending": "초대를 보내는 중...",
+      "submit": "초대 보내기"
+    }
+  },
+  "workspace": {
+    "errors": {
+      "createAuthRequired": "워크스페이스를 만들기 전에 로그인해 주세요.",
+      "personalUnsupported": "현재 버전에서는 팀 워크스페이스만 만들 수 있습니다.",
+      "inviteAuthRequired": "구성원을 초대하기 전에 로그인해 주세요.",
+      "teamInviteOnly": "현재 워크스페이스에서는 구성원 초대를 지원하지 않습니다.",
+      "invitePermissionDenied": "구성원을 초대할 권한이 없습니다."
+    }
+  }
+}

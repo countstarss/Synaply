@@ -1,0 +1,47 @@
+{
+  "actions": {
+    "back": "Back",
+    "cancel": "Cancel",
+    "close": "Close",
+    "confirm": "Confirm",
+    "create": "Create",
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save"
+  },
+  "entities": {
+    "issue": "Issue",
+    "project": "Project",
+    "task": "Task",
+    "workflow": "Workflow",
+    "workspace": "Workspace"
+  },
+  "fields": {
+    "description": "Description",
+    "dueDate": "Due date",
+    "name": "Name",
+    "owner": "Owner",
+    "priority": "Priority",
+    "project": "Project",
+    "state": "State",
+    "title": "Title",
+    "visibility": "Visibility"
+  },
+  "feedback": {
+    "loading": "Loading...",
+    "retry": "Please try again.",
+    "success": "Saved successfully."
+  },
+  "states": {
+    "currentUser": "Current user",
+    "none": "None",
+    "noneAssigned": "Unassigned",
+    "noneNamed": "Untitled",
+    "noneSelected": "Nothing selected"
+  },
+  "validation": {
+    "chooseOne": "Please choose an option.",
+    "loginAgain": "We could not verify your session. Please sign in again.",
+    "titleRequired": "Please enter a title."
+  }
+}

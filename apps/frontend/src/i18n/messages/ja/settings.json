@@ -1,0 +1,406 @@
+{
+  "navigation": {
+    "previous": "前へ",
+    "next": "次へ"
+  },
+  "general": {
+    "pageTitle": "一般",
+    "description": "アカウント単位の設定はここに集約されています。サイドバーの「一般」は、複数ページに分けずこのスクロールページに直接対応します。",
+    "sections": {
+      "profile": {
+        "label": "プロフィール",
+        "description": "プロフィール詳細、アバター、本人情報"
+      },
+      "notifications": {
+        "label": "通知",
+        "description": "アラート、ダイジェスト、非同期コラボレーションのシグナル",
+        "placeholderDescription": "この領域は、受信トレイのリマインド強度、ダイジェスト頻度、他ツールとの通知設定を置く場所として自然です。一般の中にまとめることで、個人設定への導線を一本化できます。",
+        "highlights": {
+          "digestFrequency": "日次 / 週次ダイジェストの頻度",
+          "reminders": "メンション、アサイン、引き継ぎのリマインド",
+          "bridges": "GitHub / Slack 連携通知の設定",
+          "quietHours": "通知を抑える時間帯と個人の注意量しきい値"
+        }
+      },
+      "language": {
+        "label": "言語",
+        "description": "Synaply 全体で使う表示言語を選択します。",
+        "selectorLabel": "現在の言語",
+        "selectorDescription": "ナビゲーション、通知、プロダクト文言に反映されます。"
+      },
+      "appearance": {
+        "label": "外観",
+        "description": "テーマ、密度、読みやすさ"
+      }
+    }
+  },
+  "admin": {
+    "pageTitle": "管理",
+    "sections": {
+      "workspace": {
+        "label": "ワークスペース",
+        "description": "ワークスペースのルール、識別情報、権限境界",
+        "placeholderDescription": "ここはワークスペース名、既定の協業ルール、プロジェクト横断の制約、メンバー可視性を置くのに自然な場所です。構造をここに残しておけば、実際のフィールドが来てもページを再分割せずに済みます。",
+        "highlights": {
+          "identity": "ワークスペースの識別情報と命名",
+          "rules": "既定の協業ルール",
+          "visibility": "プロジェクト横断の可視性設定",
+          "invites": "役割と招待ポリシーの既定値"
+        }
+      },
+      "teams": {
+        "label": "チーム",
+        "description": "チーム一覧、作成導線、チーム設定ナビゲーション"
+      },
+      "members": {
+        "label": "メンバー",
+        "description": "メンバー役割、権限、削除操作"
+      },
+      "aiExecution": {
+        "label": "AI実行",
+        "description": "AI アクション、確認ポリシー、監査履歴"
+      },
+      "security": {
+        "label": "セキュリティ",
+        "description": "アカウントセキュリティ、サインイン方針、監査の入口",
+        "placeholderDescription": "セキュリティ設定はメンバーやワークスペースルールの近くに置くのが自然です。デバイスセッション、サインイン管理、監査ログが入ってきても、この領域は一貫性を保てます。",
+        "highlights": {
+          "sessions": "セッションとデバイス管理",
+          "confirmations": "機微な操作の確認",
+          "audit": "監査ログとアクセス確認",
+          "permissions": "役割に応じた権限制御"
+        }
+      },
+      "application": {
+        "label": "アプリケーション",
+        "description": "クライアント、連携、プラットフォーム動作の設定",
+        "placeholderDescription": "この領域はデスクトップ、モバイル、外部サービス接続など、アプリ全体の挙動に関する設定の置き場です。管理の中に置くことで、チームの運用設定として自然に見えます。",
+        "highlights": {
+          "clients": "デスクトップ / モバイルアプリの設定",
+          "services": "接続済みサービスの管理",
+          "health": "連携の健全性と同期状況",
+          "defaults": "ワークスペース全体の既定値"
+        }
+      },
+      "billing": {
+        "label": "請求",
+        "description": "プラン、請求書、席数コスト",
+        "placeholderDescription": "請求、プラン詳細、席数情報はワークスペース管理とまとめておくのが自然です。これにより、将来あらためて請求ページ構造を分けて維持する必要がなくなります。",
+        "highlights": {
+          "overview": "プラン概要と更新タイミング",
+          "seats": "席数割り当てと利用数",
+          "invoices": "請求書の送付先と履歴",
+          "upgrades": "チーム成長時のアップグレード経路"
+        }
+      }
+    }
+  },
+  "profile": {
+    "errors": {
+      "updateFailed": "プロフィールの更新に失敗しました。",
+      "bucketMissing": "アバター用ストレージバケットがまだ存在しません。Supabase の migration を実行するか、Storage で avatars バケットを先に作成してください。",
+      "storageBlocked": "アバターのアップロードが Storage ポリシーにより拒否されました。ログイン状態を確認し、最新コードで再試行してください。",
+      "sessionExpired": "セッションの有効期限が切れました。もう一度ログインしてください。",
+      "syncAuthFailed": "サインインプロフィールの同期に失敗しました。"
+    },
+    "validation": {
+      "invalidType": "JPG、PNG、WebP のアバターのみ対応しています。",
+      "fileTooLarge": "アバターは 3 MB 未満である必要があります。"
+    },
+    "toasts": {
+      "uploading": "{fileName} をアップロードしています...",
+      "saving": "プロフィールの変更を保存しています...",
+      "uploadSuccess": "アバターをアップロードしました。「変更を保存」を押すとプロフィールに反映されます。",
+      "saveSuccess": "プロフィールを保存しました。",
+      "cancelNewAvatar": "新しいアバターを取り消しました。",
+      "undoRemoveAvatar": "アバター削除を取り消しました。",
+      "markRemoveAvatar": "アバター削除を保存待ちとしてマークしました。「変更を保存」で反映されます。"
+    },
+    "states": {
+      "authRequiredTitle": "ログインが必要です",
+      "authRequiredDescription": "アバターのアップロードやプロフィール編集の前にログインしてください。",
+      "loading": "プロフィールを読み込んでいます...",
+      "loadFailedTitle": "プロフィールの読み込みに失敗しました",
+      "loadFailedDescription": "現在プロフィールを読み取れません。"
+    },
+    "avatar": {
+      "title": "アバター",
+      "description": "コメント、チャット、協業ビューでチームメンバーに判別してもらいやすい、分かりやすいアバターを設定してください。",
+      "recommendation": "通常は正方形の画像が最も扱いやすいです。",
+      "statusUploading": "アバターはまだアップロード中です。少しお待ちください。",
+      "statusUploaded": "アバター {fileName} をアップロードしました。「変更を保存」で反映されます。",
+      "statusMarked": "アバター削除は保存後に反映されます。",
+      "statusHint": "画像を選ぶとすぐにアップロードされます。アップロード完了後に「変更を保存」を押すとプロフィールへ反映されます。",
+      "upload": "アバターをアップロード",
+      "uploading": "アップロード中...",
+      "remove": "アバターを削除",
+      "cancelNew": "新しいアバターを取り消す",
+      "undoRemove": "削除を取り消す",
+      "alt": "プロフィールアバター"
+    },
+    "info": {
+      "title": "基本情報",
+      "description": "表示名はここで変更できます。サインイン用メールアドレスは今のところ読み取り専用です。",
+      "displayNameLabel": "表示名",
+      "displayNamePlaceholder": "チームがすぐ認識できる名前を入力してください",
+      "emailLabel": "サインイン用メールアドレス",
+      "createdAtLabel": "参加日",
+      "dirty": "未保存の変更があります。",
+      "clean": "プロフィールは最新です。",
+      "save": "変更を保存"
+    }
+  },
+  "members": {
+    "noTeam": {
+      "title": "チームメンバー管理",
+      "description": "この領域はチームワークスペース内でのみ利用できます。",
+      "body": "メンバー役割を管理する前に、チームワークスペースへ切り替えてください。"
+    },
+    "notOwner": {
+      "title": "権限が必要です",
+      "description": "チームメンバーを管理できるのはチームオーナーのみです。",
+      "body": "役割変更が必要な場合は、チームオーナーに連絡してください。"
+    },
+    "list": {
+      "title": "メンバー一覧",
+      "description": "チームメンバーの役割と権限を管理します。役割変更や削除ができるのはチームオーナーのみです。",
+      "loading": "チームメンバーを読み込んでいます...",
+      "loadFailed": "メンバー一覧の読み込みに失敗しました。",
+      "unknownMember": "不明なメンバー",
+      "joinedAt": "参加日: {value}",
+      "rolePlaceholder": "役割を選択",
+      "remove": "メンバーを削除",
+      "selfRestriction": "自分自身の役割は変更できず、削除もできません。",
+      "actionFailed": "メンバー操作に失敗しました。"
+    },
+    "removeDialog": {
+      "title": "このメンバーを削除しますか？",
+      "description": "「{name}」は現在のチームから削除されます。このチームワークスペース内のプロジェクト、タスク、ドキュメントへのアクセス権も失います。",
+      "fallbackName": "このメンバー",
+      "confirm": "メンバーを削除"
+    },
+    "roles": {
+      "OWNER": "オーナー",
+      "ADMIN": "管理者",
+      "MEMBER": "メンバー"
+    }
+  },
+  "appearance": {
+    "title": "背景グロー",
+    "description": "グローバルな環境光の色と動きを調整します。設定はアカウントとワークスペースごとにローカル保存されます。",
+    "replayIntro": "イントロを再生",
+    "preview": "ライブプレビュー",
+    "modeLabel": "グローモード",
+    "modes": {
+      "glow": {
+        "label": "固定グロー",
+        "description": "柔らかな光のにじみが固定アンカーの近くに留まり、背景の主張を抑えられます。"
+      },
+      "aurora": {
+        "label": "オーロラ",
+        "description": "動きを有効にすると、層状のオーロラカーテンがゆっくり漂うように見えます。"
+      },
+      "ribbon": {
+        "label": "リボン",
+        "description": "斜めの広い光帯が背景を横切り、よりエネルギッシュな雰囲気を作ります。"
+      },
+      "prism": {
+        "label": "プリズム",
+        "description": "屈折した色帯が層になって走り、よりシャープでテクニカルな印象になります。"
+      }
+    },
+    "presetLabel": "カラープリセット",
+    "enabledLabel": "背景グローを有効にする",
+    "enabledDescription": "無効にすると環境光は描画されず、ページ背景は単色のままになります。",
+    "animatedLabel": "モーションを有効にする",
+    "animatedDescription": "有効にすると選択中のグローがゆっくり動きます。無効にすると静止し、システムのモーション軽減設定も尊重します。",
+    "intensity": "グロー強度"
+  },
+  "teams": {
+    "description": "所属しているチームはすべてここに表示されます。任意のチームを開くと、そのチーム設定に入れます。オーナーと管理者は、そこでプロフィール詳細やメンバー権限も引き続き編集できます。",
+    "create": "新しいチームを作成",
+    "loading": "チーム一覧を読み込んでいます...",
+    "loadFailedTitle": "チームの読み込みに失敗しました",
+    "loadFailedDescription": "現在チーム一覧を読み取れません。",
+    "emptyTitle": "まだチームはありません",
+    "emptyDescription": "ここで最初のチームを作成すると、対応するチームワークスペースも自動で作成されます。",
+    "membersCount": "{count} 人のメンバー",
+    "open": "チーム設定を開く"
+  },
+  "teamPage": {
+    "errors": {
+      "updateFailed": "チームプロフィールの更新に失敗しました。",
+      "bucketMissing": "アバター用ストレージバケットがまだ存在しません。先に Supabase Storage で avatars バケットを作成してください。",
+      "storageBlocked": "チームアバターのアップロードが Storage ポリシーにより拒否されました。アップロードパスは現在のポリシーに合わせてあります。更新してもう一度お試しください。",
+      "sessionExpired": "セッションの有効期限が切れました。もう一度ログインしてください。",
+      "uploadFailed": "チームアバターのアップロードに失敗しました。"
+    },
+    "validation": {
+      "invalidType": "JPG、PNG、WebP のチームアバターのみ対応しています。",
+      "fileTooLarge": "チームアバターは 3 MB 未満である必要があります。",
+      "nameRequired": "チーム名を入力してください。",
+      "uploadPending": "アバターはまだアップロード中です。保存前に完了を待ってください。",
+      "permissionDenied": "チーム詳細を編集できるのはオーナーまたは管理者のみです。"
+    },
+    "toasts": {
+      "uploading": "{fileName} をアップロードしています...",
+      "saving": "チーム変更を保存しています...",
+      "uploadSuccess": "チームアバターをアップロードしました。「変更を保存」で反映されます。",
+      "saveSuccess": "チーム詳細を更新しました。",
+      "cancelNewAvatar": "新しいアバターを取り消しました。",
+      "undoRemoveAvatar": "アバター削除を取り消しました。",
+      "markRemoveAvatar": "アバター削除を保存待ちとしてマークしました。「変更を保存」で反映されます。"
+    },
+    "states": {
+      "missingTeamTitle": "チームが見つかりません",
+      "missingTeamDescription": "teamId がないため、チーム詳細を読み込めません。",
+      "authRequiredTitle": "ログインが必要です",
+      "authRequiredDescription": "チーム詳細を表示または管理する前にログインしてください。",
+      "loading": "チーム詳細を読み込んでいます...",
+      "loadFailedTitle": "チームの読み込みに失敗しました",
+      "loadFailedDescription": "現在チーム詳細を読み取れません。"
+    },
+    "hero": {
+      "description": "チームプロフィールと識別情報はここに集約されます。チーム名とアバターを変更できるのはオーナーと管理者のみです。"
+    },
+    "permissionBanner": {
+      "message": "現在のあなたの役割は {role} です。チーム詳細は閲覧できますが、変更を保存できるのはオーナーまたは管理者のみです。"
+    },
+    "onboarding": {
+      "title": "協業セットアップ",
+      "description": "新しいチームがうまく動き出すには、最初の引き継ぎ経路を明確にすることが重要です。まず関係者を招待し、そのうえで作業を受け止める最初のプロジェクトとワークフローを作成します。",
+      "progress": "{completed}/{total} ステップ完了",
+      "status": {
+        "done": "完了",
+        "pending": "未完了"
+      },
+      "steps": {
+        "invite": {
+          "title": "チームメンバーを招待",
+          "description": "まずは主要な協業メンバーをこのチームワークスペースに招待します。現在のメンバー数: {count}",
+          "action": "メンバーを招待"
+        },
+        "project": {
+          "title": "最初のプロジェクトを作成",
+          "description": "プロジェクトは、チームの範囲、責任、作業文脈を定義します。現在のプロジェクト数: {count}",
+          "action": "プロジェクトを作成"
+        },
+        "workflow": {
+          "title": "最初のワークフローを作成",
+          "description": "共有ワークフローテンプレートで、レビュー、引き継ぎ、ブロック状態を可視化します。現在のワークフロー数: {count}",
+          "action": "ワークフローを作成"
+        }
+      }
+    },
+    "avatar": {
+      "title": "チームアバター",
+      "description": "チームアバターはワークスペース切り替え、設定、チーム向け協業ビューに表示されます。",
+      "recommendation": "分かりやすいブランドマークやチームエンブレムが最も扱いやすいです。",
+      "statusUploading": "チームアバターはまだアップロード中です。少しお待ちください。",
+      "statusUploaded": "チームアバター {fileName} をアップロードしました。「変更を保存」で反映されます。",
+      "statusMarked": "アバター削除は保存後に反映されます。",
+      "statusHint": "画像を選ぶとすぐにアップロードされます。アップロード完了後に「変更を保存」を押すとチームプロフィールへ反映されます。",
+      "upload": "アバターをアップロード",
+      "uploading": "アップロード中...",
+      "remove": "アバターを削除",
+      "cancelNew": "新しいアバターを取り消す",
+      "undoRemove": "削除を取り消す"
+    },
+    "info": {
+      "title": "基本情報",
+      "description": "チーム名はいつでも変更できます。作成日時とメンバー数は現在読み取り専用の参照項目です。",
+      "nameLabel": "チーム名",
+      "namePlaceholder": "チーム名を入力",
+      "createdAtLabel": "作成日",
+      "membersCountLabel": "メンバー数",
+      "roleLabel": "あなたの役割",
+      "readOnly": "このアカウントは現在読み取り専用アクセスです。",
+      "dirty": "未保存のチーム変更があります。",
+      "clean": "チーム詳細は最新です。",
+      "save": "変更を保存",
+      "untitled": "無題のチーム"
+    }
+  },
+  "aiExecution": {
+    "title": "AI実行レイヤー",
+    "description": "AI 実行を設定するには、先にワークスペースを開いてください。",
+    "stats": {
+      "total": "利用可能なアクション",
+      "auto": "自動実行",
+      "confirm": "確認が必要",
+      "unavailable": "この役割では利用不可"
+    },
+    "capabilities": {
+      "title": "能力と権限",
+      "description": "ここはチャット画面ではなく、AI が実際のシステムアクションを呼ぶ前に共有で使う能力レイヤーです。各アクションは承認モード、対象タイプ、現在の役割での利用可否を宣言し、どのモデルでも同じ契約に従えるようにします。",
+      "workspaceLabel": "ワークスペース",
+      "roleLabel": "現在の役割",
+      "workspaceType": {
+        "TEAM": "チーム",
+        "PERSONAL": "個人"
+      },
+      "loading": "能力一覧を読み込んでいます...",
+      "loadFailed": "能力一覧の読み込みに失敗しました。"
+    },
+    "badges": {
+      "approval": {
+        "AUTO": "自動実行",
+        "CONFIRM": "確認が必要"
+      },
+      "availability": {
+        "available": "今すぐ利用可能",
+        "requires_target_check": "対象の検証が必要",
+        "unavailable": "この役割では利用不可"
+      },
+      "historyStatus": {
+        "PREVIEW": "プレビュー",
+        "SUCCEEDED": "成功",
+        "FAILED": "失敗",
+        "BLOCKED": "ブロック"
+      },
+      "historyApproval": {
+        "AUTO": "自動",
+        "CONFIRM": "確認"
+      },
+      "liveStatus": {
+        "preview": "プレビュー",
+        "succeeded": "成功",
+        "failed": "失敗",
+        "blocked": "ブロック"
+      }
+    },
+    "targetTypes": {
+      "WORKSPACE": "ワークスペース",
+      "PROJECT": "プロジェクト",
+      "ISSUE": "課題",
+      "WORKFLOW": "ワークフロー",
+      "DOC": "ドキュメント"
+    },
+    "workbench": {
+      "title": "アクションワークベンチ",
+      "description": "プレビュー、確認、実行のすべてで同じ AI アクション API を使い、経路全体を先に検証します。",
+      "actionLabel": "アクション",
+      "actionPlaceholder": "アクションを選択",
+      "inputJsonLabel": "入力 JSON",
+      "inputFieldsTitle": "入力フィールド",
+      "required": "必須",
+      "preview": "プレビュー",
+      "execute": "今すぐ実行",
+      "confirm": "確認して実行",
+      "lastResult": "最新結果",
+      "waitingConfirmation": "確認待ち",
+      "executionFailed": "アクションに失敗しました。",
+      "invalidPayload": "入力は JSON オブジェクトである必要があります。",
+      "parseFailed": "JSON 入力の解析に失敗しました。",
+      "noSummary": "要約なし"
+    },
+    "history": {
+      "title": "最近の実行",
+      "description": "プレビュー、成功、失敗、ブロックのすべてが監査履歴に記録されます。",
+      "loading": "実行履歴を読み込んでいます...",
+      "loadFailed": "実行履歴の読み込みに失敗しました。",
+      "empty": "まだ実行履歴はありません。左のワークベンチでまずプレビューから始めてください。",
+      "noSummary": "要約なし"
+    }
+  }
+}

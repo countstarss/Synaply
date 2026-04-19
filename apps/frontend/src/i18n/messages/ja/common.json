@@ -1,0 +1,47 @@
+{
+  "actions": {
+    "back": "戻る",
+    "cancel": "キャンセル",
+    "close": "近い",
+    "confirm": "確認する",
+    "create": "作成する",
+    "delete": "消去",
+    "edit": "編集",
+    "save": "保存"
+  },
+  "entities": {
+    "issue": "問題",
+    "project": "プロジェクト",
+    "task": "タスク",
+    "workflow": "ワークフロー",
+    "workspace": "ワークスペース"
+  },
+  "fields": {
+    "description": "説明",
+    "dueDate": "期日",
+    "name": "名前",
+    "owner": "所有者",
+    "priority": "優先度",
+    "project": "プロジェクト",
+    "state": "州",
+    "title": "タイトル",
+    "visibility": "可視性"
+  },
+  "feedback": {
+    "loading": "読み込み中...",
+    "retry": "もう一度試してください。",
+    "success": "正常に保存されました。"
+  },
+  "states": {
+    "currentUser": "現在のユーザー",
+    "none": "なし",
+    "noneAssigned": "未割り当て",
+    "noneNamed": "無題",
+    "noneSelected": "何も選択されていません"
+  },
+  "validation": {
+    "chooseOne": "オプションを選択してください。",
+    "loginAgain": "セッションを確認できませんでした。再度サインインしてください。",
+    "titleRequired": "タイトルを入力してください。"
+  }
+}

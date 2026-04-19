@@ -1,0 +1,104 @@
+{
+  "nav": {
+    "docs": "Docs",
+    "inbox": "Inbox",
+    "intelligence": "Intelligence",
+    "issues": "Issues",
+    "myWork": "My Work",
+    "projects": "Projects",
+    "workflows": "Workflows"
+  },
+  "sidebar": {
+    "backToMain": "Back",
+    "createTeam": "Create new team",
+    "sections": {
+      "administration": "Administration",
+      "general": "General",
+      "team": "Team"
+    },
+    "brand": {
+      "fallbackWorkspaceName": "My workspace",
+      "loadFailed": "Workspace failed to load",
+      "personal": "Personal workspace",
+      "team": "Team workspace",
+      "loadFailedDescription": "We could not load the workspace data. Check the frontend backend URL configuration or try again shortly.",
+      "retry": "Retry",
+      "memberCount": "{count} member(s)",
+      "inviteMember": "Invite new member",
+      "emailFallback": "User email",
+      "workspaceListFailed": "Failed to load the workspace list",
+      "workspaceEmpty": "There are no available workspaces for this account yet.",
+      "createWorkspace": "Create new workspace",
+      "settings": "Settings",
+      "logout": "Logout"
+    },
+    "footer": {
+      "title": "Insight Lab",
+      "description": "Where insight sparks action."
+    },
+    "utils": {
+      "title": "Utils",
+      "actions": {
+        "edit": "Edit",
+        "delete": "Delete",
+        "addShortcut": "Add shortcut"
+      },
+      "dialog": {
+        "editTitle": "Edit shortcut",
+        "editDescription": "Update the displayed label and in-app route.",
+        "createTitle": "Add shortcut",
+        "createDescription": "Fill in the label and in-app route so you can jump there quickly from the sidebar.",
+        "save": "Save",
+        "add": "Add"
+      },
+      "fields": {
+        "label": "Display label",
+        "labelPlaceholder": "For example: Blocked issues",
+        "route": "Route",
+        "routePlaceholder": "For example: /projects or /issues?state=blocked"
+      },
+      "validation": {
+        "routeRequired": "Please enter an in-app route to pin.",
+        "routeInternalOnly": "Only in-app routes are allowed here, for example /projects.",
+        "duplicateRoute": "This route is already in the shortcuts list.",
+        "maxReached": "You can add up to 5 shortcuts."
+      }
+    }
+  },
+  "settingsNav": {
+    "aiExecution": "AI Execution",
+    "appearance": "Appearance",
+    "application": "Application",
+    "billing": "Billing",
+    "members": "Members",
+    "notifications": "Notifications",
+    "profile": "Profile",
+    "security": "Security",
+    "teams": "Teams",
+    "workspace": "Workspace"
+  },
+  "infobar": {
+    "menu": "Menu",
+    "showSidebar": "Show sidebar",
+    "hideSidebar": "Hide sidebar"
+  },
+  "entryIntro": {
+    "prompt": "Press any key to enter"
+  },
+  "search": {
+    "placeholder": "Type a command or search...",
+    "empty": "No results found.",
+    "groups": {
+      "suggestions": "Suggestions",
+      "settings": "Settings"
+    },
+    "items": {
+      "calendar": "Calendar",
+      "searchEmoji": "Search Emoji",
+      "calculator": "Calculator",
+      "profile": "Profile",
+      "billing": "Billing",
+      "settings": "Settings"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "label": "言語",
+  "switch": "言語を切り替える",
+  "current": "現在の言語",
+  "english": "英語",
+  "chinese": "中文",
+  "korean": "한국어",
+  "japanese": "日本語"
+}

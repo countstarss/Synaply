@@ -1,0 +1,47 @@
+{
+  "createTeam": {
+    "title": "创建团队",
+    "description": "创建一个新团队，与队友开始协作。系统会自动生成对应的专属工作空间。",
+    "nameLabel": "团队名称",
+    "namePlaceholder": "输入团队名称",
+    "validation": {
+      "nameRequired": "请输入团队名称。"
+    },
+    "toasts": {
+      "created": "团队已创建。",
+      "createFailed": "创建团队失败，请重试。"
+    },
+    "actions": {
+      "creating": "创建中...",
+      "submit": "创建团队"
+    }
+  },
+  "inviteMember": {
+    "title": "邀请新成员",
+    "description": "邀请新成员加入“{teamName}”。",
+    "emailLabel": "邮箱地址",
+    "emailPlaceholder": "输入要邀请的邮箱地址",
+    "emailHint": "我们会将邀请链接发送到这个地址。",
+    "validation": {
+      "emailRequired": "请输入邮箱地址。",
+      "emailInvalid": "请输入有效的邮箱地址。"
+    },
+    "toasts": {
+      "sent": "已邀请 {email} 加入 {teamName}。",
+      "sendFailed": "邀请成员时出现问题，请重试。"
+    },
+    "actions": {
+      "sending": "发送邀请中...",
+      "submit": "发送邀请"
+    }
+  },
+  "workspace": {
+    "errors": {
+      "createAuthRequired": "请先登录，再创建工作空间。",
+      "personalUnsupported": "当前版本仅支持创建团队工作空间。",
+      "inviteAuthRequired": "请先登录，再邀请成员。",
+      "teamInviteOnly": "当前工作空间不支持邀请成员。",
+      "invitePermissionDenied": "你没有邀请成员的权限。"
+    }
+  }
+}

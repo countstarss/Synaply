@@ -1,0 +1,406 @@
+{
+  "navigation": {
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "general": {
+    "pageTitle": "General",
+    "description": "Account-level preferences live here. The General item in the sidebar now maps directly to this scrolling page instead of splitting into separate pages.",
+    "sections": {
+      "profile": {
+        "label": "Profile",
+        "description": "Profile details, avatar, and identity information"
+      },
+      "notifications": {
+        "label": "Notifications",
+        "description": "Alerts, digests, and async collaboration signals",
+        "placeholderDescription": "This area is a good home for inbox reminder intensity, digest cadence, and cross-tool notification preferences. Keeping it inside General preserves one personal preference path.",
+        "highlights": {
+          "digestFrequency": "Daily / weekly async digest frequency",
+          "reminders": "Mention, assignment and handoff reminders",
+          "bridges": "GitHub / Slack bridge notification preferences",
+          "quietHours": "Quiet hours and personal attention thresholds"
+        }
+      },
+      "language": {
+        "label": "Language",
+        "description": "Choose the interface language used across Synaply.",
+        "selectorLabel": "Current language",
+        "selectorDescription": "Applied to navigation, notifications, and product copy."
+      },
+      "appearance": {
+        "label": "Appearance",
+        "description": "Theme, density, and reading comfort"
+      }
+    }
+  },
+  "admin": {
+    "pageTitle": "Administration",
+    "sections": {
+      "workspace": {
+        "label": "Workspace",
+        "description": "Workspace rules, identity, and permission boundaries",
+        "placeholderDescription": "This is a natural home for the workspace name, default collaboration rules, cross-project constraints, and member visibility. Keeping the structure here means we will not have to split the page again when the real fields arrive.",
+        "highlights": {
+          "identity": "Workspace identity and naming",
+          "rules": "Default collaboration rules",
+          "visibility": "Cross-project visibility settings",
+          "invites": "Role and invite policy defaults"
+        }
+      },
+      "teams": {
+        "label": "Teams",
+        "description": "Team list, creation entry, and team settings navigation"
+      },
+      "members": {
+        "label": "Members",
+        "description": "Member roles, permissions, and removal actions"
+      },
+      "aiExecution": {
+        "label": "AI execution",
+        "description": "AI actions, confirmation policy, and audit history"
+      },
+      "security": {
+        "label": "Security",
+        "description": "Account security, sign-in policy, and audit entry points",
+        "placeholderDescription": "Security settings fit naturally beside members and workspace rules. When device sessions, sign-in management, and audit logs arrive, this area will stay coherent.",
+        "highlights": {
+          "sessions": "Session and device management",
+          "confirmations": "Sensitive action confirmations",
+          "audit": "Audit log and access review",
+          "permissions": "Role-sensitive permission controls"
+        }
+      },
+      "application": {
+        "label": "Application",
+        "description": "Client, integration, and platform behavior preferences",
+        "placeholderDescription": "This section is reserved for app-wide behavior such as desktop, mobile, and third-party connection settings. Keeping it inside Administration makes it feel like team operating configuration.",
+        "highlights": {
+          "clients": "Desktop and mobile app preferences",
+          "services": "Connected service management",
+          "health": "Integration health and sync status",
+          "defaults": "Workspace-wide product defaults"
+        }
+      },
+      "billing": {
+        "label": "Billing",
+        "description": "Plan, invoices, and seat cost",
+        "placeholderDescription": "Billing, plan details, and seat information naturally belong together with workspace administration, so we do not need to maintain a separate billing page structure later.",
+        "highlights": {
+          "overview": "Plan overview and renewal timing",
+          "seats": "Seat allocation and usage counts",
+          "invoices": "Invoice recipients and history",
+          "upgrades": "Upgrade path for growing teams"
+        }
+      }
+    }
+  },
+  "profile": {
+    "errors": {
+      "updateFailed": "Failed to update the profile.",
+      "bucketMissing": "The avatar storage bucket does not exist yet. Run the Supabase migration or create the avatars bucket in Storage first.",
+      "storageBlocked": "The avatar upload was blocked by the Storage policy. Please make sure you are signed in and try again with the latest code.",
+      "sessionExpired": "Your session expired. Please sign in again.",
+      "syncAuthFailed": "Failed to sync the sign-in profile."
+    },
+    "validation": {
+      "invalidType": "Only JPG, PNG, and WebP avatars are supported.",
+      "fileTooLarge": "The avatar must be smaller than 3 MB."
+    },
+    "toasts": {
+      "uploading": "Uploading {fileName}...",
+      "saving": "Saving profile changes...",
+      "uploadSuccess": "Avatar uploaded. Click Save changes to apply it to your profile.",
+      "saveSuccess": "Profile saved.",
+      "cancelNewAvatar": "The new avatar was canceled.",
+      "undoRemoveAvatar": "Avatar removal was undone.",
+      "markRemoveAvatar": "Avatar removal is marked. Click Save changes to apply it."
+    },
+    "states": {
+      "authRequiredTitle": "Sign in required",
+      "authRequiredDescription": "Sign in before uploading an avatar or editing your profile.",
+      "loading": "Loading your profile...",
+      "loadFailedTitle": "Failed to load the profile",
+      "loadFailedDescription": "We could not read your profile right now."
+    },
+    "avatar": {
+      "title": "Avatar",
+      "description": "Upload a clear avatar so teammates can recognize you across comments, chat, and collaboration views.",
+      "recommendation": "A square image usually works best.",
+      "statusUploading": "The avatar is still uploading. Please wait a moment.",
+      "statusUploaded": "Avatar {fileName} is uploaded. Click Save changes to apply it.",
+      "statusMarked": "Avatar removal is marked and will apply after saving.",
+      "statusHint": "Choose an image to upload it immediately. After the upload succeeds, click Save changes to apply it to your profile.",
+      "upload": "Upload avatar",
+      "uploading": "Uploading...",
+      "remove": "Remove avatar",
+      "cancelNew": "Cancel new avatar",
+      "undoRemove": "Undo removal",
+      "alt": "Profile avatar"
+    },
+    "info": {
+      "title": "Basic information",
+      "description": "You can update the display name here. The sign-in email stays read-only for now.",
+      "displayNameLabel": "Display name",
+      "displayNamePlaceholder": "Choose a name your team will recognize easily",
+      "emailLabel": "Sign-in email",
+      "createdAtLabel": "Joined on",
+      "dirty": "You have unsaved changes.",
+      "clean": "Your profile is already up to date.",
+      "save": "Save changes"
+    }
+  },
+  "members": {
+    "noTeam": {
+      "title": "Team member management",
+      "description": "This area is only available inside a team workspace.",
+      "body": "Switch to a team workspace before managing member roles."
+    },
+    "notOwner": {
+      "title": "Permission required",
+      "description": "Only the OWNER can manage team members.",
+      "body": "Contact the team owner if you need a member role changed."
+    },
+    "list": {
+      "title": "Member list",
+      "description": "Manage team member roles and permissions. Only the OWNER can update roles or remove members.",
+      "loading": "Loading team members...",
+      "loadFailed": "Failed to load the member list.",
+      "unknownMember": "Unknown member",
+      "joinedAt": "Joined: {value}",
+      "rolePlaceholder": "Choose a role",
+      "remove": "Remove member",
+      "selfRestriction": "You cannot change your own role or remove yourself.",
+      "actionFailed": "The member action failed."
+    },
+    "removeDialog": {
+      "title": "Remove this team member?",
+      "description": "“{name}” will be removed from the current team. They will lose access to the projects, tasks, and docs inside this team workspace.",
+      "fallbackName": "this member",
+      "confirm": "Remove member"
+    },
+    "roles": {
+      "OWNER": "Owner",
+      "ADMIN": "Admin",
+      "MEMBER": "Member"
+    }
+  },
+  "appearance": {
+    "title": "Background glow",
+    "description": "Control the global ambient glow colors and motion. Preferences are stored locally for the account and workspace separately.",
+    "replayIntro": "Replay intro",
+    "preview": "Live preview",
+    "modeLabel": "Glow mode",
+    "modes": {
+      "glow": {
+        "label": "Fixed glow",
+        "description": "Soft light blooms stay close to fixed anchor points, ideal for low-distraction backgrounds."
+      },
+      "aurora": {
+        "label": "Aurora",
+        "description": "Simulates layered aurora curtains that drift slowly when motion is enabled."
+      },
+      "ribbon": {
+        "label": "Ribbon",
+        "description": "Wider diagonal light bands sweep across the background for a more energetic atmosphere."
+      },
+      "prism": {
+        "label": "Prism",
+        "description": "Layered refracted color bands cut across the surface for a sharper technical feel."
+      }
+    },
+    "presetLabel": "Color presets",
+    "enabledLabel": "Enable background glow",
+    "enabledDescription": "When disabled, the ambient light is not rendered and the page background stays solid.",
+    "animatedLabel": "Animated motion",
+    "animatedDescription": "When enabled, the selected glow moves slowly. When disabled, it remains static and still respects the system reduced-motion preference.",
+    "intensity": "Glow intensity"
+  },
+  "teams": {
+    "description": "All teams you belong to are listed here. Open any team to jump into its team settings. Owners and admins can keep editing profile details and member permissions there.",
+    "create": "Create new team",
+    "loading": "Loading team list...",
+    "loadFailedTitle": "Failed to load teams",
+    "loadFailedDescription": "We could not read the team list right now.",
+    "emptyTitle": "You do not have a team yet",
+    "emptyDescription": "Create your first team here and we will automatically create the matching team workspace.",
+    "membersCount": "{count} member(s)",
+    "open": "Open team settings"
+  },
+  "teamPage": {
+    "errors": {
+      "updateFailed": "Failed to update the team profile.",
+      "bucketMissing": "The avatar storage bucket does not exist yet. Create the avatars bucket in Supabase Storage first.",
+      "storageBlocked": "The team avatar upload was blocked by the Storage policy. The upload path now matches the current policy shape. Refresh and try again.",
+      "sessionExpired": "Your session expired. Please sign in again.",
+      "uploadFailed": "Failed to upload the team avatar."
+    },
+    "validation": {
+      "invalidType": "Only JPG, PNG, and WebP team avatars are supported.",
+      "fileTooLarge": "The team avatar must be smaller than 3 MB.",
+      "nameRequired": "Please enter a team name.",
+      "uploadPending": "The avatar is still uploading. Please wait before saving.",
+      "permissionDenied": "Only the team owner or an admin can edit team details."
+    },
+    "toasts": {
+      "uploading": "Uploading {fileName}...",
+      "saving": "Saving team changes...",
+      "uploadSuccess": "Team avatar uploaded. Click Save changes to apply it.",
+      "saveSuccess": "Team details updated.",
+      "cancelNewAvatar": "The new avatar was canceled.",
+      "undoRemoveAvatar": "Avatar removal was undone.",
+      "markRemoveAvatar": "Avatar removal is marked. Click Save changes to apply it."
+    },
+    "states": {
+      "missingTeamTitle": "Team not found",
+      "missingTeamDescription": "The teamId is missing, so the team details cannot be loaded.",
+      "authRequiredTitle": "Sign in required",
+      "authRequiredDescription": "Sign in before viewing or managing the team details.",
+      "loading": "Loading team details...",
+      "loadFailedTitle": "Failed to load the team",
+      "loadFailedDescription": "We could not read the team details right now."
+    },
+    "hero": {
+      "description": "The team profile and identity details live here. Only the team owner and admins can change the team name and avatar."
+    },
+    "permissionBanner": {
+      "message": "Your current role is {role}. You can view the team details, but only the owner or admins can save changes."
+    },
+    "onboarding": {
+      "title": "Collaboration setup",
+      "description": "New teams work best when the initial handoff path is explicit: invite the people involved, then create the first project and workflow that will hold the work.",
+      "progress": "{completed}/{total} steps complete",
+      "status": {
+        "done": "Done",
+        "pending": "Pending"
+      },
+      "steps": {
+        "invite": {
+          "title": "Invite teammates",
+          "description": "Bring the core collaborators into this team workspace first. Current members: {count}.",
+          "action": "Invite member"
+        },
+        "project": {
+          "title": "Create the first project",
+          "description": "Use a project to define scope, ownership, and the working context for the team. Current projects: {count}.",
+          "action": "Create project"
+        },
+        "workflow": {
+          "title": "Create the first workflow",
+          "description": "Make review, handoff, and blocked states visible with a shared workflow template. Current workflows: {count}.",
+          "action": "Create workflow"
+        }
+      }
+    },
+    "avatar": {
+      "title": "Team avatar",
+      "description": "The team avatar appears in workspace switching, settings, and team-facing collaboration views.",
+      "recommendation": "A clear brand mark or team emblem usually works best.",
+      "statusUploading": "The team avatar is still uploading. Please wait a moment.",
+      "statusUploaded": "Team avatar {fileName} is uploaded. Click Save changes to apply it.",
+      "statusMarked": "Avatar removal is marked and will apply after saving.",
+      "statusHint": "Choose an image to upload it immediately. After the upload succeeds, click Save changes to apply it to the team profile.",
+      "upload": "Upload avatar",
+      "uploading": "Uploading...",
+      "remove": "Remove avatar",
+      "cancelNew": "Cancel new avatar",
+      "undoRemove": "Undo removal"
+    },
+    "info": {
+      "title": "Basic information",
+      "description": "You can rename the team at any time. The creation time and member count are read-only reference fields.",
+      "nameLabel": "Team name",
+      "namePlaceholder": "Enter a team name",
+      "createdAtLabel": "Created on",
+      "membersCountLabel": "Members",
+      "roleLabel": "Your role",
+      "readOnly": "This account currently has read-only access.",
+      "dirty": "You have unsaved team changes.",
+      "clean": "Team details are already up to date.",
+      "save": "Save changes",
+      "untitled": "Untitled team"
+    }
+  },
+  "aiExecution": {
+    "title": "AI execution layer",
+    "description": "Open a workspace first before configuring AI execution.",
+    "stats": {
+      "total": "Available actions",
+      "auto": "Auto-run",
+      "confirm": "Needs confirmation",
+      "unavailable": "Unavailable to this role"
+    },
+    "capabilities": {
+      "title": "Capabilities and permissions",
+      "description": "This is not the chat surface. It is the shared capability layer that AI uses before it calls real system actions. Every action declares its approval mode, target type, and current role availability so every model uses the same contract.",
+      "workspaceLabel": "Workspace",
+      "roleLabel": "Current role",
+      "workspaceType": {
+        "TEAM": "Team",
+        "PERSONAL": "Personal"
+      },
+      "loading": "Loading the capability list...",
+      "loadFailed": "Failed to load the capability list."
+    },
+    "badges": {
+      "approval": {
+        "AUTO": "Auto-run",
+        "CONFIRM": "Needs confirmation"
+      },
+      "availability": {
+        "available": "Available now",
+        "requires_target_check": "Needs target validation",
+        "unavailable": "Unavailable to this role"
+      },
+      "historyStatus": {
+        "PREVIEW": "Preview",
+        "SUCCEEDED": "Succeeded",
+        "FAILED": "Failed",
+        "BLOCKED": "Blocked"
+      },
+      "historyApproval": {
+        "AUTO": "Auto",
+        "CONFIRM": "Confirm"
+      },
+      "liveStatus": {
+        "preview": "Preview",
+        "succeeded": "Succeeded",
+        "failed": "Failed",
+        "blocked": "Blocked"
+      }
+    },
+    "targetTypes": {
+      "WORKSPACE": "Workspace",
+      "PROJECT": "Project",
+      "ISSUE": "Issue",
+      "WORKFLOW": "Workflow",
+      "DOC": "Doc"
+    },
+    "workbench": {
+      "title": "Action workbench",
+      "description": "Use the same AI action API for previewing, confirming, and running actions so the whole path is validated first.",
+      "actionLabel": "Action",
+      "actionPlaceholder": "Choose an action",
+      "inputJsonLabel": "Input JSON",
+      "inputFieldsTitle": "Input fields",
+      "required": "Required",
+      "preview": "Preview",
+      "execute": "Run now",
+      "confirm": "Confirm and run",
+      "lastResult": "Latest result",
+      "waitingConfirmation": "Waiting for confirmation",
+      "executionFailed": "The action failed.",
+      "invalidPayload": "The input must be a JSON object.",
+      "parseFailed": "Failed to parse the JSON input.",
+      "noSummary": "No summary"
+    },
+    "history": {
+      "title": "Recent execution",
+      "description": "Every preview, success, failure, and block is recorded in the audit history.",
+      "loading": "Loading execution history...",
+      "loadFailed": "Failed to load execution history.",
+      "empty": "There is no execution history yet. Start with a preview in the left workbench.",
+      "noSummary": "No summary"
+    }
+  }
+}

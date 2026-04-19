@@ -1,0 +1,293 @@
+{
+  "sourceSwitcher": {
+    "label": "ドキュメントのソース",
+    "description": "チーム共有ドキュメントと自分専用ドキュメントを切り替えます。",
+    "placeholder": "ドキュメントのソースを選択"
+  },
+  "source": {
+    "personal": "マイドキュメント",
+    "team": "チームドキュメント",
+    "teamPersonal": "自分専用ドキュメント"
+  },
+  "creation": {
+    "newDoc": "新規ドキュメント",
+    "newFolder": "新規フォルダ",
+    "newTeamDoc": "新しいチームドキュメント",
+    "newPersonalDoc": "新しい個人ドキュメント",
+    "dialog": {
+      "title": "構造化ドキュメントを作成",
+      "description": "このドキュメントに持たせたい協業の形を選んでください。Synaply がチーム向けのスターター構成を挿入します。",
+      "templateLabel": "テンプレート",
+      "templatePlaceholder": "テンプレートを選択",
+      "titleLabel": "ドキュメントタイトル",
+      "titlePlaceholder": "ドキュメントタイトルを入力",
+      "projectHint": "このドキュメントは現在のプロジェクトに自動で紐づきます。",
+      "parentHint": "このドキュメントは現在のフォルダ内に作成されます。",
+      "cancel": "キャンセル",
+      "create": "ドキュメントを作成",
+      "creating": "作成中...",
+      "createFailed": "ドキュメントの作成に失敗しました。"
+    },
+    "template": {
+      "blank": {
+        "label": "空白ドキュメント",
+        "description": "自由記述のメモだけが必要なときは、空のページから始めます。",
+        "title": "新しいドキュメント"
+      },
+      "projectBrief": {
+        "label": "プロジェクトブリーフ",
+        "description": "このプロジェクトの目的、範囲、成功条件を明確にします。",
+        "title": "プロジェクトブリーフ"
+      },
+      "decisionLog": {
+        "label": "意思決定ログ",
+        "description": "決定内容、理由、影響範囲、フォローアップを残し、引き継ぎの土台にします。",
+        "title": "意思決定ログ"
+      },
+      "reviewPacket": {
+        "label": "レビューパケット",
+        "description": "レビュー担当が返答する前に必要な文脈、変更点、確認事項をまとめます。",
+        "title": "レビューパケット"
+      },
+      "handoffPacket": {
+        "label": "引き継ぎパケット",
+        "description": "次の担当者が引き継ぐための準備状況、依存関係、リンク、期待値を整理します。",
+        "title": "引き継ぎパケット"
+      },
+      "releaseChecklist": {
+        "label": "リリースチェックリスト",
+        "description": "ローンチ準備、リスク確認、担当者、リリース後の監視ポイントを 1 か所にまとめます。",
+        "title": "リリースチェックリスト"
+      }
+    },
+    "templateContent": {
+      "projectBrief": {
+        "intro": "このプロジェクトが何を前に進めようとしているのか、そしてなぜ今チームが足並みをそろえるべきなのかを要約します。",
+        "goal": "[目的と範囲] デリバリー目標、範囲の境界、そしてこのプロジェクトで意図的に扱わないことを記述します。",
+        "scope": "[主要な文脈] 現在の文脈、制約、依存関係、チームが共有すべき前提を記録します。",
+        "success": "[成功のシグナル] このプロジェクトが準備完了・成功・安全にリリース可能と判断できる条件を書きます。",
+        "openQuestions": "[未解決の問い] まだ追う必要がある未解決の問い、意思決定、リスクを列挙します。"
+      },
+      "decisionLog": {
+        "intro": "このメモには 1 つの具体的な意思決定を残し、次の担当者が議論全体を見直さなくても背景を理解できるようにします。",
+        "decision": "[意思決定] 1 文で結論を明記します。",
+        "context": "[文脈] 何が変わったのか、どの圧力が意思決定のきっかけになったのか、どのトレードオフを解消する必要があったのかを説明します。",
+        "rationale": "[理由] なぜこの案が他の選択肢より優先されたのかを書きます。",
+        "impact": "[影響を受ける作業] 影響を受けるプロジェクト、課題、ワークフロー、リリース面を紐づけ、次に何が変わるかを記します。",
+        "followUp": "[フォローアップ] 次のアクション、担当者、そしてこの判断を見直すべきタイミングを残します。"
+      },
+      "reviewPacket": {
+        "intro": "レビュー担当が最低限必要とする文脈をまとめ、追加の確認なしで非同期レビューを進められるようにします。",
+        "goal": "[レビューの目的] どの種類のレビューが必要か、そしてその結果どんな判断が必要かを明確にします。",
+        "changeSummary": "[何が変わるか] レビュー対象の提案、実装、成果物を要約します。",
+        "focusQuestions": "[レビューの焦点] レビュー担当に重点的に見てほしい論点、リスク、境界ケースを列挙します。",
+        "decision": "[結論 / 修正依頼] 結果、修正依頼、承認メモを書き残す場所を用意します。",
+        "nextStep": "[次の引き継ぎ] レビュー後に何が起きるべきか、誰が引き継ぐのかを明記します。"
+      },
+      "handoffPacket": {
+        "intro": "このパケットを使って、追加の同期説明なしでも次の担当者がすぐに動ける状態を作ります。",
+        "target": "[引き継ぎ先] 誰に向けた引き継ぎか、その相手が何を引き継ぐのかを明確にします。",
+        "readyNow": "[今すぐ信頼できること] すでに完了・検証済みで、次の担当者が安心して引き継げる内容を要約します。",
+        "dependencies": "[依存関係とブロッカー] まだ必要な入力、意思決定、リスク、ブロッカーを列挙します。",
+        "links": "[リンクと根拠] 受け手が最初に確認すべき課題、ドキュメント、デザイン、PR、リリース文脈を添えます。",
+        "receiverChecklist": "[受け手のチェックリスト] 引き継ぎ受諾後に最初に行うべき確認やアクションを明記します。"
+      },
+      "releaseChecklist": {
+        "intro": "ローンチ準備の状態を見える化し、プロダクト、デザイン、エンジニアリング、オペレーション、サポートが自分で状況を追えるようにします。",
+        "scope": "[リリース範囲] 何を出すのか、意図的に除外するものは何か、どの環境に影響するのかを記述します。",
+        "risk": "[リスクと安全策] 見えているリスク、ロールバック経路、監視方法、調整が必要な依存関係を記録します。",
+        "goNoGo": "[リリース可否チェック] リリース準備完了と見なす前に通すべきチェックを列挙します。",
+        "ownerMap": "[担当マップ] 承認、実行、周知、リリース後フォローを誰が担うのかを明確にします。",
+        "postRelease": "[リリース後の監視] リリース直後に見るべき項目と、対応が必要になる閾値を記録します。"
+      }
+    }
+  },
+  "docKind": {
+    "general": "一般ドキュメント",
+    "projectBrief": "プロジェクトブリーフ",
+    "decisionLog": "意思決定ログ",
+    "reviewPacket": "レビューパケット",
+    "handoffPacket": "引き継ぎパケット",
+    "releaseChecklist": "リリースチェックリスト"
+  },
+  "consumption": {
+    "summaryPrefix": "ダイジェスト向けドキュメント変更: {items}",
+    "summaryEmpty": "まだ構造化ドキュメントは紐づいていません。まずは次の担当者に最も必要なパケットから始めましょう。",
+    "summaryCount": "{count} 件の{label}",
+    "emptyTitle": "まだドキュメントはありません",
+    "emptyDescription": "この協業パケットはまだ記録されていません。",
+    "updatedAt": "{value} に更新",
+    "openDoc": "ドキュメントを開く",
+    "createDoc": "ドキュメントを作成"
+  },
+  "overview": {
+    "shared": {
+      "documentMetric": "ドキュメント",
+      "folderMetric": "フォルダ",
+      "structuredMetric": "構造化ドキュメント",
+      "recentMetric": "今週更新",
+      "newDocTitle": "新規ドキュメント",
+      "categoryTitle": "カテゴリ",
+      "recentTitle": "最近更新",
+      "recentDescription": "動いているドキュメントを前に出し、文脈を探し直さずにそのまま続きへ戻れるようにします。",
+      "structuredTitle": "協業パケット",
+      "structuredDescription": "ブリーフ、意思決定ログ、レビューパケット、引き継ぎパケットを同じ作業面に置き、余分な追跡を減らします。",
+      "workspaceTitle": "トップレベル空間",
+      "workspaceDescription": "現在のドキュメント作業面で扱う主要テーマへの入口です。ひとつの流れに素早く戻りやすくなります。",
+      "projectSpacesTitle": "プロジェクト空間",
+      "projectSpacesDescription": "チームドキュメントはプロジェクトを主軸に整理します。各プロジェクトがブリーフ、決定、引き継ぎのための安定した空間を持ちます。",
+      "otherSpacesTitle": "その他のトップレベル空間",
+      "otherSpacesDescription": "特定プロジェクトに直接属さないチームドキュメント空間はここに残します。",
+      "openAction": "開く",
+      "enterSpace": "空間に入る",
+      "totalCount": "{count} 件のドキュメント",
+      "folderContains": "{count} 件",
+      "emptyFolder": "空のフォルダ",
+      "updatedAt": "{value} に更新",
+      "projectSpaceMeta": "{docs} 件のドキュメント · {folders} 件のサブフォルダ"
+    },
+    "personal": {
+      "eyebrow": "個人ワークスペース",
+      "title": "マイドキュメント",
+      "subtitle": "{count} 件の個人ドキュメント",
+      "heroDescription": "メモ、下書き、実行文脈を、散らかった一時置き場ではなく、落ち着いて使える作業面に残します。",
+      "newDocDescription": "新しい個人ドキュメントを作成",
+      "emptyTitle": "まだドキュメントはありません",
+      "emptyDescription": "最初のドキュメントを作成して、アイデアを残し始めましょう。",
+      "emptyAction": "ドキュメントを作成"
+    },
+    "team": {
+      "eyebrow": "チーム知識面",
+      "title": "チームドキュメント",
+      "subtitle": "{count} 件のチームドキュメント",
+      "heroDescription": "プロジェクト文脈、意思決定、レビュー、引き継ぎをひとつの意図ある作業面にまとめます。文脈を取り戻すためにチャット履歴をたどる必要はありません。",
+      "documentMetric": "チームドキュメント",
+      "newDocDescription": "新しいチームドキュメントを作成",
+      "emptyTitle": "まだチームドキュメントはありません",
+      "emptyDescription": "最初のチームドキュメントを作成し、チームでの協業を始めましょう。",
+      "emptyAction": "チームドキュメントを作成"
+    },
+    "teamPersonal": {
+      "eyebrow": "個人作業レイヤー",
+      "title": "マイワークドキュメント",
+      "subtitle": "{count} 件の個人作業ドキュメント",
+      "heroDescription": "チーム文脈に紐づいた個人用の分解メモや準備作業を、共有面を汚さずに保持します。",
+      "documentMetric": "作業ドキュメント",
+      "newDocDescription": "新しい個人作業ドキュメントを作成",
+      "emptyTitle": "まだ個人作業ドキュメントはありません",
+      "emptyDescription": "チームワークスペース内に、自分だけが見られる個人ドキュメントを作成します。",
+      "emptyAction": "個人ドキュメントを作成"
+    }
+  },
+  "states": {
+    "loadingPage": "ドキュメントを読み込んでいます...",
+    "loadingSidebar": "読み込み中...",
+    "loadingEditor": "エディタを読み込んでいます..."
+  },
+  "welcome": {
+    "title": "ドキュメントへようこそ",
+    "emptyDescription": "まだドキュメントはありません。サイドバーの + ボタンから作成してください。",
+    "selectDescription": "左側でドキュメントを選ぶと編集を開始できます。"
+  },
+  "emptyState": {
+    "eyebrow": "ドキュメントワークスペース",
+    "emptyDescription": "まだ開いているドキュメントはありません。左のツリーから探すか、ショートカットですぐに書き始められます。",
+    "selectDescription": "左側から既存ドキュメントを開くか、ショートカットですぐに空白ドキュメントを作成できます。",
+    "shortcutsTitle": "使えるショートカット",
+    "createHint": "まだドキュメントがない場合は、Cmd + N で空白ドキュメントをすぐに作成できます。",
+    "selectHint": "編集領域を広く使いたいときは、Cmd + B で左のドキュメントサイドバーを隠したり戻したりできます。",
+    "shortcuts": {
+      "newDoc": "新規ドキュメントをすぐ作成",
+      "toggleSidebar": "ドキュメントサイドバーを切り替え",
+      "saveDoc": "現在のドキュメントを保存"
+    }
+  },
+  "sidebar": {
+    "title": "ドキュメント",
+    "searchPlaceholder": "ドキュメントを検索...",
+    "newChildDoc": "子ドキュメントを作成",
+    "newDoc": "新規ドキュメント",
+    "newFolder": "新規フォルダ",
+    "duplicate": "複製",
+    "duplicateSuffix": "コピー",
+    "rename": "名前を変更",
+    "delete": "削除",
+    "projectSpaces": "プロジェクト空間",
+    "otherSpaces": "その他の空間",
+    "projectSpaceBadge": "プロジェクト",
+    "emptySearch": "一致するドキュメントが見つかりません",
+    "emptyTitle": "まだドキュメントはありません",
+    "emptyDescription": "上の + ボタンから作成してください",
+    "deleteDialog": {
+      "title": "ドキュメントを削除しますか？",
+      "description": "「{title}」を削除します。{children} この操作は元に戻せません。",
+      "children": "子ドキュメントも一緒に削除されます。",
+      "cancel": "キャンセル",
+      "confirm": "削除を確定"
+    }
+  },
+  "toolbar": {
+    "collapseTitle": "エディタを折りたたむ",
+    "expandTitle": "エディタを広げる",
+    "collapse": "折りたたむ",
+    "expand": "広げる"
+  },
+  "tabs": {
+    "close": "閉じる",
+    "closeOthers": "他を閉じる",
+    "closeAll": "すべて閉じる"
+  },
+  "editor": {
+    "save": "保存",
+    "saving": "保存中...",
+    "cancel": "キャンセル",
+    "untitled": "無題のドキュメント",
+    "editable": "編集可能",
+    "readonly": "読み取り専用",
+    "clickToEdit": "タイトルをクリックして編集",
+    "updatedAt": "{value} に更新",
+    "meta": {
+      "folder": "フォルダ",
+      "document": "ドキュメント",
+      "private": "非公開",
+      "teamReadonly": "チーム読み取り専用",
+      "teamEditable": "チーム編集可",
+      "public": "公開"
+    }
+  },
+  "blocknote": {
+    "conflict": "リモートの変更を検知しました。ローカル下書きは保持されています。",
+    "saveFailed": "保存に失敗しました",
+    "saving": "保存中...",
+    "conflictStatus": "競合を検知しました。ローカル下書きは保持されています。",
+    "errorStatus": "保存に失敗しました。ローカル下書きは端末上に保持されています。",
+    "recoveredDraft": "ローカル下書きを復元しました",
+    "draftPending": "ローカル下書きは同期待ちです",
+    "updatedAt": "{value} に更新",
+    "ready": "準備完了",
+    "shortcut": "{key} + S で保存 • 30 秒ごとに自動保存"
+  },
+  "folderIntro": {
+    "saveFailed": "フォルダ説明の保存に失敗しました。",
+    "folderMeta": "フォルダ • {value} に作成",
+    "editDescription": "説明を編集",
+    "title": "フォルダ説明",
+    "projectRootBadge": "プロジェクト空間",
+    "projectRootDescription": "このフォルダはプロジェクトによって自動管理されています。中身は引き続き編集できますが、フォルダ自体はプロジェクト名とライフサイクルに合わせて保たれます。",
+    "placeholder": "フォルダ説明を入力...",
+    "saving": "保存中...",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "emptyEditable": "クリックしてフォルダ説明を追加...",
+    "emptyReadonly": "まだフォルダ説明はありません",
+    "tipsTitle": "ヒント",
+    "tip1": "このフォルダはドキュメントを整理・分類するために使います。",
+    "tip2": "フォルダを右クリックすると、子ドキュメントを作成できます。",
+    "tip3": "ここに詳細なガイドや利用メモを追記できます。",
+    "projectRootTip": "プロジェクトが存在する間、このルートフォルダは削除できません。",
+    "visibility": "フォルダの公開範囲: {value}"
+  },
+  "context": {
+    "docNotReady": "このドキュメントは存在しないか、まだ読み込みが完了していません。"
+  }
+}

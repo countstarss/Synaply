@@ -1,0 +1,23 @@
+{
+  "welcome": "Welcome back!",
+  "subtitle": "You have successfully logged into the Synaply system. Start exploring the features we've prepared for you.",
+  "userProfile": "User Profile",
+  "userProfileDesc": "View and edit your personal information",
+  "securitySettings": "Security Settings",
+  "securitySettingsDesc": "Manage your account security options",
+  "notifications": "Notification Center",
+  "notificationsDesc": "View the latest system notifications",
+  "activityStats": "Activity Statistics",
+  "activityStatsDesc": "View your usage statistics",
+  "quickActions": "Quick Actions",
+  "systemSettings": "System Settings",
+  "systemSettingsDesc": "Customize your system preferences",
+  "goToSettings": "Go to Settings",
+  "returnHome": "Return to Home",
+  "returnHomeDesc": "Go back to the main application interface",
+  "goToHome": "Go to Home",
+  "active": "Active",
+  "security": "Security",
+  "newMessages": "new messages",
+  "today": "Today"
+} 

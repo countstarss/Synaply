@@ -1,0 +1,148 @@
+{
+  "shared": {
+    "copyFailed": "复制失败。",
+    "assistant": "AI 助手",
+    "surfaceLabel": "智能协作",
+    "newConversation": "新建对话",
+    "conversation": "智能协作会话",
+    "conversationLegacy": "AI 协作线程"
+  },
+  "thread": {
+    "shell": {
+      "title": "AI 助手",
+      "description": "先从当前任务语境出发，再帮助你澄清、推进并塑造下一步。"
+    },
+    "list": {
+      "fallbackTitle": "AI 协作线程",
+      "description": "这个线程会记住当前任务语境以及你的协作历史。",
+      "noPins": "还没有固定的上下文"
+    },
+    "messages": {
+      "loading": "正在同步线程和消息历史...",
+      "empty": "告诉 AI 你想推进什么，它会基于当前任务语境给出回应。",
+      "streaming": "正在生成回复..."
+    },
+    "composer": {
+      "placeholder": "例如：帮我梳理这个事项的下一步，并指出还缺哪些上下文。",
+      "send": "发送"
+    },
+    "approval": {
+      "readStatusFailed": "当前无法读取确认状态。",
+      "confirmUnavailable": "当前无法确认此操作。",
+      "actionIncomplete": "该操作未能成功完成。",
+      "confirmSuccess": "已确认，AI 正在继续执行。",
+      "confirmFailed": "确认失败。",
+      "rejectUnavailable": "当前无法拒绝此操作。",
+      "rejectSuccess": "已拒绝该操作。",
+      "rejectFailed": "拒绝失败。",
+      "statuses": {
+        "confirmed": "已确认",
+        "rejected": "已拒绝",
+        "expired": "已过期",
+        "pending": "等待确认"
+      },
+      "action": "操作：{value}",
+      "batchSummary": "这次确认会一次执行 {count} 个操作。",
+      "previewStatus": "预览状态：{value}",
+      "confirm": "确认并执行",
+      "reject": "拒绝"
+    },
+    "codingPrompt": {
+      "copied": "编码交接提示词已复制。",
+      "title": "编码交接提示词",
+      "issueLabel": "事项 {id}",
+      "unbound": "未绑定到具体事项",
+      "copy": "复制给 Claude Code / Codex"
+    },
+    "clarification": {
+      "fallbackTitle": "选项"
+    },
+    "toolResult": {
+      "toolFailed": "工具执行失败。",
+      "toolCompleted": "工具执行完成。",
+      "details": "查看结构化输出",
+      "status": "状态：{value}",
+      "summary": "摘要：{value}",
+      "message": "消息：{value}"
+    },
+    "messageBubble": {
+      "empty": "没有可见消息内容。"
+    }
+  },
+  "workbench": {
+    "page": {
+      "fallbackWorkspace": "未命名工作空间",
+      "defaultOriginTitle": "{name} · 智能协作工作区",
+      "unauthorized": "无权访问。",
+      "sendFailed": "AI 消息发送失败。",
+      "loading": "正在准备智能协作工作区...",
+      "emptyWorkspace": "目前还没有可用工作空间，因此无法启动智能协作。"
+    },
+    "sidebar": {
+      "new": "新建",
+      "workspaceSection": "工作空间",
+      "projectsSection": "项目",
+      "sectionTitle": "智能协作",
+      "freeEmpty": "还没有自由对话记录。你可以直接从当前上下文开始。",
+      "projectEmpty": "这个项目还没有事项对话记录。点击项目本身即可进入项目对话。",
+      "projectStart": "从这个项目开始主对话",
+      "projectConversation": "项目对话",
+      "freeConversation": "自由对话",
+      "collapseProject": "收起 {name}",
+      "expandProject": "展开 {name}",
+      "syncing": "正在同步对话...",
+      "empty": "还没有任何对话记录。发送第一条消息后，输入框会下移到工作区中。",
+      "justNow": "刚刚",
+      "minutesAgo": "{count} 分钟前",
+      "hoursAgo": "{count} 小时前",
+      "daysAgo": "{count} 天前"
+    },
+    "chat": {
+      "loading": "正在同步线程和消息历史...",
+      "heroTitle": "先说说你想推进什么。",
+      "streaming": "AI 正在组织回复",
+      "copySuccess": "消息已复制。",
+      "copy": "复制",
+      "deselect": "取消选择",
+      "select": "选择",
+      "exitMultiSelect": "退出多选",
+      "multiSelect": "多选",
+      "noContent": "没有可见消息内容。",
+      "selected": "已选择 {count} 条消息",
+      "autoSelect": "自动选择",
+      "mergeCopy": "合并复制",
+      "copying": "复制中...",
+      "clearSelection": "清空选择",
+      "exit": "退出",
+      "selectionHint": "右键消息可继续多选，之后也可以自然扩展成摘录、总结或保存。"
+    },
+    "composer": {
+      "placeholder": "继续输入你的想法、阻塞或下一步...",
+      "sending": "发送中...",
+      "send": "发送"
+    },
+    "roles": {
+      "user": "用户",
+      "assistant": "AI 助手",
+      "system": "系统",
+      "tool": "工具",
+      "message": "消息"
+    },
+    "plainText": {
+      "status": "状态：{value}",
+      "summary": "摘要：{value}",
+      "message": "消息：{value}",
+      "toolFailed": "工具执行失败。",
+      "toolCompleted": "工具执行完成。",
+      "approval": "确认请求",
+      "action": "操作：{value}",
+      "batchActions": "批量操作：{count} 项",
+      "error": "错误：{value}",
+      "context": "上下文：{value}",
+      "tool": "工具 {name}",
+      "codingPrompt": "编码提示词",
+      "options": "选项",
+      "noContent": "无内容"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+export enum DocTypeValue {
+  DOCUMENT = 'DOCUMENT',
+  FOLDER = 'FOLDER',
+}
+
+export enum DocKindValue {
+  GENERAL = 'GENERAL',
+  PROJECT_BRIEF = 'PROJECT_BRIEF',
+  DECISION_LOG = 'DECISION_LOG',
+  REVIEW_PACKET = 'REVIEW_PACKET',
+  HANDOFF_PACKET = 'HANDOFF_PACKET',
+  RELEASE_CHECKLIST = 'RELEASE_CHECKLIST',
+}
+
+export enum DocChangeSourceValue {
+  CREATE = 'CREATE',
+  EDITOR = 'EDITOR',
+  META = 'META',
+  SYSTEM = 'SYSTEM',
+  IMPORT = 'IMPORT',
+}

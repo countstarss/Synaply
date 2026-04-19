@@ -1,0 +1,457 @@
+{
+  "priority": {
+    "default": "使用默认优先级（普通）",
+    "low": "低",
+    "normal": "普通",
+    "high": "高",
+    "urgent": "紧急"
+  },
+  "status": {
+    "todo": "待办",
+    "inProgress": "进行中",
+    "almostDone": "接近完成",
+    "blocked": "阻塞",
+    "done": "已完成"
+  },
+  "stateCategory": {
+    "backlog": "积压",
+    "todo": "待办",
+    "inProgress": "进行中",
+    "done": "已完成",
+    "canceled": "已取消"
+  },
+  "visibility": {
+    "private": "仅自己可见",
+    "teamReadonly": "团队只读",
+    "teamEditable": "团队可编辑",
+    "public": "公开"
+  },
+  "descriptionTemplate": {
+    "actions": {
+      "insert": "插入结构化模板"
+    },
+    "sections": {
+      "background": "背景",
+      "acceptance": "验收标准",
+      "risks": "风险 / 阻塞点",
+      "nextStep": "下一步"
+    },
+    "placeholders": {
+      "background": "补充背景、目标，以及为什么这件事现在重要",
+      "acceptance": "说明完成后应该达到什么结果",
+      "risks": "记录当前风险、依赖项，或谁可以帮助解除阻塞",
+      "nextStep": "写下推动这项工作继续前进的下一步动作"
+    }
+  },
+  "createModal": {
+    "title": "创建事项",
+    "workspace": {
+      "personal": "个人工作区",
+      "team": "团队工作区"
+    },
+    "currentProject": "当前项目：{name}",
+    "type": {
+      "label": "事项类型",
+      "normal": "标准事项",
+      "workflow": "工作流事项"
+    },
+    "workflow": {
+      "label": "工作流",
+      "placeholder": "选择一个工作流",
+      "missingDescription": "暂无说明"
+    },
+    "project": {
+      "label": "项目",
+      "placeholder": "选择一个项目",
+      "none": "无项目"
+    },
+    "fields": {
+      "title": "标题",
+      "titlePlaceholder": "清楚描述这项工作",
+      "description": "描述",
+      "descriptionPlaceholder": "补充上下文、验收标准或后续备注",
+      "dueDatePlaceholder": "选择截止日期",
+      "clearDate": "清除日期",
+      "priorityPlaceholder": "使用默认优先级",
+      "statePlaceholder": "选择状态",
+      "visibilityPlaceholder": "选择可见范围",
+      "directAssignee": "直接负责人",
+      "directAssigneePlaceholder": "选择负责人",
+      "additionalAssignees": "其他负责人"
+    },
+    "assignee": {
+      "none": "暂无直接负责人",
+      "currentUser": "指派给我",
+      "teamHint": "从当前工作区的完整成员列表中选择。",
+      "personalHint": "在个人工作区中，负责人始终是你自己。",
+      "personalQueueHint": "这个事项会自动进入你的个人队列。",
+      "personalPendingHint": "你的成员身份仍在同步中，稍后即可创建事项。",
+      "additionalPlaceholder": "选择其他负责人",
+      "searchPlaceholder": "搜索成员...",
+      "noMembers": "没有找到匹配的团队成员"
+    },
+    "actions": {
+      "creating": "创建中...",
+      "submit": "创建事项"
+    }
+  },
+  "toasts": {
+    "titleRequired": "请输入事项标题。",
+    "workflowRequired": "请选择一个工作流模板。",
+    "authRequired": "当前无法验证登录状态，请重新登录后再试。",
+    "memberSyncPending": "成员身份仍在同步中，请稍等片刻后再试。",
+    "createFailed": "创建事项失败，请重试。",
+    "boardOrderMissingWorkspace": "当前工作区无效，无法保存看板顺序。",
+    "boardOrderUnchanged": "看板顺序没有发生变化。",
+    "boardOrderSaveFailed": "保存看板顺序失败，请重试。",
+    "boardOrderSaved": "看板顺序已更新。",
+    "updateFailed": "更新事项状态失败，请重试。"
+  },
+  "page": {
+    "type": {
+      "normal": "标准事项",
+      "workflow": "工作流事项"
+    },
+    "summary": {
+      "withState": "当前正在显示“{state}”中的 {count} 条事项。",
+      "activeOnly": "当前有 {count} 条活跃事项。",
+      "mixed": "当前正在显示 {total} 条事项，其中 {active} 条为活跃状态。",
+      "mySuffix": " 这里只包含你负责、参与或创建的事项。",
+      "closedSuffix": " 另有 {count} 条已完成或已取消。",
+      "listViewHint": " 列表视图默认隐藏已完成和已取消的事项，切换到看板视图可查看所有状态。"
+    },
+    "filters": {
+      "searchPlaceholder": "按标题、项目、负责人或事项编号搜索...",
+      "projectAria": "按项目筛选",
+      "stateAria": "按状态筛选",
+      "priorityAria": "按优先级筛选",
+      "typeAria": "按类型筛选",
+      "allProjects": "全部项目",
+      "unassignedProject": "无项目",
+      "allStates": "全部状态",
+      "allPriorities": "全部优先级",
+      "allTypes": "全部类型",
+      "clear": "清除筛选"
+    },
+    "tabs": {
+      "all": "全部 {count}",
+      "my": "我的 {count}"
+    },
+    "actions": {
+      "create": "创建事项",
+      "saveBoardOrder": "保存看板顺序",
+      "savedOrder": "看板顺序已保存",
+      "openIssue": "打开事项",
+      "cancelIssue": "取消事项",
+      "viewOrEdit": "查看或编辑"
+    },
+    "viewMode": {
+      "list": "列表",
+      "board": "看板"
+    },
+    "states": {
+      "unassigned": "未分配",
+      "assignee": "负责人",
+      "workflow": "工作流"
+    },
+    "onlyCreatorCanCancel": "只有创建者可以取消这个事项。",
+    "cancelled": "事项已取消，列表视图默认会将其隐藏。",
+    "cancelFailed": "取消事项失败，请重试。",
+    "loading": "正在加载事项...",
+    "empty": {
+      "none": "还没有事项",
+      "filtered": "没有找到匹配的事项",
+      "createFirst": "创建第一个事项"
+    },
+    "cancelDialog": {
+      "title": "要取消这个事项吗？",
+      "description": "该事项会被移动到“已取消”，并在列表视图中默认隐藏。记录仍会保留，相关负责人依然可以看到它。",
+      "keep": "先保留",
+      "confirm": "确认取消",
+      "pending": "取消中..."
+    }
+  },
+  "tabs": {
+    "discussion": {
+      "title": "讨论",
+      "empty": "还没有评论，来补充第一条上下文吧。",
+      "placeholder": "添加评论... 使用 @ 提及队友",
+      "noMembers": "没有找到匹配的团队成员",
+      "mentionHint": "使用 @ 提及队友",
+      "send": "发送"
+    },
+    "history": {
+      "empty": "还没有记录任何活动。"
+    },
+    "records": {
+      "stepLabel": "{name}（步骤 {step}）",
+      "unknownMember": "未知成员",
+      "empty": "还没有记录任何产出。"
+    }
+  },
+  "nodeStatus": {
+    "title": "节点状态",
+    "description": "点击状态圆点更新进度，准备好后再推进到下一步。",
+    "owner": "负责人：{name}",
+    "unassigned": "未分配",
+    "previous": "上一步",
+    "next": "下一步",
+    "finishWorkflow": "完成任务",
+    "cannotEdit": "只有当前负责人可以更新节点状态或推动工作流继续前进。",
+    "completeHint": "请先将当前节点标记为“已完成”，再进入下一步。",
+    "finishHint": "请先将当前节点标记为“已完成”，再结束整个流程。",
+    "ready": "这个节点已经可以继续推进。",
+    "finalReady": "这个节点已经可以结束整个 workflow issue：{title}。",
+    "note": "备注",
+    "notePlaceholder": "添加备注...",
+    "add": "添加"
+  },
+  "workflowCompletionDialog": {
+    "title": "确认结束这个 workflow issue",
+    "description": "这是最后一个节点。提交后，这个 workflow issue 会直接标记为已完成。",
+    "confirmLabel": "我已经和团队完成最终确认，并确认这个 issue 可以结束",
+    "confirmDescription": "请只在需要的评审、交接或团队确认都已经完成后，再结束整个流程。",
+    "inputLabel": "输入当前 issue 标题以确认",
+    "inputPlaceholder": "请输入当前 issue 标题",
+    "inputHint": "请准确输入：{title}",
+    "inputError": "输入的 issue 标题不匹配。",
+    "cancel": "取消",
+    "submit": "确认完成"
+  },
+  "recordModal": {
+    "title": "添加产出",
+    "placeholder": "这个步骤完成了什么？",
+    "cancel": "取消",
+    "submit": "提交"
+  },
+  "workflowDetail": {
+    "loading": "正在加载工作流事项...",
+    "notFound": "这个工作流事项不存在，或已被删除。",
+    "back": "返回列表"
+  },
+  "detailPage": {
+    "backToList": "返回列表",
+    "missingWorkspaceTitle": "未选择工作区",
+    "missingWorkspaceDescription": "请先选择一个工作区，再打开这个事项。",
+    "loadingTitle": "正在加载事项",
+    "loadingDescription": "正在同步事项详情与协作上下文。",
+    "notFoundTitle": "未找到事项",
+    "notFoundDescription": "这个事项可能已被删除，或当前账号已无权访问。"
+  },
+  "normalDetail": {
+    "memberFallback": "成员 {id}",
+    "user": {
+      "anonymous": "匿名用户",
+      "unknown": "未知"
+    },
+    "meta": {
+      "notSet": "未设置",
+      "unassigned": "未分配"
+    },
+    "editingHint": "{names} 正在编辑这个字段",
+    "toasts": {
+      "invalidWorkspace": "当前工作区无效，无法保存这个事项。",
+      "saved": "事项已保存。",
+      "updateFailed": "更新事项失败，请重试。",
+      "copyFailed": "复制文本失败。",
+      "missingDoneState": "当前工作区没有可用的完成状态。"
+    },
+    "states": {
+      "loading": "正在加载事项...",
+      "notFound": "这个事项不存在，或已被删除。",
+      "back": "返回列表",
+      "saving": "正在保存更改..."
+    },
+    "badges": {
+      "state": "状态：{value}",
+      "priority": "优先级：{value}",
+      "project": "项目：{value}",
+      "assignee": "负责人：{value}",
+      "dueDate": "截止日期：{value}",
+      "visibility": "可见范围：{value}",
+      "collaborator": "协作者：{value}"
+    },
+    "select": {
+      "statePlaceholder": "状态：未设置",
+      "stateOption": "状态：{value}",
+      "priorityPlaceholder": "优先级：未设置",
+      "priorityOption": "优先级：{value}",
+      "projectPlaceholder": "项目：未设置",
+      "projectOption": "项目：{value}",
+      "assigneePlaceholder": "负责人：未分配",
+      "assigneeOption": "负责人：{value}",
+      "visibilityPlaceholder": "可见范围",
+      "visibilityOption": "可见范围：{value}"
+    },
+    "actions": {
+      "openAi": "打开 AI 助手",
+      "markComplete": "标记为完成"
+    },
+    "description": {
+      "title": "事项描述",
+      "referencedDocs": "{count, plural, one {已引用 # 篇文档。} other {已引用 # 篇文档。}}",
+      "insertDoc": "插入团队文档",
+      "save": "保存描述",
+      "cancel": "取消",
+      "edit": "编辑描述",
+      "placeholder": "使用 Markdown 说明背景、验收标准、风险以及下一步。\n例如：\n## 背景\n- 为什么这件事重要\n- [ ] 仍待确认的问题",
+      "empty": "还没有描述。补充背景、验收标准、风险以及相关文档吧。"
+    },
+    "aiHandoff": {
+      "title": "AI 编码交接",
+      "updatedAt": "最近更新于 {time}",
+      "fallback": "内容已回存到这个事项里，可直接交给 Claude Code 或 Codex。",
+      "copySuccess": "编码交接提示词已复制。",
+      "copyAction": "复制给 Claude Code / Codex"
+    },
+    "docCards": {
+      "title": "关键文档",
+      "subtitle": "把评审包、交接包和决策记录固定在事项里，而不是散落在聊天记录中。",
+      "created": "事项文档已创建。",
+      "createFailed": "创建事项文档失败。",
+      "createForbidden": "你没有权限在这里创建事项文档。"
+    },
+    "footer": {
+      "createdAt": "创建于：{value}",
+      "updatedAt": "更新于：{value}"
+    },
+    "docReference": {
+      "label": "文档",
+      "defaultTitle": "团队文档",
+      "projectDoc": "项目文档",
+      "teamDoc": "团队文档",
+      "pickerTitle": "插入团队文档",
+      "pickerDescription": "选择一个文档插入到事项描述中。稍后你可以点击描述里的文档标签进行预览。",
+      "loading": "正在加载团队文档...",
+      "empty": "当前还没有可引用的团队文档。",
+      "close": "关闭",
+      "previewDescription": "预览来自团队空间的引用文档。",
+      "previewEmpty": "这个文档还没有内容。"
+    }
+  },
+  "workflowFlow": {
+    "runStatus": {
+      "active": "进行中",
+      "blocked": "阻塞",
+      "waitingReview": "待评审",
+      "handoffPending": "待交接",
+      "done": "已完成"
+    },
+    "actionType": {
+      "execution": "当前执行步骤",
+      "blocked": "等待解除阻塞",
+      "review": "等待确认",
+      "handoff": "等待接手",
+      "done": "工作流已完成"
+    },
+    "reviewOutcome": {
+      "approved": "已通过",
+      "changesRequested": "需要修改"
+    },
+    "memberFallback": "成员 {id}",
+    "toasts": {
+      "requestReviewFailed": "发起评审失败。",
+      "requestHandoffFailed": "发起交接失败。",
+      "blockFailed": "标记工作流为阻塞失败。",
+      "unblockFailed": "解除工作流阻塞失败。",
+      "approveReviewFailed": "通过评审失败。",
+      "requestChangesFailed": "请求修改失败。",
+      "acceptHandoffFailed": "接受交接失败。"
+    },
+    "states": {
+      "loadFailed": "加载工作流数据失败。"
+    },
+    "meta": {
+      "number": "编号",
+      "workflow": "工作流",
+      "status": "状态",
+      "currentStep": "当前步骤",
+      "currentOwner": "当前负责人",
+      "priority": "优先级",
+      "stepCount": "步骤数",
+      "action": "动作",
+      "owner": "负责人",
+      "step": "步骤",
+      "version": "版本",
+      "recentReview": "最近一次评审",
+      "notStarted": "未开始",
+      "unknownStep": "未命名步骤",
+      "notSet": "未设置",
+      "unassigned": "未分配",
+      "specifiedMember": "已指定成员",
+      "stepsValue": "{count} 个步骤"
+    },
+    "header": {
+      "workflow": "工作流：{name}",
+      "priority": "优先级：{value}",
+      "workflowTask": "工作流事项"
+    },
+    "actions": {
+      "openAi": "打开 AI 助手",
+      "requestReview": "发起评审",
+      "requestHandoff": "发起交接",
+      "markBlocked": "标记阻塞",
+      "approveReview": "通过评审",
+      "requestChanges": "请求修改",
+      "acceptHandoff": "接受交接",
+      "unblock": "解除阻塞"
+    },
+    "tabs": {
+      "overview": "概览"
+    },
+    "overview": {
+      "title": "任务概览",
+      "empty": "还没有补充说明。请添加背景、验收标准、交接备注和相关文档。"
+    },
+    "collaboration": {
+      "title": "协作状态",
+      "pendingTarget": "正在等待：{value}",
+      "activeTitle": "当前由 {name} 负责",
+      "activeDescription": "当前负责人可以发起评审、交出这个步骤，或在需要外部支持时标记阻塞。",
+      "targetLabel": "评审或交接对象",
+      "targetPlaceholder": "选择要评审或接手的人",
+      "noteLabel": "协作备注",
+      "notePlaceholder": "补充评审、交接或阻塞说明。标记阻塞时，请写明原因、可协助的人以及预计恢复时间。",
+      "targetOptionalHint": "发起评审和交接都需要指定目标成员；阻塞可以直接提交。",
+      "noEligibleTarget": "当前还没有其他可接收评审或交接的队友。",
+      "latestNoteTitle": "最新上下文",
+      "latestNoteMeta": "由 {name} 添加 · {time}",
+      "onlyCurrentOwner": "只有当前负责人可以发起评审、开始交接，或将这个工作流标记为阻塞。"
+    },
+    "review": {
+      "waitingTitle": "正在等待 {name} 评审",
+      "waitingDescription": "评审通过后，工作流会继续推进；如果需要修改，也可以直接退回。",
+      "placeholder": "写下评审结论或需要修改的内容",
+      "readonlyHint": "这个步骤正在等待 {name} 评审。你仍然可以在讨论页补充上下文。"
+    },
+    "handoff": {
+      "waitingTitle": "正在等待 {name} 接手",
+      "waitingDescription": "接手之后，当前步骤的负责人会转移给新的成员。",
+      "placeholder": "补充交接说明，例如下一步应如何继续",
+      "readonlyHint": "这个步骤正在等待 {name} 接手。你仍然可以在讨论页补充交接上下文。"
+    },
+    "blocked": {
+      "title": "这个步骤已被阻塞",
+      "description": "负责人：{name}。阻塞说明应写清原因、谁可以协助，以及预计何时恢复。",
+      "placeholder": "说明为什么阻塞已解除，或补充恢复后的下一步",
+      "readonlyHint": "只有当前负责人可以解除这个工作流的阻塞，其他队友仍然可以在讨论页补充上下文。"
+    },
+    "done": {
+      "description": "这个工作流已经完成。之后你仍可以回到这里查看产出和协作记录。"
+    },
+    "focusingNode": "正在处理当前节点",
+    "records": {
+      "title": "协作记录",
+      "history": "历史",
+      "discussion": "讨论",
+      "outputs": "产出（{count}）"
+    },
+    "history": {
+      "step": "步骤",
+      "target": "对象",
+      "reason": "原因",
+      "note": "备注",
+      "result": "结果"
+    }
+  }
+}

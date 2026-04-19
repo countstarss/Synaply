@@ -1,0 +1,23 @@
+{
+  "welcome": "欢迎回来！",
+  "subtitle": "你已成功登录 Synaply。现在就开始查看我们为你准备的功能入口。",
+  "userProfile": "个人资料",
+  "userProfileDesc": "查看并编辑你的个人信息",
+  "securitySettings": "安全设置",
+  "securitySettingsDesc": "管理你的账号安全选项",
+  "notifications": "通知中心",
+  "notificationsDesc": "查看最新的系统通知",
+  "activityStats": "活动统计",
+  "activityStatsDesc": "查看你的使用数据",
+  "quickActions": "快捷操作",
+  "systemSettings": "系统设置",
+  "systemSettingsDesc": "自定义你的系统偏好",
+  "goToSettings": "前往设置",
+  "returnHome": "返回首页",
+  "returnHomeDesc": "回到应用主界面",
+  "goToHome": "回到首页",
+  "active": "活跃",
+  "security": "安全",
+  "newMessages": "新消息",
+  "today": "今天"
+}

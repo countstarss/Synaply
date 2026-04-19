@@ -1,0 +1,110 @@
+{
+  "relativeTime": {
+    "justNow": "刚刚",
+    "minutesAgo": "{count} 分钟前",
+    "hoursAgo": "{count} 小时前",
+    "daysAgo": "{count} 天前"
+  },
+  "views": {
+    "primary": "主要",
+    "other": "其他",
+    "digest": "摘要",
+    "later": "稍后",
+    "cleared": "已清理"
+  },
+  "viewSubLabel": {
+    "digestCount": "{count} 条摘要汇总",
+    "digestEmpty": "暂无摘要汇总",
+    "laterCount": "{count} 条稍后处理",
+    "laterEmpty": "暂无稍后处理事项",
+    "clearedCount": "{count} 条已清理事项",
+    "clearedEmpty": "暂无已清理事项",
+    "pendingCount": "{count} 条待处理事项",
+    "pendingEmpty": "当前没有事项"
+  },
+  "empty": {
+    "primary": {
+      "title": "当前没有在等你处理的内容",
+      "description": "新的评审请求、指派事项和到期内容会优先出现在这里。"
+    },
+    "other": {
+      "title": "暂无需要稍后关注的更新",
+      "description": "风险、阻塞和后续信号会在需要二次处理时汇总到这里。"
+    },
+    "digest": {
+      "title": "暂无可查看的文档摘要",
+      "description": "当同一项目、事项或工作流累计了足够多的文档变更，这里会将它们合并成一条摘要。"
+    },
+    "later": {
+      "title": "当前没有被延后的内容",
+      "description": "如果某条信号已读但不想打断当前节奏，可以先移到这里稍后处理。"
+    },
+    "cleared": {
+      "title": "还没有已清理的内容",
+      "description": "被你清理的信号会离开活动队列，并在这里保留一段简短记录。"
+    }
+  },
+  "source": {
+    "workflow": "工作流",
+    "project": "项目",
+    "issue": "事项",
+    "doc": "文档"
+  },
+  "docTitles": {
+    "reviewReady": "评审资料已就绪：{title}",
+    "handoffReady": "交接资料已就绪：{title}",
+    "releaseUpdated": "发布检查清单已更新：{title}",
+    "decisionUpdated": "决策已更新：{title}",
+    "digestGenerated": "最近有 {count} 份协作文档发生变化"
+  },
+  "digest": {
+    "summaryPrefix": "包含 {items}",
+    "summaryCount": "{count} 个{label}",
+    "summaryLatest": "最新：{title}"
+  },
+  "groups": {
+    "today": "今天",
+    "recentWeek": "最近 7 天",
+    "earlierThisMonth": "本月更早"
+  },
+  "filters": {
+    "unread": "未读",
+    "actionable": "需要处理",
+    "clear": "清除筛选",
+    "archivedHint": "该视图本身已按状态分组，因此无法再使用其他筛选。"
+  },
+  "actions": {
+    "refresh": "刷新",
+    "clearView": "清空当前视图",
+    "retry": "重试"
+  },
+  "row": {
+    "openAria": "打开 {title}",
+    "markSeen": "标记为已读",
+    "markUnread": "标记为未读",
+    "accept": "接受",
+    "snooze": "稍后处理",
+    "clear": "清理",
+    "cleared": "已清理"
+  },
+  "hint": "点击任意一行即可打开相关事项、项目、工作流或文档。你也可以直接将其标记已读、延后处理、接受交接或清理该信号。",
+  "states": {
+    "loading": "正在加载收件箱...",
+    "errorTitle": "收件箱加载失败",
+    "errorDescription": "请稍后再试。"
+  },
+  "toasts": {
+    "openFailed": "无法打开该收件箱条目。",
+    "markedSeen": "已标记为已读。",
+    "markedUnread": "已标记为未读。",
+    "updateReadFailed": "无法更新已读状态。",
+    "snoozed": "已移到稍后处理。",
+    "snoozeFailed": "无法延后此条目。",
+    "cleared": "收件箱条目已清理。",
+    "clearFailed": "无法清理此条目。",
+    "handoffAccepted": "已接受交接。",
+    "acceptFailed": "无法接受交接。",
+    "clearedView": "已清空当前视图。",
+    "clearAllFailed": "无法清空当前视图。"
+  }
+}

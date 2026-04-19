@@ -1,0 +1,443 @@
+{
+  "site": {
+    "tagline": "面向小型初创团队的远程协作软件。",
+    "hero": {
+      "eyebrow": "面向小型初创团队的远程协作软件",
+      "title": "让项目、工作流、事项和文档在同一个协作软件里顺畅运转。",
+      "subtitle": "Synaply 为小型初创团队提供规划、执行、交接与文档沉淀的共享上下文，让远程协作无需反复催促也能快速推进。",
+      "primaryCta": "从清晰开始",
+      "secondaryCta": "看看工作流如何流动",
+      "returningCta": "进入你的工作区"
+    },
+    "metrics": [
+      {
+        "value": "3-15",
+        "label": "每个远程团队的人数"
+      },
+      {
+        "value": "4",
+        "label": "核心协作面"
+      },
+      {
+        "value": "实时",
+        "label": "跨角色与更新同步"
+      }
+    ],
+    "capabilities": {
+      "eyebrow": "一个工作区，更少断层",
+      "title": "把工作组织好，团队才能专注交付。",
+      "description": "每个模块的存在，都是为了减少来回沟通。产品、设计、工程和运营能保持对齐，是因为流程本身会把上下文往前带。",
+      "items": [
+        {
+          "name": "项目",
+          "title": "在工作碎裂之前，先把项目边界立住。",
+          "description": "沉淀目标、优先级和交付背景，让团队知道现在最重要的是什么，接下来又该往哪里走。"
+        },
+        {
+          "name": "事项",
+          "title": "把每一项工作都变成明确的推进单元。",
+          "description": "既能足够严谨地追踪动作、阻塞和后续推进，又不会把日常协作变成流程表演。"
+        },
+        {
+          "name": "工作流",
+          "title": "让每一次交接都看得清楚。",
+          "description": "定义阶段、负责人和流转路径，就算涉及多个角色，工作也不会在中途失真或消失。"
+        },
+        {
+          "name": "文档",
+          "title": "把“为什么”留在工作旁边。",
+          "description": "需求、决策和运营说明都和执行放在同一个空间里，而不是散落在独立档案中。"
+        }
+      ]
+    },
+    "workflow": {
+      "eyebrow": "用流程代替追着问",
+      "title": "协作应该建立在清晰之上，而不是提醒之上。",
+      "description": "当流程本身可见，进度就不再依赖记忆。团队花更少时间确认“现在到哪了”，把更多时间用在真正推动工作上。",
+      "steps": [
+        {
+          "step": "01",
+          "title": "先定义结果",
+          "description": "项目先把目标、范围和顺序讲清楚，让所有人都从同一份项目简述出发。"
+        },
+        {
+          "step": "02",
+          "title": "通过事项承接工作",
+          "description": "事项承载当前状态、负责人、备注和下一步动作，而且天然适合继续推进。"
+        },
+        {
+          "step": "03",
+          "title": "沿着工作流流转",
+          "description": "状态切换明确、交接过程可见，多角色协作也不会在工具之间失联。"
+        },
+        {
+          "step": "04",
+          "title": "把文档作为交付的一部分",
+          "description": "文档会持续吸收上下文，因此团队回看决策时，不必重新翻找旧线程。"
+        }
+      ]
+    },
+    "finalCta": {
+      "eyebrow": "从清晰开始，用节奏推进。",
+      "description": "搭建一个把规划、执行和对齐始终连在一起的共享工作区。",
+      "primary": "搭建你的协作中枢"
+    },
+    "auth": {
+      "eyebrow": "结构化访问",
+      "title": "进入那个能让远程执行持续对齐的工作区。",
+      "description": "项目、事项、工作流和文档都留在同一个共享上下文里，让每个角色都能朝同一方向推进。",
+      "highlights": [
+        "多角色协作无需反复切换工具",
+        "每一次交接都拥有清晰可见的流转路径",
+        "实时同步减少重复确认和跟进"
+      ],
+      "modes": {
+        "login": {
+          "title": "欢迎回来",
+          "description": "回到那个优先级、状态和文档都已经对齐好的工作区。"
+        },
+        "register": {
+          "title": "创建你的团队工作区",
+          "description": "从一个更安静、更清晰的远程协作工具开始，服务产品、设计、工程与运营团队。"
+        },
+        "reset": {
+          "title": "找回访问权限，不丢上下文",
+          "description": "我们会发送一条安全链接，让你回到同一个结构化协作流中。"
+        }
+      }
+    }
+  },
+  "landing": {
+    "proofSignals": [
+      "远程优先结构",
+      "交接清晰可见",
+      "文档贴着执行",
+      "一个统一节奏"
+    ],
+    "canvasWord": "流动中的清晰",
+    "coverPrefix": "从",
+    "coverWord": "清晰",
+    "coverSuffix": "开始，让流程带着其余部分往前走。",
+    "preview": {
+      "moduleStrip": "项目 / 事项 / 工作流 / 文档",
+      "status": "远程执行始终对齐"
+    },
+    "productPreview": {
+      "workspaceTitle": "Synaply 工作区",
+      "workspaceSubtitle": "项目、事项、工作流和文档都在同一个共享上下文中",
+      "syncStatus": "远程执行已同步",
+      "execution": {
+        "eyebrow": "当前执行面",
+        "title": "跨角色发布协作",
+        "status": "刚刚同步",
+        "columns": {
+          "issue": "事项",
+          "owner": "负责人",
+          "state": "状态",
+          "doc": "关联文档"
+        },
+        "rowHint": "工作在流转时，上下文也始终跟着走。",
+        "rows": [
+          {
+            "name": "远程入职发布",
+            "owner": "ENG",
+            "state": "评审中",
+            "doc": "上线清单"
+          },
+          {
+            "name": "工作流交接更新",
+            "owner": "PM",
+            "state": "规格已对齐",
+            "doc": "决策记录"
+          },
+          {
+            "name": "文档与执行保持联动",
+            "owner": "OPS",
+            "state": "准备就绪",
+            "doc": "运营指南"
+          }
+        ]
+      },
+      "workflow": {
+        "eyebrow": "工作流",
+        "title": "清晰的交接路径",
+        "steps": [
+          "产品明确里程碑与推进顺序",
+          "设计交付已评审的交接包",
+          "工程带着关联文档完成交付"
+        ]
+      },
+      "context": {
+        "eyebrow": "上下文",
+        "title": "文档和更新始终挂在工作旁边",
+        "snippetEyebrow": "文档片段",
+        "snippetBody": "上线清单、评审意见和发布决策都会紧贴着工作展示，而不是掉进聊天历史里。",
+        "sharedBy": "所有角色共享"
+      }
+    },
+    "workflowPrinciple": {
+      "label": "运行原则",
+      "text": "当团队共享同一个上下文，进度就不再依赖提醒，而是依赖系统本身的设计。"
+    },
+    "structuredFlowLabel": "结构化流转",
+    "final": {
+      "titlePrefix": "为每个项目建立",
+      "titleFocus": "秩序",
+      "secondaryCta": "查看定价"
+    },
+    "footer": {
+      "copyrightSuffix": "保留所有权利。",
+      "sections": [
+        {
+          "title": "页面",
+          "items": [
+            {
+              "label": "首页",
+              "href": "/landing"
+            },
+            {
+              "label": "能力",
+              "href": "#capabilities"
+            },
+            {
+              "label": "工作流",
+              "href": "#workflow"
+            },
+            {
+              "label": "定价",
+              "href": "/pricing"
+            }
+          ]
+        },
+        {
+          "title": "产品",
+          "items": [
+            {
+              "label": "项目",
+              "href": "/auth"
+            },
+            {
+              "label": "事项",
+              "href": "/auth"
+            },
+            {
+              "label": "工作流",
+              "href": "/auth"
+            },
+            {
+              "label": "文档",
+              "href": "/auth"
+            }
+          ]
+        },
+        {
+          "title": "公司",
+          "items": [
+            {
+              "label": "关于 Synaply",
+              "href": "/about"
+            },
+            {
+              "label": "远程优先"
+            },
+            {
+              "label": "结构化执行"
+            },
+            {
+              "label": "清晰胜过噪音"
+            }
+          ]
+        },
+        {
+          "title": "入口",
+          "items": [
+            {
+              "label": "从清晰开始",
+              "href": "/auth"
+            },
+            {
+              "label": "登录",
+              "href": "/auth"
+            },
+            {
+              "label": "查看定价",
+              "href": "/pricing"
+            },
+            {
+              "label": "关于",
+              "href": "/about"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "about": {
+    "badge": "关于 Synaply",
+    "hero": {
+      "eyebrow": "它为什么存在",
+      "titlePrefix": "我们希望远程团队拥有更多",
+      "titleFocus": "清晰",
+      "titleSuffix": "。",
+      "description": "Synaply 建立在一个简单信念上：好的协作软件，不该只是更快的收件箱。它应该是一个更清楚的环境，让目标、流程、工作和文档服从同一套逻辑。",
+      "canvasWord": "有节奏的秩序"
+    },
+    "story": [
+      "Synaply 从来不是为了帮团队管理更多任务而设计的。",
+      "它是一款面向小型初创团队的远程协作软件，让不同角色可以自然地围绕同一个项目上下文推进工作。",
+      "当工作流清晰、上下文完整、文档紧贴执行时，团队就能把注意力重新放回交付本身。"
+    ],
+    "principlesSection": {
+      "eyebrow": "原则",
+      "title": "我们如何理解协作软件",
+      "description": "这不是另一个堆任务的地方，而是一种帮助团队保持同频节奏的结构。"
+    },
+    "principles": [
+      {
+        "title": "一个共享上下文",
+        "description": "项目、事项、工作流和文档不该散落在彼此割裂的工具里，它们应该属于同一个操作面。"
+      },
+      {
+        "title": "流程胜过催促",
+        "description": "更好的协作来自更清晰的阶段、责任归属和推进路径，而不是更多提醒和跟进消息。"
+      },
+      {
+        "title": "文档写在执行里",
+        "description": "需求、判断依据和运营说明都应贴着工作本身，而不是逐渐淡出成归档材料。"
+      }
+    ],
+    "preview": {
+      "label": "产品界面",
+      "description": "这是真实产品界面，而不是抽象的协作概念图。",
+      "surfaceTag": "Synaply 应用",
+      "imageAlt": "Synaply 的远程协作工作区，包含项目、事项、工作流和文档",
+      "badge": "远程优先工作区",
+      "status": "在线产品视图"
+    },
+    "symbol": {
+      "label": "运行符号",
+      "description": "对我们来说，协作软件只有在工作持续流动时还能承接住上下文，才真正有价值。"
+    },
+    "closing": "少一点反复确认，多一点工作顺着该去的地方抵达。"
+  },
+  "pricing": {
+    "hero": {
+      "eyebrow": "定价",
+      "titlePrefix": "定价也应该足够",
+      "titleFocus": "清晰",
+      "titleSuffix": "。",
+      "description": "Synaply 的定价方式同样服务于清晰感。无论团队处于哪个阶段，都应该能从一个专注的远程协作工具开始，而不是先面对不必要的复杂度。",
+      "cta": "开始使用 Synaply"
+    },
+    "included": [
+      "不是模块四散堆叠，而是一个统一的工作上下文",
+      "目标是减少协作拖拽，而不是堆更多功能体积",
+      "套餐按团队成熟度划分，而不是用随意的功能锁做切分"
+    ],
+    "planSignal": {
+      "label": "方案信号",
+      "description": "目标不是更大的功能面积，而是更稳地进入同一套协作节奏。"
+    },
+    "summaryCards": [
+      {
+        "kind": "workspace",
+        "text": "统一工作区"
+      },
+      {
+        "kind": "followUp",
+        "text": "更少跟进噪音"
+      },
+      {
+        "kind": "coordination",
+        "text": "更可靠的协作配合"
+      }
+    ],
+    "plans": [
+      {
+        "name": "Launch",
+        "featured": false,
+        "price": "$9",
+        "priceHint": "每位成员 / 月",
+        "summary": "适合刚开始建立更平静协作节奏的团队",
+        "badge": "私测中",
+        "fitLabel": "适合 3-8 个席位"
+      },
+      {
+        "name": "Team",
+        "featured": true,
+        "price": "$19",
+        "priceHint": "每位成员 / 月",
+        "summary": "适合多角色团队稳定推进执行工作",
+        "badge": "最契合",
+        "fitLabel": "适合 5-15 个席位"
+      },
+      {
+        "name": "Custom",
+        "featured": false,
+        "price": "定制",
+        "priceHint": "定制报价",
+        "summary": "适合需要长期工作流设计与落地支持的团队",
+        "badge": "联系咨询",
+        "fitLabel": "按团队规模定制"
+      }
+    ],
+    "planCta": "申请访问",
+    "offers": [
+      {
+        "name": "Launch",
+        "description": "适合 3-8 人团队建立更平静的远程协作节奏。",
+        "price": "9",
+        "priceCurrency": "USD"
+      },
+      {
+        "name": "Team",
+        "description": "适合 5-15 人跨职能团队，需要更稳定的交接与执行配合。",
+        "price": "19",
+        "priceCurrency": "USD"
+      }
+    ]
+  },
+  "seo": {
+    "shared": {
+      "homeLabel": "首页"
+    },
+    "pages": {
+      "landing": {
+        "title": "面向小型初创团队的远程协作软件",
+        "description": "Synaply 帮助小型初创团队通过清晰的执行、可见的交接，以及跨项目、事项、工作流、文档和更新的共享上下文实现更快的远程协作。",
+        "keywords": [
+          "远程协作软件",
+          "远程团队协作工具",
+          "工作流交接软件",
+          "异步团队协作",
+          "项目事项文档工作流"
+        ],
+        "breadcrumbLabel": "首页"
+      },
+      "pricing": {
+        "title": "远程团队协作软件定价",
+        "description": "查看 Synaply 面向产品、设计、工程和运营远程团队的定价方案，为需要更平静工作流、可见交接和统一执行上下文的团队而设计。",
+        "keywords": [
+          "协作软件定价",
+          "远程团队软件价格",
+          "工作流软件定价",
+          "小团队协作工具",
+          "异步协作平台定价"
+        ],
+        "breadcrumbLabel": "定价"
+      },
+      "about": {
+        "title": "关于 Synaply 与我们的远程协作理念",
+        "description": "了解 Synaply 为什么把重点放在远程团队清晰度、结构化执行、可见交接，以及始终贴着项目、事项和工作流的文档上。",
+        "keywords": [
+          "关于 Synaply",
+          "远程协作理念",
+          "工作流可见性",
+          "结构化执行软件",
+          "团队交接平台"
+        ],
+        "breadcrumbLabel": "关于"
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+.DS_Store
+/node_modules
+/.pnpm-store
+/coverage
+pnpm-debug.log*
+*.tsbuildinfo
+
+# Local Codex / Claude workspace artifacts
+.claude/settings.local.json
+.claude/worktrees/
+
+# Local environment files
+.env
+.env.local
+.env.*
+!.env.example
+!.env.*.example
+
+# Local Supabase config
+supabase/config.toml

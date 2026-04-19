@@ -1,0 +1,23 @@
+{
+  "welcome": "다시 오신 것을 환영합니다!",
+  "subtitle": "Synaply에 로그인했습니다. 여기에서 주요 기능으로 바로 이동할 수 있습니다.",
+  "userProfile": "프로필",
+  "userProfileDesc": "개인 정보를 확인하고 수정합니다",
+  "securitySettings": "보안 설정",
+  "securitySettingsDesc": "계정 보안 옵션을 관리합니다",
+  "notifications": "알림 센터",
+  "notificationsDesc": "최신 시스템 알림을 확인합니다",
+  "activityStats": "활동 통계",
+  "activityStatsDesc": "사용 현황 통계를 봅니다",
+  "quickActions": "빠른 작업",
+  "systemSettings": "시스템 설정",
+  "systemSettingsDesc": "시스템 전반의 설정을 조정합니다",
+  "goToSettings": "설정으로 이동",
+  "returnHome": "홈으로 돌아가기",
+  "returnHomeDesc": "메인 애플리케이션 화면으로 돌아갑니다",
+  "goToHome": "홈으로 이동",
+  "active": "활성",
+  "security": "보안",
+  "newMessages": "새 메시지",
+  "today": "오늘"
+}

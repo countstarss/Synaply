@@ -1,0 +1,347 @@
+{
+  "status": {
+    "planning": "Planning",
+    "active": "Active",
+    "blocked": "Blocked",
+    "shipping": "Shipping",
+    "done": "Done",
+    "archived": "Archived"
+  },
+  "risk": {
+    "low": "Low risk",
+    "medium": "Medium risk",
+    "high": "High risk",
+    "critical": "Critical risk"
+  },
+  "visibility": {
+    "private": {
+      "label": "Private",
+      "description": "Best for personal workspaces. Resource-level permissions are not strictly enforced by visibility yet."
+    },
+    "teamReadonly": {
+      "label": "Team Read-only",
+      "description": "Team members can view this project. Write access is still controlled by OWNER and ADMIN roles."
+    },
+    "teamEditable": {
+      "label": "Team Editable",
+      "description": "Best for collaborative projects. Backend write permissions are still determined by workspace member roles."
+    },
+    "public": {
+      "label": "Public",
+      "description": "A public-facing project view for sharing context and status."
+    }
+  },
+  "overview": {
+    "title": {
+      "personal": "My projects",
+      "team": "Team projects"
+    },
+    "summary": "{total} total projects, {linked} with active issues, {empty} without active issues, {unassigned} active issues without a project",
+    "create": "Create project",
+    "searchPlaceholder": "Search by project name, brief, phase, owner, or visibility...",
+    "results": "{count} results",
+    "recentlyUpdated": "Recently updated first",
+    "emptyTitle": "No matching projects",
+    "emptyDescription": "Try a different keyword, or create a new project.",
+    "missingBrief": "This project does not have a collaboration brief yet.",
+    "activeIssues": "{count} active issues"
+  },
+  "detail": {
+    "relativeTime": {
+      "justNow": "Just now",
+      "minutesAgo": "{count} min ago",
+      "hoursAgo": "{count} hr ago",
+      "daysAgo": "{count} d ago"
+    },
+    "issueState": {
+      "blocked": "Blocked",
+      "done": "Done",
+      "inProgress": "In progress",
+      "uncategorized": "Uncategorized"
+    },
+    "assignee": {
+      "assigned": "Assigned",
+      "pending": "Needs assignee"
+    },
+    "priority": {
+      "urgent": "Urgent",
+      "high": "High priority"
+    },
+    "attention": {
+      "blockedTitle": "Blocked issues need attention",
+      "blockedDescription": "{count} issues are currently blocked.",
+      "overdueTitle": "Some work is overdue",
+      "overdueDescription": "{count} issues are past the due date.",
+      "staleSyncTitle": "Sync rhythm is getting stale",
+      "staleSyncDescription": "It has been {count} days since the last sync update.",
+      "healthyTitle": "Project status looks stable",
+      "healthyDescription": "There are no strong delay or blocker signals right now."
+    },
+    "summary": {
+      "missingIssue": "Issue details are still syncing. Please try again in a moment.",
+      "docCreateAuthRequired": "Current user info is unavailable, so a project doc cannot be created yet.",
+      "docCreated": "Project doc created.",
+      "docCreateFailed": "Failed to create a project doc.",
+      "newDocTitle": "{name} doc",
+      "missingBrief": "This project does not have a one-line brief yet. Add the goal, delivery direction, and success criteria.",
+      "phase": "Phase",
+      "owner": "Owner",
+      "activeIssues": "{count} active issues",
+      "workflowCount": "{count} workflows",
+      "docsCount": "{count} docs",
+      "updatedAt": "Updated {value}",
+      "edit": "Edit",
+      "delete": "Delete",
+      "completion": "Delivery progress",
+      "completionHint": "{completed} done · {total} active",
+      "riskAndDelay": "Blockers and delay",
+      "riskAndDelayHint": "{blocked} blocked · {overdue} overdue",
+      "executionSurface": "Execution surface",
+      "executionSurfaceHint": "{workflowCount} linked workflows · {highPriority} high priority",
+      "pendingConfirmations": "Pending confirmations",
+      "pendingConfirmationsHint": "{reviewCount} reviews · {handoffCount} handoffs",
+      "recentSync": "Recent sync",
+      "notRecorded": "Not recorded",
+      "recentSyncHint": "Update this after a review or async sync checkpoint.",
+      "workspaceTitle": "Project workspace",
+      "createIssue": "Create issue",
+      "createDoc": "Create doc",
+      "workspaceCards": {
+        "issues": "Active issues",
+        "docs": "Docs",
+        "workflow": "Workflow",
+        "sync": "Sync"
+      },
+      "risksTitle": "Risks",
+      "blockedIssuesTitle": "Blocked issues",
+      "blockedIssuesEmpty": "No blocked issues are currently detected."
+    },
+    "collaboration": {
+      "title": "Collaboration snapshot",
+      "subtitle": "Keep the project page anchored in the next handoff, key docs, and the workflow runs that are currently moving delivery.",
+      "pendingTitle": "Pending confirmations",
+      "pendingEmpty": "No review or handoff is waiting on a response right now.",
+      "docsTitle": "Key docs",
+      "docsEmpty": "No project docs have been created yet. Capture the first brief, decision, or review note here.",
+      "openDocs": "Open docs",
+      "docUpdatedAt": "Updated {value}",
+      "workflowRuntimeTitle": "Workflow runtime",
+      "workflowRuntimeEmpty": "No workflow run is active in this project yet.",
+      "linkedWorkflowIssues": "{count} linked issues",
+      "workflowRuntimeSummary": "{issueCount} linked issues · {activeCount} active · {waitingReviewCount} waiting review · {handoffPendingCount} waiting handoff · {blockedCount} blocked",
+      "workflowFocusIssue": "Current focus: {name}",
+      "currentStep": "Current step: {name}",
+      "pendingTarget": "Waiting on {name}",
+      "pendingTargetFallback": "Waiting on confirmation",
+      "status": {
+        "waitingReview": "Waiting review",
+        "handoffPending": "Waiting handoff",
+        "blocked": "Blocked",
+        "active": "Active",
+        "done": "Done",
+        "unknown": "Unknown"
+      },
+      "workflowRuntime": {
+        "active": "Active runs",
+        "waitingReview": "Waiting review",
+        "handoffPending": "Waiting handoff",
+        "blocked": "Blocked"
+      }
+    },
+    "timeline": {
+      "title": "Activity and sync timeline",
+      "subtitle": "Keep the latest collaboration moves, issue changes, and sync checkpoints in one place so the project rhythm is easy to read.",
+      "openSync": "Open sync view",
+      "updateSync": "Update sync",
+      "recentSync": "Recent sync",
+      "activityCount": "Timeline events",
+      "activityCountHint": "Includes sync checkpoints and recent collaboration activity.",
+      "updatedAt": "Project updated",
+      "empty": "This project has not formed a useful activity timeline yet.",
+      "syncTitle": "Project sync recorded",
+      "syncDescription": "The latest async sync checkpoint has been updated and can serve as the current pace marker.",
+      "actorFallback": "Team member"
+    }
+  },
+  "subviews": {
+    "relativeTime": {
+      "justNow": "Just now",
+      "minutesAgo": "{count} min ago",
+      "hoursAgo": "{count} hr ago",
+      "daysAgo": "{count} d ago"
+    },
+    "issues": {
+      "title": "Issues",
+      "subtitle": "Keep the project execution layer separate, with both list and board views.",
+      "openIssue": "Open issue",
+      "quickComplete": "Mark as done",
+      "cancelIssue": "Cancel issue",
+      "summary": "{active} active project issues{suffix}",
+      "hiddenSuffix": " · {count} done or canceled{hidden}",
+      "hiddenLabel": " hidden",
+      "onlyCreatorCanCancel": "Only the creator can cancel this issue.",
+      "cancelled": "Issue canceled. It is now hidden in list view by default.",
+      "cancelFailed": "Failed to cancel the issue. Please try again.",
+      "updateStateFailed": "Failed to update the issue state. Please try again.",
+      "saveBoardOrder": "Save board order",
+      "boardOrderSaved": "Board order saved",
+      "loading": "Loading project issues...",
+      "emptyTitle": "This project does not have any active issues yet",
+      "emptyDescription": "List view hides done and canceled issues by default. Switch to board view to see every state.",
+      "createIssue": "Create project issue",
+      "cancelDialog": {
+        "title": "Cancel this issue?",
+        "description": "The issue will be moved to Canceled and hidden in list view by default. The record stays in place and related assignees will still see it.",
+        "keep": "Keep it",
+        "confirm": "Confirm cancel",
+        "pending": "Canceling..."
+      }
+    },
+    "docs": {
+      "missingUser": "Current user info is unavailable, so project docs cannot be loaded yet."
+    },
+    "workflow": {
+      "title": "Workflow",
+      "subtitle": "Aggregate the workflows that are actually connected to this project.",
+      "openCenter": "Open workflow center",
+      "empty": "No workflow issue is linked to this project yet. Once a workflow issue is added to this project, it will appear here automatically.",
+      "linkedIssues": "{count} linked issues · {status}",
+      "steps": "{count} steps",
+      "version": "Version",
+      "visibility": "Visibility",
+      "notAvailable": "N/A"
+    },
+    "sync": {
+      "title": "Project sync",
+      "subtitle": "Keep async sync traces and recent changes in a dedicated surface.",
+      "updateSync": "Update sync time",
+      "recentSync": "Recent sync",
+      "activityCount": "Activity count",
+      "updatedAt": "Project updated",
+      "notRecorded": "Not recorded",
+      "empty": "Project activity has not built up yet. Issue updates and activity records will accumulate here automatically.",
+      "digest": {
+        "title": "Project digest pulse",
+        "description": "Deliver the latest aggregated doc digests directly into the sync view so you can catch the key collaboration changes before reading the full timeline.",
+        "emptyTitle": "No digest is ready for this project yet",
+        "emptyDescription": "When the same project accumulates enough structured doc changes, a digest will show up here first."
+      },
+      "teamMember": "Team member",
+      "timeline": {
+        "syncTitle": "Project sync recorded",
+        "syncDescription": "The latest async sync checkpoint has been updated and can serve as the current pace marker."
+      }
+    }
+  },
+  "kanban": {
+    "issueCount": "{count} issues",
+    "reorderColumn": "Reorder the {label} column",
+    "dragColumn": "Drag to reorder columns",
+    "dropIssue": "Drag an issue into this column",
+    "workflow": "Workflow",
+    "dragIssue": "Drag {title}",
+    "dragIssueCategory": "Drag to change issue category",
+    "openIssue": "Open issue",
+    "cancelIssue": "Cancel issue"
+  },
+  "page": {
+    "selectWorkspaceTitle": "No workspace selected",
+    "selectWorkspaceDescription": "Choose a workspace and the project module will automatically scope data to it.",
+    "loading": "Loading projects...",
+    "loadFailedTitle": "Failed to load projects",
+    "loadFailedDescription": "We could not fetch the project list.",
+    "emptyState": {
+      "title": "No projects yet",
+      "description": "The project module is connected to the live backend now. Create a project container first, then attach related work to it.",
+      "createAction": "Create the first project",
+      "readOnlyHint": "Only OWNER and ADMIN members can create, edit, or delete projects in the current team workspace."
+    }
+  },
+  "owner": {
+    "missing": "No owner assigned",
+    "unnamedMember": "Unnamed member"
+  },
+  "editor": {
+    "title": {
+      "create": "Create project",
+      "edit": "Edit project"
+    },
+    "subtitle": {
+      "create": "Turn the project into a collaboration context, not just an issue container.",
+      "edit": "Maintain the brief, phase, risk level, owner, and other collaboration semantics here."
+    },
+    "fields": {
+      "name": "Project name",
+      "namePlaceholder": "For example: Q2 Launch, AI Search Revamp",
+      "brief": "One-line brief",
+      "briefPlaceholder": "Explain why this project exists and what the team is moving toward delivery.",
+      "description": "Project background / goals",
+      "descriptionPlaceholder": "Add scope, success criteria, and key background so the team can understand the project context.",
+      "status": "Current status",
+      "statusPlaceholder": "Choose a project status",
+      "phase": "Current phase",
+      "phasePlaceholder": "For example: Kickoff, Design Review, Build, Launch",
+      "risk": "Risk level",
+      "riskPlaceholder": "Choose a risk level",
+      "owner": "Project owner",
+      "ownerPlaceholder": "Choose an owner",
+      "visibility": "Visibility",
+      "visibilityPlaceholder": "Choose project visibility"
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "saving": "Saving...",
+      "create": "Create project",
+      "save": "Save changes"
+    },
+    "statusDescriptions": {
+      "planning": "The goal and scope are still converging. This is a good time to add the brief and define success criteria.",
+      "active": "The project already has an execution rhythm and can serve as the main collaboration surface.",
+      "blocked": "There is a key blocker, and the team should identify who will unblock it soon.",
+      "shipping": "The work is in release, acceptance, or launch wrap-up.",
+      "done": "The goal has been reached and can stay as historical context.",
+      "archived": "The project has left the day-to-day collaboration flow, but the context should still be kept."
+    },
+    "riskDescriptions": {
+      "low": "The rhythm looks stable and no clear handoff or delivery risk has appeared yet.",
+      "medium": "There are already waits or uncertainties worth tracking on the project page.",
+      "high": "Delivery, review, or coordination has a visible risk and needs attention.",
+      "critical": "The project is already being materially affected and needs immediate intervention."
+    }
+  },
+  "deleteDialog": {
+    "title": "Delete project",
+    "description": "Deleting this project will immediately cascade through its related issues, documents, doc folders, and other collaboration context. This action cannot be undone.",
+    "aboutToDelete": "About to delete",
+    "missingProject": "No project selected",
+    "missingProjectDescription": "This project does not have a description yet.",
+    "countingIssues": "Counting issues that will be cascade deleted...",
+    "countingResources": "Counting project resources that will be cascade deleted...",
+    "cascadeWarning": "After confirmation, this project's execution surface and document context will disappear together.",
+    "issueCountLabel": "Issues",
+    "docCountLabel": "Docs",
+    "folderCountLabel": "Folders",
+    "resourceSummary": "This will remove {issues} issues, {docs} documents, and {folders} folders together with the project.",
+    "confirmLabel": "Enter the project name to confirm deletion",
+    "confirmPlaceholder": "Type the project name",
+    "confirmHint": "Deletion is only enabled when the input exactly matches the project name.",
+    "deleting": "Deleting...",
+    "confirmDelete": "Confirm delete"
+  },
+  "toasts": {
+    "workspaceRequired": "Please select a workspace first.",
+    "created": "Project created.",
+    "updated": "Project updated.",
+    "saveFailed": "Failed to save the project.",
+    "deleted": "Project deleted together with {issueCount} issues, {docCount} documents, and {folderCount} folders.",
+    "deleteFailed": "Failed to delete the project.",
+    "invalidIssueRoute": "The current project route is invalid, so this issue cannot be opened.",
+    "syncUpdated": "Project sync time updated.",
+    "syncFailed": "Failed to update the project sync time.",
+    "boardOrderMissingWorkspace": "The current workspace is invalid, so the board order cannot be saved.",
+    "boardOrderUnchanged": "The board order has not changed.",
+    "boardOrderSaveFailed": "Failed to save the board order. Please try again.",
+    "boardOrderSaved": "Board order updated."
+  }
+}

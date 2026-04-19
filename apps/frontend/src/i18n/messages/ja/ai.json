@@ -1,0 +1,148 @@
+{
+  "shared": {
+    "copyFailed": "コピーに失敗しました。",
+    "assistant": "AIアシスタント",
+    "surfaceLabel": "インテリジェンス",
+    "newConversation": "新しい会話",
+    "conversation": "インテリジェンス会話",
+    "conversationLegacy": "AI協業スレッド"
+  },
+  "thread": {
+    "shell": {
+      "title": "AIアシスタント",
+      "description": "まず現在のタスク文脈から入り、そのうえで次の一手を明確にし、前に進め、形にしていきます。"
+    },
+    "list": {
+      "fallbackTitle": "AI協業スレッド",
+      "description": "このスレッドは現在のタスク文脈と協業履歴を覚えています。",
+      "noPins": "まだ固定された文脈はありません"
+    },
+    "messages": {
+      "loading": "スレッドとメッセージ履歴を同期しています...",
+      "empty": "AI に進めたいことを伝えると、現在のタスク文脈をもとに応答します。",
+      "streaming": "返信を生成しています..."
+    },
+    "composer": {
+      "placeholder": "例: この課題の次の一手を整理して、足りない文脈も指摘して。",
+      "send": "送信"
+    },
+    "approval": {
+      "readStatusFailed": "現在、確認状態を読み取れません。",
+      "confirmUnavailable": "この操作は今すぐ確認できません。",
+      "actionIncomplete": "この操作は正常に完了しませんでした。",
+      "confirmSuccess": "確認しました。AI が処理を続行しています。",
+      "confirmFailed": "確認に失敗しました。",
+      "rejectUnavailable": "この操作は今すぐ却下できません。",
+      "rejectSuccess": "この操作を却下しました。",
+      "rejectFailed": "却下に失敗しました。",
+      "statuses": {
+        "confirmed": "確認済み",
+        "rejected": "却下済み",
+        "expired": "期限切れ",
+        "pending": "確認待ち"
+      },
+      "action": "アクション: {value}",
+      "batchSummary": "この確認で {count} 件のアクションがまとめて実行されます。",
+      "previewStatus": "プレビュー状態: {value}",
+      "confirm": "確認して実行",
+      "reject": "却下"
+    },
+    "codingPrompt": {
+      "copied": "コーディング引き継ぎプロンプトをコピーしました。",
+      "title": "コーディング引き継ぎプロンプト",
+      "issueLabel": "課題 {id}",
+      "unbound": "特定の課題には紐づいていません",
+      "copy": "Claude Code / Codex 用にコピー"
+    },
+    "clarification": {
+      "fallbackTitle": "選択肢"
+    },
+    "toolResult": {
+      "toolFailed": "ツールの実行に失敗しました。",
+      "toolCompleted": "ツールの実行が完了しました。",
+      "details": "構造化出力を表示",
+      "status": "状態: {value}",
+      "summary": "要約: {value}",
+      "message": "メッセージ: {value}"
+    },
+    "messageBubble": {
+      "empty": "表示できるメッセージ内容がありません。"
+    }
+  },
+  "workbench": {
+    "page": {
+      "fallbackWorkspace": "無題のワークスペース",
+      "defaultOriginTitle": "{name}・インテリジェンスワークスペース",
+      "unauthorized": "権限がありません。",
+      "sendFailed": "AI メッセージの送信に失敗しました。",
+      "loading": "インテリジェンスワークスペースを準備しています...",
+      "emptyWorkspace": "利用できるワークスペースがまだないため、インテリジェンスを開始できません。"
+    },
+    "sidebar": {
+      "new": "新規",
+      "workspaceSection": "ワークスペース",
+      "projectsSection": "プロジェクト",
+      "sectionTitle": "インテリジェンス",
+      "freeEmpty": "まだ自由会話の履歴はありません。現在の文脈からそのまま始められます。",
+      "projectEmpty": "このプロジェクトにはまだ課題会話の履歴がありません。プロジェクト自体をクリックすると、プロジェクト会話に入れます。",
+      "projectStart": "このプロジェクトのメイン会話を開始",
+      "projectConversation": "プロジェクト会話",
+      "freeConversation": "自由会話",
+      "collapseProject": "{name} を折りたたむ",
+      "expandProject": "{name} を展開",
+      "syncing": "会話を同期しています...",
+      "empty": "まだ会話履歴はありません。最初のメッセージを送ると、コンポーザーがワークスペース内に移動します。",
+      "justNow": "たった今",
+      "minutesAgo": "{count} 分前",
+      "hoursAgo": "{count} 時間前",
+      "daysAgo": "{count} 日前"
+    },
+    "chat": {
+      "loading": "スレッドとメッセージ履歴を同期しています...",
+      "heroTitle": "まず、何を前に進めたいかを伝えてください。",
+      "streaming": "AI が返信を組み立てています",
+      "copySuccess": "メッセージをコピーしました。",
+      "copy": "コピー",
+      "deselect": "選択解除",
+      "select": "選択",
+      "exitMultiSelect": "複数選択を終了",
+      "multiSelect": "複数選択",
+      "noContent": "表示できるメッセージ内容がありません。",
+      "selected": "{count} 件のメッセージを選択中",
+      "autoSelect": "自動選択",
+      "mergeCopy": "結合してコピー",
+      "copying": "コピー中...",
+      "clearSelection": "選択を解除",
+      "exit": "終了",
+      "selectionHint": "メッセージを右クリックすると複数選択を続けられます。今後は抜粋、要約、保存にも自然に広げられます。"
+    },
+    "composer": {
+      "placeholder": "考え、ブロッカー、次のアクションをそのまま入力してください...",
+      "sending": "送信中...",
+      "send": "送信"
+    },
+    "roles": {
+      "user": "ユーザー",
+      "assistant": "AIアシスタント",
+      "system": "システム",
+      "tool": "ツール",
+      "message": "メッセージ"
+    },
+    "plainText": {
+      "status": "状態: {value}",
+      "summary": "要約: {value}",
+      "message": "メッセージ: {value}",
+      "toolFailed": "ツールの実行に失敗しました。",
+      "toolCompleted": "ツールの実行が完了しました。",
+      "approval": "確認リクエスト",
+      "action": "アクション: {value}",
+      "batchActions": "一括アクション: {count} 件",
+      "error": "エラー: {value}",
+      "context": "文脈: {value}",
+      "tool": "ツール {name}",
+      "codingPrompt": "コーディングプロンプト",
+      "options": "選択肢",
+      "noContent": "内容なし"
+    }
+  }
+}

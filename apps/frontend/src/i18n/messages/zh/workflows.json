@@ -1,0 +1,286 @@
+{
+  "shared": {
+    "untitled": "无标题工作流",
+    "currentUser": "当前用户",
+    "unknownUser": "未知用户",
+    "unassigned": "未分配",
+    "noRole": "无角色",
+    "workflow": "工作流"
+  },
+  "toasts": {
+    "workspaceIncomplete": "工作空间信息不完整。",
+    "createSuccess": "工作流已创建。",
+    "createFailed": "创建工作流失败。",
+    "saveDraftSuccess": "草稿已保存。",
+    "publishSuccess": "工作流已发布。",
+    "saveFailed": "保存工作流失败。",
+    "deleteSuccess": "工作流已删除。",
+    "deleteFailed": "删除工作流失败。"
+  },
+  "page": {
+    "states": {
+      "loading": "正在加载工作流...",
+      "loadFailedTitle": "无法加载工作流",
+      "loadFailedDescription": "当前无法加载工作流列表。"
+    },
+    "header": {
+      "title": "工作流管理",
+      "description": "管理工作流模板，并创建可重复使用的协作流程。",
+      "create": "创建工作流"
+    },
+    "stats": {
+      "total": "工作流总数",
+      "draft": "草稿",
+      "published": "已发布",
+      "active": "使用中"
+    },
+    "list": {
+      "title": "工作流列表",
+      "showAll": "显示全部",
+      "draftOnly": "仅看草稿",
+      "emptyTitle": "还没有工作流",
+      "emptyDescription": "创建你的第一个工作流模板，开始标准化团队协作。",
+      "emptyAction": "创建工作流"
+    },
+    "badges": {
+      "draft": "草稿",
+      "published": "已发布"
+    },
+    "meta": {
+      "nodes": "节点数：{count}",
+      "version": "版本：{value}",
+      "activeRuns": "活跃运行：{count}",
+      "totalRuns": "总运行次数：{count}",
+      "creator": "创建者：{value}",
+      "createdAt": "创建时间：{value}"
+    },
+    "actions": {
+      "viewEdit": "查看或编辑",
+      "settings": "设置",
+      "edit": "编辑",
+      "delete": "删除"
+    },
+    "deleteDialog": {
+      "title": "删除工作流？",
+      "description": "“{name}”删除后无法恢复，现有工作流运行也可能受到影响。",
+      "fallbackDescription": "此操作无法撤销。",
+      "confirm": "删除工作流",
+      "deleting": "删除中..."
+    }
+  },
+  "setup": {
+    "title": "创建工作流",
+    "nameLabel": "工作流名称 *",
+    "namePlaceholder": "输入工作流名称...",
+    "descriptionLabel": "描述",
+    "descriptionPlaceholder": "输入工作流描述...",
+    "continue": "继续编辑",
+    "nameRequired": "请输入工作流名称。"
+  },
+  "toolbar": {
+    "draftBadge": "草稿",
+    "viewJson": "查看 JSON",
+    "viewJsonTitle": "查看工作流 JSON",
+    "export": "导出",
+    "exportTitle": "导出工作流",
+    "import": "导入",
+    "importTitle": "导入工作流",
+    "saveDraft": "保存草稿",
+    "saveDraftTitle": "另存为草稿",
+    "publish": "发布工作流",
+    "publishTitle": "发布工作流",
+    "saveAndPublish": "保存并发布",
+    "saveAndPublishTitle": "保存并发布",
+    "saving": "处理中...",
+    "back": "返回",
+    "backTitle": "返回列表"
+  },
+  "editor": {
+    "validation": {
+      "title": "工作流校验失败",
+      "close": "关闭",
+      "summary": "工作流校验失败：{errors}",
+      "atLeastOneNode": "工作流至少需要一个节点。",
+      "missingAssignees": "{count} 个节点仍未分配负责人。",
+      "missingStart": "工作流至少需要一个起始节点。",
+      "missingEnd": "工作流至少需要一个结束节点。",
+      "isolatedNodes": "{count} 个孤立节点仍需连接或删除。"
+    },
+    "jsonModal": {
+      "title": "工作流 JSON",
+      "close": "关闭"
+    }
+  },
+  "json": {
+    "exportSuccessTitle": "导出完成",
+    "exportSuccessDescription": "工作流已导出为 JSON 文件。",
+    "exportFailedTitle": "导出失败",
+    "exportFailedDescription": "导出工作流时发生错误。",
+    "importSuccessTitle": "导入完成",
+    "importSuccessDescription": "工作流“{name}”已导入。",
+    "importFailedTitle": "导入失败",
+    "importFailedDescription": "该文件不包含有效的工作流 JSON。",
+    "invalidFormat": "无效的工作流 JSON 格式。"
+  },
+  "settingsModal": {
+    "title": "工作流设置",
+    "nameLabel": "工作流名称",
+    "namePlaceholder": "输入工作流名称",
+    "descriptionLabel": "描述",
+    "descriptionPlaceholder": "工作流描述（可选）",
+    "visibilityLabel": "可见性",
+    "statusLabel": "状态",
+    "stepsLabel": "步骤",
+    "versionLabel": "版本",
+    "statuses": {
+      "draft": "草稿",
+      "published": "已发布"
+    },
+    "visibility": {
+      "private": "私密",
+      "public": "公开",
+      "teamReadonly": "团队只读",
+      "teamEditable": "团队可编辑"
+    },
+    "actions": {
+      "publish": "发布工作流",
+      "save": "保存"
+    },
+    "toasts": {
+      "saved": "工作流设置已保存。",
+      "saveFailed": "保存工作流设置失败。",
+      "publishNeedSteps": "请先补充工作流步骤，再进行发布。",
+      "published": "工作流已发布。",
+      "publishFailed": "发布工作流失败。"
+    }
+  },
+  "docCards": {
+    "title": "工作流文档",
+    "subtitle": "把交接资料包、评审资料包和发布检查清单直接挂在工作流模板上，复用时也不会丢失上下文。",
+    "created": "工作流文档已创建。",
+    "createFailed": "创建工作流文档失败。"
+  },
+  "nodeDetails": {
+    "title": "节点详情",
+    "nodeFallback": "节点",
+    "assigneeLabel": "负责人",
+    "assigneePlaceholder": "输入 @ 提及负责人",
+    "descriptionLabel": "描述",
+    "descriptionPlaceholder": "描述这个节点...",
+    "estimatedHoursLabel": "预估时长",
+    "estimatedHoursPlaceholder": "例如：8",
+    "estimatedHoursUnit": "预估：{value} 小时"
+  },
+  "node": {
+    "status": "状态：{status}",
+    "hasDetails": "包含详情"
+  },
+  "nodePanel": {
+    "expand": "展开节点面板",
+    "collapse": "折叠节点面板",
+    "title": "节点类型",
+    "manage": "管理节点类型",
+    "defaults": {
+      "product": "产品经理",
+      "ui": "UI 设计师",
+      "frontend": "前端工程师",
+      "backend": "后端工程师",
+      "test": "QA 工程师",
+      "devops": "DevOps"
+    }
+  },
+  "nodeSettings": {
+    "title": "管理节点类型",
+    "existingNodes": "现有节点",
+    "noCustomNodes": "还没有自定义节点。",
+    "actions": {
+      "edit": "编辑",
+      "delete": "删除",
+      "import": "导入",
+      "export": "导出",
+      "sync": "同步到后端",
+      "cancelEdit": "取消编辑",
+      "saveEdit": "保存更改",
+      "add": "添加节点"
+    },
+    "form": {
+      "createTitle": "创建节点",
+      "editTitle": "编辑节点",
+      "nameLabel": "名称 *",
+      "namePlaceholder": "例如：产品经理",
+      "roleLabel": "角色 *",
+      "rolePlaceholder": "例如：product",
+      "iconLabel": "图标 *（emoji 或图片 URL）",
+      "iconPlaceholder": "例如：📋 或 https://example.com/icon.png",
+      "colorLabel": "颜色 *",
+      "ownerLabel": "负责人 *",
+      "ownerLoading": "正在加载团队成员...",
+      "ownerPlaceholder": "选择负责人",
+      "ownerMissing": "未找到团队成员",
+      "tagsLabel": "标签（逗号分隔）",
+      "tagsPlaceholder": "例如：frontend,development"
+    },
+    "deleteDialog": {
+      "title": "删除节点类型？",
+      "description": "“{name}”将被删除，之后可能需要回头检查现有的本地工作流模板。",
+      "fallbackName": "这个节点",
+      "confirm": "删除节点"
+    },
+    "toasts": {
+      "requiredFields": "请填写所有必填项。",
+      "syncTodo": "同步到后端的功能尚未实现。",
+      "importTodo": "节点导入功能尚未实现。",
+      "exportTodo": "节点导出功能尚未实现。"
+    }
+  },
+  "mention": {
+    "placeholder": "输入 @ 选择负责人...",
+    "loading": "加载中...",
+    "noMatching": "未找到匹配的成员",
+    "noMembers": "没有可用的团队成员",
+    "createCustom": "创建自定义负责人：{value}"
+  },
+  "teamMemberSelect": {
+    "placeholder": "选择负责人...",
+    "searchPlaceholder": "搜索成员...",
+    "noMatching": "未找到匹配的成员",
+    "customLabel": "添加：{value}",
+    "customHint": "自定义负责人"
+  },
+  "colors": {
+    "blue": "蓝色",
+    "purple": "紫色",
+    "green": "绿色",
+    "orange": "橙色",
+    "red": "红色",
+    "gray": "灰色",
+    "cyan": "青色",
+    "pink": "粉色",
+    "yellow": "黄色",
+    "selected": "已选：{value}"
+  },
+  "runtime": {
+    "onlyCurrentOwner": "只有当前节点负责人可以执行此操作。",
+    "statusSyncFailed": "同步节点状态失败。",
+    "advanceFailed": "推进工作流运行失败。",
+    "revertFailed": "回退工作流运行失败。"
+  },
+  "instance": {
+    "title": "创建工作流实例",
+    "steps": "包含 {count} 个步骤",
+    "fields": {
+      "title": "事项标题 *",
+      "titlePlaceholder": "输入事项标题...",
+      "description": "描述",
+      "descriptionPlaceholder": "输入详细描述...",
+      "dueDate": "截止日期"
+    },
+    "validation": {
+      "titleRequired": "请输入标题。"
+    },
+    "actions": {
+      "creating": "创建中...",
+      "submit": "创建工作流实例"
+    }
+  }
+}

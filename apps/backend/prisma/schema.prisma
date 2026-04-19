@@ -1,0 +1,790 @@
+generator client {
+  provider = "prisma-client"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/// MARK: - 用户模型
+model User {
+  id         String       @id @default(uuid())
+  email      String       @unique
+  name       String?
+  avatarUrl  String?      @map("avatar_url")
+  createdAt  DateTime     @default(now()) @map("created_at")
+  updatedAt  DateTime     @updatedAt @map("updated_at")
+  teams      TeamMember[]
+  workspaces Workspace[]
+
+  @@map("users")
+}
+
+/// MARK: - 团队模型
+model Team {
+  id        String       @id @default(uuid())
+  name      String
+  avatarUrl String?      @map("avatar_url")
+  createdAt DateTime     @default(now()) @map("created_at")
+  updatedAt DateTime     @updatedAt @map("updated_at")
+  members   TeamMember[]
+  workspace Workspace?
+
+  @@map("teams")
+}
+
+/// MARK: - 团队成员模型
+model TeamMember {
+  id               String     @id @default(uuid())
+  teamId           String     @map("team_id")
+  userId           String     @map("user_id")
+  role             Role       @default(MEMBER)
+  createdAt        DateTime   @default(now()) @map("created_at")
+  updatedAt        DateTime   @updatedAt @map("updated_at")
+  comments         Comment[]
+  team             Team       @relation(fields: [teamId], references: [id])
+  user             User       @relation(fields: [userId], references: [id])
+  createdWorkflows Workflow[] @relation("CreatedWorkflows")
+
+  Issue           Issue[]
+  IssueStepRecord IssueStepRecord[]
+  IssueActivity   IssueActivity[]
+  Task            Task[]
+  createdIssues   Issue[]           @relation("CreatedIssues")
+  assignedIssues  IssueAssignee[]
+  ownedProjects   Project[]         @relation("ProjectOwner")
+  createdDocs     Doc[]             @relation("CreatedDocs")
+  ownedDocs       Doc[]             @relation("OwnedDocs")
+  docRevisions    DocRevision[]     @relation("AuthoredDocRevisions")
+
+  @@unique([teamId, userId])
+  @@map("team_members")
+}
+
+/// MARK: - 工作空间模型
+model Workspace {
+  id          String        @id @default(uuid())
+  name        String
+  type        WorkspaceType
+  userId      String?       @map("user_id")
+  teamId      String?       @unique @map("team_id")
+  issuePrefix String?       @map("issue_prefix") // Issue 编号前缀，如 "SYN"、"BE"
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+  issues      Issue[]
+  projects    Project[]
+  workflows   Workflow[]
+  team        Team?         @relation(fields: [teamId], references: [id])
+  user        User?         @relation(fields: [userId], references: [id])
+  calendar    Calendar?
+  issueStates IssueState[]
+  labels      Label[]
+  docs        Doc[]
+
+  @@map("workspaces")
+}
+
+/// MARK: - 项目模型 (可选层级)
+model Project {
+  id            String           @id @default(uuid())
+  name          String
+  description   String?
+  brief         String?
+  status        ProjectStatus    @default(ACTIVE)
+  phase         String?
+  riskLevel     ProjectRiskLevel @default(LOW) @map("risk_level")
+  workspaceId   String           @map("workspace_id")
+  createdAt     DateTime         @default(now()) @map("created_at")
+  updatedAt     DateTime         @updatedAt @map("updated_at")
+  creatorId     String           @map("creator_id")
+  ownerMemberId String           @map("owner_member_id")
+  lastSyncAt    DateTime?        @map("last_sync_at")
+  visibility    VisibilityType   @default(PRIVATE)
+  issues        Issue[]
+  docs          Doc[]
+  owner         TeamMember       @relation("ProjectOwner", fields: [ownerMemberId], references: [id])
+  workspace     Workspace        @relation(fields: [workspaceId], references: [id])
+
+  @@index([workspaceId])
+  @@index([ownerMemberId])
+  @@index([status])
+  @@map("projects")
+}
+
+model Workflow {
+  id                String         @id @default(uuid())
+  name              String
+  workspaceId       String         @map("workspace_id")
+  createdAt         DateTime       @default(now()) @map("created_at")
+  updatedAt         DateTime       @updatedAt @map("updated_at")
+  status            WorkflowStatus @default(DRAFT)
+  creatorId         String         @map("creator_id")
+  visibility        VisibilityType @default(PRIVATE)
+  assigneeMap       Json?
+  json              Json?
+  totalSteps        Int            @default(0)
+  currentStepIndex  Int            @default(0)
+  currentStepStatus IssueStatus    @default(TODO)
+  version           String         @default("v1")
+  isSystemTemplate  Boolean        @default(false) // 是否为系统级模板
+
+  // issues    Issue[]
+  creator   TeamMember @relation("CreatedWorkflows", fields: [creatorId], references: [id])
+  workspace Workspace  @relation(fields: [workspaceId], references: [id])
+  docs      Doc[]
+
+  @@map("workflows")
+}
+
+model Issue {
+  id               String    @id @default(uuid())
+  title            String
+  description      String?
+  workspaceId      String    @map("workspace_id")
+  workflowId       String?   @map("workflow_id")
+  directAssigneeId String?   @map("direct_assignee_id")
+  creatorId        String    @map("creator_id")
+  createdAt        DateTime  @default(now()) @map("created_at")
+  updatedAt        DateTime  @updatedAt @map("updated_at")
+  dueDate          DateTime? @map("due_date")
+
+  // P0 新增字段
+  stateId         String?        @map("state_id") // 关联 IssueState，主状态
+  projectId       String?        @map("project_id") // 可选归属项目
+  visibility      VisibilityType @default(TEAM_EDITABLE) // 可见性控制
+  creatorMemberId String?        @map("creator_member_id") // 创建者 TeamMember ID
+  key             String?        @unique // Issue 编号，如 "SYN-123"
+  sequence        Int? // workspace 内自增序号
+
+  // Workflow 相关字段 (保留，用于 WORKFLOW 类型)
+  totalSteps        Int           @default(0)
+  currentStepId     String?       @map("current_step_id") // 用于快速标识当前步骤（配合 snapshot 解析）
+  currentStepIndex  Int           @default(0)
+  currentStepStatus IssueStatus   @default(TODO)
+  workflowSnapshot  Json?
+  priority          IssuePriority @default(NORMAL)
+  issueType         IssueType     @default(NORMAL)
+
+  // AI 编码 prompt 落点：assemble_coding_prompt + attach_coding_prompt_to_issue
+  aiHandoffPrompt          String?   @map("ai_handoff_prompt")
+  aiHandoffPromptUpdatedAt DateTime? @map("ai_handoff_prompt_updated_at")
+
+  // Relations
+  comments        Comment[]
+  workspace       Workspace         @relation(fields: [workspaceId], references: [id])
+  TeamMember      TeamMember?       @relation(fields: [teamMemberId], references: [id])
+  teamMemberId    String?
+  IssueStepRecord IssueStepRecord[]
+  IssueActivity   IssueActivity[]
+  state           IssueState?       @relation(fields: [stateId], references: [id])
+  project         Project?          @relation(fields: [projectId], references: [id])
+  creatorMember   TeamMember?       @relation("CreatedIssues", fields: [creatorMemberId], references: [id])
+  assignees       IssueAssignee[]
+  labels          IssueLabel[]
+  docs            Doc[]
+
+  @@index([workspaceId])
+  @@index([stateId])
+  @@index([projectId])
+  @@index([creatorMemberId])
+  @@map("issues")
+}
+
+model Doc {
+  id               String         @id @default(uuid())
+  workspaceId      String         @map("workspace_id")
+  creatorMemberId  String         @map("creator_member_id")
+  ownerMemberId    String         @map("owner_member_id")
+  title            String
+  description      String?
+  type             DocType
+  status           DocStatus      @default(ACTIVE)
+  kind             DocKind        @default(GENERAL)
+  templateKey      String?        @map("template_key")
+  visibility       VisibilityType @default(PRIVATE)
+  parentId         String?        @map("parent_id")
+  projectId        String?        @map("project_id")
+  issueId          String?        @map("issue_id")
+  workflowId       String?        @map("workflow_id")
+  icon             String?
+  coverImage       String?        @map("cover_image")
+  sortOrder        Int            @default(0) @map("sort_order")
+  isArchived       Boolean        @default(false) @map("is_archived")
+  isDeleted        Boolean        @default(false) @map("is_deleted")
+  latestRevisionId String?        @unique @map("latest_revision_id")
+  createdAt        DateTime       @default(now()) @map("created_at")
+  updatedAt        DateTime       @updatedAt @map("updated_at")
+  lastEditedAt     DateTime       @default(now()) @map("last_edited_at")
+
+  workspace      Workspace     @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  creatorMember  TeamMember    @relation("CreatedDocs", fields: [creatorMemberId], references: [id])
+  ownerMember    TeamMember    @relation("OwnedDocs", fields: [ownerMemberId], references: [id])
+  parent         Doc?          @relation("DocHierarchy", fields: [parentId], references: [id], onDelete: SetNull)
+  children       Doc[]         @relation("DocHierarchy")
+  project        Project?      @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  issue          Issue?        @relation(fields: [issueId], references: [id], onDelete: SetNull)
+  workflow       Workflow?     @relation(fields: [workflowId], references: [id], onDelete: SetNull)
+  revisions      DocRevision[] @relation("DocRevisions")
+  latestRevision DocRevision?  @relation("LatestDocRevision", fields: [latestRevisionId], references: [id], onDelete: SetNull)
+
+  @@index([workspaceId])
+  @@index([workspaceId, isArchived])
+  @@index([workspaceId, parentId])
+  @@index([workspaceId, kind])
+  @@index([projectId])
+  @@index([issueId])
+  @@index([workflowId])
+  @@index([creatorMemberId])
+  @@index([ownerMemberId])
+  @@map("docs")
+}
+
+model DocRevision {
+  id               String          @id @default(uuid())
+  docId            String          @map("doc_id")
+  baseRevisionId   String?         @map("base_revision_id")
+  authorMemberId   String          @map("author_member_id")
+  clientMutationId String          @map("client_mutation_id")
+  contentSnapshot  Json            @map("content_snapshot")
+  metadataSnapshot Json?           @map("metadata_snapshot")
+  changeSource     DocChangeSource @default(EDITOR) @map("change_source")
+  createdAt        DateTime        @default(now()) @map("created_at")
+
+  doc           Doc           @relation("DocRevisions", fields: [docId], references: [id], onDelete: Cascade)
+  baseRevision  DocRevision?  @relation("DocRevisionLineage", fields: [baseRevisionId], references: [id], onDelete: SetNull)
+  nextRevisions DocRevision[] @relation("DocRevisionLineage")
+  authorMember  TeamMember    @relation("AuthoredDocRevisions", fields: [authorMemberId], references: [id])
+  latestForDoc  Doc?          @relation("LatestDocRevision")
+
+  @@unique([docId, clientMutationId])
+  @@index([docId, createdAt])
+  @@index([authorMemberId])
+  @@map("doc_revisions")
+}
+
+model InboxItem {
+  id             String    @id @default(uuid())
+  workspaceId    String    @map("workspace_id")
+  targetUserId   String    @map("target_user_id")
+  type           String
+  bucket         String
+  sourceType     String    @map("source_type")
+  sourceId       String    @map("source_id")
+  projectId      String?   @map("project_id")
+  projectName    String?   @map("project_name")
+  issueId        String?   @map("issue_id")
+  issueKey       String?   @map("issue_key")
+  workflowRunId  String?   @map("workflow_run_id")
+  docId          String?   @map("doc_id")
+  actorUserId    String?   @map("actor_user_id")
+  title          String
+  summary        String?
+  priority       String    @default("normal")
+  requiresAction Boolean   @default(false) @map("requires_action")
+  actionLabel    String?   @map("action_label")
+  status         String    @default("unread")
+  occurredAt     DateTime  @map("occurred_at")
+  readAt         DateTime? @map("read_at")
+  doneAt         DateTime? @map("done_at")
+  dismissedAt    DateTime? @map("dismissed_at")
+  snoozedUntil   DateTime? @map("snoozed_until")
+  dedupeKey      String    @map("dedupe_key")
+  metadata       Json?
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
+
+  @@unique([workspaceId, targetUserId, dedupeKey])
+  @@index([workspaceId, targetUserId, status])
+  @@index([workspaceId, targetUserId, bucket])
+  @@index([workspaceId, targetUserId, occurredAt])
+  @@map("inbox_items")
+}
+
+model AiExecutionRecord {
+  id             String                 @id @default(uuid())
+  workspaceId    String                 @map("workspace_id")
+  actorUserId    String                 @map("actor_user_id")
+  actionKey      String                 @map("action_key")
+  status         AiExecutionStatus
+  approvalMode   AiApprovalMode         @map("approval_mode")
+  targetType     AiExecutionTargetType? @map("target_type")
+  targetId       String?                @map("target_id")
+  summary        String?
+  conversationId String?                @map("conversation_id")
+  input          Json?                  @map("input")
+  result         Json?                  @map("result")
+  error          Json?                  @map("error")
+  createdAt      DateTime               @default(now()) @map("created_at")
+  completedAt    DateTime?              @map("completed_at")
+
+  @@index([workspaceId, createdAt])
+  @@index([workspaceId, actionKey])
+  @@index([actorUserId, createdAt])
+  @@map("ai_execution_records")
+}
+
+/// MARK: - AI Agent V1: Thread / Run / Approval
+///
+/// 这一组模型支撑 Synaply 的 AI agent runtime（Next.js）：
+/// - AiThread        线程主体，记录会话与起点 surface
+/// - AiThreadContextPin 一条线程可同时 pin 多个对象（project/issue/doc 等）
+/// - AiMessage       消息（user/assistant/tool/system），parts 为富结构 JSON
+/// - AiRun           一次 user message 触发的 agent 执行
+/// - AiRunStep       run 内部每次 LLM 调用 / tool 调用的追踪记录
+/// - AiPendingApproval CONFIRM 类动作的审批状态机
+///
+/// 与 AiExecutionRecord 一样，跨模块 FK 在 SQL 层维护，不在 Prisma 这里
+/// 声明 Workspace/User 的反向 relation，避免动到既有模型。
+model AiThread {
+  id                String         @id @default(uuid())
+  workspaceId       String         @map("workspace_id")
+  creatorUserId     String         @map("creator_user_id")
+  title             String?
+  status            AiThreadStatus @default(ACTIVE)
+  originSurfaceType AiSurfaceType? @map("origin_surface_type")
+  originSurfaceId   String?        @map("origin_surface_id")
+  createdAt         DateTime       @default(now()) @map("created_at")
+  updatedAt         DateTime       @updatedAt @map("updated_at")
+  lastMessageAt     DateTime?      @map("last_message_at")
+
+  pins      AiThreadContextPin[]
+  messages  AiMessage[]
+  runs      AiRun[]
+  approvals AiPendingApproval[]
+
+  @@index([workspaceId, creatorUserId, lastMessageAt])
+  @@index([workspaceId, status])
+  @@map("ai_threads")
+}
+
+model AiThreadContextPin {
+  id             String        @id @default(uuid())
+  threadId       String        @map("thread_id")
+  surfaceType    AiSurfaceType @map("surface_type")
+  surfaceId      String        @map("surface_id")
+  source         AiPinSource   @default(USER)
+  pinnedByUserId String?       @map("pinned_by_user_id")
+  pinnedAt       DateTime      @default(now()) @map("pinned_at")
+
+  thread AiThread @relation(fields: [threadId], references: [id], onDelete: Cascade)
+
+  @@unique([threadId, surfaceType, surfaceId])
+  @@index([threadId])
+  @@map("ai_thread_context_pins")
+}
+
+model AiMessage {
+  id        String        @id @default(uuid())
+  threadId  String        @map("thread_id")
+  runId     String?       @map("run_id")
+  role      AiMessageRole
+  parts     Json
+  createdAt DateTime      @default(now()) @map("created_at")
+
+  thread AiThread @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  run    AiRun?   @relation(fields: [runId], references: [id], onDelete: SetNull)
+
+  @@index([threadId, createdAt])
+  @@index([runId])
+  @@map("ai_messages")
+}
+
+model AiRun {
+  id                String      @id @default(uuid())
+  threadId          String      @map("thread_id")
+  status            AiRunStatus @default(RUNNING)
+  model             String
+  stepCount         Int         @default(0) @map("step_count")
+  maxSteps          Int         @default(10) @map("max_steps")
+  tokenBudget       Int         @default(60000) @map("token_budget")
+  tokensUsed        Int         @default(0) @map("tokens_used")
+  startedAt         DateTime    @default(now()) @map("started_at")
+  finishedAt        DateTime?   @map("finished_at")
+  lastError         Json?       @map("last_error")
+  pendingApprovalId String?     @map("pending_approval_id")
+
+  thread    AiThread            @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  steps     AiRunStep[]
+  messages  AiMessage[]
+  approvals AiPendingApproval[]
+
+  @@index([threadId, startedAt])
+  @@index([status])
+  @@map("ai_runs")
+}
+
+model AiRunStep {
+  id               String        @id @default(uuid())
+  runId            String        @map("run_id")
+  stepIndex        Int           @map("step_index")
+  kind             AiRunStepKind
+  model            String?
+  toolName         String?       @map("tool_name")
+  toolInput        Json?         @map("tool_input")
+  toolOutput       Json?         @map("tool_output")
+  promptSnapshot   Json?         @map("prompt_snapshot")
+  responseSnapshot Json?         @map("response_snapshot")
+  tokensIn         Int?          @map("tokens_in")
+  tokensOut        Int?          @map("tokens_out")
+  latencyMs        Int?          @map("latency_ms")
+  error            Json?
+  createdAt        DateTime      @default(now()) @map("created_at")
+
+  run AiRun @relation(fields: [runId], references: [id], onDelete: Cascade)
+
+  @@index([runId, stepIndex])
+  @@map("ai_run_steps")
+}
+
+model AiPendingApproval {
+  id               String           @id @default(uuid())
+  threadId         String           @map("thread_id")
+  runId            String           @map("run_id")
+  actionKey        String           @map("action_key")
+  summary          String?
+  input            Json?
+  previewResult    Json?            @map("preview_result")
+  status           AiApprovalStatus @default(PENDING)
+  createdAt        DateTime         @default(now()) @map("created_at")
+  resolvedAt       DateTime?        @map("resolved_at")
+  resolvedByUserId String?          @map("resolved_by_user_id")
+  expiresAt        DateTime         @map("expires_at")
+
+  thread AiThread @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  run    AiRun    @relation(fields: [runId], references: [id], onDelete: Cascade)
+
+  @@index([status, expiresAt])
+  @@index([threadId, status])
+  @@map("ai_pending_approvals")
+}
+
+enum AiThreadStatus {
+  ACTIVE
+  ARCHIVED
+}
+
+enum AiSurfaceType {
+  WORKSPACE
+  PROJECT
+  ISSUE
+  WORKFLOW
+  DOC
+}
+
+enum AiPinSource {
+  ORIGIN
+  USER
+  AGENT
+}
+
+enum AiMessageRole {
+  USER
+  ASSISTANT
+  TOOL
+  SYSTEM
+}
+
+enum AiRunStatus {
+  RUNNING
+  WAITING_APPROVAL
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum AiRunStepKind {
+  LLM_CALL
+  TOOL_CALL
+}
+
+enum AiApprovalStatus {
+  PENDING
+  CONFIRMED
+  REJECTED
+  EXPIRED
+}
+
+/// MARK: - Issue 状态配置模型 (Linear 风格动态状态)
+model IssueState {
+  id          String             @id @default(uuid())
+  workspaceId String             @map("workspace_id")
+  name        String // 状态名称，如 "待处理"、"进行中"
+  color       String             @default("#6B7280") // 状态颜色
+  category    IssueStateCategory @default(TODO) // 状态分类，用于聚合统计
+  position    Int                @default(0) // 排序位置
+  isDefault   Boolean            @default(false) @map("is_default") // 是否为新建 Issue 默认状态
+  isArchived  Boolean            @default(false) @map("is_archived") // 软删除标记
+  createdAt   DateTime           @default(now()) @map("created_at")
+  updatedAt   DateTime           @updatedAt @map("updated_at")
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id])
+  issues    Issue[]
+
+  @@unique([workspaceId, name])
+  @@index([workspaceId])
+  @@map("issue_states")
+}
+
+/// MARK: - 标签模型
+model Label {
+  id          String   @id @default(uuid())
+  workspaceId String   @map("workspace_id")
+  name        String
+  color       String   @default("#6B7280")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  workspace Workspace    @relation(fields: [workspaceId], references: [id])
+  issues    IssueLabel[]
+
+  @@unique([workspaceId, name])
+  @@index([workspaceId])
+  @@map("labels")
+}
+
+/// MARK: - Issue 标签关联表
+model IssueLabel {
+  id        String   @id @default(uuid())
+  issueId   String   @map("issue_id")
+  labelId   String   @map("label_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  issue Issue @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  label Label @relation(fields: [labelId], references: [id], onDelete: Cascade)
+
+  @@unique([issueId, labelId])
+  @@map("issue_labels")
+}
+
+/// MARK: - Issue 分配人关联表
+model IssueAssignee {
+  id         String   @id @default(uuid())
+  issueId    String   @map("issue_id")
+  memberId   String   @map("member_id")
+  assignedAt DateTime @default(now()) @map("assigned_at")
+
+  issue  Issue      @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  member TeamMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  @@unique([issueId, memberId])
+  @@map("issue_assignees")
+}
+
+// NOTE: 用来记录issue step的信息
+model IssueStepRecord {
+  id          String     @id @default(uuid())
+  issueId     String     @map("issue_id")
+  stepId      String // 来自 snapshot JSON 中的某个节点 ID
+  stepName    String
+  index       Int
+  resultText  String?
+  attachments Json? // 存图片、文件、link 等
+  assigneeId  String     @map("assignee_id")
+  createdAt   DateTime   @default(now()) @map("created_at")
+  issue       Issue      @relation(fields: [issueId], references: [id])
+  assignee    TeamMember @relation(fields: [assigneeId], references: [id])
+}
+
+// NOTE: 用来记录issue的操作历史，比如：
+// 1. 创建issue
+// 2. 更新issue
+// 3. 删除issue
+// 4. 更新issue的step
+// 5. 更新issue的assignee
+model IssueActivity {
+  id        String   @id @default(uuid())
+  issueId   String   @map("issue_id")
+  actorId   String   @map("actor_id") // 操作人（TeamMember）
+  action    String   @map("action") // 操作描述（可预设或自由填写）
+  metadata  Json?    @map("metadata") // 附带数据（如字段变更前后值）
+  createdAt DateTime @default(now()) @map("created_at")
+
+  issue Issue      @relation(fields: [issueId], references: [id])
+  actor TeamMember @relation(fields: [actorId], references: [id])
+
+  @@index([issueId])
+  @@index([actorId])
+  @@map("issue_activities")
+}
+
+model Comment {
+  id          String     @id @default(uuid())
+  content     String
+  issueId     String     @map("issue_id")
+  workspaceId String     @map("workspace_id")
+  authorId    String     @map("author_id")
+  parentId    String?    @map("parent_id")
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+  author      TeamMember @relation(fields: [authorId], references: [id])
+  issue       Issue      @relation(fields: [issueId], references: [id])
+
+  @@map("comments")
+}
+
+/// MARK: - 日历模型
+model Calendar {
+  id          String   @id @default(uuid())
+  name        String
+  workspaceId String   @unique @map("workspace_id")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  tasks     Task[]
+  workspace Workspace @relation(fields: [workspaceId], references: [id])
+
+  @@map("calendars")
+}
+
+/// MARK: - 任务模型
+model Task {
+  id          String     @id @default(uuid())
+  title       String
+  description String?
+  calendarId  String     @map("calendar_id")
+  dueDate     DateTime?
+  status      TaskStatus @default(PENDING)
+  createdById String?    @map("created_by_id")
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+
+  calendar  Calendar    @relation(fields: [calendarId], references: [id])
+  createdBy TeamMember? @relation(fields: [createdById], references: [id])
+
+  @@map("tasks")
+}
+
+/// Task 状态枚举
+enum TaskStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum AiExecutionStatus {
+  PREVIEW
+  SUCCEEDED
+  FAILED
+  BLOCKED
+}
+
+enum AiApprovalMode {
+  AUTO
+  CONFIRM
+}
+
+enum AiExecutionTargetType {
+  WORKSPACE
+  PROJECT
+  ISSUE
+  WORKFLOW
+  DOC
+}
+
+/// 用户角色枚举
+enum Role {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+/// 工作空间类型枚举
+enum WorkspaceType {
+  PERSONAL
+  TEAM
+}
+
+/// 工作流状态枚举
+enum WorkflowStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum DocType {
+  DOCUMENT
+  FOLDER
+}
+
+enum DocStatus {
+  ACTIVE
+  ARCHIVED
+}
+
+enum DocKind {
+  GENERAL
+  PROJECT_BRIEF
+  DECISION_LOG
+  REVIEW_PACKET
+  HANDOFF_PACKET
+  RELEASE_CHECKLIST
+}
+
+enum DocChangeSource {
+  CREATE
+  EDITOR
+  META
+  SYSTEM
+  IMPORT
+}
+
+enum ProjectStatus {
+  PLANNING
+  ACTIVE
+  BLOCKED
+  SHIPPING
+  DONE
+  ARCHIVED
+}
+
+enum ProjectRiskLevel {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+/// Issue 状态枚举 (保留用于 Workflow Step 状态)
+enum IssueStatus {
+  TODO
+  IN_PROGRESS
+  AMOST_DONE
+  BLOCKED
+  DONE
+}
+
+/// Issue 状态分类枚举 (用于 IssueState 的分类聚合)
+enum IssueStateCategory {
+  BACKLOG
+  TODO
+  IN_PROGRESS
+  DONE
+  CANCELED
+}
+
+/// Issue 优先级枚举
+enum IssuePriority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}
+
+/// Issue 类型枚举
+enum IssueType {
+  NORMAL
+  WORKFLOW
+}
+
+/// 内容可见性类型枚举
+/// 权限控制说明：
+/// - PRIVATE: 仅创建者可见和编辑
+/// - TEAM_READONLY: 团队成员可查看，但只有创建者可编辑
+/// - TEAM_EDITABLE: 团队成员可查看和编辑
+/// - PUBLIC: 完全公开（为未来扩展预留）
+enum VisibilityType {
+  PRIVATE
+  TEAM_READONLY
+  TEAM_EDITABLE
+  PUBLIC
+}

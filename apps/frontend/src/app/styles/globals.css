@@ -1,0 +1,30 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "./colors.css";
+@import "./components.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@keyframes loading-dot {
+  0%,
+  80%,
+  100% {
+    opacity: 0.28;
+    transform: translateY(0);
+  }
+
+  40% {
+    opacity: 1;
+    transform: translateY(-1px);
+  }
+}

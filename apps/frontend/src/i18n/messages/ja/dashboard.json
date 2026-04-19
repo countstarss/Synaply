@@ -1,0 +1,23 @@
+{
+  "welcome": "おかえりなさい！",
+  "subtitle": "Synaply にログインしました。ここから主要な機能へすぐに移動できます。",
+  "userProfile": "プロフィール",
+  "userProfileDesc": "個人情報を確認・編集する",
+  "securitySettings": "セキュリティ設定",
+  "securitySettingsDesc": "アカウントのセキュリティオプションを管理する",
+  "notifications": "通知センター",
+  "notificationsDesc": "最新のシステム通知を確認する",
+  "activityStats": "アクティビティ統計",
+  "activityStatsDesc": "利用状況の統計を見る",
+  "quickActions": "クイックアクション",
+  "systemSettings": "システム設定",
+  "systemSettingsDesc": "システム全体の設定を調整する",
+  "goToSettings": "設定へ移動",
+  "returnHome": "ホームに戻る",
+  "returnHomeDesc": "メインのアプリ画面に戻る",
+  "goToHome": "ホームへ移動",
+  "active": "稼働中",
+  "security": "セキュリティ",
+  "newMessages": "新しいメッセージ",
+  "today": "今日"
+}

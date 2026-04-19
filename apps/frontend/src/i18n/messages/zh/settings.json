@@ -1,0 +1,406 @@
+{
+  "navigation": {
+    "previous": "上一项",
+    "next": "下一项"
+  },
+  "general": {
+    "pageTitle": "通用",
+    "description": "账号级偏好设置统一放在这里。侧边栏中的“通用”现在直接映射到这个可滚动页面，而不是拆成多个独立页面。",
+    "sections": {
+      "profile": {
+        "label": "个人资料",
+        "description": "个人信息、头像与身份资料"
+      },
+      "notifications": {
+        "label": "通知",
+        "description": "提醒、摘要和异步协作信号",
+        "placeholderDescription": "这里很适合承载收件箱提醒强度、摘要频率以及跨工具通知偏好。把它保留在通用页里，可以维持一条统一的个人偏好路径。",
+        "highlights": {
+          "digestFrequency": "每日 / 每周异步摘要频率",
+          "reminders": "提及、指派和交接提醒",
+          "bridges": "GitHub / Slack 桥接通知偏好",
+          "quietHours": "免打扰时段与个人注意力阈值"
+        }
+      },
+      "language": {
+        "label": "语言",
+        "description": "选择 Synaply 全局使用的界面语言。",
+        "selectorLabel": "当前语言",
+        "selectorDescription": "会应用到导航、通知和产品文案。"
+      },
+      "appearance": {
+        "label": "外观",
+        "description": "主题、密度与阅读舒适度"
+      }
+    }
+  },
+  "admin": {
+    "pageTitle": "管理",
+    "sections": {
+      "workspace": {
+        "label": "工作空间",
+        "description": "工作空间规则、身份信息与权限边界",
+        "placeholderDescription": "这里适合放置工作空间名称、默认协作规则、跨项目约束和成员可见性。把结构留在这里，等真实字段到位时就不必再拆页面。",
+        "highlights": {
+          "identity": "工作空间身份与命名",
+          "rules": "默认协作规则",
+          "visibility": "跨项目可见性设置",
+          "invites": "角色与邀请策略默认值"
+        }
+      },
+      "teams": {
+        "label": "团队",
+        "description": "团队列表、创建入口与团队设置导航"
+      },
+      "members": {
+        "label": "成员",
+        "description": "成员角色、权限和移除操作"
+      },
+      "aiExecution": {
+        "label": "AI 执行",
+        "description": "AI 动作、确认策略与审计历史"
+      },
+      "security": {
+        "label": "安全",
+        "description": "账号安全、登录策略与审计入口",
+        "placeholderDescription": "安全设置与成员和工作空间规则并列放在这里最自然。等设备会话、登录管理和审计日志接入时，这一块仍然会保持清晰。",
+        "highlights": {
+          "sessions": "会话与设备管理",
+          "confirmations": "敏感操作确认",
+          "audit": "审计日志与访问复查",
+          "permissions": "按角色区分的权限控制"
+        }
+      },
+      "application": {
+        "label": "应用",
+        "description": "客户端、集成与平台行为偏好",
+        "placeholderDescription": "这里预留给桌面端、移动端和第三方连接这类应用级行为设置。把它放在管理页中，会更像团队的运行配置。",
+        "highlights": {
+          "clients": "桌面端与移动端偏好",
+          "services": "已连接服务管理",
+          "health": "集成健康状态与同步状态",
+          "defaults": "工作空间级产品默认值"
+        }
+      },
+      "billing": {
+        "label": "计费",
+        "description": "套餐、发票与席位成本",
+        "placeholderDescription": "计费、套餐详情和席位信息天然属于工作空间管理的一部分，这样未来就不需要再维护一个独立的计费页结构。",
+        "highlights": {
+          "overview": "套餐概览与续费时间",
+          "seats": "席位分配与使用数量",
+          "invoices": "发票接收人与历史记录",
+          "upgrades": "团队增长时的升级路径"
+        }
+      }
+    }
+  },
+  "profile": {
+    "errors": {
+      "updateFailed": "更新个人资料失败。",
+      "bucketMissing": "头像存储桶还不存在。请先运行 Supabase migration，或在 Storage 中创建 avatars 存储桶。",
+      "storageBlocked": "头像上传被 Storage 策略拦截。请确认你已登录，并使用最新代码后重试。",
+      "sessionExpired": "你的会话已过期，请重新登录。",
+      "syncAuthFailed": "同步登录资料失败。"
+    },
+    "validation": {
+      "invalidType": "仅支持 JPG、PNG 和 WebP 格式头像。",
+      "fileTooLarge": "头像文件必须小于 3 MB。"
+    },
+    "toasts": {
+      "uploading": "正在上传 {fileName}...",
+      "saving": "正在保存个人资料变更...",
+      "uploadSuccess": "头像已上传。点击“保存更改”即可应用到个人资料。",
+      "saveSuccess": "个人资料已保存。",
+      "cancelNewAvatar": "已取消新头像。",
+      "undoRemoveAvatar": "已撤销删除头像。",
+      "markRemoveAvatar": "已标记删除头像。点击“保存更改”后生效。"
+    },
+    "states": {
+      "authRequiredTitle": "需要登录",
+      "authRequiredDescription": "请先登录，再上传头像或编辑个人资料。",
+      "loading": "正在加载你的个人资料...",
+      "loadFailedTitle": "个人资料加载失败",
+      "loadFailedDescription": "当前无法读取你的个人资料。"
+    },
+    "avatar": {
+      "title": "头像",
+      "description": "上传一张清晰头像，方便团队成员在评论、聊天和协作视图中识别你。",
+      "recommendation": "通常正方形图片效果最好。",
+      "statusUploading": "头像仍在上传中，请稍候。",
+      "statusUploaded": "头像 {fileName} 已上传。点击“保存更改”即可应用。",
+      "statusMarked": "已标记删除头像，保存后生效。",
+      "statusHint": "选择图片后会立即上传。上传成功后，点击“保存更改”即可应用到个人资料。",
+      "upload": "上传头像",
+      "uploading": "上传中...",
+      "remove": "删除头像",
+      "cancelNew": "取消新头像",
+      "undoRemove": "撤销删除",
+      "alt": "个人头像"
+    },
+    "info": {
+      "title": "基本信息",
+      "description": "你可以在这里修改显示名称。登录邮箱目前保持只读。",
+      "displayNameLabel": "显示名称",
+      "displayNamePlaceholder": "填写一个方便团队识别的名称",
+      "emailLabel": "登录邮箱",
+      "createdAtLabel": "加入时间",
+      "dirty": "你有尚未保存的更改。",
+      "clean": "你的个人资料已经是最新状态。",
+      "save": "保存更改"
+    }
+  },
+  "members": {
+    "noTeam": {
+      "title": "团队成员管理",
+      "description": "该区域仅在团队工作空间内可用。",
+      "body": "请先切换到团队工作空间，再管理成员角色。"
+    },
+    "notOwner": {
+      "title": "需要权限",
+      "description": "只有团队所有者可以管理团队成员。",
+      "body": "如果你需要调整成员角色，请联系团队所有者。"
+    },
+    "list": {
+      "title": "成员列表",
+      "description": "管理团队成员角色与权限。只有团队所有者可以更新角色或移除成员。",
+      "loading": "正在加载团队成员...",
+      "loadFailed": "成员列表加载失败。",
+      "unknownMember": "未知成员",
+      "joinedAt": "加入时间：{value}",
+      "rolePlaceholder": "选择角色",
+      "remove": "移除成员",
+      "selfRestriction": "你不能修改自己的角色，也不能移除自己。",
+      "actionFailed": "成员操作失败。"
+    },
+    "removeDialog": {
+      "title": "移除这位团队成员？",
+      "description": "“{name}”将从当前团队中移除，并失去该团队工作空间内的项目、任务和文档访问权限。",
+      "fallbackName": "该成员",
+      "confirm": "移除成员"
+    },
+    "roles": {
+      "OWNER": "所有者",
+      "ADMIN": "管理员",
+      "MEMBER": "成员"
+    }
+  },
+  "appearance": {
+    "title": "背景光效",
+    "description": "控制全局环境光的颜色与动态。偏好会分别按账号和工作空间存储在本地。",
+    "replayIntro": "重播过场动画",
+    "preview": "实时预览",
+    "modeLabel": "光效模式",
+    "modes": {
+      "glow": {
+        "label": "固定光晕",
+        "description": "柔和光晕停留在固定锚点附近，适合干扰更低的背景。"
+      },
+      "aurora": {
+        "label": "极光",
+        "description": "模拟分层极光帘幕，在开启动态时缓慢漂移。"
+      },
+      "ribbon": {
+        "label": "光带",
+        "description": "更宽的对角光带扫过背景，带来更有能量感的氛围。"
+      },
+      "prism": {
+        "label": "棱镜",
+        "description": "层叠折射色带横切表面，呈现更锐利的技术感。"
+      }
+    },
+    "presetLabel": "颜色预设",
+    "enabledLabel": "启用背景光效",
+    "enabledDescription": "关闭后不再渲染环境光，页面背景会保持纯色。",
+    "animatedLabel": "开启动态",
+    "animatedDescription": "开启后，所选光效会缓慢移动。关闭后会保持静止，并仍然遵循系统的减少动态偏好。",
+    "intensity": "光效强度"
+  },
+  "teams": {
+    "description": "你加入的所有团队都会列在这里。打开任意团队即可进入对应团队设置。所有者和管理员也可以在那里继续编辑团队资料和成员权限。",
+    "create": "创建新团队",
+    "loading": "正在加载团队列表...",
+    "loadFailedTitle": "团队加载失败",
+    "loadFailedDescription": "当前无法读取团队列表。",
+    "emptyTitle": "你还没有团队",
+    "emptyDescription": "在这里创建你的第一个团队，我们会自动创建对应的团队工作空间。",
+    "membersCount": "{count} 名成员",
+    "open": "打开团队设置"
+  },
+  "teamPage": {
+    "errors": {
+      "updateFailed": "更新团队资料失败。",
+      "bucketMissing": "头像存储桶还不存在。请先在 Supabase Storage 中创建 avatars 存储桶。",
+      "storageBlocked": "团队头像上传被 Storage 策略拦截。上传路径已调整为当前策略要求的格式，请刷新后重试。",
+      "sessionExpired": "你的会话已过期，请重新登录。",
+      "uploadFailed": "团队头像上传失败。"
+    },
+    "validation": {
+      "invalidType": "仅支持 JPG、PNG 和 WebP 格式团队头像。",
+      "fileTooLarge": "团队头像必须小于 3 MB。",
+      "nameRequired": "请输入团队名称。",
+      "uploadPending": "头像仍在上传中，请等待上传完成后再保存。",
+      "permissionDenied": "只有团队所有者或管理员可以编辑团队资料。"
+    },
+    "toasts": {
+      "uploading": "正在上传 {fileName}...",
+      "saving": "正在保存团队变更...",
+      "uploadSuccess": "团队头像已上传。点击“保存更改”即可应用。",
+      "saveSuccess": "团队资料已更新。",
+      "cancelNewAvatar": "已取消新头像。",
+      "undoRemoveAvatar": "已撤销删除头像。",
+      "markRemoveAvatar": "已标记删除头像。点击“保存更改”后生效。"
+    },
+    "states": {
+      "missingTeamTitle": "找不到团队",
+      "missingTeamDescription": "缺少 teamId，因此无法加载团队详情。",
+      "authRequiredTitle": "需要登录",
+      "authRequiredDescription": "请先登录，再查看或管理团队详情。",
+      "loading": "正在加载团队详情...",
+      "loadFailedTitle": "团队加载失败",
+      "loadFailedDescription": "当前无法读取团队详情。"
+    },
+    "hero": {
+      "description": "团队资料和身份信息集中在这里。只有团队所有者和管理员可以修改团队名称和头像。"
+    },
+    "permissionBanner": {
+      "message": "你当前的角色是 {role}。你可以查看团队详情，但只有所有者或管理员可以保存更改。"
+    },
+    "onboarding": {
+      "title": "协作启动设置",
+      "description": "新团队最顺畅的起点，是把最初的交接路径说清楚：先邀请相关成员，再创建第一条承载工作的项目和工作流。",
+      "progress": "{completed}/{total} 步已完成",
+      "status": {
+        "done": "已完成",
+        "pending": "待处理"
+      },
+      "steps": {
+        "invite": {
+          "title": "邀请团队成员",
+          "description": "先把核心协作者加入这个团队工作空间。当前成员：{count}。",
+          "action": "邀请成员"
+        },
+        "project": {
+          "title": "创建第一个项目",
+          "description": "通过项目定义团队的范围、负责人和协作上下文。当前项目：{count}。",
+          "action": "创建项目"
+        },
+        "workflow": {
+          "title": "创建第一条工作流",
+          "description": "用共享工作流模板把评审、交接和阻塞状态可视化。当前工作流：{count}。",
+          "action": "创建工作流"
+        }
+      }
+    },
+    "avatar": {
+      "title": "团队头像",
+      "description": "团队头像会显示在工作空间切换、设置以及面向团队的协作视图中。",
+      "recommendation": "通常清晰的品牌标识或团队徽记效果最好。",
+      "statusUploading": "团队头像仍在上传中，请稍候。",
+      "statusUploaded": "团队头像 {fileName} 已上传。点击“保存更改”即可应用。",
+      "statusMarked": "已标记删除头像，保存后生效。",
+      "statusHint": "选择图片后会立即上传。上传成功后，点击“保存更改”即可应用到团队资料。",
+      "upload": "上传头像",
+      "uploading": "上传中...",
+      "remove": "删除头像",
+      "cancelNew": "取消新头像",
+      "undoRemove": "撤销删除"
+    },
+    "info": {
+      "title": "基本信息",
+      "description": "你可以随时重命名团队。创建时间和成员数量当前是只读参考字段。",
+      "nameLabel": "团队名称",
+      "namePlaceholder": "输入团队名称",
+      "createdAtLabel": "创建时间",
+      "membersCountLabel": "成员数",
+      "roleLabel": "你的角色",
+      "readOnly": "该账号当前仅有只读权限。",
+      "dirty": "你有尚未保存的团队更改。",
+      "clean": "团队资料已经是最新状态。",
+      "save": "保存更改",
+      "untitled": "未命名团队"
+    }
+  },
+  "aiExecution": {
+    "title": "AI 执行层",
+    "description": "请先打开一个工作空间，再配置 AI 执行。",
+    "stats": {
+      "total": "可用动作",
+      "auto": "自动执行",
+      "confirm": "需要确认",
+      "unavailable": "当前角色不可用"
+    },
+    "capabilities": {
+      "title": "能力与权限",
+      "description": "这里不是聊天界面，而是 AI 在调用真实系统动作前共享使用的能力层。每个动作都会声明审批模式、目标类型和当前角色可用性，确保所有模型遵循同一套契约。",
+      "workspaceLabel": "工作空间",
+      "roleLabel": "当前角色",
+      "workspaceType": {
+        "TEAM": "团队",
+        "PERSONAL": "个人"
+      },
+      "loading": "正在加载能力列表...",
+      "loadFailed": "能力列表加载失败。"
+    },
+    "badges": {
+      "approval": {
+        "AUTO": "自动执行",
+        "CONFIRM": "需要确认"
+      },
+      "availability": {
+        "available": "当前可用",
+        "requires_target_check": "需要校验目标",
+        "unavailable": "当前角色不可用"
+      },
+      "historyStatus": {
+        "PREVIEW": "预览",
+        "SUCCEEDED": "成功",
+        "FAILED": "失败",
+        "BLOCKED": "阻塞"
+      },
+      "historyApproval": {
+        "AUTO": "自动",
+        "CONFIRM": "确认"
+      },
+      "liveStatus": {
+        "preview": "预览",
+        "succeeded": "成功",
+        "failed": "失败",
+        "blocked": "阻塞"
+      }
+    },
+    "targetTypes": {
+      "WORKSPACE": "工作空间",
+      "PROJECT": "项目",
+      "ISSUE": "事项",
+      "WORKFLOW": "工作流",
+      "DOC": "文档"
+    },
+    "workbench": {
+      "title": "动作工作台",
+      "description": "使用同一套 AI 动作 API 进行预览、确认和执行，确保整条路径都会先被验证。",
+      "actionLabel": "动作",
+      "actionPlaceholder": "选择一个动作",
+      "inputJsonLabel": "输入 JSON",
+      "inputFieldsTitle": "输入字段",
+      "required": "必填",
+      "preview": "预览",
+      "execute": "立即执行",
+      "confirm": "确认并执行",
+      "lastResult": "最新结果",
+      "waitingConfirmation": "等待确认中",
+      "executionFailed": "动作执行失败。",
+      "invalidPayload": "输入内容必须是一个 JSON 对象。",
+      "parseFailed": "解析 JSON 输入失败。",
+      "noSummary": "无摘要"
+    },
+    "history": {
+      "title": "最近执行记录",
+      "description": "每一次预览、成功、失败和阻塞都会记录在审计历史中。",
+      "loading": "正在加载执行历史...",
+      "loadFailed": "执行历史加载失败。",
+      "empty": "还没有执行历史。可以先从左侧工作台做一次预览。",
+      "noSummary": "无摘要"
+    }
+  }
+}

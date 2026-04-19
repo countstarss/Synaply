@@ -1,0 +1,347 @@
+{
+  "status": {
+    "planning": "规划中",
+    "active": "进行中",
+    "blocked": "阻塞",
+    "shipping": "发布中",
+    "done": "已完成",
+    "archived": "已归档"
+  },
+  "risk": {
+    "low": "低风险",
+    "medium": "中风险",
+    "high": "高风险",
+    "critical": "严重风险"
+  },
+  "visibility": {
+    "private": {
+      "label": "私密",
+      "description": "更适合个人工作区。目前资源级权限还不会完全根据可见性严格限制。"
+    },
+    "teamReadonly": {
+      "label": "团队只读",
+      "description": "团队成员可以查看这个项目，写权限仍由 OWNER 和 ADMIN 角色控制。"
+    },
+    "teamEditable": {
+      "label": "团队可编辑",
+      "description": "更适合协作型项目。后端写权限仍由工作区成员角色决定。"
+    },
+    "public": {
+      "label": "公开",
+      "description": "用于对外共享上下文与状态的项目视图。"
+    }
+  },
+  "overview": {
+    "title": {
+      "personal": "我的项目",
+      "team": "团队项目"
+    },
+    "summary": "共 {total} 个项目，其中 {linked} 个有活跃事项，{empty} 个没有活跃事项，另有 {unassigned} 条活跃事项尚未归属项目",
+    "create": "创建项目",
+    "searchPlaceholder": "按项目名称、简介、阶段、负责人或可见范围搜索...",
+    "results": "{count} 条结果",
+    "recentlyUpdated": "最近更新优先",
+    "emptyTitle": "没有匹配的项目",
+    "emptyDescription": "试试其他关键词，或直接创建一个新项目。",
+    "missingBrief": "这个项目还没有协作简介。",
+    "activeIssues": "{count} 条活跃事项"
+  },
+  "detail": {
+    "relativeTime": {
+      "justNow": "刚刚",
+      "minutesAgo": "{count} 分钟前",
+      "hoursAgo": "{count} 小时前",
+      "daysAgo": "{count} 天前"
+    },
+    "issueState": {
+      "blocked": "阻塞",
+      "done": "已完成",
+      "inProgress": "进行中",
+      "uncategorized": "未分类"
+    },
+    "assignee": {
+      "assigned": "已分配",
+      "pending": "待分配负责人"
+    },
+    "priority": {
+      "urgent": "紧急",
+      "high": "高优先级"
+    },
+    "attention": {
+      "blockedTitle": "阻塞事项需要关注",
+      "blockedDescription": "当前有 {count} 条事项处于阻塞状态。",
+      "overdueTitle": "有部分工作已逾期",
+      "overdueDescription": "{count} 条事项已超过截止日期。",
+      "staleSyncTitle": "同步节奏正在变慢",
+      "staleSyncDescription": "距离上次同步更新已经过去 {count} 天。",
+      "healthyTitle": "项目状态整体稳定",
+      "healthyDescription": "当前没有明显的延期或阻塞信号。"
+    },
+    "summary": {
+      "missingIssue": "事项详情仍在同步中，请稍后再试。",
+      "docCreateAuthRequired": "当前用户信息不可用，暂时无法创建项目文档。",
+      "docCreated": "项目文档已创建。",
+      "docCreateFailed": "创建项目文档失败。",
+      "newDocTitle": "{name} 文档",
+      "missingBrief": "这个项目还没有一句话简介。补充目标、交付方向和成功标准吧。",
+      "phase": "阶段",
+      "owner": "负责人",
+      "activeIssues": "{count} 条活跃事项",
+      "workflowCount": "{count} 个工作流",
+      "docsCount": "{count} 篇文档",
+      "updatedAt": "更新于 {value}",
+      "edit": "编辑",
+      "delete": "删除",
+      "completion": "交付进度",
+      "completionHint": "已完成 {completed} 条 · 活跃中 {total} 条",
+      "riskAndDelay": "阻塞与延期",
+      "riskAndDelayHint": "{blocked} 条阻塞 · {overdue} 条逾期",
+      "executionSurface": "执行面",
+      "executionSurfaceHint": "{workflowCount} 个已关联工作流 · {highPriority} 条高优事项",
+      "pendingConfirmations": "待确认事项",
+      "pendingConfirmationsHint": "{reviewCount} 个评审 · {handoffCount} 个交接",
+      "recentSync": "最近同步",
+      "notRecorded": "尚未记录",
+      "recentSyncHint": "建议在评审或异步同步检查点后更新这里。",
+      "workspaceTitle": "项目工作区",
+      "createIssue": "创建事项",
+      "createDoc": "创建文档",
+      "workspaceCards": {
+        "issues": "活跃事项",
+        "docs": "文档",
+        "workflow": "工作流",
+        "sync": "同步"
+      },
+      "risksTitle": "风险",
+      "blockedIssuesTitle": "阻塞事项",
+      "blockedIssuesEmpty": "当前没有检测到阻塞事项。"
+    },
+    "collaboration": {
+      "title": "协作快照",
+      "subtitle": "让项目页始终锚定在下一次交接、关键文档，以及当前正在推动交付的工作流运行上。",
+      "pendingTitle": "待确认事项",
+      "pendingEmpty": "当前没有等待回应的评审或交接。",
+      "docsTitle": "关键文档",
+      "docsEmpty": "这个项目还没有文档。先把第一份项目简述、决策记录或评审备注沉淀下来吧。",
+      "openDocs": "打开文档",
+      "docUpdatedAt": "更新于 {value}",
+      "workflowRuntimeTitle": "工作流运行情况",
+      "workflowRuntimeEmpty": "这个项目里还没有正在运行的工作流。",
+      "linkedWorkflowIssues": "{count} 条已关联事项",
+      "workflowRuntimeSummary": "{issueCount} 条已关联事项 · {activeCount} 条进行中 · {waitingReviewCount} 条待评审 · {handoffPendingCount} 条待交接 · {blockedCount} 条阻塞",
+      "workflowFocusIssue": "当前焦点：{name}",
+      "currentStep": "当前步骤：{name}",
+      "pendingTarget": "正在等待 {name}",
+      "pendingTargetFallback": "正在等待确认",
+      "status": {
+        "waitingReview": "待评审",
+        "handoffPending": "待交接",
+        "blocked": "阻塞",
+        "active": "进行中",
+        "done": "已完成",
+        "unknown": "未知"
+      },
+      "workflowRuntime": {
+        "active": "运行中的流程",
+        "waitingReview": "待评审",
+        "handoffPending": "待交接",
+        "blocked": "阻塞"
+      }
+    },
+    "timeline": {
+      "title": "活动与同步时间线",
+      "subtitle": "把最近的协作动作、事项变化和同步检查点放在一起，项目节奏就会更容易读懂。",
+      "openSync": "打开同步视图",
+      "updateSync": "更新同步",
+      "recentSync": "最近同步",
+      "activityCount": "时间线事件",
+      "activityCountHint": "包含同步检查点和最近的协作活动。",
+      "updatedAt": "项目已更新",
+      "empty": "这个项目还没有形成足够有用的活动时间线。",
+      "syncTitle": "项目同步已记录",
+      "syncDescription": "最近一次异步同步检查点已更新，可作为当前节奏标记。",
+      "actorFallback": "团队成员"
+    }
+  },
+  "subviews": {
+    "relativeTime": {
+      "justNow": "刚刚",
+      "minutesAgo": "{count} 分钟前",
+      "hoursAgo": "{count} 小时前",
+      "daysAgo": "{count} 天前"
+    },
+    "issues": {
+      "title": "事项",
+      "subtitle": "把项目的执行层单独拎出来，同时保留列表和看板两种视图。",
+      "openIssue": "打开事项",
+      "quickComplete": "标记为完成",
+      "cancelIssue": "取消事项",
+      "summary": "{active} 条活跃项目事项{suffix}",
+      "hiddenSuffix": " · 另有 {count} 条已完成或已取消{hidden}",
+      "hiddenLabel": " 已隐藏",
+      "onlyCreatorCanCancel": "只有创建者可以取消这个事项。",
+      "cancelled": "事项已取消，列表视图默认会将其隐藏。",
+      "cancelFailed": "取消事项失败，请重试。",
+      "updateStateFailed": "更新事项状态失败，请重试。",
+      "saveBoardOrder": "保存看板顺序",
+      "boardOrderSaved": "看板顺序已保存",
+      "loading": "正在加载项目事项...",
+      "emptyTitle": "这个项目还没有活跃事项",
+      "emptyDescription": "列表视图默认隐藏已完成和已取消的事项，切换到看板视图可查看全部状态。",
+      "createIssue": "创建项目事项",
+      "cancelDialog": {
+        "title": "要取消这个事项吗？",
+        "description": "该事项会被移动到“已取消”，并在列表视图中默认隐藏。记录仍会保留，相关负责人依然可以看到它。",
+        "keep": "先保留",
+        "confirm": "确认取消",
+        "pending": "取消中..."
+      }
+    },
+    "docs": {
+      "missingUser": "当前用户信息不可用，暂时无法加载项目文档。"
+    },
+    "workflow": {
+      "title": "工作流",
+      "subtitle": "汇总真正与这个项目关联的工作流。",
+      "openCenter": "打开工作流中心",
+      "empty": "这个项目还没有关联工作流事项。一旦有工作流事项挂到该项目下，就会自动出现在这里。",
+      "linkedIssues": "{count} 条已关联事项 · {status}",
+      "steps": "{count} 个步骤",
+      "version": "版本",
+      "visibility": "可见范围",
+      "notAvailable": "不适用"
+    },
+    "sync": {
+      "title": "项目同步",
+      "subtitle": "把异步同步痕迹和最近变化放到一个专用面板里。",
+      "updateSync": "更新时间",
+      "recentSync": "最近同步",
+      "activityCount": "活动数量",
+      "updatedAt": "项目已更新",
+      "notRecorded": "尚未记录",
+      "empty": "项目活动还不够多。事项更新和活动记录会逐步自动积累到这里。",
+      "digest": {
+        "title": "项目摘要脉冲",
+        "description": "把这个项目最近被系统聚合出来的文档摘要直接放进同步视图，方便在看时间线之前先抓住关键协作变化。",
+        "emptyTitle": "这个项目还没有可投递的摘要",
+        "emptyDescription": "当同一项目范围内累积了足够多的结构化文档变化，这里会先出现一条可直接打开的摘要。"
+      },
+      "teamMember": "团队成员",
+      "timeline": {
+        "syncTitle": "项目同步已记录",
+        "syncDescription": "最近一次异步同步检查点已更新，可作为当前节奏标记。"
+      }
+    }
+  },
+  "kanban": {
+    "issueCount": "{count} 条事项",
+    "reorderColumn": "重新排序 {label} 列",
+    "dragColumn": "拖动以重新排序列",
+    "dropIssue": "将事项拖到这一列",
+    "workflow": "工作流",
+    "dragIssue": "拖动 {title}",
+    "dragIssueCategory": "拖动以更改事项分类",
+    "openIssue": "打开事项",
+    "cancelIssue": "取消事项"
+  },
+  "page": {
+    "selectWorkspaceTitle": "未选择工作区",
+    "selectWorkspaceDescription": "选择一个工作区后，项目模块会自动按该范围加载数据。",
+    "loading": "正在加载项目...",
+    "loadFailedTitle": "加载项目失败",
+    "loadFailedDescription": "我们未能获取项目列表。",
+    "emptyState": {
+      "title": "还没有项目",
+      "description": "项目模块现在已经接入真实后端。先创建一个项目容器，再把相关工作挂到它下面。",
+      "createAction": "创建第一个项目",
+      "readOnlyHint": "当前团队工作区中，只有 OWNER 和 ADMIN 成员可以创建、编辑或删除项目。"
+    }
+  },
+  "owner": {
+    "missing": "未指定负责人",
+    "unnamedMember": "未命名成员"
+  },
+  "editor": {
+    "title": {
+      "create": "创建项目",
+      "edit": "编辑项目"
+    },
+    "subtitle": {
+      "create": "把项目变成协作上下文，而不只是一个事项容器。",
+      "edit": "在这里维护简介、阶段、风险等级、负责人以及其他协作语义。"
+    },
+    "fields": {
+      "name": "项目名称",
+      "namePlaceholder": "例如：Q2 Launch、AI Search Revamp",
+      "brief": "一句话简介",
+      "briefPlaceholder": "说明这个项目为什么存在，以及团队正在朝什么交付目标前进。",
+      "description": "项目背景 / 目标",
+      "descriptionPlaceholder": "补充范围、成功标准和关键背景，帮助团队理解项目上下文。",
+      "status": "当前状态",
+      "statusPlaceholder": "选择项目状态",
+      "phase": "当前阶段",
+      "phasePlaceholder": "例如：Kickoff、Design Review、Build、Launch",
+      "risk": "风险等级",
+      "riskPlaceholder": "选择风险等级",
+      "owner": "项目负责人",
+      "ownerPlaceholder": "选择负责人",
+      "visibility": "可见范围",
+      "visibilityPlaceholder": "选择项目可见范围"
+    },
+    "actions": {
+      "cancel": "取消",
+      "creating": "创建中...",
+      "saving": "保存中...",
+      "create": "创建项目",
+      "save": "保存更改"
+    },
+    "statusDescriptions": {
+      "planning": "目标和范围仍在收敛中，现在很适合补齐项目简述并明确成功标准。",
+      "active": "项目已经进入执行节奏，可以作为主要协作面来使用。",
+      "blocked": "存在关键阻塞，团队应尽快明确由谁来推动解除。",
+      "shipping": "工作正处于发布、验收或上线收尾阶段。",
+      "done": "项目目标已经达成，可以作为历史上下文保留。",
+      "archived": "项目已经离开日常协作流，但相关上下文仍应保留。"
+    },
+    "riskDescriptions": {
+      "low": "当前节奏稳定，还没有明显的交接或交付风险。",
+      "medium": "已经出现值得在项目页持续追踪的等待或不确定性。",
+      "high": "交付、评审或协作已经出现明显风险，需要及时关注。",
+      "critical": "项目已受到实质性影响，需要立刻干预。"
+    }
+  },
+  "deleteDialog": {
+    "title": "删除项目",
+    "description": "删除这个项目后，会立即级联删除它相关的事项、文档、文档文件夹等协作内容，此操作无法撤销。",
+    "aboutToDelete": "即将删除",
+    "missingProject": "未选择项目",
+    "missingProjectDescription": "这个项目还没有描述。",
+    "countingIssues": "正在统计将被级联删除的事项...",
+    "countingResources": "正在统计将被级联删除的项目资源...",
+    "cascadeWarning": "确认删除后，这个项目的执行面和文档上下文都会一起消失。",
+    "issueCountLabel": "事项",
+    "docCountLabel": "文档",
+    "folderCountLabel": "文件夹",
+    "resourceSummary": "本次会一并删除 {issues} 条事项、{docs} 篇文档和 {folders} 个文件夹。",
+    "confirmLabel": "输入项目名称以确认删除",
+    "confirmPlaceholder": "输入项目名称",
+    "confirmHint": "只有输入内容与项目名称完全一致时，才可执行删除。",
+    "deleting": "删除中...",
+    "confirmDelete": "确认删除"
+  },
+  "toasts": {
+    "workspaceRequired": "请先选择工作区。",
+    "created": "项目已创建。",
+    "updated": "项目已更新。",
+    "saveFailed": "保存项目失败。",
+    "deleted": "项目已删除，并一并移除了 {issueCount} 条事项、{docCount} 篇文档和 {folderCount} 个文件夹。",
+    "deleteFailed": "删除项目失败。",
+    "invalidIssueRoute": "当前项目路由无效，无法打开这个事项。",
+    "syncUpdated": "项目同步时间已更新。",
+    "syncFailed": "更新项目同步时间失败。",
+    "boardOrderMissingWorkspace": "当前工作区无效，无法保存看板顺序。",
+    "boardOrderUnchanged": "看板顺序没有发生变化。",
+    "boardOrderSaveFailed": "保存看板顺序失败，请重试。",
+    "boardOrderSaved": "看板顺序已更新。"
+  }
+}

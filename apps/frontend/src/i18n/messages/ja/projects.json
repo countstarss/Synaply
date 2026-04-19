@@ -1,0 +1,347 @@
+{
+  "status": {
+    "planning": "計画中",
+    "active": "進行中",
+    "blocked": "ブロック中",
+    "shipping": "リリース中",
+    "done": "完了",
+    "archived": "アーカイブ"
+  },
+  "risk": {
+    "low": "低リスク",
+    "medium": "中リスク",
+    "high": "高リスク",
+    "critical": "重大リスク"
+  },
+  "visibility": {
+    "private": {
+      "label": "非公開",
+      "description": "個人ワークスペース向きです。リソース単位の権限は、まだ公開範囲だけでは厳密に制御されません。"
+    },
+    "teamReadonly": {
+      "label": "チーム閲覧のみ",
+      "description": "チームメンバーはこのプロジェクトを閲覧できます。書き込み権限は引き続き OWNER と ADMIN ロールで管理されます。"
+    },
+    "teamEditable": {
+      "label": "チームで編集可能",
+      "description": "共同プロジェクトに向いています。バックエンド側の書き込み権限は、引き続きワークスペースメンバーのロールで決まります。"
+    },
+    "public": {
+      "label": "公開",
+      "description": "文脈と状態を共有するための公開プロジェクトビューです。"
+    }
+  },
+  "overview": {
+    "title": {
+      "personal": "自分のプロジェクト",
+      "team": "チームのプロジェクト"
+    },
+    "summary": "プロジェクトは合計 {total} 件。{linked} 件はアクティブな課題あり、{empty} 件はアクティブな課題なし、{unassigned} 件のアクティブ課題は未分類です",
+    "create": "プロジェクトを作成",
+    "searchPlaceholder": "プロジェクト名、概要、フェーズ、オーナー、または公開範囲で検索...",
+    "results": "{count} 件",
+    "recentlyUpdated": "更新が新しい順",
+    "emptyTitle": "一致するプロジェクトはありません",
+    "emptyDescription": "別のキーワードを試すか、新しいプロジェクトを作成してください。",
+    "missingBrief": "このプロジェクトにはまだコラボレーション概要がありません。",
+    "activeIssues": "{count} 件のアクティブな課題"
+  },
+  "detail": {
+    "relativeTime": {
+      "justNow": "たった今",
+      "minutesAgo": "{count} 分前",
+      "hoursAgo": "{count} 時間前",
+      "daysAgo": "{count} 日前"
+    },
+    "issueState": {
+      "blocked": "ブロック中",
+      "done": "完了",
+      "inProgress": "進行中",
+      "uncategorized": "未分類"
+    },
+    "assignee": {
+      "assigned": "割り当て済み",
+      "pending": "担当者が必要"
+    },
+    "priority": {
+      "urgent": "緊急",
+      "high": "高優先度"
+    },
+    "attention": {
+      "blockedTitle": "ブロック中の課題に注意が必要です",
+      "blockedDescription": "現在 {count} 件の課題がブロックされています。",
+      "overdueTitle": "期限超過の作業があります",
+      "overdueDescription": "{count} 件の課題が期限を過ぎています。",
+      "staleSyncTitle": "同期のリズムが鈍ってきています",
+      "staleSyncDescription": "前回の同期更新から {count} 日が経過しています。",
+      "healthyTitle": "プロジェクト状態は安定しています",
+      "healthyDescription": "今のところ強い遅延やブロッカーのシグナルはありません。"
+    },
+    "summary": {
+      "missingIssue": "課題の詳細を同期中です。少し待ってからもう一度お試しください。",
+      "docCreateAuthRequired": "現在のユーザー情報が取得できないため、まだプロジェクトドキュメントを作成できません。",
+      "docCreated": "プロジェクトドキュメントを作成しました。",
+      "docCreateFailed": "プロジェクトドキュメントの作成に失敗しました。",
+      "newDocTitle": "{name} ドキュメント",
+      "missingBrief": "このプロジェクトにはまだ 1 行の概要がありません。目的、進める方向、成功条件を追加してください。",
+      "phase": "フェーズ",
+      "owner": "オーナー",
+      "activeIssues": "{count} 件のアクティブ課題",
+      "workflowCount": "{count} 件のワークフロー",
+      "docsCount": "{count} 件のドキュメント",
+      "updatedAt": "{value} 更新",
+      "edit": "編集",
+      "delete": "削除",
+      "completion": "進行状況",
+      "completionHint": "{completed} 件完了 · {total} 件進行中",
+      "riskAndDelay": "ブロッカーと遅延",
+      "riskAndDelayHint": "{blocked} 件ブロック中 · {overdue} 件期限超過",
+      "executionSurface": "実行面",
+      "executionSurfaceHint": "{workflowCount} 件の関連ワークフロー · {highPriority} 件の高優先度課題",
+      "pendingConfirmations": "確認待ち",
+      "pendingConfirmationsHint": "{reviewCount} 件のレビュー · {handoffCount} 件の引き継ぎ",
+      "recentSync": "最新同期",
+      "notRecorded": "未記録",
+      "recentSyncHint": "レビュー後や非同期の同期チェックポイント後に更新してください。",
+      "workspaceTitle": "プロジェクトワークスペース",
+      "createIssue": "課題を作成",
+      "createDoc": "ドキュメントを作成",
+      "workspaceCards": {
+        "issues": "アクティブ課題",
+        "docs": "ドキュメント",
+        "workflow": "ワークフロー",
+        "sync": "同期"
+      },
+      "risksTitle": "リスク",
+      "blockedIssuesTitle": "ブロック中の課題",
+      "blockedIssuesEmpty": "現在、ブロック中の課題は検出されていません。"
+    },
+    "collaboration": {
+      "title": "コラボレーション概要",
+      "subtitle": "プロジェクトページには、次の引き継ぎ、重要ドキュメント、今まさに進んでいるワークフロー実行を集約しておきます。",
+      "pendingTitle": "確認待ち",
+      "pendingEmpty": "現在、返答待ちのレビューや引き継ぎはありません。",
+      "docsTitle": "主要ドキュメント",
+      "docsEmpty": "まだプロジェクトドキュメントはありません。最初のプロジェクト概要、意思決定メモ、レビュー記録をここに残しましょう。",
+      "openDocs": "ドキュメントを開く",
+      "docUpdatedAt": "{value} 更新",
+      "workflowRuntimeTitle": "ワークフローの稼働状況",
+      "workflowRuntimeEmpty": "このプロジェクトではまだアクティブなワークフロー実行がありません。",
+      "linkedWorkflowIssues": "{count} 件の関連課題",
+      "workflowRuntimeSummary": "{issueCount} 件の関連課題 · {activeCount} 件進行中 · {waitingReviewCount} 件レビュー待ち · {handoffPendingCount} 件引き継ぎ待ち · {blockedCount} 件ブロック中",
+      "workflowFocusIssue": "現在の注力先: {name}",
+      "currentStep": "現在のステップ: {name}",
+      "pendingTarget": "{name} の確認待ち",
+      "pendingTargetFallback": "確認待ち",
+      "status": {
+        "waitingReview": "レビュー待ち",
+        "handoffPending": "引き継ぎ待ち",
+        "blocked": "ブロック中",
+        "active": "進行中",
+        "done": "完了",
+        "unknown": "不明"
+      },
+      "workflowRuntime": {
+        "active": "稼働中",
+        "waitingReview": "レビュー待ち",
+        "handoffPending": "引き継ぎ待ち",
+        "blocked": "ブロック中"
+      }
+    },
+    "timeline": {
+      "title": "活動と同期のタイムライン",
+      "subtitle": "最新のコラボレーション動作、課題変更、同期チェックポイントを 1 か所にまとめ、プロジェクトのリズムを読みやすくします。",
+      "openSync": "同期ビューを開く",
+      "updateSync": "同期を更新",
+      "recentSync": "最新同期",
+      "activityCount": "タイムラインイベント",
+      "activityCountHint": "同期チェックポイントと最近のコラボレーション活動を含みます。",
+      "updatedAt": "プロジェクトを更新",
+      "empty": "このプロジェクトには、まだ有用な活動タイムラインができていません。",
+      "syncTitle": "プロジェクト同期を記録しました",
+      "syncDescription": "最新の非同期チェックポイントを更新しました。現在のペースを示す目印として使えます。",
+      "actorFallback": "チームメンバー"
+    }
+  },
+  "subviews": {
+    "relativeTime": {
+      "justNow": "たった今",
+      "minutesAgo": "{count} 分前",
+      "hoursAgo": "{count} 時間前",
+      "daysAgo": "{count} 日前"
+    },
+    "issues": {
+      "title": "課題",
+      "subtitle": "プロジェクトの実行レイヤーを切り出しつつ、リスト表示とボード表示の両方を使えるようにします。",
+      "openIssue": "課題を開く",
+      "quickComplete": "完了にする",
+      "cancelIssue": "課題をキャンセル",
+      "summary": "{active} 件のアクティブなプロジェクト課題{suffix}",
+      "hiddenSuffix": " · {count} 件は完了またはキャンセル済み{hidden}",
+      "hiddenLabel": " 非表示",
+      "onlyCreatorCanCancel": "この課題をキャンセルできるのは作成者だけです。",
+      "cancelled": "課題をキャンセルしました。リスト表示では既定で非表示になります。",
+      "cancelFailed": "課題のキャンセルに失敗しました。もう一度お試しください。",
+      "updateStateFailed": "課題状態の更新に失敗しました。もう一度お試しください。",
+      "saveBoardOrder": "ボード順を保存",
+      "boardOrderSaved": "ボード順を保存しました",
+      "loading": "プロジェクト課題を読み込み中...",
+      "emptyTitle": "このプロジェクトにはまだアクティブな課題がありません",
+      "emptyDescription": "リスト表示では完了済みとキャンセル済みが既定で隠れます。すべての状態を見るにはボード表示に切り替えてください。",
+      "createIssue": "プロジェクト課題を作成",
+      "cancelDialog": {
+        "title": "この課題をキャンセルしますか？",
+        "description": "課題は「キャンセル済み」に移動し、リスト表示では既定で非表示になります。記録は残り、関係する担当者は引き続き確認できます。",
+        "keep": "そのままにする",
+        "confirm": "キャンセルを確定",
+        "pending": "キャンセル中..."
+      }
+    },
+    "docs": {
+      "missingUser": "現在のユーザー情報が取得できないため、まだプロジェクトドキュメントを読み込めません。"
+    },
+    "workflow": {
+      "title": "ワークフロー",
+      "subtitle": "このプロジェクトに実際につながっているワークフローをまとめて見られます。",
+      "openCenter": "ワークフローセンターを開く",
+      "empty": "このプロジェクトにはまだワークフロー課題が紐づいていません。追加されると自動的にここへ表示されます。",
+      "linkedIssues": "{count} 件の関連課題 · {status}",
+      "steps": "{count} ステップ",
+      "version": "バージョン",
+      "visibility": "公開範囲",
+      "notAvailable": "該当なし"
+    },
+    "sync": {
+      "title": "プロジェクト同期",
+      "subtitle": "非同期の同期履歴と最近の変更を、専用の画面にまとめて残します。",
+      "updateSync": "同期時刻を更新",
+      "recentSync": "最新同期",
+      "activityCount": "アクティビティ数",
+      "updatedAt": "プロジェクトを更新",
+      "notRecorded": "未記録",
+      "empty": "まだプロジェクト活動は十分に積み上がっていません。課題更新や活動記録がここに自動で蓄積されていきます。",
+      "digest": {
+        "title": "プロジェクトダイジェストパルス",
+        "description": "このプロジェクトで集約された最新のドキュメントダイジェストを同期ビューに直接届け、タイムラインを読む前に重要な協業変化をつかめるようにします。",
+        "emptyTitle": "このプロジェクトに届くダイジェストはまだありません",
+        "emptyDescription": "同じプロジェクトに十分な構造化ドキュメントの変化が溜まると、まずここにダイジェストが現れます。"
+      },
+      "teamMember": "チームメンバー",
+      "timeline": {
+        "syncTitle": "プロジェクト同期を記録しました",
+        "syncDescription": "最新の非同期チェックポイントを更新しました。現在のペースを示す目印として使えます。"
+      }
+    }
+  },
+  "kanban": {
+    "issueCount": "{count} 件の課題",
+    "reorderColumn": "{label} 列を並べ替える",
+    "dragColumn": "ドラッグして列を並べ替える",
+    "dropIssue": "この列へ課題をドラッグ",
+    "workflow": "ワークフロー",
+    "dragIssue": "{title} をドラッグ",
+    "dragIssueCategory": "ドラッグして課題カテゴリを変更",
+    "openIssue": "課題を開く",
+    "cancelIssue": "課題をキャンセル"
+  },
+  "page": {
+    "selectWorkspaceTitle": "ワークスペースが選択されていません",
+    "selectWorkspaceDescription": "ワークスペースを選ぶと、プロジェクトモジュールのデータ範囲が自動で切り替わります。",
+    "loading": "プロジェクトを読み込み中...",
+    "loadFailedTitle": "プロジェクトの読み込みに失敗しました",
+    "loadFailedDescription": "プロジェクト一覧を取得できませんでした。",
+    "emptyState": {
+      "title": "まだプロジェクトはありません",
+      "description": "プロジェクトモジュールはすでにライブのバックエンドにつながっています。まずプロジェクトの器を作り、関連する作業を紐づけてください。",
+      "createAction": "最初のプロジェクトを作成",
+      "readOnlyHint": "現在のチームワークスペースでは、OWNER と ADMIN メンバーのみがプロジェクトを作成・編集・削除できます。"
+    }
+  },
+  "owner": {
+    "missing": "オーナー未設定",
+    "unnamedMember": "名前未設定のメンバー"
+  },
+  "editor": {
+    "title": {
+      "create": "プロジェクトを作成",
+      "edit": "プロジェクトを編集"
+    },
+    "subtitle": {
+      "create": "プロジェクトを単なる課題コンテナではなく、コラボレーションの文脈にします。",
+      "edit": "概要、フェーズ、リスクレベル、オーナーなどのコラボレーション情報をここで保ちます。"
+    },
+    "fields": {
+      "name": "プロジェクト名",
+      "namePlaceholder": "例: Q2 Launch、AI Search Revamp",
+      "brief": "1 行概要",
+      "briefPlaceholder": "このプロジェクトがなぜ存在するのか、チームがどの交付に向かっているのかを説明します。",
+      "description": "プロジェクト背景 / 目標",
+      "descriptionPlaceholder": "スコープ、成功条件、重要な背景を追加し、チームがプロジェクト文脈を理解できるようにします。",
+      "status": "現在の状態",
+      "statusPlaceholder": "プロジェクト状態を選択",
+      "phase": "現在のフェーズ",
+      "phasePlaceholder": "例: Kickoff、Design Review、Build、Launch",
+      "risk": "リスクレベル",
+      "riskPlaceholder": "リスクレベルを選択",
+      "owner": "プロジェクトオーナー",
+      "ownerPlaceholder": "オーナーを選択",
+      "visibility": "公開範囲",
+      "visibilityPlaceholder": "プロジェクトの公開範囲を選択"
+    },
+    "actions": {
+      "cancel": "キャンセル",
+      "creating": "作成中...",
+      "saving": "保存中...",
+      "create": "プロジェクトを作成",
+      "save": "変更を保存"
+    },
+    "statusDescriptions": {
+      "planning": "目標とスコープはまだ収束中です。プロジェクト概要を追加し、成功条件を定義するのに良いタイミングです。",
+      "active": "このプロジェクトにはすでに実行リズムがあり、主要なコラボレーション面として機能します。",
+      "blocked": "重要なブロッカーがあり、誰が解除を進めるかを早めに決める必要があります。",
+      "shipping": "作業はリリース、受け入れ、または公開の締めに入っています。",
+      "done": "目標は達成され、今後は履歴文脈として残せます。",
+      "archived": "日々のコラボレーションフローからは外れましたが、文脈は引き続き保持すべきです。"
+    },
+    "riskDescriptions": {
+      "low": "リズムは安定しており、明確な引き継ぎや交付リスクはまだ見えていません。",
+      "medium": "すでに待ちや不確実性があり、プロジェクトページで追いかける価値があります。",
+      "high": "交付、レビュー、または調整に明確なリスクがあり、注意が必要です。",
+      "critical": "プロジェクトはすでに実質的な影響を受けており、即時介入が必要です。"
+    }
+  },
+  "deleteDialog": {
+    "title": "プロジェクトを削除",
+    "description": "このプロジェクトを削除すると、関連する課題、ドキュメント、ドキュメントフォルダなどの協業コンテキストも即座に連鎖削除されます。この操作は元に戻せません。",
+    "aboutToDelete": "削除対象",
+    "missingProject": "プロジェクトが選択されていません",
+    "missingProjectDescription": "このプロジェクトにはまだ説明がありません。",
+    "countingIssues": "連鎖削除される課題数を集計中...",
+    "countingResources": "連鎖削除されるプロジェクトリソースを集計中...",
+    "cascadeWarning": "確認後、このプロジェクトの実行面とドキュメント文脈は一緒に消えます。",
+    "issueCountLabel": "課題",
+    "docCountLabel": "ドキュメント",
+    "folderCountLabel": "フォルダ",
+    "resourceSummary": "この操作により、{issues} 件の課題、{docs} 件のドキュメント、{folders} 件のフォルダがプロジェクトと一緒に削除されます。",
+    "confirmLabel": "削除確認のためプロジェクト名を入力してください",
+    "confirmPlaceholder": "プロジェクト名を入力",
+    "confirmHint": "入力内容がプロジェクト名と完全一致した場合のみ削除できます。",
+    "deleting": "削除中...",
+    "confirmDelete": "削除を確定"
+  },
+  "toasts": {
+    "workspaceRequired": "先にワークスペースを選択してください。",
+    "created": "プロジェクトを作成しました。",
+    "updated": "プロジェクトを更新しました。",
+    "saveFailed": "プロジェクトの保存に失敗しました。",
+    "deleted": "プロジェクトを削除し、関連する {issueCount} 件の課題、{docCount} 件のドキュメント、{folderCount} 件のフォルダも一緒に削除しました。",
+    "deleteFailed": "プロジェクトの削除に失敗しました。",
+    "invalidIssueRoute": "現在のプロジェクトルートが無効なため、この課題を開けません。",
+    "syncUpdated": "プロジェクトの同期時刻を更新しました。",
+    "syncFailed": "プロジェクトの同期時刻更新に失敗しました。",
+    "boardOrderMissingWorkspace": "現在のワークスペースが無効なため、ボード順を保存できません。",
+    "boardOrderUnchanged": "ボード順に変更はありません。",
+    "boardOrderSaveFailed": "ボード順の保存に失敗しました。もう一度お試しください。",
+    "boardOrderSaved": "ボード順を更新しました。"
+  }
+}

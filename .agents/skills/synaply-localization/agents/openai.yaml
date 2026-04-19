@@ -1,0 +1,4 @@
+interface:
+  display_name: "Synaply Localization"
+  short_description: "Synaply 四语 next-intl 本地化流程"
+  default_prompt: "Use $synaply-localization to update Synaply next-intl messages and validate locale consistency."

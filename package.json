@@ -1,0 +1,22 @@
+{
+  "name": "synaply-workspace",
+  "private": true,
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "build": "pnpm --dir apps/backend build && pnpm --dir apps/frontend build",
+    "build:backend": "pnpm --dir apps/backend build",
+    "build:frontend": "pnpm --dir apps/frontend build",
+    "dev:backend": "pnpm --dir apps/backend start:dev",
+    "dev:frontend": "pnpm --dir apps/frontend dev",
+    "start:backend": "pnpm --dir apps/backend start",
+    "start:frontend": "pnpm --dir apps/frontend start",
+    "dev:frontend:3010": "pnpm --dir apps/frontend dev -- --port 3010",
+    "lint": "pnpm --dir apps/backend lint && pnpm --dir apps/frontend lint",
+    "lint:backend": "pnpm --dir apps/backend lint",
+    "lint:frontend": "pnpm --dir apps/frontend lint",
+    "test": "pnpm --dir apps/backend test && pnpm --dir apps/frontend test:unit",
+    "test:backend": "pnpm --dir apps/backend test",
+    "test:e2e": "pnpm --dir apps/backend test:e2e",
+    "test:frontend": "pnpm --dir apps/frontend test:unit"
+  }
+}

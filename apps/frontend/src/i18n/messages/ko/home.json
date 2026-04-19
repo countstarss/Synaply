@@ -1,0 +1,34 @@
+{
+  "title": "Synaply에 오신 것을 환영합니다",
+  "subtitle": "애플리케이션에 안전하고 신뢰할 수 있는 사용자 관리 경험을 제공하는 현대적인 인증 시스템입니다.",
+  "getStarted": "시작하기",
+  "learnMore": "더 알아보기",
+  "enterDashboard": "대시보드로 들어가기",
+  "whyChoose": "왜 Synaply를 선택해야 할까요?",
+  "features": {
+    "security": {
+      "title": "안전한 인증",
+      "description": "Supabase 기반의 엔터프라이즈급 보안 인증 시스템"
+    },
+    "performance": {
+      "title": "높은 성능",
+      "description": "Next.js로 구축되어 빠르고 매끄러운 사용자 경험을 제공합니다"
+    },
+    "design": {
+      "title": "모던한 디자인",
+      "description": "다양한 기기와 화면 크기를 지원하는 반응형 디자인"
+    }
+  },
+  "systemFeatures": "시스템 기능",
+  "featuresList": {
+    "secureAuth": "안전한 사용자 가입 및 로그인",
+    "passwordReset": "비밀번호 재설정",
+    "emailVerification": "이메일 인증",
+    "modernUI": "모던한 사용자 인터페이스",
+    "responsive": "반응형 디자인",
+    "realTime": "실시간 상태 업데이트",
+    "routeProtection": "경로 보호",
+    "errorHandling": "오류 처리"
+  },
+  "copyright": "© 2024 Synaply. All rights reserved."
+}

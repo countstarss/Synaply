@@ -1,0 +1,286 @@
+{
+  "shared": {
+    "untitled": "Untitled workflow",
+    "currentUser": "Current user",
+    "unknownUser": "Unknown user",
+    "unassigned": "Unassigned",
+    "noRole": "No role",
+    "workflow": "Workflow"
+  },
+  "toasts": {
+    "workspaceIncomplete": "Workspace information is incomplete.",
+    "createSuccess": "Workflow created.",
+    "createFailed": "Failed to create the workflow.",
+    "saveDraftSuccess": "Draft saved.",
+    "publishSuccess": "Workflow published.",
+    "saveFailed": "Failed to save the workflow.",
+    "deleteSuccess": "Workflow deleted.",
+    "deleteFailed": "Failed to delete the workflow."
+  },
+  "page": {
+    "states": {
+      "loading": "Loading workflows...",
+      "loadFailedTitle": "Failed to load workflows",
+      "loadFailedDescription": "We could not load the workflow list."
+    },
+    "header": {
+      "title": "Workflow management",
+      "description": "Manage workflow templates and create repeatable collaboration flows.",
+      "create": "Create workflow"
+    },
+    "stats": {
+      "total": "Total workflows",
+      "draft": "Drafts",
+      "published": "Published",
+      "active": "In use"
+    },
+    "list": {
+      "title": "Workflow list",
+      "showAll": "Show all",
+      "draftOnly": "Drafts only",
+      "emptyTitle": "No workflows yet",
+      "emptyDescription": "Create your first workflow template to standardize team collaboration.",
+      "emptyAction": "Create workflow"
+    },
+    "badges": {
+      "draft": "Draft",
+      "published": "Published"
+    },
+    "meta": {
+      "nodes": "Nodes: {count}",
+      "version": "Version: {value}",
+      "activeRuns": "Active runs: {count}",
+      "totalRuns": "Total runs: {count}",
+      "creator": "Created by: {value}",
+      "createdAt": "Created: {value}"
+    },
+    "actions": {
+      "viewEdit": "View or edit",
+      "settings": "Settings",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "deleteDialog": {
+      "title": "Delete workflow?",
+      "description": "“{name}” cannot be recovered after deletion. Existing workflow runs may also be affected.",
+      "fallbackDescription": "This action cannot be undone.",
+      "confirm": "Delete workflow",
+      "deleting": "Deleting..."
+    }
+  },
+  "setup": {
+    "title": "Create workflow",
+    "nameLabel": "Workflow name *",
+    "namePlaceholder": "Enter a workflow name...",
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "Enter a workflow description...",
+    "continue": "Continue editing",
+    "nameRequired": "Please enter a workflow name."
+  },
+  "toolbar": {
+    "draftBadge": "Draft",
+    "viewJson": "View JSON",
+    "viewJsonTitle": "View workflow JSON",
+    "export": "Export",
+    "exportTitle": "Export workflow",
+    "import": "Import",
+    "importTitle": "Import workflow",
+    "saveDraft": "Save draft",
+    "saveDraftTitle": "Save as draft",
+    "publish": "Publish workflow",
+    "publishTitle": "Publish workflow",
+    "saveAndPublish": "Save and publish",
+    "saveAndPublishTitle": "Save and publish",
+    "saving": "Processing...",
+    "back": "Back",
+    "backTitle": "Back to list"
+  },
+  "editor": {
+    "validation": {
+      "title": "Workflow validation failed",
+      "close": "Close",
+      "summary": "Workflow validation failed: {errors}",
+      "atLeastOneNode": "A workflow needs at least one node.",
+      "missingAssignees": "{count} node(s) still do not have an owner assigned.",
+      "missingStart": "A workflow needs at least one starting node.",
+      "missingEnd": "A workflow needs at least one ending node.",
+      "isolatedNodes": "{count} isolated node(s) still need to be connected or removed."
+    },
+    "jsonModal": {
+      "title": "Workflow JSON",
+      "close": "Close"
+    }
+  },
+  "json": {
+    "exportSuccessTitle": "Export complete",
+    "exportSuccessDescription": "The workflow has been exported as a JSON file.",
+    "exportFailedTitle": "Export failed",
+    "exportFailedDescription": "An error occurred while exporting the workflow.",
+    "importSuccessTitle": "Import complete",
+    "importSuccessDescription": "Workflow “{name}” was imported.",
+    "importFailedTitle": "Import failed",
+    "importFailedDescription": "The file does not contain a valid workflow JSON.",
+    "invalidFormat": "Invalid workflow JSON format."
+  },
+  "settingsModal": {
+    "title": "Workflow settings",
+    "nameLabel": "Workflow name",
+    "namePlaceholder": "Enter a workflow name",
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "Workflow description (optional)",
+    "visibilityLabel": "Visibility",
+    "statusLabel": "Status",
+    "stepsLabel": "Steps",
+    "versionLabel": "Version",
+    "statuses": {
+      "draft": "Draft",
+      "published": "Published"
+    },
+    "visibility": {
+      "private": "Private",
+      "public": "Public",
+      "teamReadonly": "Team read-only",
+      "teamEditable": "Team editable"
+    },
+    "actions": {
+      "publish": "Publish workflow",
+      "save": "Save"
+    },
+    "toasts": {
+      "saved": "Workflow settings saved.",
+      "saveFailed": "Failed to save the workflow settings.",
+      "publishNeedSteps": "Add workflow steps before publishing.",
+      "published": "Workflow published.",
+      "publishFailed": "Failed to publish the workflow."
+    }
+  },
+  "docCards": {
+    "title": "Workflow docs",
+    "subtitle": "Tie the handoff packet, review packet, and release checklist to the workflow template so reuse does not lose context.",
+    "created": "Workflow doc created.",
+    "createFailed": "Failed to create the workflow doc."
+  },
+  "nodeDetails": {
+    "title": "Node details",
+    "nodeFallback": "Node",
+    "assigneeLabel": "Owner",
+    "assigneePlaceholder": "Type @ to mention an owner",
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "Describe this node...",
+    "estimatedHoursLabel": "Estimated hours",
+    "estimatedHoursPlaceholder": "For example: 8",
+    "estimatedHoursUnit": "Estimated: {value}h"
+  },
+  "node": {
+    "status": "Status: {status}",
+    "hasDetails": "Has details"
+  },
+  "nodePanel": {
+    "expand": "Expand node panel",
+    "collapse": "Collapse node panel",
+    "title": "Node types",
+    "manage": "Manage node types",
+    "defaults": {
+      "product": "Product manager",
+      "ui": "UI designer",
+      "frontend": "Frontend engineer",
+      "backend": "Backend engineer",
+      "test": "QA engineer",
+      "devops": "DevOps"
+    }
+  },
+  "nodeSettings": {
+    "title": "Manage node types",
+    "existingNodes": "Existing nodes",
+    "noCustomNodes": "No custom nodes yet.",
+    "actions": {
+      "edit": "Edit",
+      "delete": "Delete",
+      "import": "Import",
+      "export": "Export",
+      "sync": "Sync to backend",
+      "cancelEdit": "Cancel editing",
+      "saveEdit": "Save changes",
+      "add": "Add node"
+    },
+    "form": {
+      "createTitle": "Create node",
+      "editTitle": "Edit node",
+      "nameLabel": "Name *",
+      "namePlaceholder": "For example: Product manager",
+      "roleLabel": "Role *",
+      "rolePlaceholder": "For example: product",
+      "iconLabel": "Icon * (emoji or image URL)",
+      "iconPlaceholder": "For example: 📋 or https://example.com/icon.png",
+      "colorLabel": "Color *",
+      "ownerLabel": "Owner *",
+      "ownerLoading": "Loading team members...",
+      "ownerPlaceholder": "Choose an owner",
+      "ownerMissing": "No team members found",
+      "tagsLabel": "Tags (comma-separated)",
+      "tagsPlaceholder": "For example: frontend,development"
+    },
+    "deleteDialog": {
+      "title": "Delete node type?",
+      "description": "“{name}” will be removed. Existing local workflow templates may need to be reviewed afterward.",
+      "fallbackName": "this node",
+      "confirm": "Delete node"
+    },
+    "toasts": {
+      "requiredFields": "Please fill in all required fields.",
+      "syncTodo": "Sync to backend is not implemented yet.",
+      "importTodo": "Node import is not implemented yet.",
+      "exportTodo": "Node export is not implemented yet."
+    }
+  },
+  "mention": {
+    "placeholder": "Type @ to choose an owner...",
+    "loading": "Loading...",
+    "noMatching": "No matching members found",
+    "noMembers": "No team members available",
+    "createCustom": "Create a custom owner: {value}"
+  },
+  "teamMemberSelect": {
+    "placeholder": "Choose an owner...",
+    "searchPlaceholder": "Search members...",
+    "noMatching": "No matching members found",
+    "customLabel": "Add: {value}",
+    "customHint": "Custom owner"
+  },
+  "colors": {
+    "blue": "Blue",
+    "purple": "Purple",
+    "green": "Green",
+    "orange": "Orange",
+    "red": "Red",
+    "gray": "Gray",
+    "cyan": "Cyan",
+    "pink": "Pink",
+    "yellow": "Yellow",
+    "selected": "Selected: {value}"
+  },
+  "runtime": {
+    "onlyCurrentOwner": "Only the current node owner can do this.",
+    "statusSyncFailed": "Failed to sync the node status.",
+    "advanceFailed": "Failed to advance the workflow run.",
+    "revertFailed": "Failed to revert the workflow run."
+  },
+  "instance": {
+    "title": "Create workflow instance",
+    "steps": "{count} step(s) included",
+    "fields": {
+      "title": "Issue title *",
+      "titlePlaceholder": "Enter the issue title...",
+      "description": "Description",
+      "descriptionPlaceholder": "Enter a detailed description...",
+      "dueDate": "Due date"
+    },
+    "validation": {
+      "titleRequired": "Please enter a title."
+    },
+    "actions": {
+      "creating": "Creating...",
+      "submit": "Create workflow instance"
+    }
+  }
+}

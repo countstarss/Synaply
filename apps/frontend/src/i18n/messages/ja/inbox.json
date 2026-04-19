@@ -1,0 +1,110 @@
+{
+  "relativeTime": {
+    "justNow": "たった今",
+    "minutesAgo": "{count} 分前",
+    "hoursAgo": "{count} 時間前",
+    "daysAgo": "{count} 日前"
+  },
+  "views": {
+    "primary": "優先",
+    "other": "その他",
+    "digest": "ダイジェスト",
+    "later": "あとで",
+    "cleared": "クリア済み"
+  },
+  "viewSubLabel": {
+    "digestCount": "{count} 件のダイジェスト",
+    "digestEmpty": "ダイジェストはありません",
+    "laterCount": "{count} 件のあとで見る項目",
+    "laterEmpty": "あとで見る項目はありません",
+    "clearedCount": "{count} 件のクリア済み項目",
+    "clearedEmpty": "クリア済み項目はありません",
+    "pendingCount": "{count} 件の未処理項目",
+    "pendingEmpty": "現在項目はありません"
+  },
+  "empty": {
+    "primary": {
+      "title": "今あなたの対応を待っているものはありません",
+      "description": "新しいレビュー依頼、アサイン、期限付きの項目はまずここに表示されます。"
+    },
+    "other": {
+      "title": "あとで確認すべき更新はありません",
+      "description": "リスク、ブロッカー、フォローシグナルは、もう一度見る必要があるときにここに集まります。"
+    },
+    "digest": {
+      "title": "ドキュメントダイジェストはまだありません",
+      "description": "同じプロジェクト、課題、またはワークフローで十分な文書変更が集まると、このビューで 1 つのダイジェストにまとまります。"
+    },
+    "later": {
+      "title": "今はあとで見る項目がありません",
+      "description": "シグナルを既読にはしたいが作業を中断したくないときは、ここに移してあとで見返せます。"
+    },
+    "cleared": {
+      "title": "まだクリア済みの項目はありません",
+      "description": "クリアしたシグナルはアクティブなキューから外れ、ここに短い記録として残ります。"
+    }
+  },
+  "source": {
+    "workflow": "ワークフロー",
+    "project": "プロジェクト",
+    "issue": "課題",
+    "doc": "ドキュメント"
+  },
+  "docTitles": {
+    "reviewReady": "レビューパケットの準備ができました: {title}",
+    "handoffReady": "引き継ぎパケットの準備ができました: {title}",
+    "releaseUpdated": "リリースチェックリストを更新しました: {title}",
+    "decisionUpdated": "意思決定を更新しました: {title}",
+    "digestGenerated": "直近で {count} 件の協業ドキュメントが更新されました"
+  },
+  "digest": {
+    "summaryPrefix": "含まれる項目: {items}",
+    "summaryCount": "{count} 件の{label}",
+    "summaryLatest": "最新: {title}"
+  },
+  "groups": {
+    "today": "今日",
+    "recentWeek": "過去 7 日",
+    "earlierThisMonth": "今月それ以前"
+  },
+  "filters": {
+    "unread": "未読",
+    "actionable": "対応が必要",
+    "clear": "絞り込みをクリア",
+    "archivedHint": "このビューはすでに状態ごとにまとまっているため、追加の絞り込みは使えません。"
+  },
+  "actions": {
+    "refresh": "更新",
+    "clearView": "現在のビューをクリア",
+    "retry": "再試行"
+  },
+  "row": {
+    "openAria": "{title} を開く",
+    "markSeen": "既読にする",
+    "markUnread": "未読に戻す",
+    "accept": "引き受ける",
+    "snooze": "あとで見る",
+    "clear": "クリア",
+    "cleared": "クリア済み"
+  },
+  "hint": "任意の行をクリックすると、関連する課題、プロジェクト、ワークフロー、またはドキュメントを開けます。ここから既読、あとで見る、引き継ぎの受け入れ、シグナルのクリアも行えます。",
+  "states": {
+    "loading": "受信トレイを読み込んでいます...",
+    "errorTitle": "受信トレイの読み込みに失敗しました",
+    "errorDescription": "少し待ってからもう一度お試しください。"
+  },
+  "toasts": {
+    "openFailed": "この受信トレイ項目を開けませんでした。",
+    "markedSeen": "既読にしました。",
+    "markedUnread": "未読に戻しました。",
+    "updateReadFailed": "既読状態を更新できませんでした。",
+    "snoozed": "あとで見るに移動しました。",
+    "snoozeFailed": "この項目をあとで見るにできませんでした。",
+    "cleared": "受信トレイ項目をクリアしました。",
+    "clearFailed": "この項目をクリアできませんでした。",
+    "handoffAccepted": "引き継ぎを受け入れました。",
+    "acceptFailed": "引き継ぎを受け入れられませんでした。",
+    "clearedView": "現在のビューをクリアしました。",
+    "clearAllFailed": "現在のビューをクリアできませんでした。"
+  }
+}

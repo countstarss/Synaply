@@ -1,0 +1,47 @@
+{
+  "actions": {
+    "back": "后退",
+    "cancel": "取消",
+    "close": "关闭",
+    "confirm": "确认",
+    "create": "创造",
+    "delete": "删除",
+    "edit": "编辑",
+    "save": "节省"
+  },
+  "entities": {
+    "issue": "问题",
+    "project": "项目",
+    "task": "任务",
+    "workflow": "工作流程",
+    "workspace": "工作空间"
+  },
+  "fields": {
+    "description": "描述",
+    "dueDate": "到期日",
+    "name": "姓名",
+    "owner": "所有者",
+    "priority": "优先事项",
+    "project": "项目",
+    "state": "状态",
+    "title": "标题",
+    "visibility": "能见度"
+  },
+  "feedback": {
+    "loading": "加载中...",
+    "retry": "请再试一次。",
+    "success": "保存成功。"
+  },
+  "states": {
+    "currentUser": "当前用户",
+    "none": "没有任何",
+    "noneAssigned": "未分配",
+    "noneNamed": "无题",
+    "noneSelected": "未选择任何内容"
+  },
+  "validation": {
+    "chooseOne": "请选择一个选项。",
+    "loginAgain": "我们无法验证您的会话。请重新登录。",
+    "titleRequired": "请输入标题。"
+  }
+}

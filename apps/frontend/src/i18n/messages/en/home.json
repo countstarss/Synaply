@@ -1,0 +1,34 @@
+{
+  "title": "Welcome to Synaply",
+  "subtitle": "Modern authentication system providing secure and reliable user management solutions for your applications",
+  "getStarted": "Get Started",
+  "learnMore": "Learn More",
+  "enterDashboard": "Enter Dashboard",
+  "whyChoose": "Why Choose Synaply?",
+  "features": {
+    "security": {
+      "title": "Secure Authentication",
+      "description": "Enterprise-grade security authentication system powered by Supabase"
+    },
+    "performance": {
+      "title": "High Performance",
+      "description": "Built with Next.js to provide the best user experience"
+    },
+    "design": {
+      "title": "Modern Design",
+      "description": "Responsive design supporting various devices and screen sizes"
+    }
+  },
+  "systemFeatures": "System Features",
+  "featuresList": {
+    "secureAuth": "Secure user registration and login",
+    "passwordReset": "Password reset functionality",
+    "emailVerification": "Email verification",
+    "modernUI": "Modern user interface",
+    "responsive": "Responsive design",
+    "realTime": "Real-time status updates",
+    "routeProtection": "Route protection",
+    "errorHandling": "Error handling"
+  },
+  "copyright": "© 2024 Synaply. All rights reserved."
+} 

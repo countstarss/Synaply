@@ -1,0 +1,104 @@
+{
+  "nav": {
+    "docs": "文档",
+    "inbox": "收件箱",
+    "intelligence": "智能协作",
+    "issues": "事项",
+    "myWork": "我的工作",
+    "projects": "项目",
+    "workflows": "工作流"
+  },
+  "sidebar": {
+    "backToMain": "返回",
+    "createTeam": "创建新团队",
+    "sections": {
+      "administration": "管理",
+      "general": "通用",
+      "team": "团队"
+    },
+    "brand": {
+      "fallbackWorkspaceName": "我的工作空间",
+      "loadFailed": "工作空间加载失败",
+      "personal": "个人工作空间",
+      "team": "团队工作空间",
+      "loadFailedDescription": "无法加载工作空间数据。请检查前后端 URL 配置，或稍后再试。",
+      "retry": "重试",
+      "memberCount": "{count} 名成员",
+      "inviteMember": "邀请新成员",
+      "emailFallback": "用户邮箱",
+      "workspaceListFailed": "无法加载工作空间列表",
+      "workspaceEmpty": "该账号暂时还没有可用工作空间。",
+      "createWorkspace": "创建新工作空间",
+      "settings": "设置",
+      "logout": "退出登录"
+    },
+    "footer": {
+      "title": "洞察实验室",
+      "description": "让洞察在这里转化为行动。"
+    },
+    "utils": {
+      "title": "快捷工具",
+      "actions": {
+        "edit": "编辑",
+        "delete": "删除",
+        "addShortcut": "添加快捷入口"
+      },
+      "dialog": {
+        "editTitle": "编辑快捷入口",
+        "editDescription": "更新显示名称和应用内路由。",
+        "createTitle": "添加快捷入口",
+        "createDescription": "填写显示名称和应用内路由，方便你从侧边栏快速跳转。",
+        "save": "保存",
+        "add": "添加"
+      },
+      "fields": {
+        "label": "显示名称",
+        "labelPlaceholder": "例如：阻塞事项",
+        "route": "路由",
+        "routePlaceholder": "例如：/projects 或 /issues?state=blocked"
+      },
+      "validation": {
+        "routeRequired": "请输入要固定的应用内路由。",
+        "routeInternalOnly": "这里只允许应用内路由，例如 /projects。",
+        "duplicateRoute": "该路由已在快捷入口列表中。",
+        "maxReached": "最多只能添加 5 个快捷入口。"
+      }
+    }
+  },
+  "settingsNav": {
+    "aiExecution": "AI 执行",
+    "appearance": "外观",
+    "application": "应用",
+    "billing": "计费",
+    "members": "成员",
+    "notifications": "通知",
+    "profile": "个人资料",
+    "security": "安全",
+    "teams": "团队",
+    "workspace": "工作空间"
+  },
+  "infobar": {
+    "menu": "菜单",
+    "showSidebar": "显示侧边栏",
+    "hideSidebar": "隐藏侧边栏"
+  },
+  "entryIntro": {
+    "prompt": "按任意键进入应用"
+  },
+  "search": {
+    "placeholder": "输入命令或搜索...",
+    "empty": "没有找到结果。",
+    "groups": {
+      "suggestions": "建议",
+      "settings": "设置"
+    },
+    "items": {
+      "calendar": "日历",
+      "searchEmoji": "搜索表情",
+      "calculator": "计算器",
+      "profile": "个人资料",
+      "billing": "计费",
+      "settings": "设置"
+    }
+  }
+}

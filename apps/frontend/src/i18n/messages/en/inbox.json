@@ -1,0 +1,110 @@
+{
+  "relativeTime": {
+    "justNow": "Just now",
+    "minutesAgo": "{count} min ago",
+    "hoursAgo": "{count} hr ago",
+    "daysAgo": "{count} d ago"
+  },
+  "views": {
+    "primary": "Primary",
+    "other": "Other",
+    "digest": "Digest",
+    "later": "Later",
+    "cleared": "Cleared"
+  },
+  "viewSubLabel": {
+    "digestCount": "{count} digest summaries",
+    "digestEmpty": "No digest summaries",
+    "laterCount": "{count} snoozed items",
+    "laterEmpty": "No snoozed items",
+    "clearedCount": "{count} cleared items",
+    "clearedEmpty": "No cleared items",
+    "pendingCount": "{count} pending items",
+    "pendingEmpty": "No items right now"
+  },
+  "empty": {
+    "primary": {
+      "title": "Nothing is waiting on you right now",
+      "description": "New review requests, assignments, and due items will appear here first."
+    },
+    "other": {
+      "title": "No updates need later attention",
+      "description": "Risks, blockers, and follow signals gather here when they need a second pass."
+    },
+    "digest": {
+      "title": "No doc digest is ready yet",
+      "description": "When the same project, issue, or workflow collects enough doc changes, this view merges them into one digest."
+    },
+    "later": {
+      "title": "No items are snoozed right now",
+      "description": "If a signal is read but should not interrupt your flow, you can move it here for later."
+    },
+    "cleared": {
+      "title": "Nothing has been cleared yet",
+      "description": "Signals you clear leave the active queue and stay here as a short record."
+    }
+  },
+  "source": {
+    "workflow": "Workflow",
+    "project": "Project",
+    "issue": "Issue",
+    "doc": "Doc"
+  },
+  "docTitles": {
+    "reviewReady": "Review packet ready: {title}",
+    "handoffReady": "Handoff packet ready: {title}",
+    "releaseUpdated": "Release checklist updated: {title}",
+    "decisionUpdated": "Decision updated: {title}",
+    "digestGenerated": "{count} collaboration docs changed recently"
+  },
+  "digest": {
+    "summaryPrefix": "Includes {items}",
+    "summaryCount": "{count} {label}",
+    "summaryLatest": "Latest: {title}"
+  },
+  "groups": {
+    "today": "Today",
+    "recentWeek": "Last 7 days",
+    "earlierThisMonth": "Earlier this month"
+  },
+  "filters": {
+    "unread": "Unread",
+    "actionable": "Needs action",
+    "clear": "Clear filters",
+    "archivedHint": "This view is already grouped by status, so extra filters are not available."
+  },
+  "actions": {
+    "refresh": "Refresh",
+    "clearView": "Clear current view",
+    "retry": "Retry"
+  },
+  "row": {
+    "openAria": "Open {title}",
+    "markSeen": "Mark as read",
+    "markUnread": "Mark as unread",
+    "accept": "Accept",
+    "snooze": "Snooze for later",
+    "clear": "Clear",
+    "cleared": "Cleared"
+  },
+  "hint": "Click any row to open the related issue, project, workflow, or doc. You can also mark it read, snooze it, accept a handoff, or clear the signal directly.",
+  "states": {
+    "loading": "Loading inbox...",
+    "errorTitle": "Failed to load the inbox",
+    "errorDescription": "Please try again in a moment."
+  },
+  "toasts": {
+    "openFailed": "Could not open this inbox item.",
+    "markedSeen": "Marked as read.",
+    "markedUnread": "Marked as unread.",
+    "updateReadFailed": "Could not update the read state.",
+    "snoozed": "Moved to later.",
+    "snoozeFailed": "Could not snooze this item.",
+    "cleared": "Inbox item cleared.",
+    "clearFailed": "Could not clear this item.",
+    "handoffAccepted": "Handoff accepted.",
+    "acceptFailed": "Could not accept the handoff.",
+    "clearedView": "Current view cleared.",
+    "clearAllFailed": "Could not clear the current view."
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "label": "언어",
+  "switch": "언어 전환",
+  "current": "현재 언어",
+  "english": "영어",
+  "chinese": "中文",
+  "korean": "한국어",
+  "japanese": "일본어"
+}

@@ -1,0 +1,293 @@
+{
+  "sourceSwitcher": {
+    "label": "Doc source",
+    "description": "Switch between shared team docs and your private docs.",
+    "placeholder": "Choose a doc source"
+  },
+  "source": {
+    "personal": "My docs",
+    "team": "Team docs",
+    "teamPersonal": "My private docs"
+  },
+  "creation": {
+    "newDoc": "New document",
+    "newFolder": "New folder",
+    "newTeamDoc": "New team doc",
+    "newPersonalDoc": "New personal doc",
+    "dialog": {
+      "title": "Create a structured doc",
+      "description": "Choose the collaboration shape this doc should carry. Synaply will insert a starter structure for the team.",
+      "templateLabel": "Template",
+      "templatePlaceholder": "Choose a template",
+      "titleLabel": "Document title",
+      "titlePlaceholder": "Enter a document title",
+      "projectHint": "This doc will be filed into the current project space automatically.",
+      "parentHint": "This doc will be created inside the current folder.",
+      "cancel": "Cancel",
+      "create": "Create document",
+      "creating": "Creating...",
+      "createFailed": "Failed to create the document."
+    },
+    "template": {
+      "blank": {
+        "label": "Blank doc",
+        "description": "Start from an empty page when you just need a free-form note.",
+        "title": "New document"
+      },
+      "projectBrief": {
+        "label": "Project brief",
+        "description": "Clarify why this project exists, what is in scope, and what success looks like.",
+        "title": "Project brief"
+      },
+      "decisionLog": {
+        "label": "Decision log",
+        "description": "Capture the decision, rationale, impacted work, and follow-up so handoffs stay grounded.",
+        "title": "Decision log"
+      },
+      "reviewPacket": {
+        "label": "Review packet",
+        "description": "Package the context, changes, and questions reviewers need before giving a response.",
+        "title": "Review packet"
+      },
+      "handoffPacket": {
+        "label": "Handoff packet",
+        "description": "Prepare the next owner with readiness notes, dependencies, links, and expectations.",
+        "title": "Handoff packet"
+      },
+      "releaseChecklist": {
+        "label": "Release checklist",
+        "description": "Keep launch readiness, risk checks, owners, and post-release watchpoints in one place.",
+        "title": "Release checklist"
+      }
+    },
+    "templateContent": {
+      "projectBrief": {
+        "intro": "Summarize what this project is trying to move forward and why the team should align around it now.",
+        "goal": "[Goal and scope] Describe the delivery goal, scope boundary, and what this project will intentionally not cover.",
+        "scope": "[Key context] Capture the current context, constraints, dependencies, and any assumptions the team should hold.",
+        "success": "[Success signal] Explain how the team will know this project is ready, successful, or safe to ship.",
+        "openQuestions": "[Open questions] List the unresolved questions, decisions, or risks that still need follow-up."
+      },
+      "decisionLog": {
+        "intro": "Use this note to preserve one concrete decision so the next owner can understand the why without replaying the entire discussion.",
+        "decision": "[Decision] State the decision in one sentence.",
+        "context": "[Context] Explain what changed, what pressure triggered the decision, or what tradeoff needed resolution.",
+        "rationale": "[Rationale] Write why this option won over the alternatives.",
+        "impact": "[Affected work] Link the impacted project, issue, workflow, or release surface and note what changes next.",
+        "followUp": "[Follow-up] Capture the next actions, owners, and the point when this decision should be revisited."
+      },
+      "reviewPacket": {
+        "intro": "Package the minimum context a reviewer needs so the review can move asynchronously without extra chasing.",
+        "goal": "[Review goal] Clarify what kind of review you need and what decision should come out of it.",
+        "changeSummary": "[What changed] Summarize the proposal, implementation, or artifact under review.",
+        "focusQuestions": "[Reviewer focus] List the questions, risks, or edge cases you want reviewers to inspect closely.",
+        "decision": "[Decision / requested changes] Leave space to record the outcome, requested changes, or approval notes.",
+        "nextStep": "[Next handoff] Explain what should happen after review and who is expected to take over."
+      },
+      "handoffPacket": {
+        "intro": "Use this packet to make the next owner productive without needing another synchronous walkthrough.",
+        "target": "[Handoff target] State who this handoff is for and what they are expected to take over.",
+        "readyNow": "[Ready now] Summarize what is already done, verified, and safe for the next owner to trust.",
+        "dependencies": "[Dependencies and blockers] List open blockers, risks, decisions, or inputs still needed.",
+        "links": "[Links and evidence] Attach the issue, doc, design, PR, or release context the receiver should read first.",
+        "receiverChecklist": "[Receiver checklist] Spell out the first checks or actions the receiver should complete after accepting the handoff."
+      },
+      "releaseChecklist": {
+        "intro": "Keep launch readiness visible so product, design, engineering, ops, and support can self-serve the current state.",
+        "scope": "[Release scope] Describe what is shipping, what is intentionally excluded, and what environments are affected.",
+        "risk": "[Risks and safeguards] Record the visible risks, rollback path, monitoring, and any coordination dependencies.",
+        "goNoGo": "[Go / no-go checks] List the checks that must pass before release is considered ready.",
+        "ownerMap": "[Owner map] Make clear who owns approval, execution, communication, and post-release follow-up.",
+        "postRelease": "[Post-release watch] Capture what the team should monitor immediately after release and what thresholds require action."
+      }
+    }
+  },
+  "docKind": {
+    "general": "General doc",
+    "projectBrief": "Project brief",
+    "decisionLog": "Decision log",
+    "reviewPacket": "Review packet",
+    "handoffPacket": "Handoff packet",
+    "releaseChecklist": "Release checklist"
+  },
+  "consumption": {
+    "summaryPrefix": "Digest-ready doc changes: {items}",
+    "summaryEmpty": "No structured doc has been linked yet. Start with the packet the next owner will need most.",
+    "summaryCount": "{count} {label}",
+    "emptyTitle": "No doc yet",
+    "emptyDescription": "This collaboration packet has not been captured yet.",
+    "updatedAt": "Updated {value}",
+    "openDoc": "Open doc",
+    "createDoc": "Create doc"
+  },
+  "overview": {
+    "shared": {
+      "documentMetric": "Documents",
+      "folderMetric": "Folders",
+      "structuredMetric": "Structured docs",
+      "recentMetric": "Updated this week",
+      "newDocTitle": "New document",
+      "categoryTitle": "Categories",
+      "recentTitle": "Recently updated",
+      "recentDescription": "Bring active documents forward so you can continue the work without re-finding context.",
+      "structuredTitle": "Collaboration packets",
+      "structuredDescription": "Keep briefs, decision logs, review packets, and handoff packets on the same operating surface so the team can move without extra chasing.",
+      "workspaceTitle": "Top-level spaces",
+      "workspaceDescription": "These entries anchor the main themes of the current doc surface and make it easier to re-enter a stream of work quickly.",
+      "projectSpacesTitle": "Project spaces",
+      "projectSpacesDescription": "Use projects as the primary organizing axis for team docs. Each project keeps a stable space for briefs, decisions, and handoffs.",
+      "otherSpacesTitle": "Other top-level spaces",
+      "otherSpacesDescription": "Keep team doc spaces here when they do not belong directly to a single project.",
+      "openAction": "Open",
+      "enterSpace": "Enter space",
+      "totalCount": "{count} docs",
+      "folderContains": "{count} items",
+      "emptyFolder": "Empty folder",
+      "updatedAt": "Updated {value}",
+      "projectSpaceMeta": "{docs} docs · {folders} subfolders"
+    },
+    "personal": {
+      "eyebrow": "Personal workspace",
+      "title": "My docs",
+      "subtitle": "{count} personal docs",
+      "heroDescription": "Capture notes, drafts, and execution context in a workspace that feels calm and efficient instead of cluttered or temporary.",
+      "newDocDescription": "Create a new personal doc",
+      "emptyTitle": "No docs yet",
+      "emptyDescription": "Create your first document to start capturing ideas.",
+      "emptyAction": "Create doc"
+    },
+    "team": {
+      "eyebrow": "Team knowledge surface",
+      "title": "Team docs",
+      "subtitle": "{count} team docs",
+      "heroDescription": "Keep project context, decisions, reviews, and handoffs in one deliberate surface. The team should not need to replay chat history just to regain context.",
+      "documentMetric": "Team docs",
+      "newDocDescription": "Create a new team doc",
+      "emptyTitle": "No team docs yet",
+      "emptyDescription": "Create the first team document and collaborate with your team.",
+      "emptyAction": "Create team doc"
+    },
+    "teamPersonal": {
+      "eyebrow": "Private work layer",
+      "title": "My work docs",
+      "subtitle": "{count} personal work docs",
+      "heroDescription": "Keep your personal breakdowns, notes, and preparation work attached to the team context without polluting the shared surface.",
+      "documentMetric": "Work docs",
+      "newDocDescription": "Create a new personal work doc",
+      "emptyTitle": "No personal work docs yet",
+      "emptyDescription": "Create a personal doc inside the team workspace that only you can access.",
+      "emptyAction": "Create personal doc"
+    }
+  },
+  "states": {
+    "loadingPage": "Loading docs...",
+    "loadingSidebar": "Loading...",
+    "loadingEditor": "Loading editor..."
+  },
+  "welcome": {
+    "title": "Welcome to docs",
+    "emptyDescription": "There are no docs yet. Click the + button in the sidebar to create one.",
+    "selectDescription": "Choose a document on the left to start editing."
+  },
+  "emptyState": {
+    "eyebrow": "Docs workspace",
+    "emptyDescription": "No document is open yet. Browse the tree on the left, or start with a shortcut and capture the next thing that matters.",
+    "selectDescription": "Open an existing document from the left, or use a shortcut to create a blank one right away.",
+    "shortcutsTitle": "Available shortcuts",
+    "createHint": "If there are no docs yet, press Cmd + N to create a blank document instantly.",
+    "selectHint": "Need more room to focus? Press Cmd + B to hide or bring back the doc sidebar.",
+    "shortcuts": {
+      "newDoc": "Quick new document",
+      "toggleSidebar": "Toggle doc sidebar",
+      "saveDoc": "Save current document"
+    }
+  },
+  "sidebar": {
+    "title": "Docs",
+    "searchPlaceholder": "Search docs...",
+    "newChildDoc": "Create child document",
+    "newDoc": "New document",
+    "newFolder": "New folder",
+    "duplicate": "Duplicate",
+    "duplicateSuffix": "Copy",
+    "rename": "Rename",
+    "delete": "Delete",
+    "projectSpaces": "Project spaces",
+    "otherSpaces": "Other spaces",
+    "projectSpaceBadge": "Project",
+    "emptySearch": "No matching documents found",
+    "emptyTitle": "No docs yet",
+    "emptyDescription": "Click the + button above to create one",
+    "deleteDialog": {
+      "title": "Delete document?",
+      "description": "This will delete “{title}”. {children} This action cannot be undone.",
+      "children": "Its child documents will be deleted too.",
+      "cancel": "Cancel",
+      "confirm": "Confirm delete"
+    }
+  },
+  "toolbar": {
+    "collapseTitle": "Collapse editor",
+    "expandTitle": "Expand editor",
+    "collapse": "Collapse",
+    "expand": "Expand"
+  },
+  "tabs": {
+    "close": "Close",
+    "closeOthers": "Close others",
+    "closeAll": "Close all"
+  },
+  "editor": {
+    "save": "Save",
+    "saving": "Saving...",
+    "cancel": "Cancel",
+    "untitled": "Untitled document",
+    "editable": "Editable",
+    "readonly": "Read-only",
+    "clickToEdit": "Click the title to edit",
+    "updatedAt": "Updated {value}",
+    "meta": {
+      "folder": "Folder",
+      "document": "Document",
+      "private": "Private",
+      "teamReadonly": "Team read-only",
+      "teamEditable": "Team editable",
+      "public": "Public"
+    }
+  },
+  "blocknote": {
+    "conflict": "A remote change was detected. Your local draft has been preserved.",
+    "saveFailed": "Save failed",
+    "saving": "Saving...",
+    "conflictStatus": "Conflict detected. Your local draft has been preserved.",
+    "errorStatus": "Save failed. Your local draft has been preserved locally.",
+    "recoveredDraft": "Recovered your local draft",
+    "draftPending": "Local draft pending sync",
+    "updatedAt": "Updated {value}",
+    "ready": "Ready",
+    "shortcut": "Press {key} + S to save • Auto-saves every 30 seconds"
+  },
+  "folderIntro": {
+    "saveFailed": "Failed to save the folder description.",
+    "folderMeta": "Folder • Created {value}",
+    "editDescription": "Edit description",
+    "title": "Folder description",
+    "projectRootBadge": "Project space",
+    "projectRootDescription": "This folder is managed automatically by its project. You can keep editing the contents inside it, but the folder itself stays aligned with the project's name and lifecycle.",
+    "placeholder": "Enter a folder description...",
+    "saving": "Saving...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "emptyEditable": "Click to add a folder description...",
+    "emptyReadonly": "No folder description yet",
+    "tipsTitle": "Tips",
+    "tip1": "This is a folder used to organize and categorize documents.",
+    "tip2": "Right-click the folder to create a child document.",
+    "tip3": "You can add detailed guidance and usage notes here.",
+    "projectRootTip": "This root folder cannot be deleted while its project still exists.",
+    "visibility": "Folder visibility: {value}"
+  },
+  "context": {
+    "docNotReady": "The document does not exist or has not finished loading yet."
+  }
+}
