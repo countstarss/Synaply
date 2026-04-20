@@ -21,7 +21,15 @@ function resolveMessagesRoot() {
     return resolvedMessagesRoot;
   }
 
-  const directCandidate = join(process.cwd(), "src", "i18n", "messages");
+  const moduleCandidate = join(moduleDir, "messages");
+
+  if (existsSync(moduleCandidate)) {
+    resolvedMessagesRoot = moduleCandidate;
+    return resolvedMessagesRoot;
+  }
+
+  const workspaceRoot = /* turbopackIgnore: true */ process.cwd();
+  const directCandidate = join(workspaceRoot, "src", "i18n", "messages");
 
   if (existsSync(directCandidate)) {
     resolvedMessagesRoot = directCandidate;
@@ -29,7 +37,7 @@ function resolveMessagesRoot() {
   }
 
   const appsCandidate = join(
-    process.cwd(),
+    workspaceRoot,
     "apps",
     "frontend",
     "src",
@@ -39,32 +47,6 @@ function resolveMessagesRoot() {
 
   if (existsSync(appsCandidate)) {
     resolvedMessagesRoot = appsCandidate;
-    return resolvedMessagesRoot;
-  }
-
-  for (const entry of readdirSync(process.cwd(), { withFileTypes: true })) {
-    if (!entry.isDirectory() || entry.name.startsWith(".")) {
-      continue;
-    }
-
-    const nestedCandidate = join(
-      process.cwd(),
-      entry.name,
-      "src",
-      "i18n",
-      "messages",
-    );
-
-    if (existsSync(nestedCandidate)) {
-      resolvedMessagesRoot = nestedCandidate;
-      return resolvedMessagesRoot;
-    }
-  }
-
-  const moduleCandidate = join(moduleDir, "messages");
-
-  if (existsSync(moduleCandidate)) {
-    resolvedMessagesRoot = moduleCandidate;
     return resolvedMessagesRoot;
   }
 

@@ -1,5 +1,9 @@
-import { NextConfig } from "next";
+import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
+
+const configDir = dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
   devIndicators: false,
@@ -26,6 +30,9 @@ const nextConfig: NextConfig = {
     staleTimes: {
       dynamic: 30,
     },
+  },
+  turbopack: {
+    root: join(configDir, "..", ".."),
   },
   images: {
     remotePatterns: [
