@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Header,
   Param,
   Post,
   Query,
@@ -31,6 +32,7 @@ export class InboxController {
   @Get()
   @ApiOperation({ summary: '获取当前用户的 Inbox feed' })
   @ApiParam({ name: 'workspaceId', description: '工作空间 ID' })
+  @Header('Cache-Control', 'private, max-age=10, stale-while-revalidate=20')
   findAll(
     @Param('workspaceId') workspaceId: string,
     @Req() req: Request,
@@ -42,6 +44,7 @@ export class InboxController {
   @Get('summary')
   @ApiOperation({ summary: '获取当前用户的 Inbox summary' })
   @ApiParam({ name: 'workspaceId', description: '工作空间 ID' })
+  @Header('Cache-Control', 'private, max-age=10, stale-while-revalidate=20')
   getSummary(@Param('workspaceId') workspaceId: string, @Req() req: Request) {
     return this.inboxService.getInboxSummary(workspaceId, req.user?.sub);
   }

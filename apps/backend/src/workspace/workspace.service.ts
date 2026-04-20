@@ -151,9 +151,9 @@ export class WorkspaceService {
   private isWorkflowIssue(issue: WorkspaceIssue) {
     return Boolean(
       issue.issueType === IssueType.WORKFLOW ||
-        issue.workflowId ||
-        issue.workflowSnapshot ||
-        issue.workflowRun,
+      issue.workflowId ||
+      issue.workflowSnapshot ||
+      issue.workflowRun,
     );
   }
 
@@ -164,15 +164,15 @@ export class WorkspaceService {
 
     return Boolean(
       issue.workflowRun?.runStatus === 'DONE' ||
-        issue.currentStepStatus === IssueStatus.DONE ||
-        issue.state?.category === IssueStateCategory.DONE,
+      issue.currentStepStatus === IssueStatus.DONE ||
+      issue.state?.category === IssueStateCategory.DONE,
     );
   }
 
   private isBlocked(issue: WorkspaceIssue) {
     return Boolean(
       issue.workflowRun?.runStatus === 'BLOCKED' ||
-        issue.currentStepStatus === IssueStatus.BLOCKED,
+      issue.currentStepStatus === IssueStatus.BLOCKED,
     );
   }
 
@@ -685,6 +685,9 @@ export class WorkspaceService {
     const inboxSignals = await this.inboxService.getMyWorkInboxSignals(
       workspaceId,
       userId,
+      {
+        validateAccess: false,
+      },
     );
 
     return {

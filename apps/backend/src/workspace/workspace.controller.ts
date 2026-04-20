@@ -1,4 +1,4 @@
-import { Controller, Get, Req, UseGuards, Param } from '@nestjs/common';
+import { Controller, Get, Header, Req, UseGuards, Param } from '@nestjs/common';
 import { MyWorkResponse, WorkspaceService } from './workspace.service';
 import { SupabaseAuthGuard } from '../auth/supabase-auth.guard';
 import {
@@ -82,6 +82,7 @@ export class WorkspaceController {
     description: '获取个人工作聚合成功',
   })
   @ApiResponse({ status: 401, description: '未授权访问' })
+  @Header('Cache-Control', 'private, max-age=10, stale-while-revalidate=20')
   async getMyWork(
     @Param('workspaceId') workspaceId: string,
     @Req() req,

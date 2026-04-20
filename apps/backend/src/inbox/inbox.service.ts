@@ -122,6 +122,12 @@ interface InboxSignalDraft {
   metadata: Record<string, unknown> | null;
 }
 
+interface InboxReadOptions {
+  sync?: boolean;
+  validateAccess?: boolean;
+  statuses?: InboxItemStatus[];
+}
+
 const PRIORITY_ORDER: Record<InboxItemPriority, number> = {
   urgent: 4,
   high: 3,
@@ -210,16 +216,16 @@ export class InboxService {
   private isCompleted(issue: WorkspaceIssue) {
     return Boolean(
       issue.workflowRun?.runStatus === 'DONE' ||
-        issue.currentStepStatus === IssueStatus.DONE ||
-        issue.state?.category === IssueStateCategory.DONE ||
-        issue.state?.category === IssueStateCategory.CANCELED,
+      issue.currentStepStatus === IssueStatus.DONE ||
+      issue.state?.category === IssueStateCategory.DONE ||
+      issue.state?.category === IssueStateCategory.CANCELED,
     );
   }
 
   private isBlocked(issue: WorkspaceIssue) {
     return Boolean(
       issue.workflowRun?.runStatus === 'BLOCKED' ||
-        issue.currentStepStatus === IssueStatus.BLOCKED,
+      issue.currentStepStatus === IssueStatus.BLOCKED,
     );
   }
 
@@ -1660,17 +1666,40 @@ export class InboxService {
     });
   }
 
-  private async getVisibleInboxItems(workspaceId: string, userId: string) {
-    await this.syncUserInboxState(workspaceId, userId);
+  private async getInboxFeedItems(
+    workspaceId: string,
+    userId: string,
+    options: InboxReadOptions = {},
+  ) {
+    if (options.validateAccess) {
+      await this.teamMemberService.validateWorkspaceAccess(userId, workspaceId);
+    }
+
+    if (options.sync) {
+      await this.syncUserInboxState(workspaceId, userId);
+    }
 
     const records = await this.prisma.inboxItem.findMany({
       where: {
         workspaceId,
         targetUserId: userId,
+        ...(options.statuses
+          ? {
+              status: {
+                in: options.statuses,
+              },
+            }
+          : {}),
       },
     });
 
-    const items = records.map((record) => this.mapRecord(record));
+    return records.map((record) => this.mapRecord(record));
+  }
+
+  private async getVisibleInboxItems(workspaceId: string, userId: string) {
+    const items = await this.getInboxFeedItems(workspaceId, userId, {
+      sync: true,
+    });
     const activeItems = items.filter(
       (item) => item.status === 'unread' || item.status === 'seen',
     );
@@ -1712,22 +1741,10 @@ export class InboxService {
       workspaceId,
       userId,
     );
-    const useStatusRecords =
+    const useAllRecords =
       query.status && query.status !== 'unread' && query.status !== 'seen';
 
-    const sourceItems = useStatusRecords
-      ? this.sortFeedItems(
-          (
-            await this.prisma.inboxItem.findMany({
-              where: {
-                workspaceId,
-                targetUserId: userId,
-                status: query.status,
-              },
-            })
-          ).map((record) => this.mapRecord(record)),
-        )
-      : active;
+    const sourceItems = useAllRecords ? this.sortFeedItems(all) : active;
     const filteredItems = this.filterFeedItems(sourceItems, query);
 
     const limit = query.limit ?? 50;
@@ -1884,8 +1901,14 @@ export class InboxService {
   async getMyWorkInboxSignals(
     workspaceId: string,
     userId: string,
+    options: { validateAccess?: boolean } = {},
   ): Promise<MyWorkInboxSignal[]> {
-    const { active } = await this.getVisibleInboxItems(workspaceId, userId);
+    const active = this.sortFeedItems(
+      await this.getInboxFeedItems(workspaceId, userId, {
+        statuses: ['unread', 'seen'],
+        validateAccess: options.validateAccess ?? true,
+      }),
+    );
 
     return active.slice(0, 3).map((item) => ({
       id: item.id,
