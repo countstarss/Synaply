@@ -4,6 +4,7 @@ import {
   NextIntlClientProvider,
   type AbstractIntlMessages,
 } from "next-intl";
+import RuntimeConfigGate from "@/components/app/RuntimeConfigGate";
 import { AuthProvider } from "@/context/AuthContext";
 import { QueryProvider } from "./query-provider"; // 导入 QueryProvider
 
@@ -23,9 +24,11 @@ const AppProvider = ({ children, locale, messages }: AppProviderProps) => {
       storageKey="synaply-theme"
     >
       <NextIntlClientProvider locale={locale} messages={messages}>
-        <QueryProvider>
-          <AuthProvider>{children}</AuthProvider>
-        </QueryProvider>
+        <RuntimeConfigGate>
+          <QueryProvider>
+            <AuthProvider>{children}</AuthProvider>
+          </QueryProvider>
+        </RuntimeConfigGate>
       </NextIntlClientProvider>
     </ThemeProvider>
   );

@@ -1,46 +1,14 @@
 import { createBrowserClient } from "@supabase/ssr";
+import { getSupabaseRuntimeConfigIssue } from "@/lib/public-runtime-config";
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 export const SUPABASE_AVATAR_BUCKET =
   process.env.NEXT_PUBLIC_SUPABASE_AVATAR_BUCKET || "avatars";
 
-function isLocalHostname(hostname: string) {
-  return (
-    hostname === "localhost" ||
-    hostname === "127.0.0.1" ||
-    hostname === "::1" ||
-    hostname.endsWith(".local")
-  );
-}
-
 function validatePublicSupabaseRuntimeConfig() {
-  if (typeof window === "undefined") {
-    return;
-  }
-
-  const currentHostname = window.location.hostname;
-  if (isLocalHostname(currentHostname)) {
-    return;
-  }
-
-  let configuredHostname: string;
-
-  try {
-    configuredHostname = new URL(supabaseUrl).hostname;
-  } catch {
-    throw new Error(
-      "Invalid NEXT_PUBLIC_SUPABASE_URL. Expected a full Supabase project URL.",
-    );
-  }
-
-  if (isLocalHostname(configuredHostname)) {
-    throw new Error(
-      [
-        "Invalid production Supabase configuration.",
-        "NEXT_PUBLIC_SUPABASE_URL points to a local Supabase instance, but the app is running on a public hostname.",
-        "Update your deployed frontend env vars to use the hosted Supabase project URL instead of localhost/127.0.0.1.",
-      ].join(" "),
-    );
+  const issue = getSupabaseRuntimeConfigIssue();
+  if (issue) {
+    throw new Error(issue);
   }
 }
 
