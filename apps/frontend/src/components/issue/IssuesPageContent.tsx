@@ -435,9 +435,7 @@ export default function IssuesPageContent() {
           active: activeFilteredIssueCount,
         });
 
-  const handleCreateIssue = () => {
-    queryClient.invalidateQueries({ queryKey: ["issues", workspaceId] });
-  };
+  const handleCreateIssue = () => {};
 
   const handleViewIssue = (issue: Issue) => {
     router.push(`/issues/${encodeURIComponent(issue.id)}`);

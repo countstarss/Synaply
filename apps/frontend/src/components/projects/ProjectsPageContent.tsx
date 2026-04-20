@@ -252,18 +252,34 @@ export default function ProjectsPageContent() {
       return;
     }
 
-    try {
-      if (projectDialogMode === "create") {
-        const createdProject = await createProjectMutation.mutateAsync({
+    if (projectDialogMode === "create") {
+      createProjectMutation.mutate(
+        {
           workspaceId,
           data: values,
-        });
+        },
+        {
+          onSuccess: (createdProject) => {
+            setIsProjectDialogOpen(false);
+            startTransition(() => {
+              router.push(buildProjectPath(createdProject.id));
+            });
+            toast.success(t("toasts.created"));
+          },
+          onError: (submitError) => {
+            toast.error(
+              submitError instanceof Error
+                ? submitError.message
+                : t("toasts.saveFailed"),
+            );
+          },
+        },
+      );
+      return;
+    }
 
-        startTransition(() => {
-          router.push(buildProjectPath(createdProject.id));
-        });
-        toast.success(t("toasts.created"));
-      } else if (editingProject) {
+    try {
+      if (editingProject) {
         const updatedProject = await updateProjectMutation.mutateAsync({
           workspaceId,
           projectId: editingProject.id,
@@ -485,10 +501,7 @@ export default function ProjectsPageContent() {
       <CreateIssueModal
         isOpen={isCreateIssueOpen}
         onClose={() => setIsCreateIssueOpen(false)}
-        onCreated={() => {
-          invalidateIssues();
-          setIsCreateIssueOpen(false);
-        }}
+        onCreated={() => {}}
         initialProjectId={selectedProject?.id}
         projectContextName={selectedProject?.name}
       />

@@ -371,25 +371,40 @@ export default function CreateIssueModal({
           : undefined,
     };
 
-    try {
-      if (issueType === "normal") {
-        await createIssueMutation.mutateAsync({
+    const handleCreateError = (error: unknown) => {
+      console.error("Failed to create issue:", error);
+      toast.error(error instanceof Error ? error.message : t("toasts.createFailed"));
+    };
+
+    if (issueType === "normal") {
+      createIssueMutation.mutate(
+        {
           workspaceId,
           issue: issueData,
-        });
-      } else {
-        await createWorkflowIssueMutation.mutateAsync({
+        },
+        {
+          onSuccess: () => {
+            onCreated();
+            handleClose();
+          },
+          onError: handleCreateError,
+        },
+      );
+    } else {
+      createWorkflowIssueMutation.mutate(
+        {
           workspaceId,
           issue: issueData,
           workflowId: selectedWorkflowId,
-        });
-      }
-
-      onCreated();
-      handleClose();
-    } catch (error) {
-      console.error("Failed to create issue:", error);
-      toast.error(error instanceof Error ? error.message : t("toasts.createFailed"));
+        },
+        {
+          onSuccess: () => {
+            onCreated();
+            handleClose();
+          },
+          onError: handleCreateError,
+        },
+      );
     }
   };
 

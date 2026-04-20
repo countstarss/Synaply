@@ -8,9 +8,38 @@ import {
   deleteWorkflow,
   publishWorkflow,
   updateWorkflowJson,
+  type WorkflowResponse,
 } from "@/lib/fetchers/workflow";
 import { CreateWorkflowDto, UpdateWorkflowDto } from "@/api";
 import { useAuth } from "@/context/AuthContext";
+
+const OPTIMISTIC_WORKFLOW_ID_PREFIX = "optimistic-workflow-";
+
+function createOptimisticWorkflow(
+  workspaceId: string,
+  creatorId: string,
+  data: CreateWorkflowDto,
+) {
+  const now = new Date().toISOString();
+
+  return {
+    id: `${OPTIMISTIC_WORKFLOW_ID_PREFIX}${Date.now()}`,
+    name: data.name,
+    workspaceId,
+    createdAt: now,
+    updatedAt: now,
+    status: "DRAFT",
+    creatorId,
+    visibility: data.visibility ?? "PRIVATE",
+    description: data.description,
+    totalSteps: 0,
+    version: "draft",
+    currentStepIndex: 0,
+    currentStepStatus: "TODO",
+    isSystemTemplate: false,
+    assigneeMap: {},
+  };
+}
 
 interface QueryEnabledOptions {
   enabled?: boolean;
@@ -77,11 +106,60 @@ export const useCreateWorkflow = () => {
       }
       return createWorkflow(workspaceId, data, session.access_token);
     },
-    onSuccess: (data, variables) => {
-      // 刷新工作流列表
-      queryClient.invalidateQueries({
+    onMutate: async (variables) => {
+      await queryClient.cancelQueries({
         queryKey: ["workflows", variables.workspaceId],
       });
+
+      const previousWorkflows =
+        queryClient.getQueryData<Awaited<ReturnType<typeof fetchWorkflows>>>(
+          ["workflows", variables.workspaceId],
+        ) ?? [];
+      const optimisticWorkflow = createOptimisticWorkflow(
+        variables.workspaceId,
+        session?.user?.id ?? "",
+        variables.data,
+      );
+
+      queryClient.setQueryData<WorkflowResponse[]>(
+        ["workflows", variables.workspaceId],
+        (current = []) => [optimisticWorkflow, ...current],
+      );
+
+      return {
+        previousWorkflows,
+        optimisticWorkflowId: optimisticWorkflow.id,
+      };
+    },
+    onError: (_error, variables, context) => {
+      if (!context) {
+        return;
+      }
+
+      queryClient.setQueryData(
+        ["workflows", variables.workspaceId],
+        context.previousWorkflows,
+      );
+    },
+    onSuccess: (data, variables, context) => {
+      queryClient.setQueryData<WorkflowResponse[]>(
+        ["workflows", variables.workspaceId],
+        (current = []) => {
+          const nextWorkflows = current.map((workflow) =>
+            workflow.id === context?.optimisticWorkflowId ? data : workflow,
+          );
+
+          if (!nextWorkflows.some((workflow) => workflow.id === data.id)) {
+            nextWorkflows.unshift(data);
+          }
+
+          return nextWorkflows;
+        },
+      );
+      queryClient.setQueryData(
+        ["workflow", variables.workspaceId, data.id],
+        data,
+      );
     },
   });
 };

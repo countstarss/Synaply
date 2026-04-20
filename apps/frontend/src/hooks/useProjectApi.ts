@@ -11,7 +11,40 @@ import {
   getProjectSummary,
   getProjects,
   updateProject,
+  type Project,
 } from "@/lib/fetchers/project";
+import {
+  ProjectRiskLevel,
+  ProjectStatus,
+  VisibilityType,
+} from "@/types/prisma";
+
+const OPTIMISTIC_PROJECT_ID_PREFIX = "optimistic-project-";
+
+function createOptimisticProject(
+  workspaceId: string,
+  creatorId: string,
+  data: CreateProjectDto,
+): Project {
+  const now = new Date().toISOString();
+
+  return {
+    id: `${OPTIMISTIC_PROJECT_ID_PREFIX}${Date.now()}`,
+    name: data.name,
+    description: data.description ?? null,
+    brief: data.brief ?? null,
+    status: data.status ?? ProjectStatus.PLANNING,
+    phase: data.phase ?? null,
+    riskLevel: data.riskLevel ?? ProjectRiskLevel.LOW,
+    workspaceId,
+    creatorId,
+    ownerMemberId: data.ownerMemberId ?? "",
+    lastSyncAt: data.lastSyncAt ?? null,
+    visibility: data.visibility ?? VisibilityType.PRIVATE,
+    createdAt: now,
+    updatedAt: now,
+  };
+}
 
 interface QueryEnabledOptions {
   enabled?: boolean;
@@ -100,21 +133,62 @@ export const useCreateProject = () => {
 
       return createProject(workspaceId, data, session.access_token);
     },
-    onSuccess: (_, variables) => {
-      queryClient.invalidateQueries({
+    onMutate: async (variables) => {
+      await queryClient.cancelQueries({
         queryKey: ["projects", variables.workspaceId],
       });
-      queryClient.invalidateQueries({
+
+      const previousProjects =
+        queryClient.getQueryData<Project[]>(["projects", variables.workspaceId]) ?? [];
+      const optimisticProject = createOptimisticProject(
+        variables.workspaceId,
+        session?.user?.id ?? "",
+        variables.data,
+      );
+
+      queryClient.setQueryData<Project[]>(
+        ["projects", variables.workspaceId],
+        (current = []) => [optimisticProject, ...current],
+      );
+
+      return {
+        previousProjects,
+        optimisticProjectId: optimisticProject.id,
+      };
+    },
+    onError: (_error, variables, context) => {
+      if (!context) {
+        return;
+      }
+
+      queryClient.setQueryData(
+        ["projects", variables.workspaceId],
+        context.previousProjects,
+      );
+    },
+    onSuccess: (createdProject, variables, context) => {
+      queryClient.setQueryData<Project[]>(
+        ["projects", variables.workspaceId],
+        (current = []) => {
+          const nextProjects = current.map((project) =>
+            project.id === context?.optimisticProjectId ? createdProject : project,
+          );
+
+          if (
+            !nextProjects.some((project) => project.id === createdProject.id)
+          ) {
+            nextProjects.unshift(createdProject);
+          }
+
+          return nextProjects;
+        },
+      );
+      queryClient.setQueryData(
+        ["project", variables.workspaceId, createdProject.id],
+        createdProject,
+      );
+      void queryClient.invalidateQueries({
         queryKey: ["docs", variables.workspaceId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["project-summary", variables.workspaceId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["inbox", variables.workspaceId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["inbox-summary", variables.workspaceId],
       });
     },
   });
