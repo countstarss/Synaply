@@ -4,7 +4,7 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { verifyJwt } from './verify-jwt';
+import { JwtVerificationError, verifyJwt } from './verify-jwt';
 import { AuthService } from './auth.service';
 
 const getFirstNonEmptyString = (...values: unknown[]) => {
@@ -33,7 +33,19 @@ export class SupabaseAuthGuard implements CanActivate {
     }
 
     // 使用自定义工具函数验证 Supabase JWT
-    const payload = await verifyJwt(token);
+    let payload;
+
+    try {
+      payload = await verifyJwt(token);
+    } catch (error) {
+      if (error instanceof JwtVerificationError) {
+        throw new UnauthorizedException(
+          `Invalid or expired token. ${error.message}`,
+        );
+      }
+
+      throw error;
+    }
 
     if (!payload) {
       // 验证失败或过期，抛出未授权错误

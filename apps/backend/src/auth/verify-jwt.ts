@@ -3,8 +3,36 @@ import { getAuthConfig } from './auth.config';
 type JoseModule = Awaited<ReturnType<typeof loadJose>>;
 type RemoteJwkSet = ReturnType<JoseModule['createRemoteJWKSet']>;
 
+// Keep a statically analyzable jose reference so serverless bundlers include it.
+// This function is never executed at runtime.
+const traceJoseModuleForServerless = () => import('jose');
+void traceJoseModuleForServerless;
+
 let joseModulePromise: Promise<typeof import('jose')> | undefined;
 const remoteJwkSetCache = new Map<string, RemoteJwkSet>();
+
+export class JwtVerificationError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'JwtVerificationError';
+  }
+}
+
+function normalizeJwtVerificationError(error: unknown) {
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  if (typeof error === 'string') {
+    return error;
+  }
+
+  try {
+    return JSON.stringify(error);
+  } catch {
+    return 'Unknown JWT verification error';
+  }
+}
 
 function loadJose() {
   if (!joseModulePromise) {
@@ -59,7 +87,12 @@ export async function verifyJwt(token: string) {
 
     return payload;
   } catch (err) {
-    console.error('JWT verification failed:', err);
-    return null;
+    const message = normalizeJwtVerificationError(err);
+    console.error('JWT verification failed:', {
+      message,
+      issuer: supabaseJwtIssuer,
+      jwksUrl: supabaseJwtJwksUrl,
+    });
+    throw new JwtVerificationError(message);
   }
 }
