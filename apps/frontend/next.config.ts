@@ -7,6 +7,7 @@ const configDir = dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
   devIndicators: false,
+  allowedDevOrigins: ["https://synaply-backend.vercel.app", "https://www.synaply.team", "https://synaply.team"],
   async redirects() {
     return [
       {
