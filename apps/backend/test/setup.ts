@@ -8,16 +8,27 @@ let app: INestApplication;
 // 全局清理数据库的函数
 async function cleanDatabase(prisma: PrismaService) {
   // 从依赖最深的表开始删除
-  await prisma.issueDependency.deleteMany({});
+  await prisma.aiPendingApproval.deleteMany({});
+  await prisma.aiRunStep.deleteMany({});
+  await prisma.aiMessage.deleteMany({});
+  await prisma.aiRun.deleteMany({});
+  await prisma.aiThreadContextPin.deleteMany({});
+  await prisma.aiThread.deleteMany({});
+  await prisma.inboxItem.deleteMany({});
+  await prisma.docRevision.deleteMany({});
+  await prisma.doc.deleteMany({});
+  await prisma.issueLabel.deleteMany({});
+  await prisma.issueAssignee.deleteMany({});
   await prisma.comment.deleteMany({});
   await prisma.issueActivity.deleteMany({});
+  await prisma.issueStepRecord.deleteMany({});
   await prisma.issue.deleteMany({});
-  await prisma.workflowStep.deleteMany({});
+  await prisma.task.deleteMany({});
+  await prisma.calendar.deleteMany({});
+  await prisma.label.deleteMany({});
+  await prisma.issueState.deleteMany({});
   await prisma.workflow.deleteMany({});
   await prisma.project.deleteMany({});
-  await prisma.chatMember.deleteMany({});
-  await prisma.message.deleteMany({});
-  await prisma.chat.deleteMany({});
   await prisma.teamMember.deleteMany({});
   await prisma.workspace.deleteMany({});
   await prisma.team.deleteMany({});

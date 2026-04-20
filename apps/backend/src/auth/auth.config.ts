@@ -27,6 +27,7 @@ export function getAuthConfig() {
   return {
     supabaseUrl,
     supabaseJwtIssuer: `${supabaseUrl}/auth/v1`,
+    supabaseJwtJwksUrl: `${supabaseUrl}/auth/v1/.well-known/jwks.json`,
     jwtSecret,
   };
 }
