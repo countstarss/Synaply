@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Role } from '../../../prisma/generated/prisma/client';
-import { WorkspaceDto } from 'src/workspace/dto/workspace-response.dto';
+import { WorkspaceDto } from '../../workspace/dto/workspace-response.dto';
 
 export class UserDto {
   @ApiProperty({ description: '用户ID' })
