@@ -136,7 +136,7 @@ cp apps/backend/.env.example apps/backend/.env
 
 ```env
 PORT=5678
-CORS_ORIGINS=http://localhost:3000,http://localhost:3001
+CORS_ORIGINS=http://localhost:3000,http://127.0.0.1:3000,https://synaply-iid3eekk0-synaply-frontend.vercel.app,https://synaply-frontend.vercel.app,https://www.synaply.team,https://synaply.team
 DATABASE_URL=postgresql://postgres:postgres@127.0.0.1:54322/postgres
 SUPABASE_URL=http://127.0.0.1:54321
 JWT_SECRET=replace-with-your-supabase-jwt-secret
@@ -146,7 +146,7 @@ JWT_SECRET=replace-with-your-supabase-jwt-secret
 
 ```env
 PORT=5678
-CORS_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
+CORS_ORIGINS=http://localhost:3000,http://127.0.0.1:3000,https://synaply-iid3eekk0-synaply-frontend.vercel.app,https://synaply-frontend.vercel.app,https://www.synaply.team,https://synaply.team
 DATABASE_URL=postgresql://postgres:postgres@127.0.0.1:54322/postgres
 SUPABASE_URL=http://127.0.0.1:54321
 JWT_SECRET=super-secret-jwt-token-with-at-least-32-characters-long

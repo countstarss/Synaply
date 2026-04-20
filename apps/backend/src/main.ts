@@ -5,7 +5,15 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const allowedOrigins = (
-    process.env.CORS_ORIGINS ?? 'http://localhost:3000,http://localhost:3001'
+    process.env.CORS_ORIGINS ??
+    [
+      'http://localhost:3000',
+      'http://localhost:3001',
+      'https://synaply-iid3eekk0-synaply-frontend.vercel.app',
+      'https://synaply-frontend.vercel.app',
+      'https://www.synaply.team',
+      'https://synaply.team',
+    ].join(',')
   )
     .split(',')
     .map((origin) => origin.trim())
