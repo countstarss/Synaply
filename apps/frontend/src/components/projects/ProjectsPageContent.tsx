@@ -37,9 +37,7 @@ import {
   getProjectVisibilityMeta,
 } from "@/components/projects/project-view-utils";
 import {
-  buildProjectIssuePath,
   buildProjectPath,
-  getProjectIssueIdFromPathname,
   getProjectViewModeFromPathname,
   getSelectedProjectIdFromPathname,
 } from "@/components/projects/project-route-utils";
@@ -88,10 +86,12 @@ export default function ProjectsPageContent() {
     currentRole === "ADMIN";
 
   const selectedProjectId = getSelectedProjectIdFromPathname(pathname);
-  const selectedProjectIssueId = getProjectIssueIdFromPathname(pathname);
   const projectViewMode = getProjectViewModeFromPathname(pathname);
+  const [selectedProjectIssue, setSelectedProjectIssue] = useState<Issue | null>(
+    null,
+  );
   useWorkspaceRealtime(workspaceId, {
-    enabled: isPageVisible && !selectedProjectIssueId,
+    enabled: isPageVisible && !selectedProjectIssue,
   });
   const [searchQuery, setSearchQuery] = useState("");
   const [isProjectDialogOpen, setIsProjectDialogOpen] = useState(false);
@@ -145,6 +145,10 @@ export default function ProjectsPageContent() {
       router.replace("/projects");
     }
   }, [isLoading, projects, router, selectedProjectId, workspaceId]);
+
+  useEffect(() => {
+    setSelectedProjectIssue(null);
+  }, [selectedProjectId, workspaceId]);
 
   useEffect(() => {
     if (searchParams.get("intent") !== "create-project") {
@@ -333,16 +337,13 @@ export default function ProjectsPageContent() {
   };
 
   const handleOpenIssue = (issue: Issue) => {
-    const projectIdForRoute = selectedProjectId || issue.projectId;
-
-    if (!projectIdForRoute) {
+    if (!selectedProjectId && !issue.projectId) {
       toast.error(t("toasts.invalidIssueRoute"));
       return;
     }
 
-    startTransition(() => {
-      router.push(buildProjectIssuePath(projectIdForRoute, issue.id));
-    });
+    queryClient.setQueryData<Issue>(["issue", workspaceId, issue.id], issue);
+    setSelectedProjectIssue(issue);
   };
 
   const invalidateIssues = () => {
@@ -427,7 +428,7 @@ export default function ProjectsPageContent() {
         isFetching={isFetching}
         searchQuery={searchQuery}
         selectedProjectId={selectedProjectId}
-        selectedProjectIssueId={selectedProjectIssueId}
+        selectedProjectIssue={selectedProjectIssue}
         selectedProject={selectedProject}
         selectedProjectWorkspaceName={selectedProjectWorkspaceName}
         selectedProjectVisibilityLabel={
@@ -466,9 +467,7 @@ export default function ProjectsPageContent() {
         onProjectIssuesViewModeChange={setIssuesViewMode}
         onIssueBoardCategoryOrderChange={handleIssueBoardCategoryOrderChange}
         onSaveIssueBoardCategoryOrder={handleSaveIssueBoardCategoryOrder}
-        onCloseIssueDetail={() =>
-          selectedProjectId && router.push(buildProjectPath(selectedProjectId, "issues"))
-        }
+        onCloseIssueDetail={() => setSelectedProjectIssue(null)}
       />
 
       <ProjectEditorDialog

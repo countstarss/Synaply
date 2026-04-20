@@ -47,7 +47,7 @@ export function ProjectIssueList({
         const canQuickComplete = !isWorkflowIssue && canQuickCompleteIssue(issue);
         const canCancel = canCancelIssue(issue);
         const issueRow = (
-          <div className="group/issue-row flex items-center gap-4 border-b border-app-border px-4 py-3 transition last:border-b-0 hover:bg-app-button-hover/35">
+          <div className="group/issue-row flex items-center gap-4 border-b border-app-border px-4 py-3 transition last:border-b-0 hover:bg-app-button-hover/35 cursor-pointer">
             {isWorkflowIssue ? (
               <div
                 className={cn(
@@ -68,7 +68,7 @@ export function ProjectIssueList({
                 aria-label={quickCompleteLabel}
                 title={quickCompleteLabel}
                 className={cn(
-                  "flex size-6 shrink-0 items-center justify-center rounded-full border border-app-border bg-app-bg transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-app-content-bg",
+                  "flex size-6 shrink-0 items-center justify-center rounded-full border border-app-border bg-app-bg transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-app-content-bg cursor-pointer",
                   isPending
                     ? "cursor-wait text-app-text-muted"
                     : canQuickComplete
@@ -94,7 +94,7 @@ export function ProjectIssueList({
             <button
               type="button"
               onClick={() => onOpenIssue(issue)}
-              className="flex min-w-0 flex-1 items-center gap-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-app-content-bg"
+              className="flex min-w-0 flex-1 items-center gap-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-app-content-bg cursor-pointer"
             >
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-2">

@@ -53,7 +53,6 @@ import { useProjects } from "@/hooks/useProjectApi";
 import { useTeamMemberByUserId, useTeamMembers } from "@/hooks/useTeam";
 import { useWorkspaceRealtime } from "@/hooks/realtime/useWorkspaceRealtime";
 import { useWorkspace } from "@/hooks/useWorkspace";
-import { usePathname, useRouter } from "@/i18n/navigation";
 import { priorityConfig, statusConfig } from "@/lib/data/issueConfig";
 import {
   buildIssueStateSummary,
@@ -163,23 +162,9 @@ function getIssueSearchText(issue: Issue, projectName: string) {
     .toLowerCase();
 }
 
-function getIssueIdFromPathname(pathname: string) {
-  const segments = pathname.split("/").filter(Boolean);
-  const issuesSegmentIndex = segments.indexOf("issues");
-
-  if (issuesSegmentIndex === -1) {
-    return "";
-  }
-
-  return decodeURIComponent(segments[issuesSegmentIndex + 1] || "");
-}
-
 export default function IssuesPageContent() {
   const t = useTranslations("issues");
   const isPageVisible = useCachedPageVisibility();
-  const pathname = usePathname();
-  const router = useRouter();
-  const routedIssueId = getIssueIdFromPathname(pathname);
   const [selectedView, setSelectedView] = useState<IssueListView>("all");
   const [issuesViewMode, setIssuesViewMode] = useState<IssueViewMode>("list");
   const [searchQuery, setSearchQuery] = useState("");
@@ -195,6 +180,7 @@ export default function IssuesPageContent() {
   const [pendingCancelIssue, setPendingCancelIssue] = useState<Issue | null>(
     null,
   );
+  const [selectedIssue, setSelectedIssue] = useState<Issue | null>(null);
 
   const { user } = useAuth();
   const { currentWorkspace } = useWorkspace();
@@ -233,7 +219,7 @@ export default function IssuesPageContent() {
     currentWorkspaceMember?.id || currentUserTeamMember?.id;
 
   useWorkspaceRealtime(workspaceId, {
-    enabled: isPageVisible && !routedIssueId,
+    enabled: isPageVisible && !selectedIssue,
   });
 
   useEffect(() => {
@@ -244,6 +230,7 @@ export default function IssuesPageContent() {
     setOptimisticIssueStates({});
     setPendingIssueIds(new Set());
     setPendingCancelIssue(null);
+    setSelectedIssue(null);
   }, [workspaceId]);
 
   useEffect(() => {
@@ -438,7 +425,8 @@ export default function IssuesPageContent() {
   const handleCreateIssue = () => {};
 
   const handleViewIssue = (issue: Issue) => {
-    router.push(`/issues/${encodeURIComponent(issue.id)}`);
+    queryClient.setQueryData<Issue>(["issue", workspaceId, issue.id], issue);
+    setSelectedIssue(issue);
   };
 
   const handleUpdateIssue = () => {
@@ -638,13 +626,13 @@ export default function IssuesPageContent() {
     );
   };
 
-  if (routedIssueId) {
+  if (selectedIssue) {
     return (
       <div className="h-full w-full bg-transparent">
         <IssueDetailPageSurface
-          issueId={routedIssueId}
+          issueId={selectedIssue.id}
           workspaceId={workspaceId}
-          onClose={() => router.push("/issues")}
+          onClose={() => setSelectedIssue(null)}
           onUpdate={handleUpdateIssue}
         />
       </div>

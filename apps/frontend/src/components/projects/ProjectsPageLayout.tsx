@@ -81,7 +81,7 @@ export function ProjectsPageLayout({
   isFetching,
   searchQuery,
   selectedProjectId,
-  selectedProjectIssueId,
+  selectedProjectIssue,
   selectedProject,
   selectedProjectWorkspaceName,
   selectedProjectVisibilityLabel,
@@ -126,7 +126,7 @@ export function ProjectsPageLayout({
   isFetching: boolean;
   searchQuery: string;
   selectedProjectId: string | null;
-  selectedProjectIssueId: string | null;
+  selectedProjectIssue: Issue | null;
   selectedProject: Project | ProjectDetail | null;
   selectedProjectWorkspaceName: string;
   selectedProjectVisibilityLabel: string;
@@ -159,11 +159,11 @@ export function ProjectsPageLayout({
   onSaveIssueBoardCategoryOrder: () => void;
   onCloseIssueDetail: () => void;
 }) {
-  if (selectedProjectId && selectedProjectIssueId) {
+  if (selectedProjectId && selectedProjectIssue) {
     return (
       <div className="h-full w-full bg-transparent">
         <IssueDetailPageSurface
-          issueId={selectedProjectIssueId}
+          issueId={selectedProjectIssue.id}
           workspaceId={workspaceId}
           onClose={onCloseIssueDetail}
           onUpdate={onInvalidateIssues}

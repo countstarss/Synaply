@@ -52,7 +52,6 @@ export const productPages = [
     label: "",
     labelKey: "nav.projects",
     href: "/projects",
-    borderlessShellPatterns: ["/projects/:projectId/:issueId"],
   },
   {
     id: "issues",
@@ -64,7 +63,6 @@ export const productPages = [
     label: "",
     labelKey: "nav.issues",
     href: "/issues",
-    borderlessShellPatterns: ["/issues/:issueId"],
   },
   {
     id: "workflows",

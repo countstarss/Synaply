@@ -59,22 +59,6 @@ export const getProjectViewModeFromPathname = (
   return "overview";
 };
 
-export const getProjectIssueIdFromPathname = (pathname: string) => {
-  const { segments, projectsSegmentIndex } = getProjectsSegmentIndex(pathname);
-
-  if (projectsSegmentIndex === -1) {
-    return "";
-  }
-
-  const candidate = segments[projectsSegmentIndex + 2];
-
-  if (!candidate || PROJECT_SUBVIEW_SET.has(candidate as ProjectSubview)) {
-    return "";
-  }
-
-  return decodeURIComponent(candidate);
-};
-
 export const buildProjectPath = (
   projectId: string,
   subview?: ProjectSubview,
@@ -87,6 +71,3 @@ export const buildProjectPath = (
 
   return `/projects/${encodedProjectId}/${subview}`;
 };
-
-export const buildProjectIssuePath = (projectId: string, issueId: string) =>
-  `/projects/${encodeURIComponent(projectId)}/${encodeURIComponent(issueId)}`;
