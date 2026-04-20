@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
 import { getMessages } from "next-intl/server";
-
+import { Analytics } from "@vercel/analytics/next"
 import { routing } from "@/i18n/routing";
 import "@/app/globals.css";
 import AppProvider from "@/providers/app-provider";
@@ -57,6 +57,7 @@ export default async function LocaleLayout({
             `,
           }}
         />
+        <Analytics />
       </head>
       <body className="bg-background font-sans text-foreground">
         <AppProvider locale={locale} messages={messages}>
