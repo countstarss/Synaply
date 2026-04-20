@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { WorkspaceType } from '../../prisma/generated/prisma/client'; // 导入 WorkspaceType 枚举
+import {
+  Role,
+  WorkspaceType,
+} from '../../prisma/generated/prisma/client'; // 导入 WorkspaceType 枚举
 
 export interface SyncUserProfileInput {
   name?: string | null;
@@ -19,6 +22,10 @@ const normalizeOptionalString = (value?: string | null) => {
 @Injectable()
 export class AuthService {
   constructor(private prisma: PrismaService) {}
+
+  private getPersonalTeamName(userId: string) {
+    return `__personal_workspace__:${userId}`;
+  }
 
   /**
    * MARK: - 同步或创建用户
@@ -42,34 +49,110 @@ export class AuthService {
     const normalizedName = normalizeOptionalString(profile.name);
     const normalizedAvatarUrl = normalizeOptionalString(profile.avatarUrl);
 
-    return this.prisma.user.upsert({
-      where: { id: userId },
-      create: {
-        id: userId,
-        email: email,
-        name: normalizedName ?? null,
-        avatarUrl: normalizedAvatarUrl ?? null,
-        // 为新用户创建个人工作空间
-        workspaces: {
-          create: {
+    return this.prisma.$transaction(async (tx) => {
+      await tx.user.upsert({
+        where: { id: userId },
+        create: {
+          id: userId,
+          email: email,
+          name: normalizedName ?? null,
+          avatarUrl: normalizedAvatarUrl ?? null,
+          // 为新用户创建个人工作空间
+          workspaces: {
+            create: {
+              name: `${email} 的个人空间`,
+              type: WorkspaceType.PERSONAL,
+              calendar: {
+                create: {
+                  name: `${email} 的日历`,
+                },
+              },
+            },
+          },
+        },
+        update: {
+          email,
+          ...(normalizedName !== undefined ? { name: normalizedName } : {}),
+          ...(normalizedAvatarUrl !== undefined
+            ? { avatarUrl: normalizedAvatarUrl }
+            : {}),
+        },
+      });
+
+      let personalWorkspace = await tx.workspace.findFirst({
+        where: {
+          userId,
+          type: WorkspaceType.PERSONAL,
+        },
+        select: {
+          id: true,
+          teamId: true,
+        },
+        orderBy: {
+          createdAt: 'asc',
+        },
+      });
+
+      if (!personalWorkspace) {
+        personalWorkspace = await tx.workspace.create({
+          data: {
             name: `${email} 的个人空间`,
             type: WorkspaceType.PERSONAL,
+            userId,
             calendar: {
               create: {
                 name: `${email} 的日历`,
               },
             },
           },
+          select: {
+            id: true,
+            teamId: true,
+          },
+        });
+      }
+
+      const personalTeamId = personalWorkspace.teamId ?? personalWorkspace.id;
+
+      await tx.team.upsert({
+        where: { id: personalTeamId },
+        create: {
+          id: personalTeamId,
+          name: this.getPersonalTeamName(userId),
         },
-      },
-      update: {
-        email,
-        ...(normalizedName !== undefined ? { name: normalizedName } : {}),
-        ...(normalizedAvatarUrl !== undefined
-          ? { avatarUrl: normalizedAvatarUrl }
-          : {}),
-      },
-      include: { workspaces: true }, // 包含工作空间信息
+        update: {},
+      });
+
+      await tx.teamMember.upsert({
+        where: {
+          teamId_userId: {
+            teamId: personalTeamId,
+            userId,
+          },
+        },
+        create: {
+          teamId: personalTeamId,
+          userId,
+          role: Role.OWNER,
+        },
+        update: {
+          role: Role.OWNER,
+        },
+      });
+
+      if (personalWorkspace.teamId !== personalTeamId) {
+        await tx.workspace.update({
+          where: { id: personalWorkspace.id },
+          data: {
+            teamId: personalTeamId,
+          },
+        });
+      }
+
+      return tx.user.findUnique({
+        where: { id: userId },
+        include: { workspaces: true },
+      });
     });
   }
 }

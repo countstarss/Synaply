@@ -216,9 +216,16 @@ export class TeamService {
   async getUserTeams(userId: string) {
     const teamMemberships = await this.prisma.teamMember.findMany({
       where: { userId },
-      include: { team: { include: this.teamDetailInclude } },
+      include: {
+        team: {
+          include: this.teamDetailInclude,
+        },
+      },
     });
-    return teamMemberships.map((tm) => tm.team);
+
+    return teamMemberships
+      .map((tm) => tm.team)
+      .filter((team) => team.workspace?.type === WorkspaceType.TEAM);
   }
 
   async updateTeam(
@@ -608,9 +615,27 @@ export class TeamService {
       );
     }
 
-    return this.prisma.teamMember.findFirst({
+    const memberships = await this.prisma.teamMember.findMany({
       where: { userId },
-      include: this.teamMemberWithUserInclude,
+      include: {
+        ...this.teamMemberWithUserInclude,
+        team: {
+          include: {
+            workspace: {
+              select: {
+                type: true,
+              },
+            },
+          },
+        },
+      },
     });
+
+    const preferredMembership =
+      memberships.find(
+        (membership) => membership.team.workspace?.type === WorkspaceType.TEAM,
+      ) ?? memberships[0];
+
+    return preferredMembership ?? null;
   }
 }

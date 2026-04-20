@@ -969,6 +969,14 @@ export class ProjectService {
       throw new BadRequestException('个人工作空间项目负责人必须为当前用户');
     }
 
+    if (
+      workspace.type === 'PERSONAL' &&
+      workspace.teamId &&
+      ownerMember.teamId !== workspace.teamId
+    ) {
+      throw new BadRequestException('个人工作空间项目负责人必须属于当前个人空间');
+    }
+
     return ownerMember.id;
   }
 

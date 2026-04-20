@@ -136,6 +136,15 @@ export default function CreateIssueModal({
   const createIssueMutation = useCreateIssue();
   const createWorkflowIssueMutation = useCreateWorkflowIssue();
 
+  const currentWorkspaceMember = useMemo(
+    () =>
+      teamMembers.find(
+        (member) =>
+          member.user?.id === session?.user?.id || member.userId === session?.user?.id,
+      ) || null,
+    [session?.user?.id, teamMembers],
+  );
+
   const workflows = workflowResponses.map(
     (workflowResponse: WorkflowResponse): Workflow => {
       const workflow: Workflow = {
@@ -205,7 +214,8 @@ export default function CreateIssueModal({
     [locale, teamMembers],
   );
 
-  const personalAssigneeId = currentUserTeamMember?.id || "";
+  const personalAssigneeId =
+    currentWorkspaceMember?.id || currentUserTeamMember?.id || "";
 
   const selectedProject = projects.find((project) => project.id === selectedProjectId);
   const selectedWorkflow = workflows.find(

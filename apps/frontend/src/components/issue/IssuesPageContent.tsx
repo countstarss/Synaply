@@ -50,7 +50,7 @@ import { Issue, isWorkflowIssue } from "@/lib/fetchers/issue";
 import { useIssues, useCancelIssue, useUpdateIssue } from "@/hooks/useIssueApi";
 import { useIssueStates } from "@/hooks/useIssueStates";
 import { useProjects } from "@/hooks/useProjectApi";
-import { useTeamMemberByUserId } from "@/hooks/useTeam";
+import { useTeamMemberByUserId, useTeamMembers } from "@/hooks/useTeam";
 import { useWorkspaceRealtime } from "@/hooks/realtime/useWorkspaceRealtime";
 import { useWorkspace } from "@/hooks/useWorkspace";
 import { usePathname, useRouter } from "@/i18n/navigation";
@@ -211,6 +211,9 @@ export default function IssuesPageContent() {
   >({});
   const [pendingIssueIds, setPendingIssueIds] = useState<Set<string>>(new Set());
   const { data: currentUserTeamMember } = useTeamMemberByUserId(user?.id);
+  const { data: teamMembers = [] } = useTeamMembers(currentWorkspace?.teamId, {
+    enabled: isPageVisible,
+  });
   const { data: issues = [], isLoading: isLoadingIssues } =
     useIssues(workspaceId, {}, { enabled: isPageVisible });
   const { data: projects = [] } = useProjects(workspaceId, {
@@ -222,6 +225,12 @@ export default function IssuesPageContent() {
   const queryClient = useQueryClient();
   const cancelIssueMutation = useCancelIssue();
   const updateIssueMutation = useUpdateIssue();
+  const currentWorkspaceMember =
+    teamMembers.find(
+      (member) => member.user?.id === user?.id || member.userId === user?.id,
+    ) || null;
+  const currentActorMemberId =
+    currentWorkspaceMember?.id || currentUserTeamMember?.id;
 
   useWorkspaceRealtime(workspaceId, {
     enabled: isPageVisible && !routedIssueId,
@@ -313,9 +322,9 @@ export default function IssuesPageContent() {
       issuesWithOptimisticState.filter(
         (issue) =>
           isActiveIssue(issue) &&
-          issueBelongsToUser(issue, currentUserTeamMember?.id, user?.id),
+          issueBelongsToUser(issue, currentActorMemberId, user?.id),
       ).length,
-    [currentUserTeamMember?.id, issuesWithOptimisticState, user?.id],
+    [currentActorMemberId, issuesWithOptimisticState, user?.id],
   );
 
   const baseFilteredIssues = useMemo(() => {
@@ -330,7 +339,7 @@ export default function IssuesPageContent() {
 
         if (
           selectedView === "my" &&
-          !issueBelongsToUser(issue, currentUserTeamMember?.id, user?.id)
+          !issueBelongsToUser(issue, currentActorMemberId, user?.id)
         ) {
           return false;
         }
@@ -385,7 +394,7 @@ export default function IssuesPageContent() {
       }),
     );
   }, [
-    currentUserTeamMember?.id,
+    currentActorMemberId,
     issuesWithOptimisticState,
     projectNameById,
     searchQuery,
@@ -548,11 +557,11 @@ export default function IssuesPageContent() {
   const canCancelIssue = (issue: Issue) => {
     const creatorMemberId = issue.creatorMemberId || issue.creatorId;
 
-    if (!creatorMemberId || !currentUserTeamMember?.id) {
+    if (!creatorMemberId || !currentActorMemberId) {
       return true;
     }
 
-    return creatorMemberId === currentUserTeamMember.id;
+    return creatorMemberId === currentActorMemberId;
   };
 
   const handleClearFilters = () => {
