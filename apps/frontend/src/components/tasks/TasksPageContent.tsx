@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useMemo, useState } from "react";
+import dynamic from "next/dynamic";
 import { format } from "date-fns";
 import { useTranslations } from "next-intl";
 import {
@@ -13,10 +14,8 @@ import {
   Workflow,
 } from "lucide-react";
 import { toast } from "sonner";
-import WorkflowIssueDetail from "@/components/issue/WorkflowIssueDetail";
 import InfoBarTabs from "@/components/layout/infobar/InfoBarTabs";
 import AmbientGlow from "@/components/global/AmbientGlow";
-import NormalIssueDetail from "@/components/shared/issue/NormalIssueDetail";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -38,6 +37,15 @@ import { priorityConfig } from "@/lib/data/issueConfig";
 import { MyWorkItem, MyWorkResponse } from "@/lib/fetchers/my-work";
 import { cn } from "@/lib/utils";
 import { IssuePriority, IssueStatus } from "@/types/prisma";
+
+const WorkflowIssueDetail = dynamic(
+  () => import("@/components/issue/WorkflowIssueDetail"),
+  { loading: () => null },
+);
+const NormalIssueDetail = dynamic(
+  () => import("@/components/shared/issue/NormalIssueDetail"),
+  { loading: () => null },
+);
 
 type WorkTabId = "today" | "waiting" | "in-progress" | "blocked" | "completed";
 type SectionId = "waitingForMe" | "inProgress" | "blocked" | "completedToday";
@@ -694,7 +702,6 @@ function getActiveSection(activeTab: WorkTabId): SectionId | null {
 export default function TasksPageContent() {
   const tTasks = useTranslations("tasks");
   const isPageVisible = useCachedPageVisibility();
-  const hasMountedRef = useRef(false);
   const [activeTab, setActiveTab] = useState<WorkTabId>("today");
   const [selectedIssueId, setSelectedIssueId] = useState<string | null>(null);
   const [selectedIssueIsWorkflow, setSelectedIssueIsWorkflow] = useState(false);
@@ -712,19 +719,6 @@ export default function TasksPageContent() {
     enabled: isPageVisible && !selectedIssueId,
     userEnabled: isPageVisible,
   });
-
-  useEffect(() => {
-    if (!hasMountedRef.current) {
-      hasMountedRef.current = true;
-      return;
-    }
-
-    if (!isPageVisible) {
-      return;
-    }
-
-    void refetch();
-  }, [isPageVisible, refetch]);
 
   const tabs = useMemo(() => buildTabs(tTasks, data), [data, tTasks]);
   const sectionMeta = useMemo(() => getSectionMeta(tTasks), [tTasks]);
@@ -750,7 +744,6 @@ export default function TasksPageContent() {
   const handleCloseDetail = () => {
     setSelectedIssueId(null);
     setSelectedIssueIsWorkflow(false);
-    void refetch();
   };
 
   const handleMarkStarted = async (item: MyWorkItem) => {
@@ -769,7 +762,6 @@ export default function TasksPageContent() {
         },
       });
       toast.success(tTasks("toasts.markedStarted"));
-      await refetch();
     } catch (mutationError) {
       toast.error(
         mutationError instanceof Error
@@ -795,7 +787,6 @@ export default function TasksPageContent() {
         data: {},
       });
       toast.success(tTasks("toasts.handoffAccepted"));
-      await refetch();
     } catch (mutationError) {
       toast.error(
         mutationError instanceof Error

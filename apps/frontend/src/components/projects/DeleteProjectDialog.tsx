@@ -40,7 +40,10 @@ export function DeleteProjectDialog({
   const { data: projectIssues = [], isLoading: isLoadingIssues } = useIssues(
     workspaceId,
     { projectId: project?.id },
-    { enabled: open && !!workspaceId && !!project?.id },
+    {
+      enabled: open && !!workspaceId && !!project?.id,
+      fetchAll: true,
+    },
   );
   const { data: projectDocs = [], isLoading: isLoadingDocs } = useDocsTree(
     workspaceId,

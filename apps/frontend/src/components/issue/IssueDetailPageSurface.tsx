@@ -1,14 +1,22 @@
 "use client";
 
 import React from "react";
+import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { RiArrowLeftLine, RiLoader4Line } from "react-icons/ri";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 import { useIssue } from "@/hooks/useIssueApi";
 import { isWorkflowIssue } from "@/lib/fetchers/issue";
-import WorkflowIssueDetail from "@/components/issue/WorkflowIssueDetail";
-import NormalIssueDetail from "@/components/shared/issue/NormalIssueDetail";
+
+const WorkflowIssueDetail = dynamic(
+  () => import("@/components/issue/WorkflowIssueDetail"),
+  { loading: () => null },
+);
+const NormalIssueDetail = dynamic(
+  () => import("@/components/shared/issue/NormalIssueDetail"),
+  { loading: () => null },
+);
 
 interface IssueDetailPageSurfaceProps {
   issueId: string;

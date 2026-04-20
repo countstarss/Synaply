@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState, useCallback } from "react";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import ContextMenuWrapper from "@/components/ContextMenuWrapper";
 import { CachedPageVisibilityProvider } from "@/components/cache/CachedPageVisibility";
@@ -8,13 +9,41 @@ import {
   getProductPageIdFromPathname,
   pageOrderById,
 } from "@/lib/navigation/page-registry";
-import { CachedTasksPage } from "./pages/CachedTasksPage";
-import { CachedProjectsPage } from "./pages/CachedProjectsPage";
-import { CachedIssuesPage } from "./pages/CachedIssuesPage";
-import { CachedWorkflowsPage } from "./pages/CachedWorkflowsPage";
-import { CachedDocsPage } from "./pages/CachedDocsPage";
-import { CachedInboxPage } from "./pages/CachedInboxPage";
-import { CachedIntelligencePage } from "./pages/CachedIntelligencePage";
+const CachedTasksPage = dynamic(
+  () => import("./pages/CachedTasksPage").then((mod) => mod.CachedTasksPage),
+  { loading: () => null },
+);
+const CachedProjectsPage = dynamic(
+  () =>
+    import("./pages/CachedProjectsPage").then((mod) => mod.CachedProjectsPage),
+  { loading: () => null },
+);
+const CachedIssuesPage = dynamic(
+  () => import("./pages/CachedIssuesPage").then((mod) => mod.CachedIssuesPage),
+  { loading: () => null },
+);
+const CachedWorkflowsPage = dynamic(
+  () =>
+    import("./pages/CachedWorkflowsPage").then(
+      (mod) => mod.CachedWorkflowsPage,
+    ),
+  { loading: () => null },
+);
+const CachedDocsPage = dynamic(
+  () => import("./pages/CachedDocsPage").then((mod) => mod.CachedDocsPage),
+  { loading: () => null },
+);
+const CachedInboxPage = dynamic(
+  () => import("./pages/CachedInboxPage").then((mod) => mod.CachedInboxPage),
+  { loading: () => null },
+);
+const CachedIntelligencePage = dynamic(
+  () =>
+    import("./pages/CachedIntelligencePage").then(
+      (mod) => mod.CachedIntelligencePage,
+    ),
+  { loading: () => null },
+);
 
 const PAGE_COMPONENTS = {
   tasks: CachedTasksPage,

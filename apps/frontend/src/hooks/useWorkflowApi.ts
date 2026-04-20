@@ -12,10 +12,17 @@ import {
 import { CreateWorkflowDto, UpdateWorkflowDto } from "@/api";
 import { useAuth } from "@/context/AuthContext";
 
+interface QueryEnabledOptions {
+  enabled?: boolean;
+}
+
 /**
  * 获取工作流列表
  */
-export const useWorkflows = (workspaceId?: string) => {
+export const useWorkflows = (
+  workspaceId?: string,
+  options: QueryEnabledOptions = {},
+) => {
   const { session } = useAuth();
 
   return useQuery({
@@ -26,7 +33,7 @@ export const useWorkflows = (workspaceId?: string) => {
       }
       return fetchWorkflows(workspaceId, session.access_token);
     },
-    enabled: !!workspaceId && !!session?.access_token,
+    enabled: (options.enabled ?? true) && !!workspaceId && !!session?.access_token,
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
 };
@@ -276,8 +283,11 @@ export const useBatchWorkflowOperations = () => {
 /**
  * 获取工作流统计信息
  */
-export const useWorkflowStats = (workspaceId?: string) => {
-  const { data: workflows, isLoading } = useWorkflows(workspaceId);
+export const useWorkflowStats = (
+  workspaceId?: string,
+  options: QueryEnabledOptions = {},
+) => {
+  const { data: workflows, isLoading } = useWorkflows(workspaceId, options);
 
   const stats = {
     total: workflows?.length || 0,

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import {
@@ -13,9 +14,6 @@ import {
   RiSettings3Line,
 } from "react-icons/ri";
 import { useRouter } from "@/i18n/navigation";
-import WorkflowEditor from "@/components/workflow/WorkflowEditor";
-import WorkflowSetupModal from "@/components/workflow/WorkflowSetupModal";
-import WorkflowSettingsModal from "@/components/workflow/WorkflowSettingsModal";
 import {
   Dialog,
   DialogContent,
@@ -34,15 +32,30 @@ import {
   useUpdateWorkflowJson,
 } from "@/hooks/useWorkflowApi";
 import { useWorkspace } from "@/hooks/useWorkspace";
+import { useCachedPageVisibility } from "@/components/cache/CachedPageVisibility";
 import AmbientGlow from "@/components/global/AmbientGlow";
 import { toast } from "sonner";
 import { WorkflowResponse } from "@/lib/fetchers/workflow";
+
+const WorkflowEditor = dynamic(
+  () => import("@/components/workflow/WorkflowEditor"),
+  { loading: () => null },
+);
+const WorkflowSetupModal = dynamic(
+  () => import("@/components/workflow/WorkflowSetupModal"),
+  { loading: () => null },
+);
+const WorkflowSettingsModal = dynamic(
+  () => import("@/components/workflow/WorkflowSettingsModal"),
+  { loading: () => null },
+);
 
 export default function WorkflowsPageContent() {
   const locale = useLocale();
   const tCommon = useTranslations("common");
   const tWorkflows = useTranslations("workflows");
   const searchParams = useSearchParams();
+  const isPageVisible = useCachedPageVisibility();
   const router = useRouter();
   const [editingWorkflow, setEditingWorkflow] = useState<Workflow | null>(null);
   const [viewMode, setViewMode] = useState<"list" | "editor">("list");
@@ -59,8 +72,12 @@ export default function WorkflowsPageContent() {
     data: workflows = [],
     isLoading,
     error,
-  } = useWorkflows(currentWorkspace?.id);
-  const { stats } = useWorkflowStats(currentWorkspace?.id);
+  } = useWorkflows(currentWorkspace?.id, {
+    enabled: isPageVisible,
+  });
+  const { stats } = useWorkflowStats(currentWorkspace?.id, {
+    enabled: isPageVisible,
+  });
 
   const createWorkflowMutation = useCreateWorkflow();
   const deleteWorkflowMutation = useDeleteWorkflow();

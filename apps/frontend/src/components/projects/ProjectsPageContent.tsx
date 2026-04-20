@@ -71,7 +71,7 @@ export default function ProjectsPageContent() {
   const { data: allIssues = [] } = useIssues(
     workspaceId,
     {},
-    { enabled: isPageVisible },
+    { enabled: isPageVisible, fetchAll: true },
   );
   const { data: teamMembers = [] } = useTeamMembers(currentWorkspace?.teamId, {
     enabled: isPageVisible,
@@ -126,7 +126,10 @@ export default function ProjectsPageContent() {
     useIssues(
       workspaceId,
       { projectId: selectedProjectId },
-      { enabled: isPageVisible && !!selectedProjectId },
+      {
+        enabled: isPageVisible && !!selectedProjectId,
+        fetchAll: true,
+      },
     );
 
   useEffect(() => {

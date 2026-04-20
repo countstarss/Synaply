@@ -215,7 +215,7 @@ export default function IssuesPageContent() {
     enabled: isPageVisible,
   });
   const { data: issues = [], isLoading: isLoadingIssues } =
-    useIssues(workspaceId, {}, { enabled: isPageVisible });
+    useIssues(workspaceId, {}, { enabled: isPageVisible, fetchAll: true });
   const { data: projects = [] } = useProjects(workspaceId, {
     enabled: isPageVisible,
   });

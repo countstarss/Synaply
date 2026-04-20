@@ -151,6 +151,13 @@ export interface IssueQueryParams {
   limit?: number;
 }
 
+export interface GetIssuesOptions {
+  fetchAll?: boolean;
+  defaultPageSize?: number;
+}
+
+export const DEFAULT_ISSUES_PAGE_SIZE = 100;
+
 // MARK: WorkflowIssueDto
 export interface CreateWorkflowIssueDto {
   title: string;
@@ -298,23 +305,61 @@ async function fetchApi<T>(
   return response.json();
 }
 
+export function normalizeIssueQueryParams(params: IssueQueryParams = {}) {
+  const normalizedParams: IssueQueryParams = {};
+
+  if (params.scope) normalizedParams.scope = params.scope;
+  if (params.stateId) normalizedParams.stateId = params.stateId;
+  if (params.stateCategory) {
+    normalizedParams.stateCategory = params.stateCategory;
+  }
+  if (params.projectId) normalizedParams.projectId = params.projectId;
+  if (params.assigneeId) normalizedParams.assigneeId = params.assigneeId;
+  if (params.labelId) normalizedParams.labelId = params.labelId;
+  if (params.issueType) normalizedParams.issueType = params.issueType;
+  if (params.priority) normalizedParams.priority = params.priority;
+  if (params.sortBy) normalizedParams.sortBy = params.sortBy;
+  if (params.sortOrder) normalizedParams.sortOrder = params.sortOrder;
+  if (params.cursor) normalizedParams.cursor = params.cursor;
+  if (params.limit !== undefined) normalizedParams.limit = params.limit;
+
+  return normalizedParams;
+}
+
 function buildIssueQueryString(params: IssueQueryParams = {}) {
+  const normalizedParams = normalizeIssueQueryParams(params);
   const searchParams = new URLSearchParams();
 
-  if (params.scope) searchParams.set("scope", params.scope);
-  if (params.stateId) searchParams.set("stateId", params.stateId);
-  if (params.stateCategory) {
-    searchParams.set("stateCategory", params.stateCategory);
+  if (normalizedParams.scope) searchParams.set("scope", normalizedParams.scope);
+  if (normalizedParams.stateId) {
+    searchParams.set("stateId", normalizedParams.stateId);
   }
-  if (params.projectId) searchParams.set("projectId", params.projectId);
-  if (params.assigneeId) searchParams.set("assigneeId", params.assigneeId);
-  if (params.labelId) searchParams.set("labelId", params.labelId);
-  if (params.issueType) searchParams.set("issueType", params.issueType);
-  if (params.priority) searchParams.set("priority", params.priority);
-  if (params.sortBy) searchParams.set("sortBy", params.sortBy);
-  if (params.sortOrder) searchParams.set("sortOrder", params.sortOrder);
-  if (params.cursor) searchParams.set("cursor", params.cursor);
-  if (params.limit) searchParams.set("limit", `${params.limit}`);
+  if (normalizedParams.stateCategory) {
+    searchParams.set("stateCategory", normalizedParams.stateCategory);
+  }
+  if (normalizedParams.projectId) {
+    searchParams.set("projectId", normalizedParams.projectId);
+  }
+  if (normalizedParams.assigneeId) {
+    searchParams.set("assigneeId", normalizedParams.assigneeId);
+  }
+  if (normalizedParams.labelId) {
+    searchParams.set("labelId", normalizedParams.labelId);
+  }
+  if (normalizedParams.issueType) {
+    searchParams.set("issueType", normalizedParams.issueType);
+  }
+  if (normalizedParams.priority) {
+    searchParams.set("priority", normalizedParams.priority);
+  }
+  if (normalizedParams.sortBy) searchParams.set("sortBy", normalizedParams.sortBy);
+  if (normalizedParams.sortOrder) {
+    searchParams.set("sortOrder", normalizedParams.sortOrder);
+  }
+  if (normalizedParams.cursor) searchParams.set("cursor", normalizedParams.cursor);
+  if (normalizedParams.limit !== undefined) {
+    searchParams.set("limit", `${normalizedParams.limit}`);
+  }
 
   const queryString = searchParams.toString();
   return queryString ? `?${queryString}` : "";
@@ -376,45 +421,55 @@ export async function getIssues(
   workspaceId: string,
   token: string,
   params: IssueQueryParams = {},
+  options: GetIssuesOptions = {},
 ): Promise<Issue[]> {
+  const normalizedParams = normalizeIssueQueryParams(params);
   const shouldFetchSinglePage =
-    params.limit !== undefined || params.cursor !== undefined;
+    normalizedParams.limit !== undefined || normalizedParams.cursor !== undefined;
+  const shouldFetchAll = options.fetchAll && !shouldFetchSinglePage;
 
-  if (shouldFetchSinglePage) {
-    const issues = await fetchApi<Issue[]>(
-      `/workspaces/${workspaceId}/issues${buildIssueQueryString(params)}`,
-      token,
-    );
+  if (shouldFetchAll) {
+    const pageSize = options.defaultPageSize ?? DEFAULT_ISSUES_PAGE_SIZE;
+    const issues: Issue[] = [];
+    let cursor: string | undefined;
+
+    while (true) {
+      const page = await fetchApi<Issue[]>(
+        `/workspaces/${workspaceId}/issues${buildIssueQueryString({
+          ...normalizedParams,
+          limit: pageSize,
+          cursor,
+        })}`,
+        token,
+      );
+
+      issues.push(...page);
+
+      if (page.length < pageSize) {
+        break;
+      }
+
+      cursor = page[page.length - 1]?.id;
+
+      if (!cursor) {
+        break;
+      }
+    }
 
     return normalizeIssueList(issues);
   }
 
-  const pageSize = 100;
-  const issues: Issue[] = [];
-  let cursor: string | undefined;
+  const requestParams = shouldFetchSinglePage
+    ? normalizedParams
+    : {
+        ...normalizedParams,
+        limit: options.defaultPageSize ?? DEFAULT_ISSUES_PAGE_SIZE,
+      };
 
-  while (true) {
-    const page = await fetchApi<Issue[]>(
-      `/workspaces/${workspaceId}/issues${buildIssueQueryString({
-        ...params,
-        limit: pageSize,
-        cursor,
-      })}`,
-      token,
-    );
-
-    issues.push(...page);
-
-    if (page.length < pageSize) {
-      break;
-    }
-
-    cursor = page[page.length - 1]?.id;
-
-    if (!cursor) {
-      break;
-    }
-  }
+  const issues = await fetchApi<Issue[]>(
+    `/workspaces/${workspaceId}/issues${buildIssueQueryString(requestParams)}`,
+    token,
+  );
 
   return normalizeIssueList(issues);
 }

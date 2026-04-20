@@ -1,18 +1,9 @@
 "use client";
 
 import React from "react";
+import dynamic from "next/dynamic";
 import AmbientGlow from "@/components/global/AmbientGlow";
-import IssueDetailPageSurface from "@/components/issue/IssueDetailPageSurface";
-import { ProjectDetailView } from "@/components/projects/ProjectDetailView";
 import { ProjectRouteShell } from "@/components/projects/ProjectRouteShell";
-import {
-  ProjectDocsSubview,
-  ProjectIssuesSubview,
-  ProjectSyncSubview,
-  ProjectWorkflowSubview,
-} from "@/components/projects/ProjectSubviewContent";
-import { ProjectsEmptyState } from "@/components/projects/ProjectsEmptyState";
-import { ProjectsOverviewPage } from "@/components/projects/ProjectsOverviewPage";
 import type { Issue } from "@/lib/fetchers/issue";
 import type {
   Project,
@@ -22,6 +13,60 @@ import type {
   ProjectWorkflowSummary,
 } from "@/lib/fetchers/project";
 import { IssueStateCategory } from "@/types/prisma";
+
+const IssueDetailPageSurface = dynamic(
+  () => import("@/components/issue/IssueDetailPageSurface"),
+  { loading: () => null },
+);
+const ProjectDetailView = dynamic(
+  () =>
+    import("@/components/projects/ProjectDetailView").then(
+      (mod) => mod.ProjectDetailView,
+    ),
+  { loading: () => null },
+);
+const ProjectIssuesSubview = dynamic(
+  () =>
+    import("@/components/projects/ProjectSubviewContent").then(
+      (mod) => mod.ProjectIssuesSubview,
+    ),
+  { loading: () => null },
+);
+const ProjectDocsSubview = dynamic(
+  () =>
+    import("@/components/projects/ProjectSubviewContent").then(
+      (mod) => mod.ProjectDocsSubview,
+    ),
+  { loading: () => null },
+);
+const ProjectSyncSubview = dynamic(
+  () =>
+    import("@/components/projects/ProjectSubviewContent").then(
+      (mod) => mod.ProjectSyncSubview,
+    ),
+  { loading: () => null },
+);
+const ProjectWorkflowSubview = dynamic(
+  () =>
+    import("@/components/projects/ProjectSubviewContent").then(
+      (mod) => mod.ProjectWorkflowSubview,
+    ),
+  { loading: () => null },
+);
+const ProjectsEmptyState = dynamic(
+  () =>
+    import("@/components/projects/ProjectsEmptyState").then(
+      (mod) => mod.ProjectsEmptyState,
+    ),
+  { loading: () => null },
+);
+const ProjectsOverviewPage = dynamic(
+  () =>
+    import("@/components/projects/ProjectsOverviewPage").then(
+      (mod) => mod.ProjectsOverviewPage,
+    ),
+  { loading: () => null },
+);
 
 export function ProjectsPageLayout({
   workspaceId,

@@ -10,11 +10,13 @@ import {
   cancelIssue,
   CreateIssueDto,
   CreateWorkflowIssueDto,
+  DEFAULT_ISSUES_PAGE_SIZE,
   createIssue,
   createWorkflowIssue,
   CreateIssueStepRecordDto,
   CreateIssueActivityDto,
   deleteIssue,
+  GetIssuesOptions,
   getIssue,
   getIssueActivities,
   getIssueStepRecords,
@@ -23,6 +25,7 @@ import {
   Issue,
   IssueQueryParams,
   isWorkflowIssue,
+  normalizeIssueQueryParams,
   RespondWorkflowReviewDto,
   RequestWorkflowHandoffDto,
   requestWorkflowHandoff,
@@ -50,15 +53,27 @@ import { IssueType } from "@/types/prisma";
 export const useIssues = (
   workspaceId: string,
   params: IssueQueryParams = {},
-  options: { enabled?: boolean } = {},
+  options: { enabled?: boolean } & GetIssuesOptions = {},
 ) => {
   const { session } = useAuth();
+  const normalizedParams = normalizeIssueQueryParams(params);
+  const fetchAll = options.fetchAll ?? false;
+  const defaultPageSize =
+    options.defaultPageSize ?? DEFAULT_ISSUES_PAGE_SIZE;
 
   return useQuery({
-    queryKey: ["issues", workspaceId, params],
+    queryKey: [
+      "issues",
+      workspaceId,
+      normalizedParams,
+      { fetchAll, defaultPageSize },
+    ],
     queryFn: async () => {
       if (!session?.access_token) return [];
-      return getIssues(workspaceId, session.access_token, params);
+      return getIssues(workspaceId, session.access_token, normalizedParams, {
+        fetchAll,
+        defaultPageSize,
+      });
     },
     enabled:
       (options.enabled ?? true) && !!session?.access_token && !!workspaceId,

@@ -114,35 +114,79 @@ export interface InboxQueryParams {
   limit?: number;
 }
 
-function buildInboxQuery(params: InboxQueryParams = {}) {
-  const searchParams = new URLSearchParams();
+export function normalizeInboxQueryParams(
+  params: InboxQueryParams = {},
+): InboxQueryParams {
+  const normalized: InboxQueryParams = {};
 
   if (params.bucket) {
-    searchParams.set("bucket", params.bucket);
+    normalized.bucket = params.bucket;
   }
 
   if (params.status) {
-    searchParams.set("status", params.status);
+    normalized.status = params.status;
   }
 
   if (params.type) {
-    searchParams.set("type", params.type);
+    normalized.type = params.type;
   }
 
   if (params.projectId) {
-    searchParams.set("projectId", params.projectId);
+    normalized.projectId = params.projectId;
   }
 
   if (params.requiresAction !== undefined) {
-    searchParams.set("requiresAction", String(params.requiresAction));
+    normalized.requiresAction = params.requiresAction;
   }
 
   if (params.cursor) {
-    searchParams.set("cursor", params.cursor);
+    normalized.cursor = params.cursor;
   }
 
   if (params.limit) {
-    searchParams.set("limit", String(params.limit));
+    normalized.limit = params.limit;
+  }
+
+  return normalized;
+}
+
+export function getInboxQueryKey(
+  workspaceId: string,
+  params: InboxQueryParams = {},
+) {
+  return ["inbox", workspaceId, normalizeInboxQueryParams(params)] as const;
+}
+
+function buildInboxQuery(params: InboxQueryParams = {}) {
+  const normalized = normalizeInboxQueryParams(params);
+  const searchParams = new URLSearchParams();
+
+  if (normalized.bucket) {
+    searchParams.set("bucket", normalized.bucket);
+  }
+
+  if (normalized.status) {
+    searchParams.set("status", normalized.status);
+  }
+
+  if (normalized.type) {
+    searchParams.set("type", normalized.type);
+  }
+
+  if (normalized.projectId) {
+    searchParams.set("projectId", normalized.projectId);
+  }
+
+  if (normalized.requiresAction !== undefined) {
+    searchParams.set("requiresAction", String(normalized.requiresAction));
+  }
+
+  if (normalized.cursor) {
+    searchParams.set("cursor", normalized.cursor);
+  }
+
+  if (normalized.limit) {
+    searchParams.set("limit", String(normalized.limit));
   }
 
   const queryString = searchParams.toString();

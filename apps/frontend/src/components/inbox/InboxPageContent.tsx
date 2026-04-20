@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import {
@@ -27,8 +28,6 @@ import {
   Workflow,
 } from "lucide-react";
 import { toast } from "sonner";
-import WorkflowIssueDetail from "@/components/issue/WorkflowIssueDetail";
-import NormalIssueDetail from "@/components/shared/issue/NormalIssueDetail";
 import { Button } from "@/components/ui/button";
 import { useCachedPageVisibility } from "@/components/cache/CachedPageVisibility";
 import { useAcceptWorkflowHandoff } from "@/hooks/useIssueApi";
@@ -58,6 +57,15 @@ import {
   resolveInboxDocContext,
 } from "@/components/inbox/inbox-digest-utils";
 import AmbientGlow from "../global/AmbientGlow";
+
+const WorkflowIssueDetail = dynamic(
+  () => import("@/components/issue/WorkflowIssueDetail"),
+  { loading: () => null },
+);
+const NormalIssueDetail = dynamic(
+  () => import("@/components/shared/issue/NormalIssueDetail"),
+  { loading: () => null },
+);
 
 type InboxViewId = "primary" | "other" | "digest" | "later" | "cleared";
 
@@ -546,6 +554,10 @@ function InboxRow({
       onClick={() => void onOpen(item)}
       aria-label={tInbox("row.openAria", { title: displayTitle })}
       className="group block w-full px-1 py-1 text-left focus:outline-none"
+      style={{
+        contentVisibility: "auto",
+        containIntrinsicSize: "140px",
+      }}
     >
       <div
         className={cn(
@@ -684,7 +696,6 @@ export default function InboxPageContent() {
   const tInbox = useTranslations("inbox");
   const searchParams = useSearchParams();
   const isPageVisible = useCachedPageVisibility();
-  const hasMountedRef = useRef(false);
   const [activeView, setActiveView] = useState<InboxViewId>(() => {
     const requestedView = searchParams.get("view");
     return isInboxView(requestedView) ? requestedView : "primary";
@@ -762,19 +773,6 @@ export default function InboxPageContent() {
     enabled: isPageVisible && !selectedIssueId,
     userEnabled: isPageVisible,
   });
-
-  useEffect(() => {
-    if (!hasMountedRef.current) {
-      hasMountedRef.current = true;
-      return;
-    }
-
-    if (!isPageVisible) {
-      return;
-    }
-
-    void refetch();
-  }, [isPageVisible, refetch]);
 
   useEffect(() => {
     const requestedView = searchParams.get("view");
@@ -990,7 +988,6 @@ export default function InboxPageContent() {
   const handleCloseDetail = () => {
     setSelectedIssueId(null);
     setSelectedIssueIsWorkflow(false);
-    void handleRefresh();
   };
 
   if (selectedIssueId && selectedIssueIsWorkflow) {
