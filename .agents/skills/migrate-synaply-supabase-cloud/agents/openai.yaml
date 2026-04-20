@@ -1,0 +1,4 @@
+interface:
+  display_name: "Migrate Synaply Supabase Cloud"
+  short_description: "Deploy Synaply Cloud migrations"
+  default_prompt: "Use $migrate-synaply-supabase-cloud to deploy Synaply Prisma and Supabase migrations to a Supabase Cloud project and verify the remote state."
