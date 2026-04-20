@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import {
   Bot,
@@ -16,6 +16,7 @@ import { getAiThreadDisplayTitleWithLabels } from "@/components/ai/workbench/aiW
 import type { AiThreadRecord } from "@/lib/ai/types";
 import type { Issue } from "@/lib/fetchers/issue";
 import { cn } from "@/lib/utils";
+import { useMeasuredVirtualList } from "@/hooks/useMeasuredVirtualList";
 
 export interface AiWorkbenchSidebarProps {
   workspaceName: string;
@@ -68,6 +69,31 @@ interface SidebarProjectGroup {
   issueThreadCount: number;
   projectThreadCount: number;
 }
+
+type SidebarRow =
+  | {
+      id: string;
+      type: "section";
+      label: string;
+      topSpacing: boolean;
+    }
+  | {
+      id: string;
+      type: "thread";
+      item: SidebarThreadItem;
+    }
+  | {
+      id: string;
+      type: "project";
+      group: SidebarProjectGroup;
+      active: boolean;
+      expanded: boolean;
+    }
+  | {
+      id: string;
+      type: "empty";
+      variant: "workspace" | "project";
+    };
 
 type AiTranslate = (
   key: string,
@@ -246,6 +272,7 @@ export function AiWorkbenchSidebar({
 }: AiWorkbenchSidebarProps) {
   const locale = useLocale();
   const tAi = useTranslations("ai");
+  const viewportRef = useRef<HTMLDivElement | null>(null);
   const threadItems = useMemo<SidebarThreadItem[]>(
     () =>
       threads.map((thread) => {
@@ -386,6 +413,187 @@ export function AiWorkbenchSidebar({
     onProjectChange(group.project.id);
   };
 
+  const sidebarRows = useMemo<SidebarRow[]>(() => {
+    const rows: SidebarRow[] = [
+      {
+        id: "section-workspace",
+        type: "section",
+        label: tAi("workbench.sidebar.workspaceSection"),
+        topSpacing: false,
+      },
+    ];
+
+    if (freeThreads.length > 0) {
+      rows.push(
+        ...freeThreads.map((item) => ({
+          id: `thread:${item.thread.id}`,
+          type: "thread" as const,
+          item,
+        })),
+      );
+    } else {
+      rows.push({
+        id: "empty-workspace",
+        type: "empty",
+        variant: "workspace",
+      });
+    }
+
+    rows.push({
+      id: "section-projects",
+      type: "section",
+      label: tAi("workbench.sidebar.projectsSection"),
+      topSpacing: true,
+    });
+
+    for (const group of projectGroups) {
+      const expanded = expandedKeys.has(group.project.id);
+      const active =
+        activeProjectId === group.project.id ||
+        (resolvedThreadItem?.tone === "project" &&
+          resolvedThreadItem.projectId === group.project.id);
+
+      rows.push({
+        id: `project:${group.project.id}`,
+        type: "project",
+        group,
+        active,
+        expanded,
+      });
+
+      if (!expanded) {
+        continue;
+      }
+
+      if (group.issueThreads.length > 0) {
+        rows.push(
+          ...group.issueThreads.map((item) => ({
+            id: `thread:${item.thread.id}`,
+            type: "thread" as const,
+            item,
+          })),
+        );
+      } else {
+        rows.push({
+          id: `empty-project:${group.project.id}`,
+          type: "empty",
+          variant: "project",
+        });
+      }
+    }
+
+    return rows;
+  }, [
+    activeProjectId,
+    expandedKeys,
+    freeThreads,
+    projectGroups,
+    resolvedThreadItem,
+    tAi,
+  ]);
+
+  const shouldVirtualize = sidebarRows.length > 40;
+  const { virtualItems, totalSize, measureElement } = useMeasuredVirtualList({
+    containerRef: viewportRef,
+    itemCount: sidebarRows.length,
+    enabled: shouldVirtualize,
+    overscan: 8,
+    estimateSize: (index) => {
+      const row = sidebarRows[index];
+
+      switch (row?.type) {
+        case "section":
+          return row.topSpacing ? 48 : 28;
+        case "project":
+          return 76;
+        case "empty":
+          return 82;
+        case "thread":
+        default:
+          return 78;
+      }
+    },
+  });
+
+  const renderRow = (row: SidebarRow) => {
+    switch (row.type) {
+      case "section":
+        return (
+          <div className={cn(row.topSpacing && "pt-3")}>
+            <p className="px-2 text-[10px] font-medium uppercase tracking-[0.22em] text-slate-400 dark:text-white/24">
+              {row.label}
+            </p>
+          </div>
+        );
+      case "thread":
+        return (
+          <SidebarThreadRow
+            item={row.item}
+            active={row.item.thread.id === resolvedThreadId}
+            tAi={tAi}
+            onSelectThread={onSelectThread}
+          />
+        );
+      case "empty":
+        return (
+          <div className="rounded-lg border border-dashed border-black/[0.08] px-4 py-3 text-sm leading-6 text-slate-500 dark:border-white/8 dark:text-white/34">
+            {row.variant === "workspace"
+              ? tAi("workbench.sidebar.freeEmpty")
+              : tAi("workbench.sidebar.projectEmpty")}
+          </div>
+        );
+      case "project":
+        return (
+          <div
+            className={cn(
+              "flex items-start gap-2 rounded-lg border border-black/[0.06] bg-black/[0.02] p-2 transition dark:border-white/8 dark:bg-white/[0.02]",
+              row.active &&
+                "border-black/[0.1] bg-black/[0.045] dark:border-white/12 dark:bg-white/[0.07]",
+            )}
+          >
+            <button
+              type="button"
+              onClick={() => toggleExpanded(row.group.project.id)}
+              className="mt-1 flex size-7 shrink-0 items-center justify-center rounded-lg text-slate-500 transition hover:bg-black/[0.04] hover:text-slate-900 dark:text-white/42 dark:hover:bg-white/[0.06] dark:hover:text-white"
+              aria-label={
+                row.expanded
+                  ? tAi("workbench.sidebar.collapseProject", {
+                      name: row.group.project.name,
+                    })
+                  : tAi("workbench.sidebar.expandProject", {
+                      name: row.group.project.name,
+                    })
+              }
+            >
+              {row.expanded ? (
+                <ChevronDown className="size-4" />
+              ) : (
+                <ChevronRight className="size-4" />
+              )}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleSelectProject(row.group)}
+              className="flex min-w-0 flex-1 gap-3 text-left"
+            >
+              <div className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-2xl border border-black/[0.06] bg-black/[0.03] text-slate-600 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/72">
+                <FolderOpen className="size-4" />
+              </div>
+
+              <div className="min-w-0 flex-1 flex">
+                <div className="flex min-w-0 w-full items-center gap-3">
+                  <p className="max-w-[200px] flex-1 truncate text-sm font-medium text-slate-950 dark:text-white line-clamp-1">
+                    {row.group.project.name}
+                  </p>
+                </div>
+              </div>
+            </button>
+          </div>
+        );
+    }
+  };
+
   return (
     <aside className="flex w-[375px] shrink-0 flex-col overflow-hidden rounded-lg border border-black/[0.06] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(244,244,245,0.98))] shadow-[0_30px_100px_-70px_rgba(15,23,42,0.18)] dark:border-white/8 dark:bg-[linear-gradient(180deg,rgba(17,17,19,0.98),rgba(10,10,12,0.99))] dark:shadow-[0_30px_100px_-70px_rgba(0,0,0,0.9)]">
       <div className="border-b border-black/[0.06] px-6 py-3 dark:border-white/8">
@@ -415,121 +623,35 @@ export function AiWorkbenchSidebar({
         </div>
       </div>
 
-      <ScrollArea className="min-h-0 flex-1 overflow-hidden">
-        <div className="space-y-5 px-3 py-4">
-          <div>
-            <p className="px-2 text-[10px] font-medium uppercase tracking-[0.22em] text-slate-400 dark:text-white/24">
-              {tAi("workbench.sidebar.workspaceSection")}
-            </p>
-
-            <div className="mt-2 space-y-1.5">
-
-              {freeThreads.length > 0 ? (
-                <div className="min-w-0 space-y-1">
-                  {freeThreads.map((item) => (
-                    <SidebarThreadRow
-                      key={item.thread.id}
-                      item={item}
-                      active={item.thread.id === resolvedThreadId}
-                      tAi={tAi}
-                      onSelectThread={onSelectThread}
-                    />
-                  ))}
-                </div>
-              ) : (
-                <div className="rounded-lg border border-dashed border-black/[0.08] px-4 py-3 text-sm leading-6 text-slate-500 dark:border-white/8 dark:text-white/34">
-                  {tAi("workbench.sidebar.freeEmpty")}
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div>
-            <p className="px-2 text-[10px] font-medium uppercase tracking-[0.22em] text-slate-400 dark:text-white/24">
-              {tAi("workbench.sidebar.projectsSection")}
-            </p>
-
-            <div className="mt-2 space-y-1.5">
-              {projectGroups.map((group) => {
-                const expanded = expandedKeys.has(group.project.id);
-                const isActive =
-                  activeProjectId === group.project.id ||
-                  (resolvedThreadItem?.tone === "project" &&
-                    resolvedThreadItem.projectId === group.project.id);
+      <ScrollArea
+        className="min-h-0 flex-1 overflow-hidden"
+        viewportRef={viewportRef}
+      >
+        <div className="px-3 py-4">
+          {shouldVirtualize ? (
+            <div className="relative" style={{ height: totalSize }}>
+              {virtualItems.map((virtualItem) => {
+                const row = sidebarRows[virtualItem.index];
 
                 return (
-                  <div key={group.project.id} className="space-y-1">
-                    <div
-                      className={cn(
-                        "flex items-start gap-2 rounded-lg border border-black/[0.06] bg-black/[0.02] p-2 transition dark:border-white/8 dark:bg-white/[0.02]",
-                        isActive &&
-                          "border-black/[0.1] bg-black/[0.045] dark:border-white/12 dark:bg-white/[0.07]",
-                      )}
-                    >
-                      <button
-                        type="button"
-                        onClick={() => toggleExpanded(group.project.id)}
-                        className="mt-1 flex size-7 shrink-0 items-center justify-center rounded-lg text-slate-500 transition hover:bg-black/[0.04] hover:text-slate-900 dark:text-white/42 dark:hover:bg-white/[0.06] dark:hover:text-white"
-                        aria-label={
-                          expanded
-                            ? tAi("workbench.sidebar.collapseProject", {
-                                name: group.project.name,
-                              })
-                            : tAi("workbench.sidebar.expandProject", {
-                                name: group.project.name,
-                              })
-                        }
-                      >
-                        {expanded ? (
-                          <ChevronDown className="size-4" />
-                        ) : (
-                          <ChevronRight className="size-4" />
-                        )}
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => handleSelectProject(group)}
-                        className="flex min-w-0 flex-1 gap-3 text-left"
-                      >
-                        <div className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-2xl border border-black/[0.06] bg-black/[0.03] text-slate-600 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/72">
-                          <FolderOpen className="size-4" />
-                        </div>
-
-                        <div className="min-w-0 flex-1 flex">
-                          <div className="flex min-w-0 w-full items-center gap-3">
-                            <p className="max-w-[200px] flex-1 truncate text-sm font-medium text-slate-950 dark:text-white line-clamp-1">
-                              {group.project.name}
-                            </p>
-                          </div>
-                        </div>
-                      </button>
-                    </div>
-
-                    {expanded ? (
-                      <div className="min-w-0 space-y-1">
-                        {group.issueThreads.length > 0 ? (
-                          group.issueThreads.map((item) => (
-                            <SidebarThreadRow
-                              key={item.thread.id}
-                              item={item}
-                              active={item.thread.id === resolvedThreadId}
-                              tAi={tAi}
-                              onSelectThread={onSelectThread}
-                            />
-                          ))
-                        ) : (
-                          <div className="rounded-lg border border-dashed border-black/[0.08] px-4 py-3 text-sm leading-6 text-slate-500 dark:border-white/8 dark:text-white/34">
-                            {tAi("workbench.sidebar.projectEmpty")}
-                          </div>
-                        )}
-                      </div>
-                    ) : null}
+                  <div
+                    key={row.id}
+                    ref={measureElement(virtualItem.index)}
+                    className="absolute inset-x-0 pb-1.5"
+                    style={{ top: virtualItem.start }}
+                  >
+                    {renderRow(row)}
                   </div>
                 );
               })}
             </div>
-          </div>
+          ) : (
+            <div className="space-y-1.5">
+              {sidebarRows.map((row) => (
+                <div key={row.id}>{renderRow(row)}</div>
+              ))}
+            </div>
+          )}
         </div>
       </ScrollArea>
     </aside>

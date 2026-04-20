@@ -17,6 +17,7 @@ import { AiWorkbenchInputArea } from "@/components/ai/workbench/modules/chat/AiW
 import { AiWorkbenchChatMessage } from "@/components/ai/workbench/modules/chat/AiWorkbenchChatMessage";
 import { useAiWorkbenchSelectionStore } from "@/components/ai/workbench/modules/chat/AiWorkbenchSelectionStore";
 import { cn } from "@/lib/utils";
+import { useMeasuredVirtualList } from "@/hooks/useMeasuredVirtualList";
 
 interface AiWorkbenchChatPanelProps {
   messages: AiMessageRecord[];
@@ -74,6 +75,32 @@ export function AiWorkbenchChatPanel({
     () => messages.length > 0 || isStreaming,
     [isStreaming, messages.length],
   );
+  const chatRows = useMemo(
+    () => [
+      ...messages.map((message) => ({
+        id: message.id,
+        type: "message" as const,
+        message,
+      })),
+      ...(isStreaming
+        ? [
+            {
+              id: "__streaming__",
+              type: "streaming" as const,
+            },
+          ]
+        : []),
+    ],
+    [isStreaming, messages],
+  );
+  const chatRowIndexById = useMemo(
+    () =>
+      new Map(
+        chatRows.map((row, index) => [row.id, index] as const),
+      ),
+    [chatRows],
+  );
+  const shouldVirtualizeMessages = chatRows.length > 40;
   const threadKey = messages[0]?.threadId ?? "__empty__";
   const lastMessage = messages.at(-1);
   const shouldReserveViewportSpace =
@@ -81,6 +108,23 @@ export function AiWorkbenchChatPanel({
   const viewportSpacerHeight = shouldReserveViewportSpace
     ? Math.max(containerViewportHeight - 256, 220)
     : 0;
+  const { virtualItems, totalSize, measureElement, getOffsetForIndex } =
+    useMeasuredVirtualList({
+    containerRef,
+    itemCount: chatRows.length,
+    enabled: shouldVirtualizeMessages,
+    cacheKey: threadKey,
+    overscan: 6,
+    estimateSize: (index) => {
+      const row = chatRows[index];
+
+      if (!row || row.type === "streaming") {
+        return 110;
+      }
+
+      return row.message.role === "USER" ? 140 : 220;
+    },
+    });
 
   const stopScrollAnimation = useCallback(() => {
     if (scrollAnimationFrameRef.current !== null) {
@@ -192,6 +236,7 @@ export function AiWorkbenchChatPanel({
     container.scrollTop = container.scrollHeight;
     previousMessagesCountRef.current = messages.length;
     initializedThreadKeyRef.current = threadKey;
+    lastAnchoredMessageIdRef.current = null;
     setShowScrollButton(false);
     setIsAutoScrollEnabled(true);
   }, [hasMessages, messages.length, stopScrollAnimation, threadKey]);
@@ -206,9 +251,24 @@ export function AiWorkbenchChatPanel({
     }
 
     const container = containerRef.current;
+    const targetIndex = chatRowIndexById.get(pendingViewportAnchorId) ?? -1;
     const target = document.getElementById(`message-${pendingViewportAnchorId}`);
 
-    if (!container || !target) {
+    if (!container) {
+      return;
+    }
+
+    if (!target && shouldVirtualizeMessages && targetIndex >= 0) {
+      const estimatedTop = Math.max(0, getOffsetForIndex(targetIndex) - 24);
+
+      if (Math.abs(container.scrollTop - estimatedTop) > 4) {
+        animateScrollTo(estimatedTop, 220);
+      }
+
+      return;
+    }
+
+    if (!target) {
       return;
     }
 
@@ -222,7 +282,15 @@ export function AiWorkbenchChatPanel({
     animateScrollTo(targetTop, 260);
     lastAnchoredMessageIdRef.current = pendingViewportAnchorId;
     setIsAutoScrollEnabled(false);
-  }, [animateScrollTo, messages.length, pendingViewportAnchorId]);
+  }, [
+    animateScrollTo,
+    chatRowIndexById,
+    getOffsetForIndex,
+    messages.length,
+    pendingViewportAnchorId,
+    shouldVirtualizeMessages,
+    virtualItems,
+  ]);
 
   useEffect(() => {
     const hasNewMessage = messages.length > previousMessagesCountRef.current;
@@ -289,21 +357,51 @@ export function AiWorkbenchChatPanel({
               </div>
             </div>
           ) : (
-            <div className="flex flex-col gap-4">
-              {messages.map((message) => (
-                <AiWorkbenchChatMessage
-                  key={message.id}
-                  message={message}
-                  onInView={handleMessageInView}
-                  onQuickReply={onQuickReply}
-                  disableQuickReply={isSubmitting}
-                />
-              ))}
+            <>
+              {shouldVirtualizeMessages ? (
+                <div className="relative" style={{ height: totalSize }}>
+                  {virtualItems.map((virtualItem) => {
+                    const row = chatRows[virtualItem.index];
 
-              {isStreaming ? (
-                <AiWorkbenchChatMessage streamingText={streamingText} />
-              ) : null}
-            </div>
+                    return (
+                      <div
+                        key={row.id}
+                        ref={measureElement(virtualItem.index)}
+                        className="absolute inset-x-0 pb-4"
+                        style={{ top: virtualItem.start }}
+                      >
+                        {row.type === "message" ? (
+                          <AiWorkbenchChatMessage
+                            message={row.message}
+                            onInView={handleMessageInView}
+                            onQuickReply={onQuickReply}
+                            disableQuickReply={isSubmitting}
+                          />
+                        ) : (
+                          <AiWorkbenchChatMessage streamingText={streamingText} />
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="flex flex-col gap-4">
+                  {messages.map((message) => (
+                    <AiWorkbenchChatMessage
+                      key={message.id}
+                      message={message}
+                      onInView={handleMessageInView}
+                      onQuickReply={onQuickReply}
+                      disableQuickReply={isSubmitting}
+                    />
+                  ))}
+
+                  {isStreaming ? (
+                    <AiWorkbenchChatMessage streamingText={streamingText} />
+                  ) : null}
+                </div>
+              )}
+            </>
           )}
 
           {hasMessages && viewportSpacerHeight > 0 ? (

@@ -172,7 +172,11 @@ function TreeNode({
                   ? "bg-app-bg/85 text-app-text-primary"
                   : "text-app-text-secondary hover:bg-app-bg/55 hover:text-app-text-primary",
               )}
-              style={{ paddingLeft: `${level * 14 + 10}px` }}
+              style={{
+                paddingLeft: `${level * 14 + 10}px`,
+                contentVisibility: "auto",
+                containIntrinsicSize: "48px",
+              }}
               onClick={() =>
                 !isEditing && doc.type === "document" ? onSelectDoc(doc) : openDoc(doc)
               }
@@ -608,11 +612,15 @@ export default function DocsSidebar({
                       : null;
 
                     return (
-                      <button
+                     <button
                         key={doc._id}
                         type="button"
                         onClick={() => onSelectDoc(doc)}
                         className="flex w-full items-center gap-3 rounded-xl bg-app-bg/60 px-3 py-3 text-left transition-colors hover:bg-app-bg/80"
+                        style={{
+                          contentVisibility: "auto",
+                          containIntrinsicSize: "88px",
+                        }}
                       >
                         <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg bg-app-content-bg text-app-text-primary">
                           {doc.type === "folder" ? (
