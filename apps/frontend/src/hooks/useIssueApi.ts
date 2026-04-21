@@ -50,6 +50,7 @@ import {
   createIssueActivity,
   createIssueStepRecord,
 } from "@/lib/fetchers/issue";
+import { scheduleQueryInvalidations } from "@/lib/query/scheduled-invalidation";
 import { broadcastIssueDeleted } from "@/lib/realtime/broadcast";
 import { IssueScope, IssueType } from "@/types/prisma";
 
@@ -384,23 +385,23 @@ export const useCreateIssue = () => {
         ["issue", variables.workspaceId, createdIssue.id],
         createdIssue,
       );
-      void queryClient.invalidateQueries({
-        queryKey: ["my-work", variables.workspaceId],
-        exact: true,
-      });
-      void queryClient.invalidateQueries({
-        queryKey: ["inbox", variables.workspaceId],
-      });
-      void queryClient.invalidateQueries({
-        queryKey: ["inbox-summary", variables.workspaceId],
-        exact: true,
-      });
-      if (createdIssue.projectId) {
-        void queryClient.invalidateQueries({
-          queryKey: ["project-summary", variables.workspaceId, createdIssue.projectId],
-          exact: true,
-        });
-      }
+      scheduleQueryInvalidations(queryClient, [
+        { queryKey: ["my-work", variables.workspaceId], exact: true },
+        { queryKey: ["inbox", variables.workspaceId] },
+        { queryKey: ["inbox-summary", variables.workspaceId], exact: true },
+        ...(createdIssue.projectId
+          ? [
+              {
+                queryKey: [
+                  "project-summary",
+                  variables.workspaceId,
+                  createdIssue.projectId,
+                ],
+                exact: true,
+              },
+            ]
+          : []),
+      ]);
     },
   });
 };
@@ -492,58 +493,76 @@ export const useCreateWorkflowIssue = () => {
         ["issue", variables.workspaceId, createdIssue.id],
         createdIssue,
       );
-      void queryClient.invalidateQueries({
-        queryKey: ["my-work", variables.workspaceId],
-        exact: true,
-      });
-      void queryClient.invalidateQueries({
-        queryKey: ["inbox", variables.workspaceId],
-      });
-      void queryClient.invalidateQueries({
-        queryKey: ["inbox-summary", variables.workspaceId],
-        exact: true,
-      });
-      if (createdIssue.projectId) {
-        void queryClient.invalidateQueries({
-          queryKey: ["project-summary", variables.workspaceId, createdIssue.projectId],
-          exact: true,
-        });
-      }
+      scheduleQueryInvalidations(queryClient, [
+        { queryKey: ["my-work", variables.workspaceId], exact: true },
+        { queryKey: ["inbox", variables.workspaceId] },
+        { queryKey: ["inbox-summary", variables.workspaceId], exact: true },
+        ...(createdIssue.projectId
+          ? [
+              {
+                queryKey: [
+                  "project-summary",
+                  variables.workspaceId,
+                  createdIssue.projectId,
+                ],
+                exact: true,
+              },
+            ]
+          : []),
+      ]);
     },
   });
 };
 
-function invalidateWorkflowRunQueries(
+function scheduleIssueWorkspaceInvalidations(
+  queryClient: ReturnType<typeof useQueryClient>,
+  workspaceId: string,
+  options: {
+    issueId?: string;
+    includeInbox?: boolean;
+    includeProjectSummary?: boolean;
+    includeActivities?: boolean;
+    includeStepRecords?: boolean;
+  } = {},
+) {
+  const {
+    issueId,
+    includeInbox = true,
+    includeProjectSummary = true,
+    includeActivities = false,
+    includeStepRecords = false,
+  } = options;
+
+  scheduleQueryInvalidations(queryClient, [
+    { queryKey: ["issues", workspaceId] },
+    { queryKey: ["my-work", workspaceId], exact: true },
+    ...(includeInbox ? [{ queryKey: ["inbox", workspaceId] }] : []),
+    ...(includeInbox
+      ? [{ queryKey: ["inbox-summary", workspaceId], exact: true }]
+      : []),
+    ...(includeProjectSummary ? [{ queryKey: ["project-summary", workspaceId] }] : []),
+    ...(issueId && includeActivities
+      ? [{ queryKey: ["issue-activities", issueId], exact: true }]
+      : []),
+    ...(issueId && includeStepRecords
+      ? [{ queryKey: ["issue-step-records", issueId], exact: true }]
+      : []),
+  ]);
+}
+
+function scheduleWorkflowRunInvalidations(
   queryClient: ReturnType<typeof useQueryClient>,
   workspaceId: string,
   issueId: string
 ) {
-  queryClient.invalidateQueries({
-    queryKey: ["issue", workspaceId, issueId],
-  });
-  queryClient.invalidateQueries({
-    queryKey: ["workflow-run", workspaceId, issueId],
-  });
-  queryClient.invalidateQueries({
-    queryKey: ["issues", workspaceId],
-  });
-  queryClient.invalidateQueries({
-    queryKey: ["my-work", workspaceId],
-  });
-  queryClient.invalidateQueries({
-    queryKey: ["inbox", workspaceId],
-  });
-  queryClient.invalidateQueries({
-    queryKey: ["inbox-summary", workspaceId],
-  });
-  queryClient.invalidateQueries({
-    queryKey: ["issue-step-records", issueId],
-  });
-  queryClient.invalidateQueries({
-    queryKey: ["issue-activities", issueId],
-  });
-  queryClient.invalidateQueries({
-    queryKey: ["project-summary", workspaceId],
+  scheduleQueryInvalidations(queryClient, [
+    { queryKey: ["issue", workspaceId, issueId], exact: true },
+    { queryKey: ["workflow-run", workspaceId, issueId], exact: true },
+  ]);
+  scheduleIssueWorkspaceInvalidations(queryClient, workspaceId, {
+    issueId,
+    includeActivities: true,
+    includeStepRecords: true,
   });
 }
 
@@ -573,7 +592,7 @@ export const useUpdateWorkflowRunStatus = () => {
       );
     },
     onSuccess: (_updatedIssue, variables) => {
-      invalidateWorkflowRunQueries(
+      scheduleWorkflowRunInvalidations(
         queryClient,
         variables.workspaceId,
         variables.issueId
@@ -603,7 +622,7 @@ export const useAdvanceWorkflowRun = () => {
       return advanceWorkflowRun(workspaceId, issueId, data, session.access_token);
     },
     onSuccess: (_updatedIssue, variables) => {
-      invalidateWorkflowRunQueries(
+      scheduleWorkflowRunInvalidations(
         queryClient,
         variables.workspaceId,
         variables.issueId
@@ -633,7 +652,7 @@ export const useRevertWorkflowRun = () => {
       return revertWorkflowRun(workspaceId, issueId, data, session.access_token);
     },
     onSuccess: (_updatedIssue, variables) => {
-      invalidateWorkflowRunQueries(
+      scheduleWorkflowRunInvalidations(
         queryClient,
         variables.workspaceId,
         variables.issueId
@@ -663,7 +682,7 @@ export const useBlockWorkflowRun = () => {
       return blockWorkflowRun(workspaceId, issueId, data, session.access_token);
     },
     onSuccess: (_updatedIssue, variables) => {
-      invalidateWorkflowRunQueries(
+      scheduleWorkflowRunInvalidations(
         queryClient,
         variables.workspaceId,
         variables.issueId
@@ -693,7 +712,7 @@ export const useUnblockWorkflowRun = () => {
       return unblockWorkflowRun(workspaceId, issueId, data, session.access_token);
     },
     onSuccess: (_updatedIssue, variables) => {
-      invalidateWorkflowRunQueries(
+      scheduleWorkflowRunInvalidations(
         queryClient,
         variables.workspaceId,
         variables.issueId
@@ -728,7 +747,7 @@ export const useRequestWorkflowReview = () => {
       );
     },
     onSuccess: (_updatedIssue, variables) => {
-      invalidateWorkflowRunQueries(
+      scheduleWorkflowRunInvalidations(
         queryClient,
         variables.workspaceId,
         variables.issueId
@@ -763,7 +782,7 @@ export const useRequestWorkflowHandoff = () => {
       );
     },
     onSuccess: (_updatedIssue, variables) => {
-      invalidateWorkflowRunQueries(
+      scheduleWorkflowRunInvalidations(
         queryClient,
         variables.workspaceId,
         variables.issueId
@@ -798,7 +817,7 @@ export const useRespondWorkflowReview = () => {
       );
     },
     onSuccess: (_updatedIssue, variables) => {
-      invalidateWorkflowRunQueries(
+      scheduleWorkflowRunInvalidations(
         queryClient,
         variables.workspaceId,
         variables.issueId
@@ -833,7 +852,7 @@ export const useAcceptWorkflowHandoff = () => {
       );
     },
     onSuccess: (_updatedIssue, variables) => {
-      invalidateWorkflowRunQueries(
+      scheduleWorkflowRunInvalidations(
         queryClient,
         variables.workspaceId,
         variables.issueId
@@ -868,7 +887,7 @@ export const useSubmitWorkflowRecord = () => {
       );
     },
     onSuccess: (_updatedIssue, variables) => {
-      invalidateWorkflowRunQueries(
+      scheduleWorkflowRunInvalidations(
         queryClient,
         variables.workspaceId,
         variables.issueId
@@ -900,23 +919,12 @@ export const useUpdateIssue = () => {
 
       return updateIssue(workspaceId, issueId, data, session.access_token);
     },
-    onSuccess: (_updatedIssue, variables) => {
-      queryClient.invalidateQueries({
-        queryKey: ["issues", variables.workspaceId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["my-work", variables.workspaceId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["inbox", variables.workspaceId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["inbox-summary", variables.workspaceId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["project-summary", variables.workspaceId],
-      });
-
+    onSuccess: (updatedIssue, variables) => {
+      queryClient.setQueryData(
+        ["issue", variables.workspaceId, variables.issueId],
+        updatedIssue,
+      );
+      scheduleIssueWorkspaceInvalidations(queryClient, variables.workspaceId);
     },
   });
 };
@@ -942,26 +950,15 @@ export const useCancelIssue = () => {
 
       return cancelIssue(workspaceId, issueId, session.access_token);
     },
-    onSuccess: (_updatedIssue, variables) => {
-      queryClient.invalidateQueries({
-        queryKey: ["issues", variables.workspaceId],
+    onSuccess: (updatedIssue, variables) => {
+      queryClient.setQueryData(
+        ["issue", variables.workspaceId, variables.issueId],
+        updatedIssue,
+      );
+      scheduleIssueWorkspaceInvalidations(queryClient, variables.workspaceId, {
+        issueId: variables.issueId,
+        includeActivities: true,
       });
-      queryClient.invalidateQueries({
-        queryKey: ["my-work", variables.workspaceId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["inbox", variables.workspaceId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["inbox-summary", variables.workspaceId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["project-summary", variables.workspaceId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["issue-activities", variables.issueId],
-      });
-
     },
   });
 };
@@ -987,21 +984,11 @@ export const useDeleteIssue = () => {
       await deleteIssue(workspaceId, issueId, session.access_token);
     },
     onSuccess: async (_, variables) => {
-      queryClient.invalidateQueries({
-        queryKey: ["issues", variables.workspaceId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["my-work", variables.workspaceId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["inbox", variables.workspaceId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["inbox-summary", variables.workspaceId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["project-summary", variables.workspaceId],
-      });
+      queryClient.setQueryData(
+        ["issue", variables.workspaceId, variables.issueId],
+        null,
+      );
+      scheduleIssueWorkspaceInvalidations(queryClient, variables.workspaceId);
 
       if (!session?.access_token) {
         return;
@@ -1055,12 +1042,10 @@ export const useCreateIssueStepRecord = () => {
       );
     },
     onSuccess: (_createdStepRecord, variables) => {
-      queryClient.invalidateQueries({
-        queryKey: ["issue-step-records", variables.issueId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["project-summary", variables.workspaceId],
-      });
+      scheduleQueryInvalidations(queryClient, [
+        { queryKey: ["issue-step-records", variables.issueId], exact: true },
+        { queryKey: ["project-summary", variables.workspaceId] },
+      ]);
     },
   });
 };
@@ -1100,9 +1085,9 @@ export const useCreateIssueActivity = () => {
       );
     },
     onSuccess: (_createdActivity, variables) => {
-      queryClient.invalidateQueries({
-        queryKey: ["issue-activities", variables.issueId],
-      });
+      scheduleQueryInvalidations(queryClient, [
+        { queryKey: ["issue-activities", variables.issueId], exact: true },
+      ]);
     },
   });
 };

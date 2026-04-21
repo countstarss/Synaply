@@ -7,7 +7,9 @@ import {
   REALTIME_EVENTS,
   WORKSPACE_REALTIME_EVENTS,
   type RealtimeEventName,
+  type RealtimePayloadMap,
 } from "@/lib/realtime/events";
+import { scheduleQueryInvalidations } from "@/lib/query/scheduled-invalidation";
 import { buildWorkspaceTopic } from "@/lib/realtime/topics";
 import { useRealtimeChannel } from "./useRealtimeChannel";
 import { useUserRealtime } from "./useUserRealtime";
@@ -25,30 +27,103 @@ export function useWorkspaceRealtime(
   const { user } = useAuth();
 
   const handleWorkspaceBroadcast = useCallback(
-    (event: RealtimeEventName) => {
-      // Project summary changes need a narrower invalidation set than
-      // generic issue events, but invalidating both is cheap and avoids
-      // missing edge cases.
-      void queryClient.invalidateQueries({
-        queryKey: ["issues", workspaceId],
-      });
-      void queryClient.invalidateQueries({
-        queryKey: ["my-work", workspaceId],
-      });
-      void queryClient.invalidateQueries({
-        queryKey: ["inbox", workspaceId],
-      });
-      void queryClient.invalidateQueries({
-        queryKey: ["inbox-summary", workspaceId],
-      });
-      void queryClient.invalidateQueries({
-        queryKey: ["project-summary", workspaceId],
-      });
+    (
+      event: RealtimeEventName,
+      payload: RealtimePayloadMap[RealtimeEventName],
+    ) => {
+      if (!workspaceId) {
+        return;
+      }
 
-      if (event === REALTIME_EVENTS.PROJECT_SUMMARY_INVALIDATED) {
-        void queryClient.invalidateQueries({
-          queryKey: ["projects", workspaceId],
-        });
+      switch (event) {
+        case REALTIME_EVENTS.ISSUE_CREATED:
+        case REALTIME_EVENTS.ISSUE_DELETED:
+          scheduleQueryInvalidations(queryClient, [
+            { queryKey: ["issues", workspaceId] },
+            { queryKey: ["my-work", workspaceId], exact: true },
+            { queryKey: ["project-summary", workspaceId] },
+          ]);
+          return;
+        case REALTIME_EVENTS.ISSUE_UPDATED: {
+          const changedFields = Array.isArray(
+            (payload as RealtimePayloadMap[typeof REALTIME_EVENTS.ISSUE_UPDATED])
+              ?.changedFields,
+          )
+            ? (
+                payload as RealtimePayloadMap[typeof REALTIME_EVENTS.ISSUE_UPDATED]
+              ).changedFields
+            : [];
+          const affectsIssueCollections = changedFields.some((field) =>
+            ISSUE_COLLECTION_FIELDS.has(field),
+          );
+          const affectsProjectSummaries = changedFields.some((field) =>
+            PROJECT_SUMMARY_FIELDS.has(field),
+          );
+
+          if (!affectsIssueCollections && !affectsProjectSummaries) {
+            return;
+          }
+
+          scheduleQueryInvalidations(queryClient, [
+            ...(affectsIssueCollections
+              ? [
+                  { queryKey: ["issues", workspaceId] },
+                  { queryKey: ["my-work", workspaceId], exact: true },
+                ]
+              : []),
+            ...(affectsProjectSummaries
+              ? [{ queryKey: ["project-summary", workspaceId] }]
+              : []),
+          ]);
+          return;
+        }
+        case REALTIME_EVENTS.WORKFLOW_RUN_CREATED:
+        case REALTIME_EVENTS.WORKFLOW_STEP_STATUS_CHANGED:
+        case REALTIME_EVENTS.WORKFLOW_STEP_COMPLETED:
+        case REALTIME_EVENTS.WORKFLOW_STEP_REVERTED:
+        case REALTIME_EVENTS.WORKFLOW_RECORD_SUBMITTED:
+        case REALTIME_EVENTS.WORKFLOW_REVIEW_REQUESTED:
+        case REALTIME_EVENTS.WORKFLOW_REVIEW_APPROVED:
+        case REALTIME_EVENTS.WORKFLOW_REVIEW_CHANGES_REQUESTED:
+        case REALTIME_EVENTS.WORKFLOW_HANDOFF_REQUESTED:
+        case REALTIME_EVENTS.WORKFLOW_HANDOFF_ACCEPTED:
+        case REALTIME_EVENTS.WORKFLOW_BLOCKED:
+        case REALTIME_EVENTS.WORKFLOW_UNBLOCKED:
+        case REALTIME_EVENTS.WORKFLOW_RUN_COMPLETED:
+          scheduleQueryInvalidations(queryClient, [
+            { queryKey: ["issues", workspaceId] },
+            { queryKey: ["my-work", workspaceId], exact: true },
+            { queryKey: ["project-summary", workspaceId] },
+          ]);
+          return;
+        case REALTIME_EVENTS.PROJECT_SUMMARY_INVALIDATED: {
+          const projectId = (
+            payload as RealtimePayloadMap[typeof REALTIME_EVENTS.PROJECT_SUMMARY_INVALIDATED]
+          )?.projectId;
+
+          scheduleQueryInvalidations(queryClient, [
+            { queryKey: ["projects", workspaceId], exact: true },
+            ...(projectId
+              ? [
+                  {
+                    queryKey: ["project", workspaceId, projectId],
+                    exact: true,
+                  },
+                ]
+              : []),
+            ...(projectId
+              ? [
+                  {
+                    queryKey: ["project-summary", workspaceId, projectId],
+                    exact: true,
+                  },
+                ]
+              : [{ queryKey: ["project-summary", workspaceId] }]),
+          ]);
+          return;
+        }
+        default:
+          return;
       }
     },
     [queryClient, workspaceId],
@@ -68,3 +143,45 @@ export function useWorkspaceRealtime(
     enabled: userEnabled && !!workspaceId,
   });
 }
+
+const ISSUE_COLLECTION_FIELDS = new Set([
+  "created",
+  "deleted",
+  "workspaceId",
+  "title",
+  "stateId",
+  "projectId",
+  "directAssigneeId",
+  "dueDate",
+  "priority",
+  "visibility",
+  "issueType",
+  "workflowId",
+  "workflowSnapshot",
+  "totalSteps",
+  "currentStepId",
+  "currentStepIndex",
+  "currentStepStatus",
+  "key",
+  "sequence",
+  "creatorMemberId",
+]);
+
+const PROJECT_SUMMARY_FIELDS = new Set([
+  "created",
+  "deleted",
+  "workspaceId",
+  "stateId",
+  "projectId",
+  "directAssigneeId",
+  "dueDate",
+  "priority",
+  "visibility",
+  "issueType",
+  "workflowId",
+  "workflowSnapshot",
+  "totalSteps",
+  "currentStepId",
+  "currentStepIndex",
+  "currentStepStatus",
+]);

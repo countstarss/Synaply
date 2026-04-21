@@ -54,6 +54,7 @@ import { useTeamMemberByUserId, useTeamMembers } from "@/hooks/useTeam";
 import { useWorkspaceRealtime } from "@/hooks/realtime/useWorkspaceRealtime";
 import { useWorkspace } from "@/hooks/useWorkspace";
 import { priorityConfig, statusConfig } from "@/lib/data/issueConfig";
+import { scheduleQueryInvalidations } from "@/lib/query/scheduled-invalidation";
 import {
   buildIssueStateSummary,
   getIssueCategory,
@@ -430,7 +431,9 @@ export default function IssuesPageContent() {
   };
 
   const handleUpdateIssue = () => {
-    queryClient.invalidateQueries({ queryKey: ["issues", workspaceId] });
+    scheduleQueryInvalidations(queryClient, [
+      { queryKey: ["issues", workspaceId] },
+    ]);
   };
 
   const handleIssueBoardCategoryOrderChange = (
@@ -514,7 +517,9 @@ export default function IssuesPageContent() {
       },
       {
         onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ["issues", workspaceId] });
+          scheduleQueryInvalidations(queryClient, [
+            { queryKey: ["issues", workspaceId] },
+          ]);
           setPendingIssueIds((current) => {
             const nextState = new Set(current);
             nextState.delete(issue.id);

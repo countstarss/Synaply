@@ -42,6 +42,7 @@ import {
   getSelectedProjectIdFromPathname,
 } from "@/components/projects/project-route-utils";
 import CreateIssueModal from "@/components/shared/issue/CreateIssueModal";
+import { scheduleQueryInvalidations } from "@/lib/query/scheduled-invalidation";
 import {
   isActiveIssue,
 } from "@/lib/issue-board";
@@ -347,7 +348,9 @@ export default function ProjectsPageContent() {
   };
 
   const invalidateIssues = () => {
-    queryClient.invalidateQueries({ queryKey: ["issues", workspaceId] });
+    scheduleQueryInvalidations(queryClient, [
+      { queryKey: ["issues", workspaceId] },
+    ]);
   };
 
   const handleMarkSync = (projectId: string) => {

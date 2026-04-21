@@ -22,6 +22,7 @@ import {
   normalizeInboxQueryParams,
   snoozeInboxItem,
 } from "@/lib/fetchers/inbox";
+import { scheduleQueryInvalidations } from "@/lib/query/scheduled-invalidation";
 
 type InboxListQueryKey = ReturnType<typeof getInboxQueryKey>;
 
@@ -109,10 +110,7 @@ function updateInboxListCaches(
   }
 
   for (const queryKey of keysToInvalidate) {
-    void queryClient.invalidateQueries({
-      queryKey,
-      exact: true,
-    });
+    scheduleQueryInvalidations(queryClient, [{ queryKey, exact: true }]);
   }
 }
 
@@ -141,10 +139,7 @@ function clearInboxListCaches(
       ...data,
       items: nextItems,
     });
-    void queryClient.invalidateQueries({
-      queryKey,
-      exact: true,
-    });
+    scheduleQueryInvalidations(queryClient, [{ queryKey, exact: true }]);
   }
 }
 
@@ -199,14 +194,10 @@ export function useMarkInboxItemSeen() {
     },
     onSuccess: (updatedItem, variables) => {
       updateInboxListCaches(queryClient, variables.workspaceId, updatedItem);
-      void queryClient.invalidateQueries({
-        queryKey: ["inbox-summary", variables.workspaceId],
-        exact: true,
-      });
-      void queryClient.invalidateQueries({
-        queryKey: ["my-work", variables.workspaceId],
-        exact: true,
-      });
+      scheduleQueryInvalidations(queryClient, [
+        { queryKey: ["inbox-summary", variables.workspaceId], exact: true },
+        { queryKey: ["my-work", variables.workspaceId], exact: true },
+      ]);
     },
   });
 }
@@ -231,14 +222,10 @@ export function useMarkInboxItemDone() {
     },
     onSuccess: (updatedItem, variables) => {
       updateInboxListCaches(queryClient, variables.workspaceId, updatedItem);
-      void queryClient.invalidateQueries({
-        queryKey: ["inbox-summary", variables.workspaceId],
-        exact: true,
-      });
-      void queryClient.invalidateQueries({
-        queryKey: ["my-work", variables.workspaceId],
-        exact: true,
-      });
+      scheduleQueryInvalidations(queryClient, [
+        { queryKey: ["inbox-summary", variables.workspaceId], exact: true },
+        { queryKey: ["my-work", variables.workspaceId], exact: true },
+      ]);
     },
   });
 }
@@ -263,14 +250,10 @@ export function useMarkInboxItemUnread() {
     },
     onSuccess: (updatedItem, variables) => {
       updateInboxListCaches(queryClient, variables.workspaceId, updatedItem);
-      void queryClient.invalidateQueries({
-        queryKey: ["inbox-summary", variables.workspaceId],
-        exact: true,
-      });
-      void queryClient.invalidateQueries({
-        queryKey: ["my-work", variables.workspaceId],
-        exact: true,
-      });
+      scheduleQueryInvalidations(queryClient, [
+        { queryKey: ["inbox-summary", variables.workspaceId], exact: true },
+        { queryKey: ["my-work", variables.workspaceId], exact: true },
+      ]);
     },
   });
 }
@@ -297,14 +280,10 @@ export function useSnoozeInboxItem() {
     },
     onSuccess: (updatedItem, variables) => {
       updateInboxListCaches(queryClient, variables.workspaceId, updatedItem);
-      void queryClient.invalidateQueries({
-        queryKey: ["inbox-summary", variables.workspaceId],
-        exact: true,
-      });
-      void queryClient.invalidateQueries({
-        queryKey: ["my-work", variables.workspaceId],
-        exact: true,
-      });
+      scheduleQueryInvalidations(queryClient, [
+        { queryKey: ["inbox-summary", variables.workspaceId], exact: true },
+        { queryKey: ["my-work", variables.workspaceId], exact: true },
+      ]);
     },
   });
 }
@@ -329,14 +308,10 @@ export function useClearInboxItems() {
     },
     onSuccess: (_, variables) => {
       clearInboxListCaches(queryClient, variables.workspaceId, variables.itemIds);
-      void queryClient.invalidateQueries({
-        queryKey: ["inbox-summary", variables.workspaceId],
-        exact: true,
-      });
-      void queryClient.invalidateQueries({
-        queryKey: ["my-work", variables.workspaceId],
-        exact: true,
-      });
+      scheduleQueryInvalidations(queryClient, [
+        { queryKey: ["inbox-summary", variables.workspaceId], exact: true },
+        { queryKey: ["my-work", variables.workspaceId], exact: true },
+      ]);
     },
   });
 }

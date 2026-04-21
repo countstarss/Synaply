@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "@/context/AuthContext";
 import { WorkflowResponse } from "@/lib/fetchers/workflow";
+import { scheduleQueryInvalidations } from "@/lib/query/scheduled-invalidation";
 import { createWorkflowInstance } from "@/lib/workflow/createWorkflowInstance";
 import { toast } from "sonner";
 
@@ -48,7 +49,7 @@ export function useWorkflowInstance() {
     onSuccess: (_, variables) => {
       // 刷新issue列表
       const wsId = variables.workspaceId || variables.workflow.workspaceId;
-      queryClient.invalidateQueries({ queryKey: ["issues", wsId] });
+      scheduleQueryInvalidations(queryClient, [{ queryKey: ["issues", wsId] }]);
 
       toast.success("工作流实例创建成功", {
         description: `已成功创建 "${variables.title}" 工作流实例`,

@@ -9,6 +9,7 @@ import {
   type RealtimeEventName,
   type RealtimePayloadMap,
 } from "@/lib/realtime/events";
+import { scheduleQueryInvalidations } from "@/lib/query/scheduled-invalidation";
 import { buildUserTopic } from "@/lib/realtime/topics";
 import { useRealtimeChannel } from "./useRealtimeChannel";
 
@@ -46,15 +47,11 @@ export function useUserRealtime(
         return;
       }
 
-      void queryClient.invalidateQueries({
-        queryKey: ["inbox", targetWorkspaceId],
-      });
-      void queryClient.invalidateQueries({
-        queryKey: ["inbox-summary", targetWorkspaceId],
-      });
-      void queryClient.invalidateQueries({
-        queryKey: ["my-work", targetWorkspaceId],
-      });
+      scheduleQueryInvalidations(queryClient, [
+        { queryKey: ["inbox", targetWorkspaceId] },
+        { queryKey: ["inbox-summary", targetWorkspaceId], exact: true },
+        { queryKey: ["my-work", targetWorkspaceId], exact: true },
+      ]);
     },
     [queryClient, workspaceId],
   );

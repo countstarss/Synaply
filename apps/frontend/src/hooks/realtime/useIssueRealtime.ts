@@ -10,7 +10,9 @@ import {
   type IssueRealtimeEditingField,
   type IssueRealtimePresence,
   type RealtimeEventName,
+  type RealtimePayloadMap,
 } from "@/lib/realtime/events";
+import { scheduleQueryInvalidations } from "@/lib/query/scheduled-invalidation";
 import {
   buildIssueTopic,
   buildWorkflowIssueTopic,
@@ -89,29 +91,52 @@ export function useIssueRealtime(
     useState<WorkflowPresenceDraft>(DEFAULT_WORKFLOW_PRESENCE_DRAFT);
 
   const handleIssueBroadcast = useCallback(
-    (event: RealtimeEventName) => {
+    (
+      event: RealtimeEventName,
+      payload: RealtimePayloadMap[RealtimeEventName],
+    ) => {
       switch (event) {
         case REALTIME_EVENTS.COMMENT_CREATED:
-          void queryClient.invalidateQueries({ queryKey: ["comments", issueId] });
+          scheduleQueryInvalidations(queryClient, [
+            { queryKey: ["comments", issueId], exact: true },
+          ]);
           return;
         case REALTIME_EVENTS.ISSUE_DELETED:
           queryClient.setQueryData(["issue", workspaceId, issueId], null);
-          void queryClient.invalidateQueries({
-            queryKey: ["issues", workspaceId],
-          });
+          scheduleQueryInvalidations(queryClient, [
+            { queryKey: ["issues", workspaceId] },
+            { queryKey: ["my-work", workspaceId], exact: true },
+            { queryKey: ["project-summary", workspaceId] },
+          ]);
           return;
-        case REALTIME_EVENTS.ISSUE_UPDATED:
-          void queryClient.invalidateQueries({
-            queryKey: ["issue", workspaceId, issueId],
-          });
-          void queryClient.invalidateQueries({
-            queryKey: ["issues", workspaceId],
-          });
+        case REALTIME_EVENTS.ISSUE_UPDATED: {
+          const changedFields = Array.isArray(
+            (payload as RealtimePayloadMap[typeof REALTIME_EVENTS.ISSUE_UPDATED])
+              ?.changedFields,
+          )
+            ? (
+                payload as RealtimePayloadMap[typeof REALTIME_EVENTS.ISSUE_UPDATED]
+              ).changedFields
+            : [];
+
+          scheduleQueryInvalidations(queryClient, [
+            { queryKey: ["issue", workspaceId, issueId], exact: true },
+            ...(changedFields.some((field) => ISSUE_COLLECTION_FIELDS.has(field))
+              ? [
+                  { queryKey: ["issues", workspaceId] },
+                  { queryKey: ["my-work", workspaceId], exact: true },
+                ]
+              : []),
+            ...(changedFields.some((field) => PROJECT_SUMMARY_FIELDS.has(field))
+              ? [{ queryKey: ["project-summary", workspaceId] }]
+              : []),
+          ]);
           return;
+        }
         case REALTIME_EVENTS.ISSUE_ACTIVITY_CREATED:
-          void queryClient.invalidateQueries({
-            queryKey: ["issue-activities", issueId],
-          });
+          scheduleQueryInvalidations(queryClient, [
+            { queryKey: ["issue-activities", issueId], exact: true },
+          ]);
           return;
         default:
           return;
@@ -138,24 +163,15 @@ export function useIssueRealtime(
         event === REALTIME_EVENTS.WORKFLOW_UNBLOCKED ||
         event === REALTIME_EVENTS.WORKFLOW_RUN_COMPLETED
       ) {
-        void queryClient.invalidateQueries({
-          queryKey: ["issue", workspaceId, issueId],
-        });
-        void queryClient.invalidateQueries({
-          queryKey: ["workflow-run", workspaceId, issueId],
-        });
-        void queryClient.invalidateQueries({
-          queryKey: ["issue-step-records", issueId],
-        });
-        void queryClient.invalidateQueries({
-          queryKey: ["issue-activities", issueId],
-        });
-        void queryClient.invalidateQueries({
-          queryKey: ["issues", workspaceId],
-        });
-        void queryClient.invalidateQueries({
-          queryKey: ["project-summary", workspaceId],
-        });
+        scheduleQueryInvalidations(queryClient, [
+          { queryKey: ["issue", workspaceId, issueId], exact: true },
+          { queryKey: ["workflow-run", workspaceId, issueId], exact: true },
+          { queryKey: ["issue-step-records", issueId], exact: true },
+          { queryKey: ["issue-activities", issueId], exact: true },
+          { queryKey: ["issues", workspaceId] },
+          { queryKey: ["my-work", workspaceId], exact: true },
+          { queryKey: ["project-summary", workspaceId] },
+        ]);
       }
     },
     [issueId, queryClient, workspaceId],
@@ -361,3 +377,45 @@ export function useIssueRealtime(
     setFocusingNode,
   };
 }
+
+const ISSUE_COLLECTION_FIELDS = new Set([
+  "created",
+  "deleted",
+  "workspaceId",
+  "title",
+  "stateId",
+  "projectId",
+  "directAssigneeId",
+  "dueDate",
+  "priority",
+  "visibility",
+  "issueType",
+  "workflowId",
+  "workflowSnapshot",
+  "totalSteps",
+  "currentStepId",
+  "currentStepIndex",
+  "currentStepStatus",
+  "key",
+  "sequence",
+  "creatorMemberId",
+]);
+
+const PROJECT_SUMMARY_FIELDS = new Set([
+  "created",
+  "deleted",
+  "workspaceId",
+  "stateId",
+  "projectId",
+  "directAssigneeId",
+  "dueDate",
+  "priority",
+  "visibility",
+  "issueType",
+  "workflowId",
+  "workflowSnapshot",
+  "totalSteps",
+  "currentStepId",
+  "currentStepIndex",
+  "currentStepStatus",
+]);

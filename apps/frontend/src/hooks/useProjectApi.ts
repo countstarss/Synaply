@@ -18,6 +18,7 @@ import {
   ProjectStatus,
   VisibilityType,
 } from "@/types/prisma";
+import { scheduleQueryInvalidations } from "@/lib/query/scheduled-invalidation";
 
 const OPTIMISTIC_PROJECT_ID_PREFIX = "optimistic-project-";
 
@@ -187,9 +188,9 @@ export const useCreateProject = () => {
         ["project", variables.workspaceId, createdProject.id],
         createdProject,
       );
-      void queryClient.invalidateQueries({
-        queryKey: ["docs", variables.workspaceId],
-      });
+      scheduleQueryInvalidations(queryClient, [
+        { queryKey: ["docs", variables.workspaceId] },
+      ]);
     },
   });
 };
@@ -214,25 +215,25 @@ export const useUpdateProject = () => {
 
       return updateProject(workspaceId, projectId, data, session.access_token);
     },
-    onSuccess: (_, variables) => {
-      queryClient.invalidateQueries({
-        queryKey: ["projects", variables.workspaceId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["docs", variables.workspaceId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["project", variables.workspaceId, variables.projectId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["project-summary", variables.workspaceId, variables.projectId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["inbox", variables.workspaceId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["inbox-summary", variables.workspaceId],
-      });
+    onSuccess: (updatedProject, variables) => {
+      queryClient.setQueryData(
+        ["project", variables.workspaceId, variables.projectId],
+        updatedProject,
+      );
+      scheduleQueryInvalidations(queryClient, [
+        { queryKey: ["projects", variables.workspaceId], exact: true },
+        { queryKey: ["docs", variables.workspaceId] },
+        {
+          queryKey: ["project", variables.workspaceId, variables.projectId],
+          exact: true,
+        },
+        {
+          queryKey: ["project-summary", variables.workspaceId, variables.projectId],
+          exact: true,
+        },
+        { queryKey: ["inbox", variables.workspaceId] },
+        { queryKey: ["inbox-summary", variables.workspaceId], exact: true },
+      ]);
     },
   });
 };
@@ -256,27 +257,25 @@ export const useDeleteProject = () => {
       return deleteProject(workspaceId, projectId, session.access_token);
     },
     onSuccess: (_, variables) => {
-      queryClient.invalidateQueries({
-        queryKey: ["projects", variables.workspaceId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["docs", variables.workspaceId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["project", variables.workspaceId, variables.projectId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["project-summary", variables.workspaceId, variables.projectId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["issues", variables.workspaceId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["inbox", variables.workspaceId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["inbox-summary", variables.workspaceId],
-      });
+      queryClient.setQueryData(
+        ["project", variables.workspaceId, variables.projectId],
+        null,
+      );
+      scheduleQueryInvalidations(queryClient, [
+        { queryKey: ["projects", variables.workspaceId], exact: true },
+        { queryKey: ["docs", variables.workspaceId] },
+        {
+          queryKey: ["project", variables.workspaceId, variables.projectId],
+          exact: true,
+        },
+        {
+          queryKey: ["project-summary", variables.workspaceId, variables.projectId],
+          exact: true,
+        },
+        { queryKey: ["issues", variables.workspaceId] },
+        { queryKey: ["inbox", variables.workspaceId] },
+        { queryKey: ["inbox-summary", variables.workspaceId], exact: true },
+      ]);
     },
   });
 };
